@@ -7,7 +7,8 @@
   "author": "Davide Crestini <davide.crestini94@gmail.com>",
   "scripts": {
     "start": "webpack-dev-server --config webpack/webpack.dev.js",
-    "build": "webpack --config webpack/webpack.prod.js"
+    "build": "webpack --config webpack/webpack.prod.js",
+    "test:lint": "eslint src/**/*.js"
   },
   "husky": {
     "hooks": {
