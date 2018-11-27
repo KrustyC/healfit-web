@@ -1,19 +1,20 @@
 import React, { Suspense } from "react";
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
+import { hot } from 'react-hot-loader'
 
-import Loader from 'uikit/elements/Loader'
+import { FullPageLoader } from 'uikit/elements/Loaders'
 import Router from "./router";
 import theme from "./themes";
 
 const App = () => (
   <BrowserRouter>
     <ThemeProvider theme={theme}>
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={<FullPageLoader />}>
         <Router />
       </Suspense>
     </ThemeProvider>
   </BrowserRouter>
 );
 
-export default App;
+export default hot(module)(App);
