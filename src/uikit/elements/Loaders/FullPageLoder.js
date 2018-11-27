@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import withPortal from "helpers/withPortal";
+import styled, { css } from 'styled-components';
+import withPortal from 'helpers/withPortal';
 
 const FullPageLoader = styled.div`
   ${({ theme }) => css`
@@ -10,4 +10,4 @@ const FullPageLoader = styled.div`
   `}
 `;
 
-export default withPortal(FullPageLoader, "full-page-loader-root");
+export default withPortal(FullPageLoader, 'full-page-loader-root');

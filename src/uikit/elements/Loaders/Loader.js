@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import withPortal from "helpers/withPortal";
+import styled from 'styled-components';
+import withPortal from 'helpers/withPortal';
 
 const Loader = styled.div`
   display: flex;
@@ -7,4 +7,4 @@ const Loader = styled.div`
   width: 100%;
 `;
 
-export default withPortal(Loader, "loader-root");
+export default withPortal(Loader, 'loader-root');

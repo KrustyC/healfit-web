@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
 export default (WrappedComponent, rootElement) => {
   class Portal extends Component {
@@ -7,7 +7,7 @@ export default (WrappedComponent, rootElement) => {
       super(props);
 
       this.rootSelector = document.getElementById(rootElement);
-      this.container = document.createElement("div");
+      this.container = document.createElement('div');
     }
 
     componentDidMount() {
