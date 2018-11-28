@@ -3,7 +3,7 @@ version: 2
 jobs:
   build-job:
     docker:
-      - image: circleci/chakracore-10.13-browsers
+      - image: circleci/node:9.10-browsers
 
     steps:
       - checkout
