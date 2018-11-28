@@ -3,7 +3,7 @@ version: 2
 jobs:
   build-job:
     docker:
-      - image: node:9.10.0-alpine
+      - image: circleci/node:9.10.0-browsers
 
     steps:
       - checkout
@@ -27,7 +27,7 @@ jobs:
 
   deploy-job:
     docker:
-      - image: circleci/node:8.4
+      - image: circleci/node:9.10.0-browsers
     steps:
       - checkout
       - run:
