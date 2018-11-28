@@ -13,15 +13,15 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-        
+
       # run build
       - run: yarn build
 
@@ -37,7 +37,7 @@ jobs:
             sudo pip install awscli
             yarn install
             yarn build
-            aws s3 sync ~/project/dist s3://keepitfit --delete
+            aws s3 sync ~/project/dist s3://keepitfit.com --delete
 workflows:
   version: 2
   build-deploy:
