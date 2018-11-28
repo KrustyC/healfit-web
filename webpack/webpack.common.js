@@ -1,25 +1,21 @@
-require('dotenv').config()
+require('dotenv').config();
 
-const path = require('path')
-const webpack = require('webpack')
+const path = require('path');
+const webpack = require('webpack');
 
-const appRoot = path.dirname(__dirname)
-const src = path.join(appRoot, 'src')
+const appRoot = path.dirname(__dirname);
+const src = path.join(appRoot, 'src');
 
 module.exports = {
   context: src,
   entry: {
-    app: [
-      // 'babel-polyfill/dist/polyfill.js',
-      // 'raf/polyfill',
-      './index.js'
-    ]
+    app: ['./index.js'],
   },
 
   output: {
     filename: '[name]-[hash].js',
     publicPath: '/',
-    chunkFilename: '[name]-[hash].js'
+    chunkFilename: '[name]-[hash].js',
   },
 
   resolve: {
@@ -28,8 +24,8 @@ module.exports = {
     alias: {
       app: src,
       helpers: path.join(src, 'helpers'),
-      uikit: path.join(src, 'uikit')
-    }
+      uikit: path.join(src, 'uikit'),
+    },
   },
 
   module: {
@@ -37,25 +33,25 @@ module.exports = {
       {
         test: /\.js|jsx$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: ['babel-loader'],
       },
       {
         test: /\.(png|j|jpeg|jgp|gif)$/,
         use: {
           loader: 'url-loader',
           options: {
-            limit: 10000
-          }
-        }
+            limit: 10000,
+          },
+        },
       },
       {
         test: /\.(ttf|eot|svg|otf|woff|woff2)(\?[\s\S]+)?$/,
-        use: 'url-loader?name=fonts/[name].[ext]'
-      }
-    ]
+        use: 'url-loader?name=fonts/[name].[ext]',
+      },
+    ],
   },
   plugins: [
     new webpack.HashedModuleIdsPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin()
-  ]
-}
+    new webpack.optimize.OccurrenceOrderPlugin(),
+  ],
+};
