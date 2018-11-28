@@ -1,8 +1,8 @@
 import { lighten, darken } from 'polished';
 
 const WHITE = '#fff';
-const PRIMARY = '#2e6da4';
-const ACCENT = '#ec971f';
+const PRIMARY = '#F4976C';
+const ACCENT = '#B4DFE5';
 const SUCCESS = '#5cb85c';
 const INFO = '#33a9da';
 const ERROR = '#d9534f';
@@ -45,35 +45,61 @@ export default {
     lg: '4rem',
     xl: '8rem',
   },
-  navbar: {
-    border: {
-      color: PRIMARY,
+  dimensions: {
+    navbarHeight: '70px',
+    categoryNavHeight: '50px',
+    containerWidth: {
+      xsmall: '25rem',
+      small: '40rem',
+      default: '55rem',
+      large: '70rem',
+      fullscreen: '100%',
     },
-    brand: {
-      image: {
-        width: '100px',
-        height: '35px',
-        marginTop: '5px',
+  },
+  fonts: {
+    default: 'Quicksand',
+  },
+  fontSize: {
+    xsmall: '0.45rem',
+    small: '0.6rem',
+    regular: '1rem',
+    large: '1.4rem',
+    title: '2.75rem',
+    h1: '2.5rem',
+    h2: '1.5rem',
+    h3: '1.2rem',
+    h4: '.9rem',
+  },
+  forms: {
+    inputHeight: '2.3rem',
+    inputPadding: '0.6rem',
+    fontSize: '0.71rem',
+    checkbox: {
+      small: {
+        size: '1.5em',
+        font: '10px',
+      },
+      medium: {
+        size: '2em',
+        font: '14px',
+      },
+      large: {
+        size: '3em',
+        font: '20px',
       },
     },
-    collapseBreakPoint: '1000px',
-    colors: {
-      text: PRIMARY,
-      background: WHITE,
-    },
-    dropdown: {
-      marginTop: '60px',
-    },
-    height: '50px',
-    item: {
-      default: {
-        color: PRIMARY,
-        background: WHITE,
-      },
-      hover: {
-        background: darken(0.04, WHITE),
-      },
-    },
+  },
+  sizes: {
+    xs: '767px', // less than - phones
+    sm: '768px', // >= than - tablets
+    md: '992px', // >= than - medium desktops
+    lg: '1200px', // >= than - large desktops
+  },
+  spaces: {
+    xsmall: '.6rem',
+    small: '.75rem',
+    regular: '1.5rem',
+    large: '2.5rem',
   },
   padding: {
     xs: '0.5rem',

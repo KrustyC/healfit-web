@@ -1,11 +1,23 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+import Container from 'uikit/blocks/Container';
+import Heading from 'uikit/elements/Heading';
+
+const Layout = styled(Container)`
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
 const Home = () => (
-  <Fragment>
-    <h1>This is my amazing home</h1>
+  <Layout size="fullscreen">
+    <Heading>Welcome to Keep It Fit</Heading>
     <Link to="/about">About</Link>
-  </Fragment>
+  </Layout>
 );
 
 export default Home;
