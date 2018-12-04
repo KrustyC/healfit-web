@@ -1,3 +1,4 @@
+import { css, keyframes } from 'styled-components';
 import { lighten, darken } from 'polished';
 
 const WHITE = '#fff';
@@ -9,6 +10,12 @@ const ERROR = '#d9534f';
 const WARNING = '#f9d834';
 const GREY = '#aaaaaa';
 const DARK = '#000000';
+
+const sizes = {
+  desktop: 992,
+  tablet: 768,
+  phone: 10,
+};
 
 export default {
   colors: {
@@ -53,22 +60,22 @@ export default {
       small: '40rem',
       default: '55rem',
       large: '70rem',
-      fullscreen: '100%',
+      fullscreen: '100vw',
     },
   },
   fonts: {
-    default: 'Quicksand',
+    default: 'Karla',
   },
   fontSize: {
-    xsmall: '0.45rem',
-    small: '0.6rem',
-    regular: '1rem',
-    large: '1.4rem',
-    title: '2.75rem',
-    h1: '2.5rem',
-    h2: '1.5rem',
-    h3: '1.2rem',
-    h4: '.9rem',
+    xsmall: '1rem',
+    small: '1.2rem',
+    regular: '1.6rem',
+    large: '2.8rem',
+    title: '5rem',
+    h1: '3rem',
+    h2: '2.5rem',
+    h3: '2rem',
+    h4: '1.8rem',
   },
   forms: {
     inputHeight: '2.3rem',
@@ -89,12 +96,6 @@ export default {
       },
     },
   },
-  sizes: {
-    xs: '767px', // less than - phones
-    sm: '768px', // >= than - tablets
-    md: '992px', // >= than - medium desktops
-    lg: '1200px', // >= than - large desktops
-  },
   spaces: {
     xsmall: '.6rem',
     small: '.75rem',
@@ -108,6 +109,12 @@ export default {
     lg: '4rem',
     xl: '8rem',
   },
+  sizes: {
+    xs: '767px', // less than - phones
+    sm: '768px', // >= than - tablets
+    md: '992px', // >= than - medium desktops
+    lg: '1200px', // >= than - large desktops
+  },
   zIndex: {
     foreground: 10002,
     background: 1,
@@ -116,8 +123,120 @@ export default {
   duration: {
     easeInOut: '.15s',
   },
+  transition: {
+    easing: '.2s',
+    easingQuick: '.1s',
+  },
+  shadows: {
+    default: '0px 2px 4px 0px rgba(69, 69, 69, .17)',
+    navbar: inverse =>
+      `0 ${inverse ? '-2' : '1'}px 2px 0 rgba(70, 70, 70, 0.02)`,
+    featureNavbar: '0 4px 10px 0 rgba(70, 70, 70, 0.25)',
+  },
   util: {
     darkenOnHover: hex => darken(0.08, hex),
     darkenOnActive: hex => darken(0.14, hex),
+    lighten: hex => lighten(0.14, hex),
+  },
+  media: Object.keys(sizes).reduce((acc, label) => {
+    acc[label] = (...args) => css`
+      @media (min-width: ${sizes[label]}px) {
+        ${css(...args)}
+      }
+    `;
+    return acc;
+  }, {}),
+  animations: {
+    grow: keyframes`
+      transform: scale(1.1);light
+    `,
+    blink: keyframes`
+      0% {
+        transform: scale(1);
+      }
+      25% {
+        transform: scale(1.15);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      75% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    `,
+    hover: keyframes`
+      0% {
+        transform: translate(0px, 0px);
+      }
+      50% {
+        transform: translate(0px, -15px);
+      }
+      100% {
+        transform: translate(0px, 0px);
+      }
+    `,
+    bounce: keyframes`
+      0% {
+        transform: translate(0px, 0px);
+      }
+      10% {
+        transform: translate(0px, 2px);
+      }
+      50% {
+        transform: translate(0px, -7px);
+      }
+      90% {
+        transform: translate(0px, 4px);
+      }
+      100% {
+        transform: translate(0px, 0px);
+      }
+    `,
+    fadeIn: keyframes`
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    `,
+    fadeInUp: keyframes`
+      from {
+        opacity: 0;
+        transform: translate3d(0, 100%, 0);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    `,
+    shake: keyframes`
+      0% {
+        transform: translateX(0px);
+      }
+      15% {
+        transform: translateX(-3px);
+      }
+      25% {
+        transform: translateX(3px);
+      }
+      45% {
+        transform: translateX(-2px);
+      }
+      65% {
+        transform: translateX(3px);
+      }
+      85% {
+        transform: translateX(-2px);
+      }
+      100% {
+        transform: translateX(0px);
+      }
+    `,
   },
 };

@@ -1,22 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
-import Container from 'uikit/blocks/Container';
-import Heading from 'uikit/elements/Heading';
+import Hero from './Hero';
+import Features from './Features';
+import Message from './Message';
+import Testimonials from './Testimonials';
+import Footer from './Footer';
 
-const Layout = styled(Container)`
+const Layout = styled.div`
   display: flex;
-  height: 100vh;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  width: 100vw;
 `;
 
 const Home = () => (
-  <Layout size="fullscreen">
-    <Heading>Welcome to Keep It Fit</Heading>
-    <Link to="/about">About</Link>
+  <Layout>
+    <Hero />
+    <Features />
+    {/* <Explaination /> */}
+    <Testimonials />
+    <Message />
+    <Footer />
   </Layout>
 );
 

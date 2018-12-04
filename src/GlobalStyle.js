@@ -4,32 +4,32 @@ import { createGlobalStyle, css } from 'styled-components';
 const GloablStyle = createGlobalStyle`
   ${({ theme }) => css`
     @font-face {
-      font-family: 'Quicksand';
-      src: url(${require('assets/fonts/quicksand/Quicksand-Light.ttf')})
-        format('truetype');
-      font-weight: 300;
-      font-style: normal;
-    }
-
-    @font-face {
-      font-family: 'Quicksand';
-      src: url(${require('assets/fonts/quicksand/Quicksand-Regular.ttf')})
+      font-family: 'Karla';
+      src: url(${require('assets/fonts/karla/Karla-Regular.ttf')})
         format('truetype');
       font-weight: 400;
       font-style: normal;
     }
 
     @font-face {
-      font-family: 'Quicksand';
-      src: url(${require('assets/fonts/quicksand/Quicksand-Medium.ttf')})
+      font-family: 'Karla';
+      src: url(${require('assets/fonts/karla/Karla-Italic.ttf')})
         format('truetype');
-      font-weight: 500;
+      font-weight: 400;
       font-style: italic;
     }
 
     @font-face {
-      font-family: 'Quicksand';
-      src: url(${require('assets/fonts/quicksand/Quicksand-Bold.ttf')})
+      font-family: 'Karla';
+      src: url(${require('assets/fonts/karla/Karla-Bold.ttf')})
+        format('truetype');
+      font-weight: bold;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Karla';
+      src: url(${require('assets/fonts/karla/Karla-BoldItalic.ttf')})
         format('truetype');
       font-weight: bold;
       font-style: italic;
