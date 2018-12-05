@@ -14,21 +14,30 @@ const testimonials = [
     couldn't find any. Now that I found this it makes my life much easier,
     as I can finally plan my meals througut the week nad keep track of wether
     I'm following it or not.`,
-    picture: require('assets/images/undrawn/healthy-habit.svg'),
+    picture: require('assets/images/people/person1.jpeg'),
+  },
+  {
+    name: 'Beatrice Cox',
+    job: 'Graphic Designer',
+    quote: `I've been looking for a while to an app like Keep It Fit one but I
+    couldn't find any. Now that I found this it makes my life much easier,
+    as I can finally plan my meals througut the week nad keep track of wether
+    I'm following it or not.`,
+    picture: require('assets/images/people/person3.jpeg'),
   },
   {
     name: 'Alessandro Frullani',
     job: 'Mechanical Engineer',
     quote:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a sem pretium, iaculis ipsum vitae, rhoncus nulla. Integer euismod sodales dui pellentesque bibendum. Donec id imperdiet lorem. ',
-    picture: require('assets/images/undrawn/healthy-habit.svg'),
+    picture: require('assets/images/people/person2.jpeg'),
   },
   {
     name: 'Luca Moretti',
     job: 'Financial Manager',
     quote:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a sem pretium, iaculis ipsum vitae, rhoncus nulla. Integer euismod sodales dui pellentesque bibendum. Donec id imperdiet lorem. ',
-    picture: require('assets/images/undrawn/healthy-habit.svg'),
+    picture: require('assets/images/people/person4.jpeg'),
   },
 ];
 /* eslint-enable global-require */
@@ -94,7 +103,8 @@ const TestimonialImg = styled.img`
   height: 70px;
   width: 70px;
   border-radius: 50px;
-  border: 3px solid green;
+  border: 2px solid green;
+  object-fit: cover;
 `;
 
 const Testimonials = () => (

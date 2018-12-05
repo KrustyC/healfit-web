@@ -27,6 +27,7 @@ const features = [
   },
 ];
 /* eslint-enable global-require */
+
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
