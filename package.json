@@ -66,6 +66,7 @@
     "react-dom": "^16.6.3",
     "react-hot-loader": "^4.3.12",
     "react-router-dom": "^4.3.1",
+    "react-styled-carousel": "^0.4.12",
     "styled-components": "^4.1.1",
     "styled-tools": "^1.6.0"
   }

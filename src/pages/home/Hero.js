@@ -26,9 +26,13 @@ const Img = styled.img`
 
 const Header = () => (
   <Layout size="fullscreen" coloured height="70vh">
+    <Div center>
+      {/* eslint-disable-next-line */}
+      <Img src={require('assets/images/undrawn/healthy-habit.svg')} />
+    </Div>
     <Div>
       <Heading level="title" style={{ color: 'white' }}>
-        Keep it Fit
+        Keep It Fit
       </Heading>
       <Heading
         level="h4"
@@ -42,10 +46,6 @@ const Header = () => (
         readable content of a page when looking at its layout. The point of
         using Lorem Ipsum is that it has a more-or-less.
       </Descritpion>
-    </Div>
-    <Div center>
-      {/* eslint-disable-next-line */}
-      <Img src={require('assets/images/undrawn/healthy-habit.svg')} />
     </Div>
   </Layout>
 );

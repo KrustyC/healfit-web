@@ -7,13 +7,25 @@ const Layout = styled(Container)`
   justify-content: center;
   align-items: center;
   background: #fff;
-  padding: 0 10%;
-  height: ${prop('height', '30vh')};
+  padding: 5% 10%;
+  min-height: ${prop('height', '30vh')};
 
   ${({ coloured }) =>
     coloured &&
     css`
-      background: linear-gradient(to right, #77a1d3, #79cbca, #e684ae);
+      background: linear-gradient(
+        to right,
+        #1e5799 0%,
+        #2989d8 0%,
+        #42e595 0%,
+        #3bb2b8 100%
+      );
+    `}
+
+  ${({ theme, footer }) =>
+    footer &&
+    css`
+      background: ${theme.colors.darkLter};
     `}
 `;
 
