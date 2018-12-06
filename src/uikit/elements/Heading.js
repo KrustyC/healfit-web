@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 const H1 = styled.h1`
-  font-size: calc(${({ theme }) => theme.fontSize.h1} * 0.5);
-  font-weight: 900;
+  font-weight: 300;
   margin: 0px 0 ${({ theme }) => theme.spaces.regular} 0;
 
   @media only screen and (min-width: ${({ theme }) => theme.sizes.sm}) {
@@ -34,6 +33,7 @@ const H2 = styled(H1)`
 
 const H3 = styled(H1)`
   font-size: ${({ theme }) => theme.fontSize.h3};
+  font-weight: bold;
 
   @media only screen and (min-width: ${({ theme }) => theme.sizes.sm}) {
     font-size: ${({ theme }) => theme.fontSize.h3};

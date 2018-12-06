@@ -1,6 +1,7 @@
 import { css, keyframes } from 'styled-components';
 import { lighten, darken } from 'polished';
 
+const FONT = '#49555f';
 const WHITE = '#fff';
 const PRIMARY = '#F4976C';
 const ACCENT = '#B4DFE5';
@@ -19,6 +20,7 @@ const sizes = {
 
 export default {
   colors: {
+    font: FONT,
     // primary and accent/secondary
     primary: PRIMARY,
     accent: ACCENT,
@@ -56,24 +58,24 @@ export default {
     navbarHeight: '70px',
     categoryNavHeight: '50px',
     containerWidth: {
-      xsmall: '25rem',
-      small: '40rem',
-      default: '55rem',
-      large: '70rem',
+      xsmall: '25vw',
+      small: '35vw',
+      default: '45vw',
+      large: '70vw',
       fullscreen: '100vw',
     },
   },
   fonts: {
-    default: 'Karla',
+    default: 'Montserrat',
   },
   fontSize: {
     xsmall: '1rem',
     small: '1.2rem',
-    regular: '1.6rem',
+    regular: '1.4rem',
     large: '2.8rem',
-    title: '5rem',
-    h1: '3rem',
-    h2: '2.5rem',
+    title: '4rem',
+    h1: '3.4rem',
+    h2: '2.9rem',
     h3: '2rem',
     h4: '1.8rem',
   },
