@@ -30,7 +30,7 @@ const features = [
 /* eslint-enable global-require */
 
 const Message = () => (
-  <Layout size="large" style={{ flexDirection: 'column' }}>
+  <Layout size="fullscreen" style={{ flexDirection: 'column' }}>
     <Heading level="h1" align="center">
       Designed for you to succeed
     </Heading>

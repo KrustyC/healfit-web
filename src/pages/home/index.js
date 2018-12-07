@@ -6,6 +6,7 @@ import Presentation from './Presentation';
 import Message from './Message';
 import Why from './Why';
 import Testimonials from './Testimonials';
+import Enquiry from './Enquiry';
 import Footer from './Footer';
 
 const Layout = styled.div`
@@ -21,6 +22,7 @@ const Home = () => (
     <Why />
     <Message />
     <Testimonials />
+    <Enquiry />
     <Footer />
   </Layout>
 );

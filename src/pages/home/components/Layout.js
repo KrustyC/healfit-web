@@ -6,6 +6,8 @@ const Layout = styled(Container)`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: ${prop('direction', 'row')};
+
   background: #fff;
   padding: 5% 10%;
   min-height: ${prop('height', '30vh')};
