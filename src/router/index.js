@@ -5,7 +5,10 @@ import * as Routes from './routes';
 const CustomRouter = () => (
   <Switch>
     <Route exact path="/" component={props => <Routes.Home {...props} />} />
-    <Route path="/about" component={props => <Routes.About {...props} />} />
+    <Route
+      path="/meal-planner"
+      component={props => <Routes.MealPlanner {...props} />}
+    />
   </Switch>
 );
 
