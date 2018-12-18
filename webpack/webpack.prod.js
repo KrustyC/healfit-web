@@ -32,6 +32,7 @@ const plugins = [
   new webpack.DefinePlugin({
     'process.env': {
       APP_ENV: JSON.stringify(process.env.APP_ENV),
+      BUGSNAG_API_KEY: JSON.stringify(process.env.BUGSNAG_API_KEY),
     },
   }),
   new Visualizer({ filename: './statistics.html' }),
