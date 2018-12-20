@@ -11,7 +11,7 @@ import theme from './themes';
 import GlobalStyle from './GlobalStyle';
 
 const apolloClient = new ApolloClient({
-  uri: 'https://w5xlvm3vzz.lp.gql.zone/graphql',
+  uri: `${process.env.API_URL}/graphql`,
 });
 
 const App = () => (

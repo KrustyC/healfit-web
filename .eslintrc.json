@@ -4,13 +4,13 @@
   "parser": "babel-eslint",
   "rules": {
     "prettier/prettier": ["error"],
+    "react/destructuring-assignment": 0,
     "react/jsx-filename-extension": [
       1,
       {
         "extensions": [".js"]
       }
     ],
-    "react/prop-types": 0,
     "no-underscore-dangle": 0,
     "import/imports-first": ["error", "absolute-first"],
     "import/newline-after-import": "error",
