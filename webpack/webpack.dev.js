@@ -40,7 +40,7 @@ const devConfig = {
       'process.env': {
         APP_ENV: JSON.stringify('development'),
         BUGSNAG_API_KEY: JSON.stringify(process.env.BUGSNAG_API_KEY),
-        DEV_API_URL: JSON.stringify(process.env.DEV_API_URL),
+        API_URL: JSON.stringify(process.env.API_URL),
       },
     }),
   ],

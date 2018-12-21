@@ -4,11 +4,13 @@ import { Switch, Redirect, Route } from 'react-router-dom';
 
 import SignUp from './SignUp';
 import SignIn from './SignIn';
+import VerifyAccount from './VerifyAccount';
 
 const AuthIndex = ({ match: { path } }) => (
   <Switch>
     <Route path={`${path}/signin`} component={SignIn} />
     <Route path={`${path}/signup`} component={SignUp} />
+    <Route path={`${path}/verify-account`} component={VerifyAccount} />
     <Redirect to={`${path}/signin`} />
   </Switch>
 );

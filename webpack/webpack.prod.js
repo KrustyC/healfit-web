@@ -33,6 +33,7 @@ const plugins = [
     'process.env': {
       APP_ENV: JSON.stringify(process.env.APP_ENV),
       BUGSNAG_API_KEY: JSON.stringify(process.env.BUGSNAG_API_KEY),
+      API_URL: JSON.stringify(process.env.API_URL),
     },
   }),
   new Visualizer({ filename: './statistics.html' }),
