@@ -1,6 +1,6 @@
 import React, { Fragment, Suspense } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { BrowserRouter } from 'react-router-dom';
+// import { Router } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
@@ -15,18 +15,18 @@ const apolloClient = new ApolloClient({
 });
 
 const App = () => (
-  <BrowserRouter>
-    <ApolloProvider client={apolloClient}>
-      <ThemeProvider theme={theme}>
-        <Fragment>
-          <GlobalStyle />
-          <Suspense fallback={<FullPageLoader />}>
-            <Router />
-          </Suspense>
-        </Fragment>
-      </ThemeProvider>
-    </ApolloProvider>
-  </BrowserRouter>
+  // <Router>
+  <ApolloProvider client={apolloClient}>
+    <ThemeProvider theme={theme}>
+      <Fragment>
+        <GlobalStyle />
+        <Suspense fallback={<FullPageLoader />}>
+          <Router />
+        </Suspense>
+      </Fragment>
+    </ThemeProvider>
+  </ApolloProvider>
+  // </Router>
 );
 
 export default hot(module)(App);
