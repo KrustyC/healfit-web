@@ -1,7 +1,8 @@
 import React from 'react';
-import { Switch, Route, Router } from 'react-router-dom';
+import { Switch, Redirect, Route, Router } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import * as Routes from './routes';
+import PrivateRoute from './routes-templates/PrivateRoute';
 
 const history = createBrowserHistory();
 
@@ -10,10 +11,12 @@ const CustomRouter = () => (
     <Switch>
       <Route exact path="/" component={props => <Routes.Home {...props} />} />
       <Route path="/auth" component={props => <Routes.Auth {...props} />} />
-      <Route
+      <PrivateRoute
         path="/meal-planner"
         component={props => <Routes.MealPlanner {...props} />}
       />
+      <Route path="/404" component={props => <Routes.NotFound {...props} />} />
+      <Redirect to="/404" />
     </Switch>
   </Router>
 );

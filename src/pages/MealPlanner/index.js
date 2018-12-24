@@ -1,31 +1,13 @@
-import React, { Component } from 'react';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withAuth } from 'app/apollo/auth';
 
-export default class MealPlanner extends Component {
-  render() {
-    return (
-      <Query
-        query={gql`
-          {
-            rates(currency: "USD") {
-              currency
-              rate
-            }
-          }
-        `}
-      >
-        {({ loading, error, data }) => {
-          if (loading) return <p>Loading...</p>;
-          if (error) return <p>Error :(</p>;
+const MealPlanner = ({ currentUser }) => (
+  <div>Ciao {currentUser.firstName}</div>
+);
 
-          return data.rates.map(({ currency, rate }) => (
-            <div key={currency}>
-              <p>{`${currency}: ${rate}`}</p>
-            </div>
-          ));
-        }}
-      </Query>
-    );
-  }
-}
+MealPlanner.propTypes = {
+  currentUser: PropTypes.object.isRequired,
+};
+
+export default withAuth(MealPlanner);

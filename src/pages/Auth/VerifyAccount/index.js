@@ -21,7 +21,7 @@ class VerifyAccount extends Component {
   };
 
   state = {
-    ui: PossibleStates('idle', 'error', 'verified', 'notVerified'),
+    ui: PossibleStates('idle', 'error', 'verified', 'notVerified<reason>'),
   };
 
   componentDidMount() {
@@ -33,9 +33,9 @@ class VerifyAccount extends Component {
     return this.props
       .verifyAccount({ variables: { token, email } })
       .then(() => this.setState(({ ui }) => ({ ui: ui.toVerified() })))
-      .catch((err, ...rest) => {
-        console.log(err, ...rest);
-        this.setState(({ ui }) => ({ ui: ui.toNotVerified() }));
+      .catch(error => {
+        const errors = error.graphQLErrors.map(x => x.message);
+        this.setState(({ ui }) => ({ ui: ui.toNotVerified(errors[0]) }));
       });
   }
 
@@ -47,7 +47,7 @@ class VerifyAccount extends Component {
           idle: () => <h1>we are verifing your account</h1>,
           error: () => <h1>THe path is wrong</h1>,
           verified: () => <h1>ooraa!!</h1>,
-          notVerified: () => <h1>Not verified! :(</h1>,
+          notVerified: ({ reason }) => <h1>{reason} :(</h1>,
         })}
       </Container>
     );

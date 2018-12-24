@@ -3,67 +3,43 @@ import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
 import { createHttpLink } from 'apollo-link-http';
 import { withClientState } from 'apollo-link-state';
-import { setContext } from 'apollo-link-context';
+// import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import decode from 'jwt-decode';
+// import decode from 'jwt-decode';
 import { history } from 'app/router';
 
-// import { defaults, resolvers } from './api';
+import { defaults, resolvers } from './auth';
 
-// import { defaults, resolvers } from './auth';
 console.log(process.env.API_URL);
 const httpLink = createHttpLink({
   uri: `${process.env.API_URL}/graphql`,
 });
 
-const apolloCache = new InMemoryCache({
-  dataIdFromObject: e => `${e.__typename}_${e.id}` || null, // eslint-disable-line no-underscore-dangle
-});
+const cache = new InMemoryCache();
 
 const stateLink = withClientState({
-  cache: apolloCache,
-  // defaults,
-  // resolvers,
+  cache,
+  defaults,
+  resolvers,
 });
 
-const authMiddlewareLink = setContext(() => {
-  const token = localStorage.getItem('keepitfit-token');
+// const authMiddlewareLink = setContext(() => {
+//   const token = localStorage.getItem('keepitfit-token');
 
-  const headers = {
-    headers: {
-      authorization: token ? `Bearer ${token}` : '',
-    },
-  };
+//   const headers = {
+//     headers: {
+//       authorization: token ? `Bearer ${token}` : '',
+//     },
+//   };
 
-  const currentTime = Date.now().valueOf() / 1000;
-  const tokenExpiration = decode(token).exp;
-  if (currentTime > tokenExpiration) {
-    history.push('/login');
-  }
-  console.log(headers);
-  return headers;
-});
-
-const afterwareLink = new ApolloLink((operation, forward) =>
-  forward(operation).map(response => {
-    const context = operation.getContext();
-    const {
-      response: { headers },
-    } = context;
-
-    if (headers) {
-      // @TODO this is probably far different
-      const token = headers.get('token');
-      // const refreshToken = headers.get(JWT.HEADER.REFRESH_TOKEN.NAME);
-
-      if (token) {
-        localStorage.setItem('keepitfit-token', token);
-      }
-    }
-
-    return response;
-  })
-);
+//   const currentTime = Date.now().valueOf() / 1000;
+//   const tokenExpiration = decode(token).exp;
+//   if (currentTime > tokenExpiration) {
+//     history.push('/login');
+//   }
+//   console.log(headers);
+//   return headers;
+// });
 
 const errorLink = onError(
   ({ graphQLErrors, networkError, forward, operation }) => {
@@ -77,7 +53,7 @@ const errorLink = onError(
           console.warn('Forbidden');
           return history.push(`/error-page/403`);
         }
-        forward(operation);
+        return forward(operation);
       });
     }
 
@@ -99,12 +75,9 @@ const errorLink = onError(
   }
 );
 
-const cache = new InMemoryCache();
-
 const links = [
   errorLink,
   stateLink,
-  afterwareLink,
   // authMiddlewareLink,
   httpLink,
 ];
