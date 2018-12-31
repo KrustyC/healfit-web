@@ -12,6 +12,10 @@ const CustomRouter = () => (
       <Route exact path="/" component={props => <Routes.Home {...props} />} />
       <Route path="/auth" component={props => <Routes.Auth {...props} />} />
       <PrivateRoute
+        path="/dashboard"
+        component={props => <Routes.Dashboard {...props} />}
+      />
+      <PrivateRoute
         path="/meal-planner"
         component={props => <Routes.MealPlanner {...props} />}
       />

@@ -9,7 +9,7 @@ const src = path.join(appRoot, 'src');
 module.exports = {
   context: src,
   entry: {
-    app: ['./index.js'],
+    app: ['@babel/polyfill', './index.js'],
   },
 
   output: {
