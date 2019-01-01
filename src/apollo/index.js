@@ -3,14 +3,13 @@ import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
 import { createHttpLink } from 'apollo-link-http';
 import { withClientState } from 'apollo-link-state';
-// import { setContext } from 'apollo-link-context';
+import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-// import decode from 'jwt-decode';
+import decode from 'jwt-decode';
 import { history } from 'app/router';
 
 import { defaults, resolvers } from './auth';
 
-console.log(process.env.API_URL);
 const httpLink = createHttpLink({
   uri: `${process.env.API_URL}/graphql`,
 });
@@ -23,23 +22,23 @@ const stateLink = withClientState({
   resolvers,
 });
 
-// const authMiddlewareLink = setContext(() => {
-//   const token = localStorage.getItem('keepitfit-token');
+const authMiddlewareLink = setContext(() => {
+  const token = localStorage.getItem('keepitfit:token');
 
-//   const headers = {
-//     headers: {
-//       authorization: token ? `Bearer ${token}` : '',
-//     },
-//   };
+  const headers = {
+    headers: {
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
 
-//   const currentTime = Date.now().valueOf() / 1000;
-//   const tokenExpiration = decode(token).exp;
-//   if (currentTime > tokenExpiration) {
-//     history.push('/login');
-//   }
-//   console.log(headers);
-//   return headers;
-// });
+  const currentTime = Date.now().valueOf() / 1000;
+  const tokenExpiration = decode(token).exp;
+  if (currentTime > tokenExpiration) {
+    history.push('/auth/signin');
+  }
+
+  return headers;
+});
 
 const errorLink = onError(
   ({ graphQLErrors, networkError, forward, operation }) => {
@@ -47,7 +46,7 @@ const errorLink = onError(
       graphQLErrors.map(({ message = '', status = 200 }) => {
         if (message === 'UNAUTHORIZED' || status === 401) {
           console.log('UNATHORIZED');
-          return history.push('/login');
+          return history.push('/auth/signin');
         }
         if (status === 403) {
           console.warn('Forbidden');
@@ -58,7 +57,7 @@ const errorLink = onError(
     }
 
     if (networkError && networkError.statusCode === 401) {
-      return history.push('/login');
+      return history.push('/auth/signin');
     }
 
     if (networkError && networkError.statusCode === 403) {
@@ -75,12 +74,7 @@ const errorLink = onError(
   }
 );
 
-const links = [
-  errorLink,
-  stateLink,
-  // authMiddlewareLink,
-  httpLink,
-];
+const links = [errorLink, stateLink, authMiddlewareLink, httpLink];
 
 const link = ApolloLink.from(links);
 

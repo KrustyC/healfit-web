@@ -16,7 +16,10 @@ const defaults = {
 const currentUserQuery = gql`
   query GetCurrentUser @client {
     currentUser {
-      user
+      user {
+        firstName
+        lastName
+      }
     }
     authStatus {
       isAuthenticated
@@ -72,6 +75,7 @@ const setAuthToken = (_, { token }, { cache }) => {
     },
   };
   cache.writeData({ data });
+  localStorage.setItem('keepitfit:token', token);
   return null;
 };
 
@@ -110,7 +114,7 @@ const resolvers = {
 const currentUserQueryHandler = {
   props: ({ data: { token, currentUser, authStatus } }) => ({
     token,
-    user: currentUser.user,
+    authUser: currentUser.user,
     isAuthenticated: authStatus.isAuthenticated,
   }),
 };
