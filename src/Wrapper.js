@@ -1,15 +1,20 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
-import { compose, graphql } from 'react-apollo';
+import { compose } from 'react-apollo';
+import withApolloClient from 'hoc/withApolloClient';
 import { withAuth } from 'app/apollo/auth';
 
-const FetchCurrentUserMutation = gql`
-  mutation fetchCurrentUserInfo() {
-    fetchCurrentUserInfo() {
+const FetchCurrentUserQuery = gql`
+  fragment UserInfo on User {
+    firstName
+    lastName
+  }
+
+  query FetchCurrentUserInfo {
+    currentUserInfo {
       user {
-        firstName
-        lastName
+        ...UserInfo
       }
     }
   }
@@ -18,20 +23,32 @@ const FetchCurrentUserMutation = gql`
 class Wrapper extends Component {
   static propTypes = {
     children: PropTypes.any.isRequired,
+    client: PropTypes.shape({
+      query: PropTypes.func.isRequired,
+    }).isRequired,
     setCurrentUser: PropTypes.func.isRequired,
-    fetchCurrentUserInfo: PropTypes.func.isRequired,
   };
 
   state = {
     isMounted: false,
   };
 
-  componentDidMount() {
-    this.props
-      .fetchCurrentUserInfo()
-      .then(this.setAuthUser)
-      .catch(this.logout)
-      .finally(this.setMounted);
+  async componentDidMount() {
+    try {
+      const result = await this.props.client.query({
+        query: FetchCurrentUserQuery,
+      });
+
+      const { user } = result.data.currentUserInfo;
+      if (!user) {
+        console.log('I should logout');
+      } else {
+        await this.props.setCurrentUser({ variables: { user } });
+      }
+    } catch (error) {
+      console.log('error', error);
+    }
+    return this.setState({ isMounted: true });
   }
 
   setAuthUser = user => this.props.setCurrentUser({ variables: { user } });
@@ -46,6 +63,6 @@ class Wrapper extends Component {
 }
 
 export default compose(
-  graphql(FetchCurrentUserMutation, { name: 'fetchCurrentUserInfo' }),
-  withAuth
+  withAuth,
+  withApolloClient
 )(Wrapper);

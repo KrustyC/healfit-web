@@ -24,6 +24,7 @@ module.exports = {
     alias: {
       app: src,
       helpers: path.join(src, 'helpers'),
+      hoc: path.join(src, 'hoc'),
       assets: path.join(src, 'assets'),
       uikit: path.join(src, 'uikit'),
     },

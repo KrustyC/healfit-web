@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withAuth } from 'app/apollo/auth';
 
 const Dashboard = ({ authUser }) => (
-  console.log('dashboard', authUser),
   <div>Welcome to your dashboard {authUser.firstName}</div>
 );
 

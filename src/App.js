@@ -6,6 +6,7 @@ import { ApolloProvider } from 'react-apollo';
 import { FullPageLoader } from 'uikit/elements/Loaders';
 import apolloClient from './apollo';
 import Router from './router';
+import Wrapper from './Wrapper';
 import theme from './themes';
 import GlobalStyle from './GlobalStyle';
 
@@ -15,7 +16,9 @@ const App = () => (
       <Fragment>
         <GlobalStyle />
         <Suspense fallback={<FullPageLoader />}>
-          <Router />
+          <Wrapper>
+            <Router />
+          </Wrapper>
         </Suspense>
       </Fragment>
     </ThemeProvider>

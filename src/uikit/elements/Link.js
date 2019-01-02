@@ -50,9 +50,17 @@ const LinkElement = props => {
 
   switch (component) {
     case 'button':
-      return <ButtonLink {...rest}>{children}</ButtonLink>;
+      return (
+        <ButtonLink to={to} {...rest}>
+          {children}
+        </ButtonLink>
+      );
     case 'nav':
-      return <NavLink {...rest}>{children}</NavLink>;
+      return (
+        <NavLink to={to} {...rest}>
+          {children}
+        </NavLink>
+      );
     case 'a':
       return (
         <ALink {...rest} href={to} target="_blank">
@@ -60,7 +68,11 @@ const LinkElement = props => {
         </ALink>
       );
     default:
-      return <Link {...rest}>{children}</Link>;
+      return (
+        <Link to={to} {...rest}>
+          {children}
+        </Link>
+      );
   }
 };
 

@@ -2,7 +2,6 @@ import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 const defaults = {
-  token: null,
   currentUser: {
     user: null,
     __typename: 'CurrentUser',
@@ -33,25 +32,14 @@ const setCurrentUserQuery = gql`
   }
 `;
 
-const setAuthTokenQuery = gql`
-  mutation setAuthToken($token: String) {
-    setAuthToken(token: $token) @client
-  }
-`;
-
 const clearUserQuery = gql`
   mutation clearUser {
     clearUser @client
   }
 `;
 
-const clearAuthTokenQuery = gql`
-  mutation clearToken {
-    clearToken @client
-  }
-`;
-
 const setCurrentUser = (_, { user }, { cache }) => {
+  console.log(user);
   const data = {
     currentUser: {
       user,
@@ -66,19 +54,6 @@ const setCurrentUser = (_, { user }, { cache }) => {
   return null;
 };
 
-const setAuthToken = (_, { token }, { cache }) => {
-  const data = {
-    token,
-    authStatus: {
-      isAuthenticated: true,
-      __typename: 'AuthStatus',
-    },
-  };
-  cache.writeData({ data });
-  localStorage.setItem('keepitfit:token', token);
-  return null;
-};
-
 const clearUser = (_, _args, { cache }) => {
   const data = {
     currentUser: {
@@ -86,18 +61,7 @@ const clearUser = (_, _args, { cache }) => {
       __typename: 'CurrentUser',
     },
   };
-  cache.writeData({ data });
-  return null;
-};
-
-const clearAuthToken = (_, _args, { cache }) => {
-  const data = {
-    token: null,
-    authStatus: {
-      isAuthenticated: true,
-      __typename: 'AuthStatus',
-    },
-  };
+  localStorage.removeItem('keepitfit:token');
   cache.writeData({ data });
   return null;
 };
@@ -105,15 +69,12 @@ const clearAuthToken = (_, _args, { cache }) => {
 const resolvers = {
   Mutation: {
     setCurrentUser,
-    setAuthToken,
     clearUser,
-    clearAuthToken,
   },
 };
 
 const currentUserQueryHandler = {
-  props: ({ data: { token, currentUser, authStatus } }) => ({
-    token,
+  props: ({ data: { currentUser, authStatus } }) => ({
     authUser: currentUser.user,
     isAuthenticated: authStatus.isAuthenticated,
   }),
@@ -122,9 +83,7 @@ const currentUserQueryHandler = {
 const withAuth = compose(
   graphql(currentUserQuery, currentUserQueryHandler),
   graphql(setCurrentUserQuery, { name: 'setCurrentUser' }),
-  graphql(setAuthTokenQuery, { name: 'setAuthToken' }),
-  graphql(clearUserQuery, { name: 'clearUser' }),
-  graphql(clearAuthTokenQuery, { name: 'clearAuthToken' })
+  graphql(clearUserQuery, { name: 'clearUser' })
 );
 
 export { defaults, resolvers, withAuth };

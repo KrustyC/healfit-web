@@ -36,7 +36,6 @@ class SignIn extends Component {
     isAuthenticated: PropTypes.bool.isRequired,
     login: PropTypes.func.isRequired,
     setCurrentUser: PropTypes.func.isRequired,
-    setAuthToken: PropTypes.func.isRequired,
   };
 
   state = {
@@ -56,7 +55,7 @@ class SignIn extends Component {
       const { account, token } = result.data.login;
 
       await this.props.setCurrentUser({ variables: { user: account } });
-      await this.props.setAuthToken({ variables: { token } });
+      localStorage.setItem('keepitfit:token', token);
       return this.setState(({ ui }) => ({ ui: ui.toAuthenticated() }));
     } catch (error) {
       console.log('error', error);
@@ -74,7 +73,7 @@ class SignIn extends Component {
 
     return (
       <Container size="large">
-        {ui.whenError(({ reason }) => (
+        {ui.whenError(() => (
           <h1>Error</h1>
         ))}
         <Formik
