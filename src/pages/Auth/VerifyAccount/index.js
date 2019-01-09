@@ -46,7 +46,7 @@ class VerifyAccount extends Component {
         {ui.caseOf({
           idle: () => <h1>we are verifing your account</h1>,
           error: () => <h1>THe path is wrong</h1>,
-          verified: () => <h1>ooraa!!</h1>,
+          verified: () => <h1>Verified!!</h1>,
           notVerified: ({ reason }) => <h1>{reason} :(</h1>,
         })}
       </Container>

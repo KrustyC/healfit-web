@@ -24,10 +24,13 @@ const stateLink = withClientState({
 
 const authMiddlewareLink = setContext(() => {
   const token = localStorage.getItem('keepitfit:token');
+  if (!token) {
+    return null;
+  }
 
   const headers = {
     headers: {
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: `Bearer ${token}`,
     },
   };
 

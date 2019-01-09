@@ -40,15 +40,14 @@ class Wrapper extends Component {
       });
 
       const { user } = result.data.currentUserInfo;
-      if (!user) {
-        console.log('I should logout');
-      } else {
+      if (user) {
         await this.props.setCurrentUser({ variables: { user } });
       }
+
+      return this.setState({ isMounted: true });
     } catch (error) {
-      console.log('error', error);
+      return this.setState({ isMounted: true });
     }
-    return this.setState({ isMounted: true });
   }
 
   setAuthUser = user => this.props.setCurrentUser({ variables: { user } });
