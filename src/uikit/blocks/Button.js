@@ -28,7 +28,7 @@ export const StyledButton = styled.button`
   user-select: none;
   border: 1px solid transparent;
   border-radius: ${({ theme }) => theme.borderRadius};
-  background-color: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.white};
   color: ${({ theme }) => theme.colors.primary};
   border-color: ${({ theme }) => theme.colors.primary};
   transition: all ${({ theme }) => theme.transition.easingQuick} ease-in-out;
@@ -58,13 +58,13 @@ export const StyledButton = styled.button`
     size === 'small' &&
     css`
       font-size: 12px;
-      padding: calc(${defaultYPadding} * 0.7) calc(${defaultXPadding} * 0.8);
+      height: 30px;
     `}
 
   ${({ size }) =>
     size === 'large' &&
     css`
-      padding: calc(${defaultYPadding} * 1.4) calc(${defaultXPadding} * 2);
+      height: 50px;
     `}
 
   ${({ size }) =>

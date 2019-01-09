@@ -4,11 +4,15 @@ import Feedback from './Feedback';
 const Input = styled.input`
   width: 100%;
   outline: none;
+  height: 50px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
 
   ${({ theme }) => css`
-    padding: 10px 3px;
+    padding: 0px 5px;
     border: 2px solid ${theme.colors.border};
-    border-radius: 5px;
+    border-radius: 2px;
   `}
 
   :focus {

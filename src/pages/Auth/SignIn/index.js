@@ -1,23 +1,31 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { Formik } from 'formik';
-import * as Yup from 'yup';
+import styled from 'styled-components';
 import gql from 'graphql-tag';
 import PossibleStates from 'possible-states';
 import { compose, graphql } from 'react-apollo';
 import { withAuth } from 'app/apollo/auth';
 
-import Container from 'uikit/blocks/Container';
-import Form from 'uikit/blocks/Form';
-import Button from 'uikit/blocks/Button';
+import Heading from 'uikit/elements/Heading';
+import Link from 'uikit/elements/Link';
 
-const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email()
-    .required('Please provide your email'),
-  password: Yup.string().required('Please provide your password'),
-});
+import Layout from './Layout';
+import Form from './Form';
+
+const Frame = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Text = styled.p`
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+`;
 
 const LoginMutation = gql`
   mutation login($email: String!, $password: String!) {
@@ -58,7 +66,6 @@ class SignIn extends Component {
       localStorage.setItem('keepitfit:token', token);
       return this.setState(({ ui }) => ({ ui: ui.toAuthenticated() }));
     } catch (error) {
-      console.log('error', error);
       return this.setState(({ ui }) => ({ ui: ui.toError(error) }));
     }
   };
@@ -66,67 +73,26 @@ class SignIn extends Component {
   render() {
     const { ui } = this.state;
 
-    console.log(ui.current());
     if (ui.current() === 'authenticated') {
       return <Redirect to="/dashboard" />;
     }
 
     return (
-      <Container size="large">
+      <Layout>
         {ui.whenError(() => (
           <h1>Error</h1>
         ))}
-        <Formik
-          initialValues={{ email: '', password: '' }}
-          onSubmit={this.onHandleSubmit}
-          validationSchema={validationSchema}
-        >
-          {({
-            values,
-            touched,
-            errors,
-            // dirty,
-            isSubmitting,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            // handleReset,
-          }) => (
-            <Form onSubmit={handleSubmit}>
-              <Form.FormGroup>
-                <Form.Label htmlFor="name">Email</Form.Label>
-                <Form.Input
-                  id="email"
-                  placeholder="Enter your email"
-                  type="text"
-                  value={values.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                <Form.Feedback show={errors.email && touched.email}>
-                  {errors.email}
-                </Form.Feedback>
-              </Form.FormGroup>
-              <Form.FormGroup>
-                <Form.Label htmlFor="password">Password</Form.Label>
-                <Form.Password
-                  id="password"
-                  placeholder="Enter your password"
-                  value={values.password}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                <Form.Feedback show={errors.password && touched.password}>
-                  {errors.password}
-                </Form.Feedback>
-              </Form.FormGroup>
-              <Button type="submit" size="large" disabled={isSubmitting}>
-                Login
-              </Button>
-            </Form>
-          )}
-        </Formik>
-      </Container>
+        <Frame>
+          <Heading level="title">Keep It Fit</Heading>
+          <Form onSubmit={this.handleSubmit} />
+          <Text>
+            Do you not have an account yet?{' '}
+            <Link to="/auth/signup" style={{ fontWeight: 'bold' }}>
+              Sign Up
+            </Link>
+          </Text>
+        </Frame>
+      </Layout>
     );
   }
 }
