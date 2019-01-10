@@ -10,7 +10,7 @@ const testimonials = [
   {
     name: 'Davide Crestini',
     job: 'Software Developer',
-    quote: `I've been looking for a while to an app like Keep It Fit one but I
+    quote: `I've been looking for a while to an app like Healfit one but I
     couldn't find any. Now that I found this it makes my life much easier,
     as I can finally plan my meals througut the week nad keep track of wether
     I'm following it or not.`,
@@ -19,7 +19,7 @@ const testimonials = [
   {
     name: 'Beatrice Cox',
     job: 'Graphic Designer',
-    quote: `I've been looking for a while to an app like Keep It Fit one but I
+    quote: `I've been looking for a while to an app like Healfit one but I
     couldn't find any. Now that I found this it makes my life much easier,
     as I can finally plan my meals througut the week nad keep track of wether
     I'm following it or not.`,

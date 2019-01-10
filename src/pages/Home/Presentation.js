@@ -48,7 +48,7 @@ const Presentation = () => (
   <Layout size="fullscreen">
     <Container>
       <Heading level="h1">
-        Keep It Fit gives you the easiest way to track your progress
+        Healfit gives you the easiest way to track your progress
       </Heading>
       <Screenshot src={require('assets/images/screenshot.png')} />
       <FeaturesGrid features={features} />

@@ -19,7 +19,7 @@ const Container = styled.div`
 const Presentation = () => (
   <Container>
     <Heading level="h1">
-      Keep It Fit gives you the easiest way to track your progress
+      Healfit gives you the easiest way to track your progress
     </Heading>
   </Container>
 );

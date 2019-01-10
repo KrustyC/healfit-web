@@ -73,7 +73,7 @@ const Header = () => (
       </Div>
       <Div>
         <Heading level="title" style={{ color: 'white' }}>
-          Keep It Fit
+          Healfit
         </Heading>
         <Heading
           level="h4"

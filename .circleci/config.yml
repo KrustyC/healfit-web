@@ -37,7 +37,7 @@ jobs:
             sudo pip install awscli
             yarn install
             yarn build
-            aws s3 sync ~/project/dist s3://keepitfit.com --delete
+            aws s3 sync ~/project/dist s3://healfit.com --delete
 workflows:
   version: 2
   build-deploy:

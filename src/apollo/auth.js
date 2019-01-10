@@ -61,7 +61,7 @@ const clearUser = (_, _args, { cache }) => {
       __typename: 'CurrentUser',
     },
   };
-  localStorage.removeItem('keepitfit:token');
+  localStorage.removeItem('healfit:token');
   cache.writeData({ data });
   return null;
 };

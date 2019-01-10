@@ -23,7 +23,7 @@ const stateLink = withClientState({
 });
 
 const authMiddlewareLink = setContext(() => {
-  const token = localStorage.getItem('keepitfit:token');
+  const token = localStorage.getItem('healfit:token');
   if (!token) {
     return null;
   }

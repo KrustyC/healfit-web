@@ -63,7 +63,7 @@ class SignIn extends Component {
       const { account, token } = result.data.login;
 
       await this.props.setCurrentUser({ variables: { user: account } });
-      localStorage.setItem('keepitfit:token', token);
+      localStorage.setItem('healfit:token', token);
       return this.setState(({ ui }) => ({ ui: ui.toAuthenticated() }));
     } catch (error) {
       return this.setState(({ ui }) => ({ ui: ui.toError(error) }));
@@ -83,7 +83,7 @@ class SignIn extends Component {
           <h1>Error</h1>
         ))}
         <Frame>
-          <Heading level="title">Keep It Fit</Heading>
+          <Heading level="title">Healfit</Heading>
           <Form onSubmit={this.handleSubmit} />
           <Text>
             Do you not have an account yet?{' '}
