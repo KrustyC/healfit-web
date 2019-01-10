@@ -39,7 +39,6 @@ const clearUserQuery = gql`
 `;
 
 const setCurrentUser = (_, { user }, { cache }) => {
-  console.log(user);
   const data = {
     currentUser: {
       user,
