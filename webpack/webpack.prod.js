@@ -4,7 +4,7 @@ const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const sharedConfig = require('./webpack.common.js');
 
 const appRoot = path.dirname(__dirname);
@@ -36,6 +36,12 @@ const plugins = [
       API_URL: JSON.stringify(process.env.API_URL),
     },
   }),
+  new TerserPlugin({
+    parallel: true,
+    terserOptions: {
+      ecma: 6,
+    },
+  }),
   new Visualizer({ filename: './statistics.html' }),
 ];
 
@@ -57,6 +63,5 @@ module.exports = merge(sharedConfig, {
         },
       },
     },
-    minimizer: [new UglifyJsPlugin()],
   },
 });
