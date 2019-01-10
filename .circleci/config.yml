@@ -32,6 +32,8 @@ jobs:
       - checkout
       - run:
           name: Deploy to S3
+          environment:
+            API_URL: http://api.healfit.co.uk
           command: |
             sudo apt-get install python-dev python-pip
             sudo pip install awscli
