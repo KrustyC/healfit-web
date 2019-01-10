@@ -10,6 +10,8 @@ import { history } from 'app/router';
 
 import { defaults, resolvers } from './auth';
 
+console.log('API', process.env.API_URL);
+
 const httpLink = createHttpLink({
   uri: `${process.env.API_URL}/graphql`,
 });
