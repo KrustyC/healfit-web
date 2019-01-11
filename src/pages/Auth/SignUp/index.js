@@ -1,23 +1,30 @@
-import React from 'react';
-import { Formik } from 'formik';
-import * as Yup from 'yup';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
-import { Mutation } from 'react-apollo';
+import { graphql } from 'react-apollo';
+import PossibleStates from 'possible-states';
+import styled from 'styled-components';
 
-import Container from 'uikit/blocks/Container';
-import Form from 'uikit/blocks/Form';
-import Button from 'uikit/blocks/Button';
+import Alert from 'uikit/blocks/Alert';
+import Heading from 'uikit/elements/Heading';
+import Form from './Form';
+import Layout from './Layout';
+import Success from './Success';
+
+const Frame = styled.div`
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StyledAlert = styled(Alert)`
+  margin-top: 20px;
+  margin-bottom: -20px;
+`;
 
 const USER_TYPE = 1;
-
-const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .email()
-    .required('Please provide your email'),
-  firstName: Yup.string().required('Please provide your First Name'),
-  lastName: Yup.string().required('Please provide your Last Name'),
-  password: Yup.string().required('Please provide your password'),
-});
 
 const SignupMutation = gql`
   mutation signup(
@@ -41,100 +48,39 @@ const SignupMutation = gql`
   }
 `;
 
-const SignUp = () => (
-  <Container size="large">
-    <Mutation mutation={SignupMutation}>
-      {signup => (
-        <Formik
-          initialValues={{
-            email: '',
-            password: '',
-            firstName: '',
-            lastName: '',
-          }}
-          onSubmit={values => {
-            signup({ variables: { ...values, type: USER_TYPE } })
-              .then(res => console.log('Success', res))
-              .catch(err => console.log('Error', err));
-          }}
-          validationSchema={validationSchema}
-        >
-          {({
-            values,
-            touched,
-            errors,
-            // dirty,
-            isSubmitting,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            // handleReset,
-          }) => (
-            <Form onSubmit={handleSubmit}>
-              <Form.FormGroup>
-                <Form.Label htmlFor="email">Email</Form.Label>
-                <Form.Input
-                  id="email"
-                  placeholder="Enter your email"
-                  type="text"
-                  value={values.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                <Form.Feedback show={errors.email && touched.email}>
-                  {errors.email}
-                </Form.Feedback>
-              </Form.FormGroup>
-              <Form.FormGroup>
-                <Form.Label htmlFor="firstName">First Name</Form.Label>
-                <Form.Input
-                  id="firstName"
-                  placeholder="Enter your first name"
-                  type="text"
-                  value={values.firstName}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                <Form.Feedback show={errors.firstName && touched.firstName}>
-                  {errors.firstName}
-                </Form.Feedback>
-              </Form.FormGroup>
-              <Form.FormGroup>
-                <Form.Label htmlFor="lastName">Last Name</Form.Label>
-                <Form.Input
-                  id="lastName"
-                  placeholder="Enter your Last Name"
-                  type="text"
-                  value={values.lastName}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                <Form.Feedback show={errors.lastName && touched.lastName}>
-                  {errors.lastName}
-                </Form.Feedback>
-              </Form.FormGroup>
-              <Form.FormGroup>
-                <Form.Label htmlFor="password">Password</Form.Label>
-                <Form.Password
-                  id="password"
-                  placeholder="Enter your password"
-                  value={values.password}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                <Form.Feedback show={errors.password && touched.password}>
-                  {errors.password}
-                </Form.Feedback>
-              </Form.FormGroup>
-              <Button type="submit" size="large" disabled={isSubmitting}>
-                Login
-              </Button>
-            </Form>
-          )}
-        </Formik>
-      )}
-    </Mutation>
-  </Container>
-);
+class Signup extends Component {
+  state = {
+    ui: PossibleStates('idle', 'success', 'error<reason>'),
+  };
 
-export default SignUp;
+  static propTypes = {
+    signup: PropTypes.func.isRequired,
+  };
+
+  onSignup = values => {
+    this.props
+      .signup({ variables: { ...values, type: USER_TYPE } })
+      .then(() => this.setState(({ ui }) => ({ ui: ui.toSuccess() })))
+      .catch(err => this.setState(({ ui }) => ({ ui: ui.toError(err) })));
+  };
+
+  render() {
+    const { ui } = this.state;
+    if (ui.current() === 'success') {
+      return <Success />;
+    }
+    return (
+      <Layout>
+        <Frame>
+          <Heading level="title">Healfit</Heading>
+          {ui.whenError(({ reason }) => (
+            <StyledAlert tpe="error">{reason}</StyledAlert>
+          ))}
+          <Form onSubmit={this.onSignup} />
+        </Frame>
+      </Layout>
+    );
+  }
+}
+
+export default graphql(SignupMutation, { name: 'signup' })(Signup);
