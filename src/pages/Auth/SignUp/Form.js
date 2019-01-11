@@ -105,7 +105,7 @@ const UserSignUpForm = ({ onSubmit }) => (
           disabled={isSubmitting}
           style={{ marginTop: '15px' }}
         >
-          Login
+          Sign Up
         </Button>
       </StyledForm>
     )}

@@ -13,6 +13,7 @@ const LeftSide = styled.div`
   height: 100vh;
   flex: 4;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
