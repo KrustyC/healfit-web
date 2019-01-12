@@ -3,43 +3,51 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import PossibleStates from 'possible-states';
-import styled, { css } from 'styled-components';
-
+import styled from 'styled-components';
+import posed, { PoseGroup } from 'react-pose';
 import Alert from 'uikit/blocks/Alert';
-import Link from 'uikit/elements/Link';
 import Heading from 'uikit/elements/Heading';
-import P from 'uikit/elements/P';
 import Form from './Form';
-import Layout from './Layout';
 import Success from './Success';
-
-const Frame = styled.div`
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-`;
+import {
+  Container,
+  Bottom,
+  Header,
+  FormContainer,
+  ImgSide,
+  FormSide,
+} from '../components';
 
 const StyledAlert = styled(Alert)`
   margin-top: 20px;
   margin-bottom: -20px;
+  width: 70%;
 `;
 
-const Bottom = styled.div`
-  ${({ theme }) => css`
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    justify-self: flex-end;
-    padding-bottom: ${theme.padding.md};
-  `}
+const StyledPoseGroup = styled(PoseGroup)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const USER_TYPE = 1;
+
+const Modal = posed.div({
+  enter: {
+    y: 0,
+    opacity: 1,
+    delay: 300,
+    transition: {
+      y: { type: 'spring', stiffness: 300, damping: 500 },
+      default: { duration: 300 },
+    },
+  },
+  exit: {
+    y: 50,
+    opacity: 0,
+    transition: { duration: 150 },
+  },
+});
 
 const SignupMutation = gql`
   mutation signup(
@@ -73,35 +81,50 @@ class Signup extends Component {
   };
 
   onSignup = values => {
-    this.props
-      .signup({ variables: { ...values, type: USER_TYPE } })
-      .then(() => this.setState(({ ui }) => ({ ui: ui.toSuccess() })))
-      .catch(err => this.setState(({ ui }) => ({ ui: ui.toError(err) })));
+    // this.props
+    //   .signup({ variables: { ...values, type: USER_TYPE } })
+    //   .then(() => this.setState(({ ui }) => ({ ui: ui.toSuccess() })))
+    //   .catch(err => this.setState(({ ui }) => ({ ui: ui.toError(err) })));
+    this.setState(({ ui }) => ({
+      ui: ui.toError('Big issue happened'),
+    })); // /
   };
 
   render() {
     const { ui } = this.state;
-    if (ui.current() === 'success') {
-      return <Success />;
-    }
+    const hideForm = ui.current() === 'success';
+
     return (
-      <Layout>
-        <Frame>
-          <Heading level="title">Healfit</Heading>
-          {ui.whenError(({ reason }) => (
-            <StyledAlert tpe="error">{reason}</StyledAlert>
-          ))}
-          <Form onSubmit={this.onSignup} />
-        </Frame>
-        <Bottom>
-          <P size="small" color="muted" align="center">
-            &copy; 2019 Healfit. All Rights Reserved. <br />
-            <Link to="/cookie">Cookie Preferences</Link>,{' '}
-            <Link to="/privacy-policy">Privacy</Link>, and{' '}
-            <Link to="/terms-and-conditions">Terms {'&'} Conditions</Link>.
-          </P>
-        </Bottom>
-      </Layout>
+      <Container>
+        <FormSide>
+          <Header>
+            <Heading level="title">Healfit</Heading>
+            <button onClick={this.onSignup}>Visible</button>
+          </Header>
+          <div style={{ display: 'flex'; flexDirection: 'column';}}>
+            {ui.whenError(({ reason }) => (
+              <StyledAlert type="error">{reason}</StyledAlert>
+            ))}
+            <StyledPoseGroup>
+              {hideForm && [
+                <Modal key="modal">
+                  <Success />
+                </Modal>,
+              ]}
+            </StyledPoseGroup>
+            <FormContainer key="form" show={!hideForm}>
+              <Form onSubmit={this.onSignup} />
+            </FormContainer>
+          </div>
+          {/* {ui.caseOf({
+              success: () => <Success />,
+              _: () => <FormContainer><Form onSubmit={this.onSignup} /><FormContainer/>,
+            })} */}
+          <Bottom />
+        </FormSide>
+        {/* eslint-disable-next-line global-require */}
+        <ImgSide url={require('assets/images/signup.jpg')} />
+      </Container>
     );
   }
 }

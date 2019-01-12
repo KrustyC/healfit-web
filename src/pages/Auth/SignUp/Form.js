@@ -7,7 +7,7 @@ import Form from 'uikit/blocks/Form';
 import Button from 'uikit/blocks/Button';
 
 const StyledForm = styled(Form)`
-  width: 100%;
+  width: 70%;
   margin: 50px 0px;
 `;
 

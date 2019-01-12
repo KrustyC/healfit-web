@@ -10,16 +10,8 @@ import { withAuth } from 'app/apollo/auth';
 import Heading from 'uikit/elements/Heading';
 import Link from 'uikit/elements/Link';
 
-import Layout from './Layout';
 import Form from './Form';
-
-const Frame = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
+import { Container, Frame, FormSide, ImgSide } from '../components';
 
 const Text = styled.p`
   width: 100%;
@@ -78,21 +70,25 @@ class SignIn extends Component {
     }
 
     return (
-      <Layout>
-        {ui.whenError(() => (
-          <h1>Error</h1>
-        ))}
-        <Frame>
-          <Heading level="title">Healfit</Heading>
-          <Form onSubmit={this.handleSubmit} />
-          <Text>
-            Do you not have an account yet?{' '}
-            <Link to="/auth/signup" style={{ fontWeight: 'bold' }}>
-              Sign Up
-            </Link>
-          </Text>
-        </Frame>
-      </Layout>
+      <Container>
+        {/* eslint-disable-next-line global-require */}
+        <ImgSide url={require('assets/images/login.jpg')} />
+        <FormSide>
+          {ui.whenError(() => (
+            <h1>Error</h1>
+          ))}
+          <Frame>
+            <Heading level="title">Healfit</Heading>
+            <Form onSubmit={this.handleSubmit} />
+            <Text>
+              Do you not have an account yet?{' '}
+              <Link to="/auth/signup" style={{ fontWeight: 'bold' }}>
+                Sign Up
+              </Link>
+            </Text>
+          </Frame>
+        </FormSide>
+      </Container>
     );
   }
 }
