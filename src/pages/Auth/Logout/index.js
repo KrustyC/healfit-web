@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import { withAuth } from 'app/apollo/auth';
 
 class Logout extends Component {
@@ -7,12 +8,17 @@ class Logout extends Component {
     clearUser: PropTypes.func.isRequired,
   };
 
+  state = {
+    redirect: false,
+  };
+
   componentDidMount() {
-    this.props.clearUser();
+    this.props.clearUser().then(() => this.setState({ redirect: true }));
   }
 
   render() {
-    return <h1>Hope to see you back soon :)!</h1>;
+    const { redirect } = this.state;
+    return redirect ? <Redirect to="" /> : null;
   }
 }
 
