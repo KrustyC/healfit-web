@@ -21,6 +21,8 @@ const sizes = {
 export default {
   colors: {
     font: FONT,
+    white: WHITE,
+
     // primary and accent/secondary
     primary: PRIMARY,
     accent: ACCENT,
@@ -70,13 +72,13 @@ export default {
   },
   fontSize: {
     xsmall: '1rem',
-    small: '1.2rem',
-    regular: '1.4rem',
+    small: '1.4rem',
+    regular: '1.6rem',
     large: '2.8rem',
-    title: '4rem',
-    h1: '3.4rem',
-    h2: '2.9rem',
-    h3: '2rem',
+    title: '5.4rem',
+    h1: '4.4rem',
+    h2: '3.6rem',
+    h3: '2.8rem',
     h4: '1.8rem',
   },
   forms: {

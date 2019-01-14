@@ -6,6 +6,10 @@ import PossibleStates from 'possible-states';
 import { locationToString } from 'helpers/queryString';
 import Container from 'uikit/blocks/Container';
 
+import Success from './Success';
+import Error from './Error';
+import Idle from './Idle';
+
 const VerifyAccountMutation = gql`
   mutation verifyAccount($email: String!, $token: String!) {
     verifyAccount(input: { email: $email, token: $token })
@@ -21,13 +25,15 @@ class VerifyAccount extends Component {
   };
 
   state = {
-    ui: PossibleStates('idle', 'error', 'verified', 'notVerified<reason>'),
+    ui: PossibleStates('idle', 'error<reason>', 'verified'),
   };
 
   componentDidMount() {
     const { token, email } = locationToString(this.props.location);
     if (!token || !email) {
-      return this.setState(({ ui }) => ({ ui: ui.toError() }));
+      return this.setState(({ ui }) => ({
+        ui: ui.toError('The URL provided is invalid! Please try another URL!'),
+      }));
     }
 
     return this.props
@@ -35,7 +41,7 @@ class VerifyAccount extends Component {
       .then(() => this.setState(({ ui }) => ({ ui: ui.toVerified() })))
       .catch(error => {
         const errors = error.graphQLErrors.map(x => x.message);
-        this.setState(({ ui }) => ({ ui: ui.toNotVerified(errors[0]) }));
+        this.setState(({ ui }) => ({ ui: ui.toError(errors[0]) }));
       });
   }
 
@@ -44,10 +50,9 @@ class VerifyAccount extends Component {
     return (
       <Container size="fullscreen">
         {ui.caseOf({
-          idle: () => <h1>we are verifing your account</h1>,
-          error: () => <h1>THe path is wrong</h1>,
-          verified: () => <h1>Verified!!</h1>,
-          notVerified: ({ reason }) => <h1>{reason} :(</h1>,
+          idle: () => <Idle />,
+          error: ({ reason }) => <Error reason={reason} />,
+          verified: () => <Success />,
         })}
       </Container>
     );

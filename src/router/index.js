@@ -9,17 +9,17 @@ const history = createBrowserHistory();
 const CustomRouter = () => (
   <Router history={history}>
     <Switch>
-      <Route exact path="/" component={props => <Routes.Home {...props} />} />
-      <Route path="/auth" component={props => <Routes.Auth {...props} />} />
+      <Route exact path="/" render={props => <Routes.Home {...props} />} />
+      <Route path="/auth" render={props => <Routes.Auth {...props} />} />
       <PrivateRoute
         path="/dashboard"
-        component={props => <Routes.Dashboard {...props} />}
+        render={props => <Routes.Dashboard {...props} />}
       />
       <PrivateRoute
         path="/meal-planner"
-        component={props => <Routes.MealPlanner {...props} />}
+        render={props => <Routes.MealPlanner {...props} />}
       />
-      <Route path="/404" component={props => <Routes.NotFound {...props} />} />
+      <Route path="/404" render={props => <Routes.NotFound {...props} />} />
       <Redirect to="/404" />
     </Switch>
   </Router>
