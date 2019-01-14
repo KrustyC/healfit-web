@@ -21,6 +21,8 @@ const sizes = {
 export default {
   colors: {
     font: FONT,
+    white: WHITE,
+
     // primary and accent/secondary
     primary: PRIMARY,
     accent: ACCENT,
