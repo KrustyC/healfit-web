@@ -3,72 +3,40 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 const H1 = styled.h1`
-  font-weight: 300;
-  margin: 0px 0 ${({ theme }) => theme.spaces.regular} 0;
-
-  @media only screen and (min-width: ${({ theme }) => theme.sizes.sm}) {
-    font-size: calc(${({ theme }) => theme.fontSize.h1} * 0.75);
-  }
-
-  @media only screen and (min-width: ${({ theme }) => theme.sizes.md}) {
-    font-size: ${({ theme }) => theme.fontSize.h1};
-  }
-
-  ${({ align }) => css`
+  ${({ theme, align }) => css`
+    font-weight: 300;
+    margin: 0px 0 ${theme.spaces.regular} 0;
+    font-size: ${theme.fontSize.h1};
     text-align: ${align};
   `}
 `;
 
 const H2 = styled(H1)`
-  font-size: calc(${({ theme }) => theme.fontSize.h2} * 0.75);
-
-  @media only screen and (min-width: ${({ theme }) => theme.sizes.sm}) {
-    font-size: calc(${({ theme }) => theme.fontSize.h2} * 0.75);
-  }
-
-  @media only screen and (min-width: ${({ theme }) => theme.sizes.md}) {
-    font-size: ${({ theme }) => theme.fontSize.h2};
-  }
+  ${({ theme }) => css`
+    font-size: ${theme.fontSize.h2};
+  `}
 `;
 
 const H3 = styled(H1)`
-  font-size: ${({ theme }) => theme.fontSize.h3};
-  font-weight: bold;
-
-  @media only screen and (min-width: ${({ theme }) => theme.sizes.sm}) {
-    font-size: ${({ theme }) => theme.fontSize.h3};
-  }
-
-  @media only screen and (min-width: ${({ theme }) => theme.sizes.md}) {
-    font-size: ${({ theme }) => theme.fontSize.h3};
-  }
+  ${({ theme }) => css`
+    font-size: ${theme.fontSize.h3};
+    font-weight: bold;
+  `}
 `;
 
 const H4 = styled(H1)`
-  font-size: ${({ theme }) => theme.fontSize.h4};
-  font-weight: bold;
-  margin: 0px 0 calc(${({ theme }) => theme.spaces.small} * 0.5) 0;
-
-  @media only screen and (min-width: ${({ theme }) => theme.sizes.sm}) {
-    font-size: ${({ theme }) => theme.fontSize.h4};
-  }
-
-  @media only screen and (min-width: ${({ theme }) => theme.sizes.md}) {
-    font-size: ${({ theme }) => theme.fontSize.h4};
-  }
+  ${({ theme }) => css`
+    font-size: ${theme.fontSize.h4};
+    font-weight: bold;
+    margin: 0px 0 ${theme.spaces.small} 0;
+  `}
 `;
 
 const Title = styled(H1)`
-  margin: 0px;
-  font-size: calc(${({ theme }) => theme.fontSize.title} * 0.5);
-
-  @media only screen and (min-width: ${({ theme }) => theme.sizes.sm}) {
-    font-size: calc(${({ theme }) => theme.fontSize.title} * 0.75);
-  }
-
-  @media only screen and (min-width: ${({ theme }) => theme.sizes.md}) {
-    font-size: ${({ theme }) => theme.fontSize.title};
-  }
+  ${({ theme }) => css`
+    margin: ${theme.margin.sm};
+    font-size: ${theme.fontSize.title};
+  `}
 `;
 
 const Heading = ({ children, level, align, ...rest }) => {

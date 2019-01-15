@@ -2,7 +2,8 @@ import React from 'react';
 import posed from 'react-pose';
 import styled, { css } from 'styled-components';
 import P from 'uikit/elements/P';
-import Link from 'uikit/elements/Link';
+import { history } from 'app/router';
+import Button from 'uikit/blocks/Button';
 
 const Box = styled(
   posed.div({
@@ -40,8 +41,8 @@ export default () => (
       Your password has been succesfully reset! Now you are ready to login and
       enjoy Healfit! @TODO BETTER COPY
     </P>
-    <Link to="/auth/signin" component="button" color="primary">
+    <Button size="large" onClick={() => history.push('/auth/signin')}>
       Back To Login
-    </Link>
+    </Button>
   </Box>
 );

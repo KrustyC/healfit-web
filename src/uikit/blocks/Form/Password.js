@@ -7,10 +7,10 @@ const Row = styled(Input)`
   display: flex;
   justify-content: space-between;
 
-  ${({ focus }) =>
+  ${({ theme, focus }) =>
     focus &&
     css`
-      border: 2px solid black;
+      border: 2px solid ${theme.colors.primary};
     `}
 `;
 

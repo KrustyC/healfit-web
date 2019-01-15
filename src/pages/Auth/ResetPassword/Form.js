@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import Form from 'uikit/blocks/Form';
 import Button from 'uikit/blocks/Button';
 
-const StyledForm = styled(Form)`
-  width: 60%;
-  margin: 50px 0px;
-`;
-
 const validationSchema = Yup.object().shape({
-  password: Yup.string().required('Please provide your email'),
+  password: Yup.string()
+    .min(8, 'Password has to be longer than 8 characters!')
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/,
+      'Password must contain at least one upppercase character, one lowercase character, one special character and one number'
+    )
+    .required('Please provide your password!'),
   passwordConfirm: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
     .required('Password confirm is required'),
@@ -35,7 +35,7 @@ const SignInForm = ({ onSubmit }) => (
       handleBlur,
       handleSubmit,
     }) => (
-      <StyledForm onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Form.FormGroup>
           <Form.Label htmlFor="name">Password</Form.Label>
           <Form.Password
@@ -72,7 +72,7 @@ const SignInForm = ({ onSubmit }) => (
         >
           Reset Password
         </Button>
-      </StyledForm>
+      </Form>
     )}
   </Formik>
 );

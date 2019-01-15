@@ -2,7 +2,8 @@ import React from 'react';
 import posed from 'react-pose';
 import styled, { css } from 'styled-components';
 import P from 'uikit/elements/P';
-import Link from 'uikit/elements/Link';
+import Button from 'uikit/blocks/Button';
+import { history } from 'app/router';
 
 const Box = styled(
   posed.div({
@@ -29,6 +30,11 @@ const Image = styled.img`
     width: 200px;
     border-radius: 50%;
     margin-bottom: ${theme.margin.md};
+
+    @media (max-width: ${theme.sizes.md}) {
+      height: 150px;
+      width: 150px;
+    }
   `}
 `;
 
@@ -41,8 +47,8 @@ export default () => (
       email to reset your password. If you don{"'"}t see the email, check other
       places it might be, like your junk, spam, social or other folders.
     </P>
-    <Link to="/auth/signin" component="button" color="primary">
+    <Button size="large" onClick={() => history.push('/auth/signin')}>
       Back To Login
-    </Link>
+    </Button>
   </Box>
 );

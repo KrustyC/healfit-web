@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import Heading from 'uikit/elements/Heading';
+import P from 'uikit/elements/P';
 
 import Completed from './Completed';
 import Form from './Form';
@@ -17,33 +18,61 @@ const ResetPasswordMutation = gql`
 `;
 
 const Layout = styled.div`
-  height: 100vh;
-  display: grid;
-  grid-template-rows: 30% 70%;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
+  ${({ theme }) => css`
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: ${theme.dimensions.containerWidth.small};
+
+    margin: 0 auto;
+    @media (max-width: ${theme.sizes.md}) {
+      width: ${theme.dimensions.containerWidth.fullscreen};
+    }
+  `}
 `;
 
 const Header = styled.div`
   ${({ theme }) => css`
     display: flex;
+    flex: 2;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    min-width: 100%;
-    width: ${theme.dimensions.containerWidth.small};
+
+    @media (max-width: ${theme.sizes.md}) {
+      flex: 3;
+    }
   `}
 `;
 
 const Main = styled.div`
   ${({ theme }) => css`
     display: flex;
+    flex: 5;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 100%;
-    width: ${theme.dimensions.containerWidth.small};
+    width: 100%;
+
+    form {
+      width: ${theme.dimensions.containerWidth.xsmall};
+    }
+
+    @media (max-width: ${theme.sizes.md}) {
+      form {
+        width: ${theme.dimensions.containerWidth.large};
+        padding: 0 ${theme.padding.md};
+      }
+    }
+
+    @media (max-width: ${theme.sizes.sm}) {
+      form {
+        width: ${theme.dimensions.containerWidth.fullscreen};
+        padding: 0 ${theme.padding.md};
+      }
+    }
   `}
 `;
 
@@ -77,6 +106,9 @@ class ResetPassword extends Component {
           <Heading level="h3" align="center">
             Reset Your Password
           </Heading>
+          <P align="center">
+            Remember to choose a strong and memorable password!{' '}
+          </P>
         </Header>
         <Main>
           {ui.caseOf({

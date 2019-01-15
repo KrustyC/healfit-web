@@ -8,8 +8,6 @@ import {
 
 import { StyledButton } from '../blocks/Button';
 
-const ButtonLink = StyledButton.withComponent(ReactRouterLink);
-
 const Link = styled(ReactRouterLink)`
   color: ${({ theme }) => theme.colors.accent};
   text-decoration: none;
@@ -51,9 +49,9 @@ const LinkElement = props => {
   switch (component) {
     case 'button':
       return (
-        <ButtonLink to={to} {...rest}>
+        <Link to={to} as={StyledButton} {...rest}>
           {children}
-        </ButtonLink>
+        </Link>
       );
     case 'nav':
       return (

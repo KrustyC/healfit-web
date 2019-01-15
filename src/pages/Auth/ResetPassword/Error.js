@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { history } from 'app/router';
 import P from 'uikit/elements/P';
-import Link from 'uikit/elements/Link';
+import Button from 'uikit/blocks/Button';
+import Alert from 'uikit/blocks/Alert';
 
 const Box = styled.div`
   display: flex;
@@ -13,15 +15,14 @@ const Box = styled.div`
 
 const Error = ({ reason }) => (
   <Box initialPose="open" pose="closed">
-    {/* eslint-disable-next-line */}
     <Alert type="error">{reason}</Alert>
     <P align="center">
       Your password has been succesfully reset! Now you are ready to login and
       enjoy Healfit! @TODO BETTER COPY
     </P>
-    <Link to="/auth/signin" component="button" color="primary">
-      Back To Home
-    </Link>
+    <Button size="large" onClick={() => history.push('/auth/signin')}>
+      Back To Login
+    </Button>
   </Box>
 );
 

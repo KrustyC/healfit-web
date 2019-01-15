@@ -1,16 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import Form from 'uikit/blocks/Form';
 import Button from 'uikit/blocks/Button';
-
-const StyledForm = styled(Form)`
-  width: 60%;
-  margin: 50px 0px;
-`;
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -34,7 +28,7 @@ const SignInForm = ({ onSubmit }) => (
       handleBlur,
       handleSubmit,
     }) => (
-      <StyledForm onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Form.FormGroup>
           <Form.Label htmlFor="name">Email</Form.Label>
           <Form.Input
@@ -57,7 +51,7 @@ const SignInForm = ({ onSubmit }) => (
         >
           Reset Password
         </Button>
-      </StyledForm>
+      </Form>
     )}
   </Formik>
 );
