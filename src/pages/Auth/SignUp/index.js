@@ -4,7 +4,6 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import PossibleStates from 'possible-states';
 import Heading from 'uikit/elements/Heading';
-import { Loader } from 'uikit/elements/Loaders';
 import Link from 'uikit/elements/Link';
 import P from 'uikit/elements/P';
 import Form from './Form';
@@ -53,13 +52,13 @@ class Signup extends Component {
     signup: PropTypes.func.isRequired,
   };
 
-  onSignup = (values, resetForm) => {
-    this.setState(({ ui }) => ({ ui: ui.toLoading() }));
+  onSignup = (values, { resetForm }) => {
     this.props
       .signup({ variables: { ...values, type: USER_TYPE } })
       .then(() => this.setState(({ ui }) => ({ ui: ui.toSuccess() })))
-      .catch(err => {
-        this.setState(({ ui }) => ({ ui: ui.toError(err) }));
+      .catch(error => {
+        const errors = error.graphQLErrors.map(x => x.message);
+        this.setState(({ ui }) => ({ ui: ui.toError(errors[0]) }));
         resetForm();
         setTimeout(() => {
           this.setState(({ ui }) => ({
@@ -85,7 +84,6 @@ class Signup extends Component {
 
             {ui.caseOf({
               success: () => <Success />,
-              loading: () => <Loader />,
               _: () => (
                 <FormContainer>
                   <Form onSubmit={this.onSignup} />
