@@ -62,6 +62,7 @@ export const FormContainer = styled.div`
     @media (max-width: ${theme.sizes.md}) {
       ${Form} {
         width: 95%;
+        position: absolute;
       }
     }
   `}
