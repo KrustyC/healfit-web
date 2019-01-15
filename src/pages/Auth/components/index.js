@@ -39,8 +39,8 @@ export const Header = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    flex: 5;
+    justify-content: flex-end;
+    flex: 3;
     min-height: min-content;
 
     @media (max-width: ${theme.sizes.sm}) {

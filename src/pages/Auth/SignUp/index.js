@@ -95,7 +95,7 @@ class Signup extends Component {
             {ui.caseOf({
               success: () => <Success />,
               _: () => (
-                <FormContainer key="form">
+                <FormContainer>
                   <Form onSubmit={this.onSignup} />
                   <br />
                   <P size="small" style={{ display: 'flex' }}>

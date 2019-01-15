@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import styled from 'styled-components';
 import gql from 'graphql-tag';
 import PossibleStates from 'possible-states';
 import { compose, graphql } from 'react-apollo';
@@ -9,15 +8,18 @@ import { withAuth } from 'app/apollo/auth';
 
 import Heading from 'uikit/elements/Heading';
 import Link from 'uikit/elements/Link';
+import P from 'uikit/elements/P';
 
 import Form from './Form';
-import { Container, Frame, FormSide, ImgSide } from '../components';
-
-const Text = styled.p`
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-`;
+import {
+  Container,
+  Header,
+  Bottom,
+  Frame,
+  FormSide,
+  ImgSide,
+  FormContainer,
+} from '../components';
 
 const LoginMutation = gql`
   mutation login($email: String!, $password: String!) {
@@ -74,19 +76,24 @@ class SignIn extends Component {
         {/* eslint-disable-next-line global-require */}
         <ImgSide url={require('assets/images/login.jpg')} />
         <FormSide>
-          {ui.whenError(() => (
-            <h1>Error</h1>
-          ))}
-          <Frame>
+          <Header>
             <Heading level="title">Healfit</Heading>
-            <Form onSubmit={this.handleSubmit} />
-            <Text>
-              Do you not have an account yet?{' '}
-              <Link to="/auth/signup" style={{ fontWeight: 'bold' }}>
-                Sign Up
-              </Link>
-            </Text>
+          </Header>
+          <Frame>
+            {ui.whenError(() => (
+              <h1>Error</h1>
+            ))}
+            <FormContainer>
+              <Form onSubmit={this.handleSubmit} />
+              <P size="small">
+                Do you not have an account yet?{' '}
+                <Link to="/auth/signup" style={{ fontWeight: 'bold' }}>
+                  Sign Up
+                </Link>
+              </P>
+            </FormContainer>
           </Frame>
+          <Bottom />
         </FormSide>
       </Container>
     );
