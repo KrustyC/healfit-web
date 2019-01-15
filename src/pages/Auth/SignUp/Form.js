@@ -104,6 +104,7 @@ const UserSignUpForm = ({ onSubmit }) => (
           type="submit"
           size="large"
           disabled={isSubmitting || !isValid}
+          loading={isSubmitting}
           style={{ marginTop: '15px' }}
         >
           Sign Up

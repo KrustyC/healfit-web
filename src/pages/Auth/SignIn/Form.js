@@ -66,6 +66,7 @@ const SignInForm = ({ onSubmit }) => (
           type="submit"
           size="large"
           color="primary"
+          loading={isSubmitting}
           disabled={isSubmitting || !isValid}
         >
           Sign In

@@ -19,6 +19,7 @@ import {
   FormSide,
   ImgSide,
   FormContainer,
+  StyledAlert,
 } from '../components';
 
 const LoginMutation = gql`
@@ -51,7 +52,7 @@ class SignIn extends Component {
     }
   }
 
-  onHandleSubmit = async values => {
+  onHandleSubmit = async (values, { resetForm }) => {
     try {
       const result = await this.props.login({ variables: values });
       const { account, token } = result.data.login;
@@ -60,7 +61,13 @@ class SignIn extends Component {
       localStorage.setItem('healfit:token', token);
       return this.setState(({ ui }) => ({ ui: ui.toAuthenticated() }));
     } catch (error) {
-      return this.setState(({ ui }) => ({ ui: ui.toError(error) }));
+      const errors = error.graphQLErrors.map(x => x.message);
+      this.setState(({ ui }) => ({ ui: ui.toError(errors[0]) }));
+      resetForm();
+      return setTimeout(
+        () => this.setState(({ ui }) => ({ ui: ui.toIdle() })),
+        3000
+      );
     }
   };
 
@@ -80,11 +87,11 @@ class SignIn extends Component {
             <Heading level="title">Healfit</Heading>
           </Header>
           <Frame>
-            {ui.whenError(() => (
-              <h1>Error</h1>
-            ))}
             <FormContainer>
-              <Form onSubmit={this.handleSubmit} />
+              {ui.whenError(({ reason }) => (
+                <StyledAlert type="error">{reason}</StyledAlert>
+              ))}
+              <Form onSubmit={this.onHandleSubmit} />
               <P size="small">
                 Do you not have an account yet?{' '}
                 <Link to="/auth/signup" style={{ fontWeight: 'bold' }}>

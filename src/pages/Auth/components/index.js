@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import Link from 'uikit/elements/Link';
 import P from 'uikit/elements/P';
 import Form from 'uikit/blocks/Form';
+import Alert from 'uikit/blocks/Alert';
 
 export const Container = styled.div`
   height: 100vh;
@@ -107,3 +108,19 @@ export const Bottom = () => (
     </P>
   </BottomDiv>
 );
+
+export const StyledAlert = styled(Alert)`
+  ${({ theme }) => css`
+    width: 65%;
+    margin-top: -${theme.margin.md};
+
+    @media (max-width: ${theme.sizes.md}) {
+      width: 85%;
+    }
+
+    @media (max-width: ${theme.sizes.md}) {
+      margin-top: -${theme.margin.xs};
+      width: 95%;
+    }
+  `}
+`;

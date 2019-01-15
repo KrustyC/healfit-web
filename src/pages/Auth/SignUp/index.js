@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import PossibleStates from 'possible-states';
-import styled, { css } from 'styled-components';
-import Alert from 'uikit/blocks/Alert';
 import Heading from 'uikit/elements/Heading';
 import { Loader } from 'uikit/elements/Loaders';
 import Link from 'uikit/elements/Link';
@@ -19,20 +17,10 @@ import {
   ImgSide,
   FormSide,
   Frame,
+  StyledAlert,
 } from '../components';
 
 const USER_TYPE = 1;
-
-const StyledAlert = styled(Alert)`
-  ${({ theme }) => css`
-    margin: 0 20px;
-    width: 70%;
-
-    @media (max-width: ${theme.sizes.md}) {
-      width: 90%;
-    }
-  `}
-`;
 
 const SignupMutation = gql`
   mutation signup(
@@ -65,13 +53,14 @@ class Signup extends Component {
     signup: PropTypes.func.isRequired,
   };
 
-  onSignup = values => {
+  onSignup = (values, resetForm) => {
     this.setState(({ ui }) => ({ ui: ui.toLoading() }));
     this.props
       .signup({ variables: { ...values, type: USER_TYPE } })
       .then(() => this.setState(({ ui }) => ({ ui: ui.toSuccess() })))
       .catch(err => {
         this.setState(({ ui }) => ({ ui: ui.toError(err) }));
+        resetForm();
         setTimeout(() => {
           this.setState(({ ui }) => ({
             ui: ui.toIdle(),
