@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import PossibleStates from 'possible-states';
+import styled, { css } from 'styled-components';
 import Alert from 'uikit/blocks/Alert';
 import Heading from 'uikit/elements/Heading';
 import Link from 'uikit/elements/Link';
@@ -20,6 +21,17 @@ import {
 } from '../components';
 
 const USER_TYPE = 1;
+
+const StyledAlert = styled(Alert)`
+  ${({ theme }) => css`
+    margin: 0 20px;
+    width: 70%;
+
+    @media (max-width: ${theme.sizes.md}) {
+      width: 90%;
+    }
+  `}
+`;
 
 const SignupMutation = gql`
   mutation signup(
@@ -52,10 +64,6 @@ class Signup extends Component {
     signup: PropTypes.func.isRequired,
   };
 
-  componentDidMount() {
-    this.setState(({ ui }) => ({ ui: ui.toSuccess() }));
-  }
-
   onSignup = values => {
     this.props
       .signup({ variables: { ...values, type: USER_TYPE } })
@@ -81,9 +89,7 @@ class Signup extends Component {
           </Header>
           <Frame>
             {ui.whenError(({ reason }) => (
-              <Alert style={{ margin: '0 20px', width: '70%' }} type="error">
-                {reason}
-              </Alert>
+              <StyledAlert type="error">{reason}</StyledAlert>
             ))}
 
             {ui.caseOf({
