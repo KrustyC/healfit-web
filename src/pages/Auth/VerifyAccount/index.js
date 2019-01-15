@@ -4,7 +4,6 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import PossibleStates from 'possible-states';
 import { locationToString } from 'helpers/queryString';
-// import Fragment from 'uikit/blocks/Container';
 
 import Success from './Success';
 import Error from './Error';
