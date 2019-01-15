@@ -6,6 +6,7 @@ import PossibleStates from 'possible-states';
 import styled, { css } from 'styled-components';
 import Alert from 'uikit/blocks/Alert';
 import Heading from 'uikit/elements/Heading';
+import { Loader } from 'uikit/elements/Loaders';
 import Link from 'uikit/elements/Link';
 import P from 'uikit/elements/P';
 import Form from './Form';
@@ -57,7 +58,7 @@ const SignupMutation = gql`
 
 class Signup extends Component {
   state = {
-    ui: PossibleStates('idle', 'success', 'error<reason>'),
+    ui: PossibleStates('idle', 'success', 'loading', 'error<reason>'),
   };
 
   static propTypes = {
@@ -65,6 +66,7 @@ class Signup extends Component {
   };
 
   onSignup = values => {
+    this.setState(({ ui }) => ({ ui: ui.toLoading() }));
     this.props
       .signup({ variables: { ...values, type: USER_TYPE } })
       .then(() => this.setState(({ ui }) => ({ ui: ui.toSuccess() })))
@@ -94,6 +96,7 @@ class Signup extends Component {
 
             {ui.caseOf({
               success: () => <Success />,
+              loading: () => <Loader />,
               _: () => (
                 <FormContainer>
                   <Form onSubmit={this.onSignup} />

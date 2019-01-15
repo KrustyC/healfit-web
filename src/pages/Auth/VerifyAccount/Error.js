@@ -1,19 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { history } from 'app/router';
 
-import Container from 'uikit/blocks/Container';
 import Alert from 'uikit/blocks/Alert';
-import Link from 'uikit/elements/Link';
+import Button from 'uikit/blocks/Button';
 import Heading from 'uikit/elements/Heading';
+import P from 'uikit/elements/P';
 
-const Layout = styled(Container)`
-  height: 100vh;
-  display: grid;
-  text-align: center;
-  grid-template-rows: 30% 70%;
-  align-items: center;
-  justify-content: center;
+const Layout = styled.div`
+  ${({ theme }) => css`
+    height: 100vh;
+    display: grid;
+    text-align: center;
+    grid-template-rows: 30% 70%;
+    align-items: center;
+    justify-content: center;
+
+    width: ${theme.dimensions.containerWidth.small};
+    margin: 0 auto;
+
+    @media (max-width: ${theme.sizes.md}) {
+      width: ${theme.dimensions.containerWidth.fullscreen};
+    }
+  `}
 `;
 
 const Header = styled.div`
@@ -22,21 +32,15 @@ const Header = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const Div = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  height: 100%;
-`;
 
-const Text = styled.div`
+const Main = styled.div`
   ${({ theme }) => css`
-    text-align: center;
-    font-size: ${theme.fontSize.regular};
-    margin-left: ${theme.margin.md};
-    margin-right: ${theme.margin.md};
-    margin-bottom: ${theme.margin.md};
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    padding: 0 ${theme.padding.md};
   `}
 `;
 
@@ -45,17 +49,17 @@ const NotVerified = ({ reason }) => (
     <Header>
       <Heading level="title">Healfit</Heading>
     </Header>
-    <Div>
+    <Main>
       <Alert type="error">{reason}</Alert>
-      <Text>
+      <P align="center">
         If this error keeps happening please contact us at hello@healfit.co.uk
         we
         {"'"}ll get back to you as soon as possible
-      </Text>
-      <Link to="/" component="button" color="primary">
+      </P>
+      <Button size="large" onClick={() => history.push('/')} color="primary">
         Back To Home
-      </Link>
-    </Div>
+      </Button>
+    </Main>
   </Layout>
 );
 

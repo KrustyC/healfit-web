@@ -27,6 +27,7 @@ const SignInForm = ({ onSubmit }) => (
       errors,
       isSubmitting,
       handleChange,
+      isValid,
       handleBlur,
       handleSubmit,
     }) => (
@@ -65,7 +66,7 @@ const SignInForm = ({ onSubmit }) => (
           type="submit"
           size="large"
           color="primary"
-          disabled={isSubmitting}
+          disabled={isSubmitting || !isValid}
         >
           Sign In
         </Button>

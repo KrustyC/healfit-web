@@ -14,8 +14,8 @@ const validationSchema = Yup.object().shape({
   password: Yup.string()
     .min(8, 'Password has to be longer than 8 characters!')
     .matches(
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.[\W])/,
-      'Password must contain at least one upppercase character, one lowercase character, one number and one special character'
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/,
+      'Password must contain at least one upppercase character, one lowercase character, one special character and one number'
     )
     .required('Please provide your password!'),
 });

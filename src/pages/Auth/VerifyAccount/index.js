@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import PossibleStates from 'possible-states';
 import { locationToString } from 'helpers/queryString';
-import Container from 'uikit/blocks/Container';
+// import Fragment from 'uikit/blocks/Container';
 
 import Success from './Success';
 import Error from './Error';
 import Idle from './Idle';
 
 const VerifyAccountMutation = gql`
-  mutation verifyAccount($email: String!, $token: String!) {
-    verifyAccount(input: { email: $email, token: $token })
+  mutation verifyAccount($token: String!) {
+    verifyAccount(input: { token: $token })
   }
 `;
 
@@ -29,15 +29,15 @@ class VerifyAccount extends Component {
   };
 
   componentDidMount() {
-    const { token, email } = locationToString(this.props.location);
-    if (!token || !email) {
+    const { token } = locationToString(this.props.location);
+    if (!token) {
       return this.setState(({ ui }) => ({
         ui: ui.toError('The URL provided is invalid! Please try another URL!'),
       }));
     }
 
     return this.props
-      .verifyAccount({ variables: { token, email } })
+      .verifyAccount({ variables: { token } })
       .then(() => this.setState(({ ui }) => ({ ui: ui.toVerified() })))
       .catch(error => {
         const errors = error.graphQLErrors.map(x => x.message);
@@ -48,13 +48,13 @@ class VerifyAccount extends Component {
   render() {
     const { ui } = this.state;
     return (
-      <Container size="fullscreen">
+      <Fragment>
         {ui.caseOf({
           idle: () => <Idle />,
           error: ({ reason }) => <Error reason={reason} />,
           verified: () => <Success />,
         })}
-      </Container>
+      </Fragment>
     );
   }
 }

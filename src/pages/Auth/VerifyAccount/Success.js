@@ -1,21 +1,19 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { history } from 'app/router';
 
-import Link from 'uikit/elements/Link';
+import Button from 'uikit/blocks/Button';
 
 /* eslint-disable global-require */
 const Layout = styled.div`
-  ${({ theme }) => css`
-    height: 100vh;
-    display: flex;
-    padding: ${theme.padding.xl};
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-image: url(${require('assets/images/undrawn/finish-line.svg')});
-    background-repeat: no-repeat;
-    background-position: center;
-  `}
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url(${require('assets/images/undrawn/finish-line.svg')});
+  background-repeat: no-repeat;
+  background-position: center;
 `;
 /* eslint-enable global-require */
 
@@ -54,9 +52,13 @@ export default () => (
       </Title>
       <Text>We are very excited to have you on board!</Text>
       <br />
-      <Link to="/auth/signin" component="button" color="primary">
-        Log In
-      </Link>
+      <Button
+        size="large"
+        onClick={() => history.push('/auth/signin')}
+        color="primary"
+      >
+        Login
+      </Button>
     </Div>
   </Layout>
 );
