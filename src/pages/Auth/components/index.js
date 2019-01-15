@@ -76,19 +76,11 @@ export const FormContainer = styled.div`
       ${Form} {
         width: 85%;
       }
-
-      &:focus-within {
-        position: absolute;
-      }
     }
 
     @media (max-width: ${theme.sizes.sm}) {
       ${Form} {
         width: 95%;
-      }
-
-      &:focus-within {
-        position: absolute;
       }
     }
   `}
