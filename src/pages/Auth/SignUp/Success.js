@@ -43,6 +43,8 @@ export default () => (
     {/* eslint-disable-next-line global-require */}
     <Image src={require('assets/icons/egg.svg')} />
     <Heading level="h2">Cracking!</Heading>
-    <P>Shortly you{"'"}ll receive an email to confirm you email address! </P>
+    <P align="center">
+      Shortly you{"'"}ll receive an email to confirm you email address!{' '}
+    </P>
   </Container>
 );

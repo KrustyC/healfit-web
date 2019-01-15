@@ -52,6 +52,10 @@ class Signup extends Component {
     signup: PropTypes.func.isRequired,
   };
 
+  componentDidMount() {
+    this.setState(({ ui }) => ({ ui: ui.toSuccess() }));
+  }
+
   onSignup = values => {
     this.props
       .signup({ variables: { ...values, type: USER_TYPE } })

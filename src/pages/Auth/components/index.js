@@ -12,24 +12,31 @@ export const Container = styled.div`
 `;
 
 export const ImgSide = styled.div`
-  ${({ url }) => css`
+  ${({ theme, url }) => css`
     height: 100vh;
     flex: 7;
-    ${'' /* visibility: hidden; */}
     background-image: url(${url});
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+
+    @media (max-width: ${theme.sizes.md}) {
+      display: none;
+    }
   `}
 `;
 
 export const FormSide = styled.div`
-  height: 100vh;
-  flex: 4;
-  /* flex: 1; //4 */
-  /* flex: 4; */
-  display: grid;
-  grid-template-rows: 25% 65% 10%;
+  ${({ theme }) => css`
+    height: 100vh;
+    flex: 4;
+    display: grid;
+    grid-template-rows: 25% 65% 10%;
+
+    @media (max-width: ${theme.sizes.md}) {
+      grid-template-rows: 10% 80% 10%;
+    }
+  `}
 `;
 
 export const Frame = styled.div`
@@ -40,16 +47,22 @@ export const Frame = styled.div`
 `;
 
 export const FormContainer = styled.div`
-  ${({ theme: { padding } }) => css`
+  ${({ theme }) => css`
     flex-direction: column;
     width: 100%;
-    padding: ${padding.sm} ${padding.sm}; /*  Use rem from theme*/
+    padding: ${theme.padding.sm} ${theme.padding.sm};
     display: flex;
     justify-content: center;
     align-items: center;
 
     ${Form} {
       width: 65%;
+    }
+
+    @media (max-width: ${theme.sizes.md}) {
+      ${Form} {
+        width: 95%;
+      }
     }
   `}
 `;
