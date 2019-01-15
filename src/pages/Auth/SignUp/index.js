@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import PossibleStates from 'possible-states';
-import styled from 'styled-components';
-import posed, { PoseGroup } from 'react-pose';
 import Alert from 'uikit/blocks/Alert';
 import Heading from 'uikit/elements/Heading';
+import Link from 'uikit/elements/Link';
+import P from 'uikit/elements/P';
 import Form from './Form';
 import Success from './Success';
 import {
@@ -16,38 +16,10 @@ import {
   FormContainer,
   ImgSide,
   FormSide,
+  Frame,
 } from '../components';
 
-const StyledAlert = styled(Alert)`
-  margin-top: 20px;
-  margin-bottom: -20px;
-  width: 70%;
-`;
-
-const StyledPoseGroup = styled(PoseGroup)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 const USER_TYPE = 1;
-
-const Modal = posed.div({
-  enter: {
-    y: 0,
-    opacity: 1,
-    delay: 300,
-    transition: {
-      y: { type: 'spring', stiffness: 300, damping: 500 },
-      default: { duration: 300 },
-    },
-  },
-  exit: {
-    y: 50,
-    opacity: 0,
-    transition: { duration: 150 },
-  },
-});
 
 const SignupMutation = gql`
   mutation signup(
@@ -81,45 +53,49 @@ class Signup extends Component {
   };
 
   onSignup = values => {
-    // this.props
-    //   .signup({ variables: { ...values, type: USER_TYPE } })
-    //   .then(() => this.setState(({ ui }) => ({ ui: ui.toSuccess() })))
-    //   .catch(err => this.setState(({ ui }) => ({ ui: ui.toError(err) })));
-    this.setState(({ ui }) => ({
-      ui: ui.toError('Big issue happened'),
-    })); // /
+    this.props
+      .signup({ variables: { ...values, type: USER_TYPE } })
+      .then(() => this.setState(({ ui }) => ({ ui: ui.toSuccess() })))
+      .catch(err => {
+        this.setState(({ ui }) => ({ ui: ui.toError(err) }));
+        setTimeout(() => {
+          this.setState(({ ui }) => ({
+            ui: ui.toIdle(),
+          }));
+        });
+      });
   };
 
   render() {
     const { ui } = this.state;
-    const hideForm = ui.current() === 'success';
 
     return (
       <Container>
         <FormSide>
           <Header>
             <Heading level="title">Healfit</Heading>
-            <button onClick={this.onSignup}>Visible</button>
           </Header>
-          <div style={{ display: 'flex'; flexDirection: 'column';}}>
+          <Frame>
             {ui.whenError(({ reason }) => (
-              <StyledAlert type="error">{reason}</StyledAlert>
+              <Alert style={{ margin: '0 20px', width: '70%' }} type="error">
+                {reason}
+              </Alert>
             ))}
-            <StyledPoseGroup>
-              {hideForm && [
-                <Modal key="modal">
-                  <Success />
-                </Modal>,
-              ]}
-            </StyledPoseGroup>
-            <FormContainer key="form" show={!hideForm}>
-              <Form onSubmit={this.onSignup} />
-            </FormContainer>
-          </div>
-          {/* {ui.caseOf({
+
+            {ui.caseOf({
               success: () => <Success />,
-              _: () => <FormContainer><Form onSubmit={this.onSignup} /><FormContainer/>,
-            })} */}
+              _: () => (
+                <FormContainer key="form">
+                  <Form onSubmit={this.onSignup} />
+                  <br />
+                  <P size="small" style={{ display: 'flex' }}>
+                    Already have an account?&nbsp;
+                    <Link to="/auth/signin">Sign In</Link>
+                  </P>
+                </FormContainer>
+              ),
+            })}
+          </Frame>
           <Bottom />
         </FormSide>
         {/* eslint-disable-next-line global-require */}

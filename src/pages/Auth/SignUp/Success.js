@@ -1,13 +1,31 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import posed from 'react-pose';
 import Heading from 'uikit/elements/Heading';
 import P from 'uikit/elements/P';
 
-const Container = styled.div`
+const Container = styled(
+  posed.div({
+    closed: {
+      y: 0,
+      opacity: 1,
+      delay: 300,
+      transition: {
+        y: { type: 'spring', stiffness: 300, damping: 500 },
+        default: { duration: 300 },
+      },
+    },
+    open: {
+      y: 50,
+      opacity: 0,
+      transition: { duration: 150 },
+    },
+  })
+)`
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 `;
 
 const Image = styled.img`
@@ -21,7 +39,7 @@ const Image = styled.img`
 `;
 
 export default () => (
-  <Container>
+  <Container initialPose="open" pose="closed">
     {/* eslint-disable-next-line global-require */}
     <Image src={require('assets/icons/egg.svg')} />
     <Heading level="h2">Cracking!</Heading>

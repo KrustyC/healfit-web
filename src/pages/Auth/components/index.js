@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import Link from 'uikit/elements/Link';
 import P from 'uikit/elements/P';
+import Form from 'uikit/blocks/Form';
 
 export const Container = styled.div`
   height: 100vh;
@@ -32,18 +33,24 @@ export const FormSide = styled.div`
 `;
 
 export const Frame = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-rows: 25% auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const FormContainer = styled.div`
-  ${({ theme: { padding }, show }) => css`
+  ${({ theme: { padding } }) => css`
     flex-direction: column;
+    width: 100%;
     padding: ${padding.sm} ${padding.sm}; /*  Use rem from theme*/
-    display: ${show ? 'flex' : 'none'};
+    display: flex;
     justify-content: center;
     align-items: center;
+
+    ${Form} {
+      width: 65%;
+    }
   `}
 `;
 

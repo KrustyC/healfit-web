@@ -2,14 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import styled from 'styled-components';
 import Form from 'uikit/blocks/Form';
 import Button from 'uikit/blocks/Button';
-
-const StyledForm = styled(Form)`
-  width: 70%;
-  margin: 50px 0px;
-`;
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -17,7 +11,13 @@ const validationSchema = Yup.object().shape({
     .required('Please provide your email'),
   firstName: Yup.string().required('Please provide your First Name'),
   lastName: Yup.string().required('Please provide your Last Name'),
-  password: Yup.string().required('Please provide your password'),
+  password: Yup.string()
+    .min(8, 'Password has to be longer than 8 characters!')
+    .matches(
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.[\W])/,
+      'Password must contain at least one upppercase character, one lowercase character, one number and one special character'
+    )
+    .required('Please provide your password!'),
 });
 
 const initialValues = {
@@ -39,10 +39,11 @@ const UserSignUpForm = ({ onSubmit }) => (
       errors,
       isSubmitting,
       handleChange,
+      isValid,
       handleBlur,
       handleSubmit,
     }) => (
-      <StyledForm onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Form.FormGroup>
           <Form.Label htmlFor="email">Email</Form.Label>
           <Form.Input
@@ -102,12 +103,12 @@ const UserSignUpForm = ({ onSubmit }) => (
           color="primary"
           type="submit"
           size="large"
-          disabled={isSubmitting}
+          disabled={isSubmitting || !isValid}
           style={{ marginTop: '15px' }}
         >
           Sign Up
         </Button>
-      </StyledForm>
+      </Form>
     )}
   </Formik>
 );
