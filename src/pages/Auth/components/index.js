@@ -27,14 +27,24 @@ export const ImgSide = styled.div`
 `;
 
 export const FormSide = styled.div`
-  ${({ theme }) => css`
-    height: 100vh;
-    flex: 4;
-    display: grid;
-    grid-template-rows: 25% 65% 10%;
+  height: 100vh;
+  min-height: min-content;
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+`;
 
-    @media (max-width: ${theme.sizes.md}) {
-      grid-template-rows: 10% 80% 10%;
+export const Header = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 5;
+    min-height: min-content;
+
+    @media (max-width: ${theme.sizes.sm}) {
+      padding: ${theme.padding.md} 0;
     }
   `}
 `;
@@ -44,12 +54,15 @@ export const Frame = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex: 10;
+  min-height: min-content;
 `;
 
 export const FormContainer = styled.div`
   ${({ theme }) => css`
     flex-direction: column;
     width: 100%;
+    height: 100%;
     padding: ${theme.padding.sm} ${theme.padding.sm};
     display: flex;
     justify-content: center;
@@ -61,18 +74,24 @@ export const FormContainer = styled.div`
 
     @media (max-width: ${theme.sizes.md}) {
       ${Form} {
+        width: 85%;
+      }
+
+      &:focus-within {
+        position: absolute;
+      }
+    }
+
+    @media (max-width: ${theme.sizes.sm}) {
+      ${Form} {
         width: 95%;
+      }
+
+      &:focus-within {
         position: absolute;
       }
     }
   `}
-`;
-
-export const Header = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
 `;
 
 const BottomDiv = styled.div`
@@ -81,6 +100,8 @@ const BottomDiv = styled.div`
     align-items: center;
     justify-content: center;
     padding-bottom: ${theme.padding.md};
+    flex: 1;
+    min-height: min-content;
   `}
 `;
 

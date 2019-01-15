@@ -6,6 +6,7 @@ const Input = styled.input`
     width: 100%;
     outline: none;
     height: 50px;
+    min-height: 50px;
     margin-bottom: 10px;
     display: flex;
     justify-content: center;
