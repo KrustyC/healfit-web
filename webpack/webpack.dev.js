@@ -16,6 +16,7 @@ const devConfig = {
     historyApiFallback: true,
     disableHostCheck: true,
     hot: true,
+    publicPath: '/',
     port: process.env.DEV_PORT,
     hotOnly: true,
   },

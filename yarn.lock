@@ -665,13 +665,6 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
-"@babel/runtime@^7.1.2":
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.2.0.tgz#b03e42eeddf5898e00646e4c840fa07ba8dcad7f"
-  integrity sha512-oouEibCbHMVdZSDlJBO6bZmID/zA/G/Qx3H1d3rSNPTD+L8UNKvCat7aKWSJ74zYbm5zWGh0GQN0hKj8zYFTCg==
-  dependencies:
-    regenerator-runtime "^0.12.0"
-
 "@babel/template@^7.1.0", "@babel/template@^7.1.2":
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.1.2.tgz#090484a574fef5a2d2d7726a674eceda5c5b5644"
@@ -6929,14 +6922,6 @@ styled-components@^4.1.1:
     stylis "^3.5.0"
     stylis-rule-sheet "^0.0.10"
     supports-color "^5.5.0"
-
-styled-system@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/styled-system/-/styled-system-3.2.0.tgz#db08036035d6c5b8818ba7bccaf125d8711ecd9a"
-  integrity sha512-T/jDWstf++Bx0DFTnUHLMxkhnGZoJhZZO+bERGy5L/9uPnAiKthOZ1XxXcEaNrybM6PATMD/42rHIK+qpIVv+w==
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    prop-types "^15.6.2"
 
 styled-tools@^1.6.0:
   version "1.6.0"
