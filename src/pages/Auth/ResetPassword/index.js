@@ -4,6 +4,7 @@ import PossibleStates from 'possible-states';
 import styled, { css } from 'styled-components';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
+import { locationToString } from 'helpers/queryString';
 import Heading from 'uikit/elements/Heading';
 import P from 'uikit/elements/P';
 
@@ -78,6 +79,9 @@ const Main = styled.div`
 
 class ResetPassword extends Component {
   static propTypes = {
+    location: PropTypes.shape({
+      search: PropTypes.string.isRequired,
+    }).isRequired,
     resetPassword: PropTypes.func.isRequired,
   };
 
@@ -85,13 +89,25 @@ class ResetPassword extends Component {
     ui: PossibleStates('idle', 'completed', 'error<reason>'),
   };
 
-  onSubmit = async values => {
+  componentDidMount() {
+    const { token } = locationToString(this.props.location);
+    if (!token) {
+      this.setState(({ ui }) => ({
+        ui: ui.toError('The URL provided is invalid! Please try another URL!'),
+      }));
+    }
+  }
+
+  onSubmit = async (values, { resetForm }) => {
+    const { password } = values;
+    const { token } = locationToString(this.props.location);
     try {
-      await this.props.resetPassword({ variables: values });
-      this.setState(({ ui }) => ({ ui: ui.toComplted() }));
+      await this.props.resetPassword({ variables: { token, password } });
+      this.setState(({ ui }) => ({ ui: ui.toCompleted() }));
     } catch (error) {
-      console.log(error);
-      this.setState(({ ui }) => ({ ui: ui.toError(error) }));
+      const errors = error.graphQLErrors.map(x => x.message);
+      this.setState(({ ui }) => ({ ui: ui.toError(errors[0]) }));
+      resetForm();
     }
   };
 

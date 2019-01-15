@@ -11,17 +11,20 @@ const Box = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 `;
 
 const Error = ({ reason }) => (
   <Box initialPose="open" pose="closed">
-    <Alert type="error">{reason}</Alert>
+    <Alert type="error" style={{ margin: '0 20px' }}>
+      {reason}
+    </Alert>
     <P align="center">
-      Your password has been succesfully reset! Now you are ready to login and
-      enjoy Healfit! @TODO BETTER COPY
+      Ops! Looks like something went wrong! Please check the url or try to ask
+      for a new token!
     </P>
-    <Button size="large" onClick={() => history.push('/auth/signin')}>
-      Back To Login
+    <Button size="large" onClick={() => history.push('/auth/forgot-password')}>
+      Get New Token
     </Button>
   </Box>
 );

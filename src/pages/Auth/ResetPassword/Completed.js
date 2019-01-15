@@ -37,10 +37,7 @@ export default () => (
   <Box initialPose="open" pose="closed">
     {/* eslint-disable-next-line */}
     <Image src={require('assets/icons/paper-plane.svg')} />
-    <P align="center">
-      Your password has been succesfully reset! Now you are ready to login and
-      enjoy Healfit! @TODO BETTER COPY
-    </P>
+    <P align="center">Your password has been succesfully restored!</P>
     <Button size="large" onClick={() => history.push('/auth/signin')}>
       Back To Login
     </Button>
