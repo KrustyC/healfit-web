@@ -3,8 +3,8 @@ import { lighten, darken } from 'polished';
 
 const FONT = '#49555f';
 const WHITE = '#fff';
-const PRIMARY = '#F4976C';
-const ACCENT = '#B4DFE5';
+const PRIMARY = '#3BB2B8';
+const ACCENT = '#2989D8';
 const SUCCESS = '#5cb85c';
 const INFO = '#33a9da';
 const ERROR = '#d9534f';
