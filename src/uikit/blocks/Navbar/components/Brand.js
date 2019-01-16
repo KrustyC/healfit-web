@@ -1,0 +1,38 @@
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
+
+const Brand = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  ${({ theme }) => css`
+    @media (min-width: ${theme.sizes.md}) {
+      margin-left: 20px;
+    }
+
+    img {
+      margin-right: 40px;
+      width: 50px;
+      height: 50px;
+    }
+  `}
+`;
+
+// const Brand = props => <Brand {...props} />;
+
+Brand.propTypes = {
+  to: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      type: PropTypes.oneOf(['img']),
+    }),
+  ]).isRequired,
+};
+
+Brand.displayName = 'NavbarBrand';
+
+export default Brand;

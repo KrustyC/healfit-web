@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar Dropdown renders correctly 1`] = `
+<div
+  className="sc-bdVaJa kZriCf"
+>
+  <a
+    aria-current={false}
+    className="sc-htoDjs jQZqDc sc-bZQynM iKYpnw"
+    href="/uikit/dropdown"
+    onClick={[Function]}
+    style={undefined}
+    type="nav"
+  >
+    Dropdown
+  </a>
+</div>
+`;
