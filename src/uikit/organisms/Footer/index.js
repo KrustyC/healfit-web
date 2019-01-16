@@ -41,13 +41,13 @@ const Grid = styled.div`
   `}
 `;
 
-const SectionDiv = styled.div`
+const Section = styled.div`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;
     font-size: ${theme.fontSize.small};
 
-    a {
+    > a {
       margin: ${theme.margin.sm} 0;
     }
 
@@ -82,36 +82,40 @@ const Bottom = styled.div`
   `}
 `;
 
-const Section = ({ title, children }) => (
-  <SectionDiv>
-    <Heading level="h4">{title}</Heading>
-    {children}
-  </SectionDiv>
-);
-
 export default () => (
   <FooterDiv>
     <Box>
       <Grid>
-        <Section title="About">
+        <Section>
+          <Heading level="h4">About</Heading>
           <Link to="/cookies">Cookies</Link>
           <Link to="/terms">Terms and Conition</Link>
           <Link to="/privacy-policy">Privacy Policy</Link>
         </Section>
-        <Section title="About">
-          <Link to="/cookies">Cookies</Link>
-          <Link to="/terms">Terms and Conition</Link>
-          <Link to="/privacy-policy">Privacy Policy</Link>
-        </Section>
-        <Section title="Help">
+        <Section>
+          <Heading level="h4">Help</Heading>
           <Link to="/why-healfit">Why Healfit</Link>
           <Link to="/contact">Contact Us</Link>
-        </Section>{' '}
+        </Section>
+        <Section>
+          <Heading level="h4">More</Heading>
+          <P size="small">
+            This website uses icons made by{' '}
+            <Link to="https://www.flaticon.com/authors/popcorns-arts">
+              Icon Pond
+            </Link>{' '}
+            from <Link to="https://www.flaticon.com/">www.flaticon.com</Link> is
+            licensed by{' '}
+            <Link to="http://creativecommons.org/licenses/by/3.0/">
+              CC 3.0 BY
+            </Link>
+          </P>
+        </Section>
       </Grid>
       <Hr />
       <Bottom>
         {/* eslint-disable-next-line */}
-            <img src={require('assets/icons/logo.svg')} />
+        <img src={require('assets/icons/logo.svg')} />
         <P size="small">© 2019 Healfit. All Rights Reserved.</P>
       </Bottom>
     </Box>
