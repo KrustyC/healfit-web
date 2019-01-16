@@ -10,7 +10,7 @@ const Layout = styled(Container)`
 
   background: #fff;
   padding: ${({ theme: { padding } }) => padding.md};
-  min-height: ${prop('height', '30vh')};
+  min-height: ${prop('height', '60vh')};
 
   ${({ coloured }) =>
     coloured &&
