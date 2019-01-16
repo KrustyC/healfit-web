@@ -9,7 +9,6 @@ export default () => (
         {/* eslint-disable-next-line */}
         <img src={require('assets/icons/logo.svg')} />
       </Navbar.Brand>
-      <Navbar.Toggle />
     </Navbar.Header>
   </Navbar>
 );

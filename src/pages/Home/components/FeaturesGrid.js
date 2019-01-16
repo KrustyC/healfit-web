@@ -6,9 +6,16 @@ import Heading from 'uikit/elements/Heading';
 import P from 'uikit/elements/P';
 
 const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 2rem;
+  ${({ theme }) => css`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: ${theme.margin.md};
+
+    @media (max-width: ${theme.sizes.md}) {
+      grid-template-columns: 1fr;
+      grid-row-gap: ${theme.margin.md};
+    }
+  `}
 `;
 
 const Box = styled.div`

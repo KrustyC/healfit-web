@@ -9,7 +9,7 @@ const Layout = styled(Container)`
   flex-direction: ${prop('direction', 'row')};
 
   background: #fff;
-  padding: 5% 10%;
+  padding: ${({ theme: { padding } }) => padding.md};
   min-height: ${prop('height', '30vh')};
 
   ${({ coloured }) =>

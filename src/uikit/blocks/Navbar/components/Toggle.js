@@ -30,7 +30,8 @@ const Toggle = props => (
   <NavbarContext.Consumer>
     {navbar => (
       <StyledToggle onClick={navbar.onToggle} {...props}>
-        <i className="fa fa-reorder" />
+        {/* eslint-disable-next-line */}
+        <img src={require('assets/icons/logo.svg')} />
       </StyledToggle>
     )}
   </NavbarContext.Consumer>

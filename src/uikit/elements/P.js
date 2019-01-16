@@ -49,6 +49,12 @@ const PTag = styled.p`
       color: ${({ theme }) => theme.colors.primary};
     `}
 
+    ${({ color }) =>
+      color === 'white' &&
+      css`
+        color: ${({ theme }) => theme.colors.white};
+      `}
+
   ${({ color }) =>
     color === 'error' &&
     css`
@@ -74,7 +80,7 @@ P.propTypes = {
   tag: PropTypes.string,
   font: PropTypes.oneOf(['default', 'serif']),
   size: PropTypes.oneOf(['small', 'regular', 'large']),
-  color: PropTypes.oneOf(['default', 'muted', 'primary', 'error']),
+  color: PropTypes.oneOf(['default', 'muted', 'primary', 'error', 'white']),
   align: PropTypes.oneOf(['', 'left', 'right', 'center', 'justify']),
 };
 

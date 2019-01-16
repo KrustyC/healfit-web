@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 const H1 = styled.h1`
-  ${({ theme, align }) => css`
+  ${({ theme, align, color }) => css`
     font-weight: 300;
     margin: 0px 0 ${theme.spaces.regular} 0;
     font-size: ${theme.fontSize.h1};
     text-align: ${align};
+    color: ${theme.colors[color]};
   `}
 `;
 
@@ -64,12 +65,23 @@ Heading.propTypes = {
   font: PropTypes.oneOf(['default', 'serif']),
   level: PropTypes.oneOf(['title', 'h1', 'h2', 'h3', 'h4']),
   align: PropTypes.oneOf(['', 'left', 'right', 'center', 'justify']),
+  color: PropTypes.oneOf([
+    'font',
+    'white',
+    'primary',
+    'accent',
+    'success',
+    'warning',
+    'error',
+    'info',
+  ]),
 };
 
 Heading.defaultProps = {
   font: 'default',
   level: 'h1',
   align: '',
+  color: 'font',
 };
 
 export default Heading;

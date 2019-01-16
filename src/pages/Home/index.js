@@ -4,13 +4,13 @@ import styled from 'styled-components';
 import { Redirect } from 'react-router-dom';
 import { withAuth } from 'app/apollo/auth';
 
+import Navbar from 'uikit/organisms/navbars/EmptyNavbar';
 import Footer from 'uikit/organisms/Footer';
 import Hero from './Hero';
 import Presentation from './Presentation';
 import Message from './Message';
-import Why from './Why';
-import Testimonials from './Testimonials';
-import Enquiry from './Enquiry';
+import Image from './Image';
+import Cta from './Cta';
 
 const Layout = styled.div`
   display: flex;
@@ -25,12 +25,12 @@ const Home = ({ isAuthenticated }) => {
 
   return (
     <Layout>
+      <Navbar />
       <Hero />
       <Presentation />
-      <Why />
+      <Image />
       <Message />
-      <Testimonials />
-      <Enquiry />
+      <Cta />
       <Footer />
     </Layout>
   );

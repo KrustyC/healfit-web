@@ -19,13 +19,13 @@ const StyledNavbar = styled.nav`
       `}
 
     @media (min-width: ${theme.sizes.md}) {
-      padding-left: 30px;
-      padding-right: 30px;
+      padding-left: ${theme.padding.md};
+      padding-right: ${theme.padding.md};
     }
 
     @media (max-width: ${theme.sizes.md}) {
-      padding-left: 0px;
-      padding-right: 0px;
+      padding-left: ${theme.padding.sm};
+      padding-right: ${theme.padding.sm};
       flex-direction: column;
     }
   `}

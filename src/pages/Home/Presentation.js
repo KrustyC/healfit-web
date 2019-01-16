@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import Heading from 'uikit/elements/Heading';
 import Layout from './components/Layout';
@@ -34,23 +34,12 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const Screenshot = styled.img`
-  ${({ theme }) => css`
-    border-radius: 15px;
-    filter: grayscale(20%);
-    box-shadow: 0 23px 40px rgba(0, 0, 0, 0.2);
-    width: 800px;
-    margin: ${theme.margin.md} 0px;
-  `}
-`;
-
 const Presentation = () => (
   <Layout size="fullscreen">
     <Container>
-      <Heading level="h1">
-        Healfit gives you the easiest way to track your progress
+      <Heading level="h1" align="center">
+        Tracking your progress has never been easier
       </Heading>
-      <Screenshot src={require('assets/images/screenshot.png')} />
       <FeaturesGrid features={features} />
     </Container>
   </Layout>

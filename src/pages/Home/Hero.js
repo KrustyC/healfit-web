@@ -2,39 +2,13 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 import Heading from 'uikit/elements/Heading';
-import Link from 'uikit/elements/Link';
 import P from 'uikit/elements/P';
 import Layout from './components/Layout';
-
-const Nav = styled.div`
-  left: 0px;
-  right: 0px;
-  top: 0;
-  position: absolute;
-  height: 80px;
-  background: transparent;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const LogoDiv = styled.div``;
-
-const LinkDiv = styled.div``;
-
-const NavLink = styled(Link)`
-  ${({ theme }) => css`
-    text-decoration: none;
-    margin-right: 50px;
-    color: ${theme.colors.light};
-    font-weight: bold;
-  `}
-`;
 
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 100vw;
 `;
 
 const Div = styled.div`
@@ -44,37 +18,60 @@ const Div = styled.div`
   justify-content: center;
   align-items: ${({ center }) => (center ? 'center' : 'flex-start')};
   padding: 2rem;
+
+  ${({ theme, hideOnSmallScreen }) =>
+    hideOnSmallScreen &&
+    css`
+      @media (max-width: ${theme.sizes.md}) {
+        display: none;
+      }
+    `}
 `;
 
 const Descritpion = styled(P)`
-  color: white;
-  max-width: 600px;
+  ${({ theme }) => css`
+    color: white;
+    max-width: 600px;
+
+    @media (max-width: ${theme.sizes.md}) {
+      display: none;
+    }
+  `}
 `;
 
 const Img = styled.img`
-  max-height: 300px;
-  margin-bottom: ${({ theme }) => theme.spaces.small};
+  ${({ theme }) => css`
+    max-height: 300px;
+    margin-bottom: ${theme.spaces.small};
+  `}
+`;
+
+const TitleRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  img {
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 const Header = () => (
   <Layout coloured size="fullscreen" height="80vh" direction="column">
-    <Nav>
-      <LogoDiv />
-
-      <LinkDiv>
-        <NavLink to="/auth/signup">Sign Up</NavLink>
-        <NavLink to="/auth/signin">Sign In</NavLink>
-      </LinkDiv>
-    </Nav>
     <Container>
-      <Div center>
+      <Div center hideOnSmallScreen>
         {/* eslint-disable-next-line */}
         <Img src={require('assets/images/undrawn/healthy-habit.svg')} />
       </Div>
       <Div>
-        <Heading level="title" style={{ color: 'white' }}>
-          Healfit
-        </Heading>
+        <TitleRow>
+          {/* eslint-disable-next-line */}
+          <img src={require('assets/icons/logo.svg')} />
+          <Heading level="title" style={{ color: 'white' }}>
+            Healfit
+          </Heading>
+        </TitleRow>
         <Heading
           level="h4"
           align="left"
