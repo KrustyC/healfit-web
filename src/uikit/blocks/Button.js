@@ -35,6 +35,12 @@ export const StyledButton = styled.button`
   font-weight: bold;
   box-shadow: ${({ theme }) => theme.shadows.default};
 
+  ${({ squircled }) =>
+    squircled &&
+    css`
+      border-radius: 100px;
+    `}
+
   ${({ disabled }) =>
     !disabled &&
     css`
@@ -265,6 +271,7 @@ const ButtonComponent = ({
   type,
   size,
   color,
+  squircled,
   disabled,
   loading,
   rounded,
@@ -279,6 +286,7 @@ const ButtonComponent = ({
     disabled={disabled}
     loading={loading}
     style={style}
+    squircled={squircled}
     rounded={rounded}
   >
     {children}
@@ -291,6 +299,7 @@ ButtonComponent.propTypes = {
   children: PropTypes.any.isRequired,
   type: PropTypes.string,
   style: PropTypes.object,
+  squircled: PropTypes.bool,
 
   size: PropTypes.oneOf(['small', 'large', 'block']),
   color: PropTypes.oneOf(['primary', 'accent', 'link', 'white']),
@@ -305,6 +314,7 @@ ButtonComponent.defaultProps = {
   id: null,
   type: 'button',
   rounded: false,
+  squircled: false,
   style: {},
   onClick: () => {},
   size: null,

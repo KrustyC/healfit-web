@@ -30,7 +30,7 @@ const features = [
 /* eslint-enable global-require */
 
 const MoreFeatures = () => (
-  <Layout size="large">
+  <Layout size="large" direction="column">
     <Heading level="h1" align="center">
       Designed for you to succeed
     </Heading>
