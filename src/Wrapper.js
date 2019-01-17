@@ -1,9 +1,10 @@
-import { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { compose } from 'react-apollo';
 import withApolloClient from 'hoc/withApolloClient';
 import { withAuth } from 'app/apollo/auth';
+import CookiePopup from 'uikit/organisms/CookiePopup';
 
 const FetchCurrentUserQuery = gql`
   fragment UserInfo on User {
@@ -57,7 +58,14 @@ class Wrapper extends Component {
   setMounted = () => this.setState({ isMounted: true });
 
   render() {
-    return this.state.isMounted && this.props.children;
+    return (
+      this.state.isMounted && (
+        <Fragment>
+          {this.props.children}
+          <CookiePopup />
+        </Fragment>
+      )
+    );
   }
 }
 
