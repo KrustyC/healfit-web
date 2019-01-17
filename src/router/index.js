@@ -1,10 +1,15 @@
 import React from 'react';
 import { Switch, Redirect, Route, Router } from 'react-router-dom';
+import ReactGA from 'react-ga';
 import createBrowserHistory from 'history/createBrowserHistory';
 import * as Routes from './routes';
 import PrivateRoute from './routes-templates/PrivateRoute';
 
 const history = createBrowserHistory();
+
+if (process.env.APP_ENV !== 'development') {
+  history.listen(location => ReactGA.pageview(location.pathname));
+}
 
 const CustomRouter = () => (
   <Router history={history}>
