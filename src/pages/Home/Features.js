@@ -34,8 +34,8 @@ const Container = styled.div`
   justify-content: center;
 `;
 
-const Presentation = () => (
-  <Layout size="fullscreen">
+const Features = () => (
+  <Layout size="large">
     <Container>
       <Heading level="h1" align="center">
         Tracking your progress has never been easier
@@ -47,4 +47,4 @@ const Presentation = () => (
 
 /* eslint-enable global-require */
 
-export default Presentation;
+export default Features;

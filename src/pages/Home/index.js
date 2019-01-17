@@ -7,8 +7,8 @@ import { withAuth } from 'app/apollo/auth';
 import Navbar from 'uikit/organisms/navbars/EmptyNavbar';
 import Footer from 'uikit/organisms/Footer';
 import Hero from './Hero';
-import Presentation from './Presentation';
-import Message from './Message';
+import Features from './Features';
+import MoreFeatures from './MoreFeatures';
 import Image from './Image';
 import Cta from './Cta';
 
@@ -27,9 +27,9 @@ const Home = ({ isAuthenticated }) => {
     <Layout>
       <Navbar />
       <Hero />
-      <Presentation />
+      <Features />
       <Image />
-      <Message />
+      <MoreFeatures />
       <Cta />
       <Footer />
     </Layout>

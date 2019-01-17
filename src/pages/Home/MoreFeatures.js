@@ -29,8 +29,8 @@ const features = [
 
 /* eslint-enable global-require */
 
-const Message = () => (
-  <Layout size="fullscreen" direction="column">
+const MoreFeatures = () => (
+  <Layout size="large">
     <Heading level="h1" align="center">
       Designed for you to succeed
     </Heading>
@@ -42,4 +42,4 @@ const Message = () => (
   </Layout>
 );
 
-export default Message;
+export default MoreFeatures;

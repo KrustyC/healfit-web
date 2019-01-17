@@ -11,9 +11,9 @@ import TermsAndCondition from './TermsAndConditions';
 
 const Layout = styled(Container)`
   ${({ theme }) => css`
-    max-width: ${theme.dimensions.containerWidth.default};
+    max-width: ${theme.dimensions.containerWidth.large};
     @media (max-width: ${theme.sizes.md}) {
-      max-width: 100vw;
+      max-width: ${theme.dimensions.containerWidth.fullscreen};
     }
   `}
 `;
