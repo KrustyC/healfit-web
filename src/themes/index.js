@@ -72,7 +72,7 @@ export default {
   },
   fontSize: {
     xsmall: '1rem',
-    small: '1.4rem',
+    small: '1.2rem',
     regular: '1.6rem',
     large: '2.8rem',
     title: '5.4rem',

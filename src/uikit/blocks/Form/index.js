@@ -7,12 +7,15 @@ import Feedback from './Feedback';
 import Input from './Input';
 import Password from './Password';
 import Textarea from './Textarea';
+import Checkbox from './Checkbox';
 
 const Form = styled.form`
   display: flex;
   flex-direction: ${prop('direction', 'column')};
 `;
 
+Form.Checkbox = Checkbox;
+Form.Label = Label;
 Form.FormGroup = FormGroup;
 Form.Label = Label;
 Form.Feedback = Feedback;

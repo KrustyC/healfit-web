@@ -4,6 +4,8 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Form from 'uikit/blocks/Form';
 import Button from 'uikit/blocks/Button';
+import Link from 'uikit/elements/Link';
+import P from 'uikit/elements/P';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -18,6 +20,9 @@ const validationSchema = Yup.object().shape({
       'Password must contain at least one upppercase character, one lowercase character, one special character and one number'
     )
     .required('Please provide your password!'),
+  acceptTermAndCondition: Yup.boolean()
+    .oneOf([true], 'Please accept out T&Cs!')
+    .required('Please accept out T&Cs!'),
 });
 
 const initialValues = {
@@ -25,6 +30,7 @@ const initialValues = {
   password: '',
   firstName: '',
   lastName: '',
+  acceptTermAndCondition: false,
 };
 
 const UserSignUpForm = ({ onSubmit }) => (
@@ -99,6 +105,25 @@ const UserSignUpForm = ({ onSubmit }) => (
             {errors.password}
           </Form.Feedback>
         </Form.FormGroup>
+        <Form.Checkbox
+          name="acceptTermAndCondition"
+          checked={values.acceptTermAndCondition}
+          value="Bike"
+          onChange={handleChange}
+          onBlur={handleBlur}
+        >
+          <P size="small" style={{ margin: 0 }}>
+            By clicking this button, you agree to{' '}
+            <Link to="/legal/terms-and-conditions">
+              Mailchimp{"'"}s Anti-spam Policy {'&'} Terms of Use.
+            </Link>
+          </P>
+        </Form.Checkbox>
+        <Form.Feedback
+          show={errors.acceptTermAndCondition && touched.acceptTermAndCondition}
+        >
+          {errors.acceptTermAndCondition}
+        </Form.Feedback>
         <Button
           color="primary"
           type="submit"
