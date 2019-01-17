@@ -13,8 +13,8 @@ export const MealPlanner = lazy(() =>
   import(/* webpackChunkName: "meal-planner" */ '../pages/MealPlanner')
 );
 
-export const PrivacyPolicy = lazy(() =>
-  import(/* webpackChunkName: "privacy-policy" */ '../pages/PrivacyPolicy')
+export const Legal = lazy(() =>
+  import(/* webpackChunkName: "legal" */ '../pages/Legal')
 );
 export const NotFound = lazy(() =>
   import(/* webpackChunkName: "404" */ '../pages/NotFound')
