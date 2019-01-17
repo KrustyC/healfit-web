@@ -8,6 +8,7 @@ import Footer from 'uikit/organisms/Footer';
 import Container from 'uikit/blocks/Container';
 import PrivacyPolicy from './PrivacyPolicy';
 import TermsAndCondition from './TermsAndConditions';
+import CookiePolicy from './CookiePolicy';
 
 const Layout = styled(Container)`
   ${({ theme }) => css`
@@ -28,6 +29,7 @@ const Legal = ({ match: { path } }) => (
           path={`${path}/terms-and-condition`}
           component={TermsAndCondition}
         />
+        <Route path={`${path}/cookie-policy`} component={CookiePolicy} />
         <Redirect to="/404" />
       </Switch>
     </Layout>

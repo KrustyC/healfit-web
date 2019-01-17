@@ -19,10 +19,7 @@ const CustomRouter = () => (
         path="/meal-planner"
         render={props => <Routes.MealPlanner {...props} />}
       />
-      <Route
-        path="/privacy-policy"
-        render={props => <Routes.PrivacyPolicy {...props} />}
-      />
+      <Route path="/legal" render={props => <Routes.Legal {...props} />} />
       <Route path="/404" render={props => <Routes.NotFound {...props} />} />
       <Redirect to="/404" />
     </Switch>

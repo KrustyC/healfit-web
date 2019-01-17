@@ -88,7 +88,7 @@ export default () => (
       <Grid>
         <Section>
           <Heading level="h4">About</Heading>
-          <Link to="/legal/cookies">Cookies</Link>
+          <Link to="/legal/cookie-policy">Cookies</Link>
           <Link to="/legal/terms-and-conditions">Terms and Conition</Link>
           <Link to="/legal/privacy-policy">Privacy Policy</Link>
         </Section>

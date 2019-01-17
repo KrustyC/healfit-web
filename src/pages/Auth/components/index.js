@@ -102,7 +102,7 @@ export const Bottom = () => (
   <BottomDiv>
     <P size="small" color="muted" align="center">
       &copy; 2019 Healfit. All Rights Reserved. <br />
-      <Link to="/legal/cookies">Cookie Preferences</Link>,{' '}
+      <Link to="/legal/cookie-policy">Cookie Preferences</Link>,{' '}
       <Link to="/legal/privacy-policy">Privacy</Link>, and{' '}
       <Link to="/legal/terms-and-conditions">Terms {'&'} Conditions</Link>.
     </P>
