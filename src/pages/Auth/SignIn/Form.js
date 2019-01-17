@@ -59,7 +59,7 @@ const SignInForm = ({ onSubmit }) => (
             {errors.password}
           </Form.Feedback>
         </Form.FormGroup>
-        <P size="small">
+        <P size="small" style={{ marginTop: '5px' }}>
           <Link to="/auth/forgot-password">Forgot Password?</Link>
         </P>
         <Button

@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const sharedConfig = require('./webpack.common.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const appRoot = path.dirname(__dirname);
 
@@ -25,21 +25,22 @@ const devConfig = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new CopyWebpackPlugin([
-      {
-        from: 'assets/images',
-        to: path.resolve(appRoot, 'dist/images'),
-      },
-    ]),
+    // new CopyWebpackPlugin([
+    //   {
+    //     from: 'assets/images',
+    //     to: path.resolve(appRoot, 'dist/images'),
+    //   },
+    // ]),
     new HtmlWebpackPlugin({
       hash: true,
-      title: '[DEV] Fitelity',
+      title: '[DEV] Healfit',
       template: path.resolve(appRoot, 'src/index.html'),
       chunks: ['vendor', 'app'],
     }),
     new webpack.DefinePlugin({
       'process.env': {
         APP_ENV: JSON.stringify('development'),
+        BASE_URL: JSON.stringify('/'),
         BUGSNAG_API_KEY: JSON.stringify(process.env.BUGSNAG_API_KEY),
         API_URL: JSON.stringify(process.env.API_URL),
         GA_API_KEY: JSON.stringify(process.env.GA_API_KEY),

@@ -94,9 +94,7 @@ class SignIn extends Component {
               <Form onSubmit={this.onHandleSubmit} />
               <P size="small">
                 Do you not have an account yet?{' '}
-                <Link to="/auth/signup" style={{ fontWeight: 'bold' }}>
-                  Sign Up
-                </Link>
+                <Link to="/auth/signup">Sign Up</Link>
               </P>
             </FormContainer>
           </Frame>

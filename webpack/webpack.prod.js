@@ -18,15 +18,15 @@ const plugins = [
     minimize: true,
     debug: false,
   }),
-  new CopyWebpackPlugin([
-    {
-      from: 'assets/images',
-      to: path.resolve(appRoot, 'dist/images'),
-    },
-  ]),
+  // new CopyWebpackPlugin([
+  //   {
+  //     from: 'assets/images',
+  //     to: path.resolve(appRoot, 'dist/images'),
+  //   },
+  // ]),
   new HtmlWebpackPlugin({
     hash: true,
-    title: 'Fitelity',
+    title: 'Healfit',
     template: path.resolve(appRoot, 'src/index.html'),
   }),
   new webpack.DefinePlugin({
@@ -53,16 +53,16 @@ module.exports = merge(sharedConfig, {
     path: buildPath,
   },
   plugins,
-  optimization: {
-    runtimeChunk: 'single',
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
-        },
-      },
-    },
-  },
+  // optimization: {
+  //   runtimeChunk: 'single',
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       vendor: {
+  //         test: /[\\/]node_modules[\\/]/,
+  //         name: 'vendors',
+  //         chunks: 'all',
+  //       },
+  //     },
+  //   },
+  // },
 });

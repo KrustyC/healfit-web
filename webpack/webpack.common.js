@@ -3,6 +3,7 @@ require('dotenv').config();
 const path = require('path');
 const webpack = require('webpack');
 
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const appRoot = path.dirname(__dirname);
 const src = path.join(appRoot, 'src');
 
@@ -60,5 +61,19 @@ module.exports = {
   plugins: [
     new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
+    new CopyWebpackPlugin([
+      { from: path.join(__dirname, '../src/assets'), to: 'assets' },
+    ]),
   ],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          minChunks: 2,
+        },
+      },
+    },
+  },
 };
