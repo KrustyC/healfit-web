@@ -13,6 +13,10 @@ export const MealPlanner = lazy(() =>
   import(/* webpackChunkName: "meal-planner" */ '../pages/MealPlanner')
 );
 
+export const Recipes = lazy(() =>
+  import(/* webpackChunkName: "recipes" */ '../pages/Recipes')
+);
+
 export const Legal = lazy(() =>
   import(/* webpackChunkName: "legal" */ '../pages/Legal')
 );

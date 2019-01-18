@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { withAuth } from 'app/apollo/auth';
+import withAuth from 'helpers/withAuth';
 
-const PrivateRoute = ({ isAuthenticated, render: Component, ...rest }) => (
+const PrivateRoute = ({ isAuthenticated, component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>

@@ -6,9 +6,9 @@ import { withClientState } from 'apollo-link-state';
 import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import decode from 'jwt-decode';
-import { history } from 'app/router';
+import history from 'app/router/history';
 
-import { defaults, resolvers } from './auth';
+import defaultsAndResolvers from './resolvers';
 
 const httpLink = createHttpLink({
   uri: `${process.env.API_URL}/graphql`,
@@ -16,10 +16,28 @@ const httpLink = createHttpLink({
 
 const cache = new InMemoryCache();
 
+const typeDefs = `
+  type Usert {
+    id: ID!
+    firstName: String
+    lastName: String
+  }
+
+  type Mutation {
+    setCurrentuser(user: User!): User
+    clearuser(user: User!): Boolean
+  }
+
+  type Query {
+    currentUser: User
+  }
+`;
+
 const stateLink = withClientState({
   cache,
-  defaults,
-  resolvers,
+  resolvers: defaultsAndResolvers.resolvers,
+  defaults: defaultsAndResolvers.defaults,
+  typeDefs,
 });
 
 const authMiddlewareLink = setContext(() => {
@@ -43,45 +61,26 @@ const authMiddlewareLink = setContext(() => {
   return headers;
 });
 
-const errorLink = onError(
-  ({ graphQLErrors, networkError, forward, operation }) => {
-    if (graphQLErrors && graphQLErrors.filter(e => e).length > 0) {
-      graphQLErrors.map(({ message = '', status = 200 }) => {
-        if (message === 'UNAUTHORIZED' || status === 401) {
-          console.log('UNATHORIZED');
-          return history.push('/auth/signin');
-        }
-        if (status === 403) {
-          console.warn('Forbidden');
-          return history.push(`/error-page/403`);
-        }
-        return forward(operation);
-      });
-    }
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors)
+    graphQLErrors.map(({ message, locations, path }) =>
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+      )
+    );
 
-    if (networkError && networkError.statusCode === 401) {
-      return history.push('/auth/signin');
-    }
+  if (networkError) console.log(`[Network error]: ${networkError}`);
+});
 
-    if (networkError && networkError.statusCode === 403) {
-      // Do something
-      return console.warn('FORBIDDEN');
-    }
-
-    if (networkError && networkError.statusCode >= 500) {
-      // eslint-disable-next-line
-      console.warn('SERVER ERROR');
-      return history.push(`/error-page/${networkError.statusCode}`);
-    }
-    return null;
-  }
-);
-
-const links = [errorLink, stateLink, authMiddlewareLink, httpLink];
-
-const link = ApolloLink.from(links);
+const link = ApolloLink.from([
+  errorLink,
+  stateLink,
+  authMiddlewareLink,
+  httpLink,
+]);
 
 export default new ApolloClient({
   link,
   cache,
+  connectToDevTools: true, // Check if is not production
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { history } from 'app/router';
+import history from 'app/router/history';
 
 import Heading from 'uikit/elements/Heading';
 import P from 'uikit/elements/P';

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { history } from 'app/router';
+import history from 'app/router/history';
 
 import Button from 'uikit/blocks/Button';
 

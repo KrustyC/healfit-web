@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
-import { compose } from 'react-apollo';
+import { compose, graphql } from 'react-apollo';
 import withApolloClient from 'hoc/withApolloClient';
-import { withAuth } from 'app/apollo/auth';
+import withAuth from 'helpers/withAuth';
 import CookiePopup from 'uikit/organisms/CookiePopup';
 
 const FetchCurrentUserQuery = gql`
@@ -69,7 +69,14 @@ class Wrapper extends Component {
   }
 }
 
+const SET_CURRENT_USER = gql`
+  mutation setCurrentUser($user: Object) {
+    setCurrentUser(user: $user) @client
+  }
+`;
+
 export default compose(
+  graphql(SET_CURRENT_USER, { name: 'setCurrentUser' }),
   withAuth,
   withApolloClient
 )(Wrapper);

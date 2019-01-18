@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withAuth } from 'app/apollo/auth';
+import withAuth from 'helpers/withAuth';
 
 const MealPlanner = ({ currentUser }) => (
   <div>Ciao {currentUser.firstName}</div>

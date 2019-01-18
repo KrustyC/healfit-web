@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import gql from 'graphql-tag';
 import PossibleStates from 'possible-states';
 import { compose, graphql } from 'react-apollo';
-import { withAuth } from 'app/apollo/auth';
+import withAuth from 'helpers/withAuth';
 
 import Heading from 'uikit/elements/Heading';
 import Link from 'uikit/elements/Link';
@@ -21,18 +21,6 @@ import {
   FormContainer,
   StyledAlert,
 } from '../components';
-
-const LoginMutation = gql`
-  mutation login($email: String!, $password: String!) {
-    login(input: { email: $email, password: $password }) {
-      token
-      account {
-        firstName
-        lastName
-      }
-    }
-  }
-`;
 
 class SignIn extends Component {
   static propTypes = {
@@ -105,7 +93,26 @@ class SignIn extends Component {
   }
 }
 
+const LOGIN = gql`
+  mutation login($email: String!, $password: String!) {
+    login(input: { email: $email, password: $password }) {
+      token
+      account {
+        firstName
+        lastName
+      }
+    }
+  }
+`;
+
+const SET_CURRENT_USER = gql`
+  mutation setCurrentUser($user: Object) {
+    setCurrentUser(user: $user) @client
+  }
+`;
+
 export default compose(
-  graphql(LoginMutation, { name: 'login' }),
+  graphql(LOGIN, { name: 'login' }),
+  graphql(SET_CURRENT_USER, { name: 'setCurrentUser' }),
   withAuth
 )(SignIn);

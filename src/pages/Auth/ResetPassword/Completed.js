@@ -2,7 +2,7 @@ import React from 'react';
 import posed from 'react-pose';
 import styled, { css } from 'styled-components';
 import P from 'uikit/elements/P';
-import { history } from 'app/router';
+import history from 'app/router/history';
 import Button from 'uikit/blocks/Button';
 
 const Box = styled(

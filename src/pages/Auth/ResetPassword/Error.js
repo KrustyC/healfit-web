@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { history } from 'app/router';
+import history from 'app/router/history';
 import P from 'uikit/elements/P';
 import Button from 'uikit/blocks/Button';
 import Alert from 'uikit/blocks/Alert';

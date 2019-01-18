@@ -252,11 +252,11 @@ export const StyledButton = styled.button`
       }
     `}
 
-    ${({ rounded }) =>
+    ${({ rounded, radius }) =>
       rounded &&
       css`
-        height: 50px;
-        width: 50px;
+        height: ${radius};
+        width: ${radius};
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -276,6 +276,7 @@ const ButtonComponent = ({
   loading,
   rounded,
   style,
+  radius,
 }) => (
   <StyledButton
     id={id || `btn-${kebabCase(children)}`}
@@ -288,6 +289,7 @@ const ButtonComponent = ({
     style={style}
     squircled={squircled}
     rounded={rounded}
+    radius={radius}
   >
     {children}
   </StyledButton>
@@ -304,6 +306,7 @@ ButtonComponent.propTypes = {
   size: PropTypes.oneOf(['small', 'large', 'block']),
   color: PropTypes.oneOf(['primary', 'accent', 'link', 'white']),
   rounded: PropTypes.bool,
+  radius: PropTypes.string,
 
   // states
   disabled: PropTypes.bool,
@@ -314,6 +317,7 @@ ButtonComponent.defaultProps = {
   id: null,
   type: 'button',
   rounded: false,
+  radius: '40px',
   squircled: false,
   style: {},
   onClick: () => {},

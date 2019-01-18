@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import { withAuth } from 'app/apollo/auth';
+import withAuth from 'helpers/withAuth';
 
 class Logout extends Component {
   static propTypes = {

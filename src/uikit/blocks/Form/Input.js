@@ -2,12 +2,12 @@ import styled, { css } from 'styled-components';
 import Feedback from './Feedback';
 
 const Input = styled.input`
-  ${({ theme }) => css`
+  ${({ theme, noMargin }) => css`
     width: 100%;
     outline: none;
     height: 50px;
     min-height: 50px;
-    margin-bottom: 10px;
+    margin-bottom: ${noMargin ? 0 : '10px'};
     display: flex;
     justify-content: center;
 

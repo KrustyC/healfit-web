@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import withPortal from 'helpers/withPortal';
-import { withAuth } from 'app/apollo/auth';
+import withAuth from 'helpers/withAuth';
 
 import P from 'uikit/elements/P';
 import Button from 'uikit/blocks/Button';
