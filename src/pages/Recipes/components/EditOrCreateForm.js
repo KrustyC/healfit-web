@@ -27,6 +27,7 @@ const Panel = styled.div`
     align-items: flex-start;
     justify-content: center;
     background: ${theme.colors.white};
+    background: #faf8f8;
     border: 1px solid ${theme.colors.border};
     border-radius: 5px;
     width: 100%;
