@@ -1,15 +1,18 @@
-import styled, { css } from 'styled-components';
+import React from 'react';
+import styled from 'styled-components';
 
-const Feedback = styled.span`
+import { ErrorMessage } from 'formik';
+
+const StyledFeedback = styled.span`
   color: red;
   margin-top: -5px;
   font-size: 10px;
-  display: none;
-  ${({ show }) =>
-    show &&
-    css`
-      display: block;
-    `}
 `;
+
+const Feedback = props => (
+  <ErrorMessage {...props}>
+    {msg => <StyledFeedback>{msg}</StyledFeedback>}
+  </ErrorMessage>
+);
 
 export default Feedback;

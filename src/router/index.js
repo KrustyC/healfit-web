@@ -17,7 +17,8 @@ const CustomRouter = () => (
       <Route exact path="/" component={Routes.Home} />
       <Route path="/auth" component={Routes.Auth} />
       <PrivateRoute path="/dashboard" component={Routes.Dashboard} />
-      <PrivateRoute path="/recipes" component={Routes.Recipes} />
+      <Route path="/recipes" component={Routes.Recipes} />
+      {/* <PrivateRoute path="/recipes" component={Routes.Recipes} /> */}
       <PrivateRoute path="/meal-planner" component={Routes.MealPlanner} />
       <Route path="/legal" component={Routes.Legal} />
       <Route path="/404" component={Routes.NotFound} />

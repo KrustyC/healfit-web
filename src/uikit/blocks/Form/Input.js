@@ -1,7 +1,8 @@
+import React from 'react';
 import styled, { css } from 'styled-components';
-import Feedback from './Feedback';
+import { Field } from 'formik';
 
-const Input = styled.input`
+const Input = styled(Field)`
   ${({ theme, noMargin }) => css`
     width: 100%;
     outline: none;
@@ -18,13 +19,16 @@ const Input = styled.input`
     :focus {
       border: 2px solid ${theme.colors.primary};
     }
-
-    :invalid {
-      ${Feedback} {
-        display: block;
-      }
-    }
   `}
 `;
+
+// const CustomInputComponent = ({
+//   field, // { name, value, onChange, onBlur }
+//   form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+//   ...props
+// }) => (
+//     <Input {...field} {...props} />
+//   </div>
+// );
 
 export default Input;

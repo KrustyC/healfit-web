@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 import Heading from 'uikit/elements/Heading';
-import Form from '../components/EditOrCreateForm';
+import Form from '../components/Form';
 
 const Layout = styled.div`
   ${({ theme }) => css`
