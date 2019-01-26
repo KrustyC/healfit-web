@@ -19,7 +19,7 @@ const RecipesIndex = ({ match: { path } }) => (
       <Route path={`${path}/:id`} component={ViewRecipe} />
       <Route component={ListRecipes} />
     </Switch>
-    <Footer />
+    {/* <Footer /> */}
   </Fragment>
 );
 

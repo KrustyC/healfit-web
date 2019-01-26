@@ -45,9 +45,9 @@ const SignInForm = ({ onSubmit }) => (
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          <Form.Feedback show={errors.password && touched.password}>
+          {/* <Form.Feedback show={errors.password && touched.password}>
             {errors.password}
-          </Form.Feedback>
+          </Form.Feedback> */}
         </Form.FormGroup>
         <Form.FormGroup>
           <Form.Label htmlFor="name">Repeat Password</Form.Label>
@@ -58,11 +58,11 @@ const SignInForm = ({ onSubmit }) => (
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          <Form.Feedback
+          {/* <Form.Feedback
             show={errors.passwordConfirm && touched.passwordConfirm}
           >
             {errors.passwordConfirm}
-          </Form.Feedback>
+          </Form.Feedback> */}
         </Form.FormGroup>
         <Button
           type="submit"

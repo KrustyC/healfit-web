@@ -1,26 +1,31 @@
 import React from 'react';
-import * as Yup from 'yup';
+import styled, { css } from 'styled-components';
 
-import MultiStepForm from './MultiStepForm';
+import Wizard from './Wizard';
+import Bottom from './ui/Bottom';
+import Main from './ui/Main';
+import Sidebar from './ui/Sidebar';
 
-import Step1 from './ui/Step1';
-import Step2 from './ui/Step2';
-import Step3 from './ui/Step3';
+import validationSchema from './validationSchema';
 
-const validateStep1 = Yup.object().shape({
-  title: Yup.string().required('PHave to decide a title'),
-  servings: Yup.number().required('PHave to decide a number'),
-});
-
-const validateStep2 = {
-  ...validateStep1,
-  ...Yup.object().shape({
-    ingridients: Yup.string().required('Please add an ingridient'),
-  }),
-};
+const Layout = styled.form`
+  ${({ theme }) => css`
+    display: grid;
+    width: ${theme.dimensions.containerWidth.fullscreen};
+    height: 100%;
+    grid-template-areas:
+      'sidebar main'
+      'sidebar main'
+      'sidebar main'
+      'sidebar main'
+      'sidebar footer';
+    grid-template-columns: 1fr 3fr;
+    ${'' /* grid-template-rows: auto 100px; */}
+  `}
+`;
 
 export default () => (
-  <MultiStepForm
+  <Wizard
     initialValues={{
       title: '',
       servings: '',
@@ -30,9 +35,28 @@ export default () => (
     onSubmit={(values, actions) => {
       console.log(values, actions);
     }}
+    validationSchema={validationSchema}
   >
-    <Step1 validationSchema={validateStep1} />
-    <Step2 validationSchema={validateStep2} />
-    <Step3 />
-  </MultiStepForm>
+    {({
+      page,
+      isFirstPage,
+      isLastPage,
+      isValid,
+      isSubmitting,
+      handleSubmit,
+      onPrevious,
+    }) => (
+      <Layout onSubmit={handleSubmit}>
+        <Sidebar pages={4} currentPage={page} />
+        <Main />
+        <Bottom
+          onPrevious={onPrevious}
+          isSubmitting={isSubmitting}
+          isFirstPage={isFirstPage}
+          isLastPage={isLastPage}
+          isValid={isValid}
+        />
+      </Layout>
+    )}
+  </Wizard>
 );

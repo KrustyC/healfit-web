@@ -60,9 +60,9 @@ const UserSignUpForm = ({ onSubmit }) => (
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          <Form.Feedback show={errors.email && touched.email}>
+          {/* <Form.Feedback show={errors.email && touched.email}>
             {errors.email}
-          </Form.Feedback>
+          </Form.Feedback> */}
         </Form.FormGroup>
         <Form.FormGroup>
           <Form.Label htmlFor="firstName">First Name</Form.Label>
@@ -74,9 +74,9 @@ const UserSignUpForm = ({ onSubmit }) => (
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          <Form.Feedback show={errors.firstName && touched.firstName}>
+          {/* <Form.Feedback show={errors.firstName && touched.firstName}>
             {errors.firstName}
-          </Form.Feedback>
+          </Form.Feedback> */}
         </Form.FormGroup>
         <Form.FormGroup>
           <Form.Label htmlFor="lastName">Last Name</Form.Label>
@@ -88,9 +88,9 @@ const UserSignUpForm = ({ onSubmit }) => (
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          <Form.Feedback show={errors.lastName && touched.lastName}>
+          {/* <Form.Feedback show={errors.lastName && touched.lastName}>
             {errors.lastName}
-          </Form.Feedback>
+          </Form.Feedback> */}
         </Form.FormGroup>
         <Form.FormGroup>
           <Form.Label htmlFor="password">Password</Form.Label>
@@ -101,9 +101,9 @@ const UserSignUpForm = ({ onSubmit }) => (
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          <Form.Feedback show={errors.password && touched.password}>
+          {/* <Form.Feedback show={errors.password && touched.password}>
             {errors.password}
-          </Form.Feedback>
+          </Form.Feedback> */}
         </Form.FormGroup>
         <Form.Checkbox
           name="acceptTermAndCondition"
@@ -119,11 +119,11 @@ const UserSignUpForm = ({ onSubmit }) => (
             </Link>
           </P>
         </Form.Checkbox>
-        <Form.Feedback
+        {/* <Form.Feedback
           show={errors.acceptTermAndCondition && touched.acceptTermAndCondition}
         >
           {errors.acceptTermAndCondition}
-        </Form.Feedback>
+        </Form.Feedback> */}
         <Button
           color="primary"
           type="submit"

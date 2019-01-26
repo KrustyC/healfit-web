@@ -39,9 +39,9 @@ const SignInForm = ({ onSubmit }) => (
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          <Form.Feedback show={errors.email && touched.email}>
+          {/* <Form.Feedback show={errors.email && touched.email}>
             {errors.email}
-          </Form.Feedback>
+          </Form.Feedback> */}
         </Form.FormGroup>
         <Button
           type="submit"

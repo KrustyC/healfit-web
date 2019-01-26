@@ -54,9 +54,9 @@ const authMiddlewareLink = setContext(() => {
 
   const currentTime = Date.now().valueOf() / 1000;
   const tokenExpiration = decode(token).exp;
-  if (currentTime > tokenExpiration) {
-    history.push('/auth/signin');
-  }
+  // if (currentTime > tokenExpiration) {
+  //   history.push('/auth/signin');
+  // }
 
   return headers;
 });

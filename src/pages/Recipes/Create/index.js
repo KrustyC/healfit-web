@@ -1,28 +1,19 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-
-import Heading from 'uikit/elements/Heading';
 import Form from '../components/Form';
 
 const Layout = styled.div`
   ${({ theme }) => css`
-    min-height: 80vh;
+    height: calc(100vh - ${theme.dimensions.navbarHeight});
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 auto;
-    padding: ${theme.padding.md};
-
-    width: ${theme.dimensions.containerWidth.default};
-    @media (max-width: ${theme.sizes.md}) {
-      width: ${theme.dimensions.containerWidth.fullscreen};
-    }
+    width: ${theme.dimensions.containerWidth.fullscreen};
   `}
 `;
 
 export default () => (
   <Layout>
-    <Heading level="h1">Create your own recipe</Heading>
     <Form onSubmit={() => console.log('submit')} />
   </Layout>
 );

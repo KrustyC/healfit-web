@@ -42,9 +42,9 @@ const SignInForm = ({ onSubmit }) => (
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          <Form.Feedback show={errors.email && touched.email}>
+          {/* <Form.Feedback show={errors.email && touched.email}>
             {errors.email}
-          </Form.Feedback>
+          </Form.Feedback> */}
         </Form.FormGroup>
         <Form.FormGroup>
           <Form.Label htmlFor="password">Password</Form.Label>
@@ -55,9 +55,9 @@ const SignInForm = ({ onSubmit }) => (
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          <Form.Feedback show={errors.password && touched.password}>
+          {/* <Form.Feedback show={errors.password && touched.password}>
             {errors.password}
-          </Form.Feedback>
+          </Form.Feedback> */}
         </Form.FormGroup>
         <P size="small" style={{ marginTop: '5px' }}>
           <Link to="/auth/forgot-password">Forgot Password?</Link>
