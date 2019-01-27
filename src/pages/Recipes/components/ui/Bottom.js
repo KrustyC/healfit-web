@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import Button from 'uikit/blocks/Button';
@@ -8,12 +9,13 @@ const BottomContainer = styled.div`
     border-top: 1px solid ${theme.colors.border};
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     grid-area: footer;
+    padding: 0 ${theme.padding.md};
   `}
 `;
 
-export default ({
+const Bottom = ({
   onPrevious,
   isSubmitting,
   isFirstPage,
@@ -21,14 +23,26 @@ export default ({
   isValid,
 }) => (
   <BottomContainer>
-    <Button onClick={onPrevious} disabled={isFirstPage}>
+    <Button size="large" onClick={onPrevious} disabled={isFirstPage}>
       Previous
     </Button>
-    <Button color="primary" disabled={isLastPage || !isValid} type="submit">
-      Next
-    </Button>
-    <Button color="primary" disabled={isSubmitting || !isValid} type="submit">
-      Create Recipe
+    <Button
+      size="large"
+      color="primary"
+      disabled={(isSubmitting, !isValid)}
+      type="submit"
+    >
+      {isLastPage ? 'Create Recipe' : 'Next'}
     </Button>
   </BottomContainer>
 );
+
+Bottom.propTypes = {
+  onPrevious: PropTypes.bool.isRequired,
+  isSubmitting: PropTypes.bool.isRequired,
+  isFirstPage: PropTypes.bool.isRequired,
+  isLastPage: PropTypes.bool.isRequired,
+  isValid: PropTypes.bool.isRequired,
+};
+
+export default Bottom;

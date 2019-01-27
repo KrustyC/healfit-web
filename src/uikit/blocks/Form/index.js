@@ -8,6 +8,7 @@ import Input from './Input';
 import Password from './Password';
 import Textarea from './Textarea';
 import Checkbox from './Checkbox';
+import Multichoice from './Multichoice';
 
 const Form = styled.form`
   display: flex;
@@ -22,5 +23,6 @@ Form.Feedback = Feedback;
 Form.Input = Input;
 Form.Password = Password;
 Form.Textarea = Textarea;
+Form.Multichoice = Multichoice;
 
 export default Form;

@@ -5,7 +5,7 @@ import WizardContext from './context';
 
 import Pages from './Pages';
 
-export default class MultiStepForm extends Component {
+export default class Wizard extends Component {
   static Page = ({ children }) => children;
 
   static Pages = Pages;
@@ -34,12 +34,12 @@ export default class MultiStepForm extends Component {
     }));
 
   handleSubmit = (values, bag) => {
-    const { children, onSubmit } = this.props;
+    const { children } = this.props;
     const { page } = this.state;
     const isLastPage = page === React.Children.count(children) - 1;
 
     if (isLastPage) {
-      return onSubmit(values, bag);
+      return this.props.onSubmit(values, bag);
     }
 
     this.next(values);
@@ -53,11 +53,25 @@ export default class MultiStepForm extends Component {
 
     const isFirstPage = page === 0;
     const isLastPage = page === React.Children.count(children) - 1;
-    const contextValue = { page };
+    const contextValue = {
+      page,
+      isFirstPage,
+      isLastPage,
+      onPrevious: this.previous,
+      onSubmit: this.onSubmit,
+    };
 
     return (
       <WizardContext.Provider value={contextValue}>
-        <Formik
+        {this.props.children({
+          page,
+          isFirstPage,
+          isLastPage,
+          onPrevious: this.previous,
+          onSubmit: this.onSubmit,
+        })}
+
+        {/* <Formik
           initialValues={values}
           enableReinitialize={false}
           validationSchema={this.props.validationSchema[page]}
@@ -76,7 +90,7 @@ export default class MultiStepForm extends Component {
               onSubmit: handleSubmit,
             })
           }
-        </Formik>
+        </Formik> */}
       </WizardContext.Provider>
     );
   }

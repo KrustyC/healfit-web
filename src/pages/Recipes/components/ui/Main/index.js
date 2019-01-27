@@ -1,5 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import Heading from 'uikit/elements/Heading';
 import Wizard from '../../Wizard';
 
 import Step1 from './Step1';
@@ -8,17 +9,26 @@ import Step3 from './Step3';
 import Preview from './Preview';
 
 const MainContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  grid-area: main;
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    grid-area: main;
+    padding: 0 ${theme.padding.md};
+    width: 100%;
+
+    h1 {
+      padding: ${theme.padding.md} 0;
+    }
+  `}
 `;
 
-export default () => (
+export default ({ values }) => (
   <MainContainer>
+    <Heading level="h1">Create a recipe</Heading>
     <Wizard.Pages>
-      <Step1 />
+      <Step1 values={values} />
       <Step2 />
       <Step3 />
       <Preview />

@@ -6,6 +6,7 @@ const FormGroup = styled.div`
   align-items: flex-start;
   margin-top: 5px;
   margin-bottom: 5px;
+  width: ${({ width }) => width || 'auto'};
 `;
 
 export default FormGroup;

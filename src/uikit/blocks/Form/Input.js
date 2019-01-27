@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { Field } from 'formik';
 
 const Input = styled(Field)`
-  ${({ theme, noMargin }) => css`
+  ${({ theme, noMargin, type }) => css`
     width: 100%;
     outline: none;
     height: 50px;
@@ -19,6 +19,11 @@ const Input = styled(Field)`
     :focus {
       border: 2px solid ${theme.colors.primary};
     }
+
+    ${type === 'number' &&
+      css`
+        width: 70px;
+      `}
   `}
 `;
 

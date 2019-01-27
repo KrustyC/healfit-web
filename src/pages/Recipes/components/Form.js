@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { Formik } from 'formik';
 
 import Wizard from './Wizard';
 import Bottom from './ui/Bottom';
@@ -25,38 +26,26 @@ const Layout = styled.form`
 `;
 
 export default () => (
-  <Wizard
-    initialValues={{
-      title: '',
-      servings: '',
-      ingridients: '',
-      steps: '',
-    }}
-    onSubmit={(values, actions) => {
-      console.log(values, actions);
-    }}
-    validationSchema={validationSchema}
-  >
-    {({
-      page,
-      isFirstPage,
-      isLastPage,
-      isValid,
-      isSubmitting,
-      handleSubmit,
-      onPrevious,
-    }) => (
-      <Layout onSubmit={handleSubmit}>
-        <Sidebar pages={4} currentPage={page} />
-        <Main />
-        <Bottom
-          onPrevious={onPrevious}
-          isSubmitting={isSubmitting}
-          isFirstPage={isFirstPage}
-          isLastPage={isLastPage}
-          isValid={isValid}
-        />
-      </Layout>
+  <Wizard onSubmit={(val, actions) => console.log(val, actions)}>
+    {({ page }) => (
+      <Formik
+        initialValues={{ title: 'Something' }}
+        validationSchema={validationSchema[page]}
+      >
+        {({ values, onChange, isValid, isSubmitting }) => (
+          <Layout>
+            <Sidebar pages={4} />
+            <Main values={values} />
+            <Bottom
+              // onPrevious={onPrevious}
+              // isSubmitting={isSubmitting}
+              // isFirstPage={isFirstPage}
+              // isLastPage={isLastPage}
+              isValid={isValid}
+            />
+          </Layout>
+        )}
+      </Formik>
     )}
   </Wizard>
 );

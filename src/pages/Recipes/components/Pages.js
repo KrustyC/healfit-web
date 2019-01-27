@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import WizardContext from './context';
 
 const Pages = ({ children }) => (
-  <WizardContext>
+  <WizardContext.Consumer>
     {({ page }) => {
       const activePage = React.Children.toArray(children)[page];
       return React.cloneElement(activePage);
     }}
-  </WizardContext>
+  </WizardContext.Consumer>
 );
 
 Pages.propTypes = {
