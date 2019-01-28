@@ -25,7 +25,7 @@ const Layout = styled.form`
 
 const Form = ({ edit, initialValues, onComplete }) => (
   <Wizard onSubmit={onComplete}>
-    {({ page, pages, isLastPage, isFirstPage, onPrevious, onSubmit }) => (
+    {({ page, isLastPage, isFirstPage, onPrevious, onSubmit }) => (
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema[page]}
@@ -33,7 +33,7 @@ const Form = ({ edit, initialValues, onComplete }) => (
       >
         {({ values, isValid, isSubmitting, handleSubmit }) => (
           <Layout onSubmit={handleSubmit}>
-            <Sidebar pages={pages} page={page} />
+            <Sidebar page={page} />
             <Main edit={edit} values={values} />
             <Bottom
               onPrevious={onPrevious}

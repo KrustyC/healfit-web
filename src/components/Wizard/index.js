@@ -57,7 +57,6 @@ export default class Wizard extends Component {
       <WizardContext.Provider value={contextValue}>
         {this.props.children({
           page,
-          pages,
           isFirstPage: page === 0,
           isLastPage: page === pages - 1,
           onPrevious: this.previous,
