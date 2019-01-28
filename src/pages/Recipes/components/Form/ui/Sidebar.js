@@ -1,19 +1,20 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-import Button from 'uikit/blocks/Button';
-
 const SidebarContainer = styled.div`
   ${({ theme }) => css`
     border-right: 1px solid ${theme.colors.border};
+    padding: 0 ${theme.padding.md};
     grid-area: sidebar;
     display: flex;
-    flex-align: column;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
   `}
 `;
 
 export default ({ pages, currentPage }) => (
-  <SidebarContainer>Sidebar</SidebarContainer>
+  <SidebarContainer>
+    Sidebar {pages} {currentPage}
+  </SidebarContainer>
 );

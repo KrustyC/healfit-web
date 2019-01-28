@@ -11,7 +11,7 @@ const Grid = styled.div`
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: ${theme.margin.md};
 
-    @media (max-width: ${theme.dimensions.containerWidth.small}) {
+    @media (max-width: ${theme.sizes.md}) {
       grid-template-columns: 1fr;
       grid-row-gap: ${theme.margin.md};
     }

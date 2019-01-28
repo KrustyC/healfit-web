@@ -16,10 +16,14 @@ const MainContainer = styled.div`
     justify-content: flex-start;
     grid-area: main;
     padding: 0 ${theme.padding.md};
-    width: 100%;
+    width: 50%;
 
     h1 {
       padding: ${theme.padding.md} 0;
+    }
+
+    @media (max-width: ${theme.sizes.md}) {
+      width: 100%;
     }
   `}
 `;

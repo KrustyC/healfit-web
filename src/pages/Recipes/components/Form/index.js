@@ -16,12 +16,9 @@ const Layout = styled.form`
     height: 100%;
     grid-template-areas:
       'sidebar main'
-      'sidebar main'
-      'sidebar main'
-      'sidebar main'
       'sidebar footer';
     grid-template-columns: 1fr 3fr;
-    ${'' /* grid-template-rows: auto 100px; */}
+    grid-template-rows: 1fr 100px;
   `}
 `;
 

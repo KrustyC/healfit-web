@@ -1,15 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { ErrorMessage } from 'formik';
 
 const StyledFeedback = styled.span`
-  color: red;
-  margin-top: -5px;
-  font-size: 10px;
-  position: absolute;
-  bottom: 0;
-  left: 2px;
+  ${({ theme }) => css`
+    color: ${theme.colors.error};
+    font-size: ${theme.fontSize.xsmall};
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  `}
 `;
 
 const Feedback = props => (

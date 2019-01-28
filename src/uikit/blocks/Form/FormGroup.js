@@ -1,13 +1,14 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const FormGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  width: ${({ width }) => width || 'auto'};
-  position: relative;
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: ${theme.padding.xs} 0;
+    width: 100%;
+    position: relative;
+  `}
 `;
 
 export default FormGroup;

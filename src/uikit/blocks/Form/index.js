@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 import { prop } from 'styled-tools';
 
+import Checkbox from './Checkbox';
+import Input from './Input';
+import Feedback from './Feedback';
 import FormGroup from './FormGroup';
 import Label from './Label';
-import Feedback from './Feedback';
-import Input from './Input';
-import Password from './Password';
-import Textarea from './Textarea';
-import Checkbox from './Checkbox';
 import Multichoice from './Multichoice';
+import Textarea from './Textarea';
+import Password from './Password';
+import Select from './Select';
 
 const Form = styled.form`
   display: flex;
@@ -16,13 +17,13 @@ const Form = styled.form`
 `;
 
 Form.Checkbox = Checkbox;
-Form.Label = Label;
+Form.Input = Input;
+Form.Feedback = Feedback;
 Form.FormGroup = FormGroup;
 Form.Label = Label;
-Form.Feedback = Feedback;
-Form.Input = Input;
-Form.Password = Password;
-Form.Textarea = Textarea;
 Form.Multichoice = Multichoice;
+Form.Textarea = Textarea;
+Form.Password = Password;
+Form.Select = Select;
 
 export default Form;

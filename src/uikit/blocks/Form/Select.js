@@ -1,7 +1,9 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { Field } from 'formik';
 
-const Input = styled(Field)`
+const StyledSelect = styled(Field)`
   ${({ theme, noMargin }) => css`
     width: 100%;
     outline: none;
@@ -17,15 +19,28 @@ const Input = styled(Field)`
     font-size: ${theme.fontSize.regular};
     color: ${theme.colors.font};
     background: ${theme.colors.white};
+    /* background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center; */
+    /* appearance: none; */
 
     :focus {
       border: 2px solid ${theme.colors.primary};
     }
-
-    &[type='number'] {
-      width: 70px;
-    }
   `}
 `;
 
-export default Input;
+const Option = styled.option``;
+
+const Select = ({ name, children }) => (
+  <StyledSelect component="select" name={name}>
+    {children}
+  </StyledSelect>
+);
+
+Select.Option = Option;
+
+Select.propTypes = {
+  name: PropTypes.string.isRequired,
+  children: PropTypes.string.isRequired,
+};
+
+export default Select;

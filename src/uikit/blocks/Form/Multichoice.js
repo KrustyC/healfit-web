@@ -67,7 +67,7 @@ const Multichoice = styled.div`
 const Choice = ({ id, label, ...rest }) => (
   <>
     <ChoiceInput id={id} type="radio" {...rest} />
-    <ChoiceLabel for={id}>{label}</ChoiceLabel>
+    <ChoiceLabel htmlFor={id}>{label}</ChoiceLabel>
   </>
 );
 
