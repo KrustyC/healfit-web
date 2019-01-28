@@ -1,10 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { prop } from 'styled-tools';
 import Input from './Input';
 
 const StyledTextarea = styled(Input)`
-  width: ${prop('width', '100%')};
+  ${({ theme }) => css`
+    width: ${prop('width', '100%')};
+    padding: ${theme.padding.sm};
+  `}
 `;
 
 const Textarea = props => <StyledTextarea as="textarea" {...props} />;

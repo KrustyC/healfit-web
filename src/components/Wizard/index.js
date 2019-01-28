@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Formik } from 'formik';
 import WizardContext from './context';
 
 import Pages from './Pages';
@@ -12,14 +11,11 @@ export default class Wizard extends Component {
 
   static propTypes = {
     children: PropTypes.any.isRequired,
-    initialValues: PropTypes.object.isRequired,
-    validationSchema: PropTypes.arrayOf(PropTypes.object).isRequired,
     onSubmit: PropTypes.func.isRequired,
   };
 
   state = {
     page: 0,
-    values: this.props.initialValues,
   };
 
   next = values =>
@@ -49,10 +45,11 @@ export default class Wizard extends Component {
 
   render() {
     const { children } = this.props;
-    const { page, values } = this.state;
+    const { page } = this.state;
 
     const isFirstPage = page === 0;
     const isLastPage = page === React.Children.count(children) - 1;
+
     const contextValue = {
       page,
       isFirstPage,
@@ -70,27 +67,6 @@ export default class Wizard extends Component {
           onPrevious: this.previous,
           onSubmit: this.onSubmit,
         })}
-
-        {/* <Formik
-          initialValues={values}
-          enableReinitialize={false}
-          validationSchema={this.props.validationSchema[page]}
-          onSubmit={this.handleSubmit}
-        >
-          {({ handleSubmit, isSubmitting, handleChange, isValid }) =>
-            this.props.children({
-              values,
-              handleChange,
-              page,
-              isFirstPage,
-              isLastPage,
-              isSubmitting,
-              isValid,
-              onPrevious: this.previous,
-              onSubmit: handleSubmit,
-            })
-          }
-        </Formik> */}
       </WizardContext.Provider>
     );
   }

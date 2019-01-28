@@ -2,7 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { Formik } from 'formik';
 
-import Wizard from './Wizard';
+import Wizard from 'components/Wizard';
 import Bottom from './ui/Bottom';
 import Main from './ui/Main';
 import Sidebar from './ui/Sidebar';

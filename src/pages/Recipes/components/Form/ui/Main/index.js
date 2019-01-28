@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Heading from 'uikit/elements/Heading';
-import Wizard from '../../Wizard';
+import Wizard from 'components/Wizard';
 
 import Step1 from './Step1';
 import Step2 from './Step2';

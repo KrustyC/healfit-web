@@ -7,6 +7,9 @@ const StyledFeedback = styled.span`
   color: red;
   margin-top: -5px;
   font-size: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 2px;
 `;
 
 const Feedback = props => (

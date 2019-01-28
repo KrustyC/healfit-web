@@ -1,46 +1,81 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { Field } from 'formik';
 
-const Container = styled.div`
-  display: flex;
+const ChoiceInput = styled(Field)`
+  display: none;
 `;
 
-const Item = styled.button`
-  background: green;
-  ${({ active }) =>
-    active &&
-    css`
-      background: red;
-    `}
+const ChoiceLabel = styled.label``;
+
+const Multichoice = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+
+    ${ChoiceInput} + ${ChoiceLabel} {
+      margin: 0;
+      height: 45px;
+      min-width: 100px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: solid 2px ${theme.colors.border};
+      border-right: none;
+      border-left: none;
+      background-color: ${theme.colors.white};
+      color: ${theme.colors.font};
+      font-size: ${theme.fontSize.small};
+      font-weight: 600;
+      transition: border-color .15s ease-out,
+                  color .25s ease-out,
+                  background-color .15s ease-out,
+                  box-shadow .15s ease-out;
+
+
+      &:first-of-type {
+        border-radius: 2px 0 0 2px;
+        border-left: solid 2px ${theme.colors.border};
+      }
+
+      &:last-of-type {
+        border-radius: 0 2px 2px 0;
+        border-right: solid 2px ${theme.colors.border};
+      }
+    }
+
+    ${ChoiceInput}:checked + ${ChoiceLabel} {
+      background-color: ${theme.colors.primary};
+      color: ${theme.colors.white};
+      box-shadow: ${theme.util.darkenOnHover(theme.colors.primary)};
+      border-color: ${theme.util.darkenOnHover(theme.colors.primary)};
+      z-index: 1;
+    }
+
+    ${ChoiceInput}:hover + ${ChoiceLabel} {
+      background-color: ${theme.colors.primary};
+      color: ${theme.colors.white};
+      border-color: ${theme.util.darkenOnHover(theme.colors.primary)};
+    }
+  `}
 `;
 
-export default class Multichoice extends Component {
-  static Item = Item;
+const Choice = ({ id, label, ...rest }) => (
+  <>
+    <ChoiceInput id={id} type="radio" {...rest} />
+    <ChoiceLabel for={id}>{label}</ChoiceLabel>
+  </>
+);
 
-  state = {
-    selected: null,
-  };
+Choice.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  label: PropTypes.string.isRequired,
+};
 
-  onSelect = i => e => {
-    e.preventDefault();
-    console.log('selected');
-    this.setState({ selected: i });
-    // this.props.selected()
-  };
+Multichoice.Choice = Choice;
 
-  render() {
-    // const { selected } = this.state;
-    const { children, selected } = this.props;
-    console.log(children, selected);
-    return (
-      <Container>
-        {React.Children.map(children, (child, i) =>
-          React.cloneElement(child, {
-            active: selected === i,
-            onClick: this.onSelect(i),
-          })
-        )}
-      </Container>
-    );
-  }
-}
+export default Multichoice;

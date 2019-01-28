@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from 'formik';
 import Form from 'uikit/blocks/Form';
 
-import Wizard from '../../Wizard';
+import Wizard from 'components/Wizard';
 
 export default () => (
   <Wizard.Page>

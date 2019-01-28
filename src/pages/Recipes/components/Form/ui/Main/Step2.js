@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from 'uikit/blocks/Form';
 
-import Wizard from '../../Wizard';
+import Wizard from 'components/Wizard';
 
 export default () => (
   <Wizard.Page>
