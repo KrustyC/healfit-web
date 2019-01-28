@@ -38,7 +38,20 @@ class CookiePopup extends Component {
     hidden: this.props.isAuthenticated || false,
   };
 
-  onDismiss = () => this.setState({ hidden: true });
+  componentDidMount() {
+    const token = localStorage.getItem('healfit:accept-cookie');
+
+    if (!token) {
+      return null;
+    }
+
+    return this.setState({ hidden: true });
+  }
+
+  onDismiss = () => {
+    localStorage.setItem('healfit:accept-cookie', true);
+    this.setState({ hidden: true });
+  };
 
   render() {
     const { hidden } = this.state;
