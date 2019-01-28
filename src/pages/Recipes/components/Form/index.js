@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { Formik } from 'formik';
 
@@ -22,22 +23,23 @@ const Layout = styled.form`
   `}
 `;
 
-export default () => (
-  <Wizard onSubmit={(val, actions) => console.log(val, actions)}>
-    {({ page }) => (
+const Form = ({ edit, initialValues, onComplete }) => (
+  <Wizard onSubmit={onComplete}>
+    {({ page, pages, isLastPage, isFirstPage, onPrevious, onSubmit }) => (
       <Formik
-        initialValues={{ title: 'Something' }}
+        initialValues={initialValues}
         validationSchema={validationSchema[page]}
+        onSubmit={onSubmit}
       >
-        {({ values, onChange, isValid, isSubmitting }) => (
-          <Layout>
-            <Sidebar pages={4} />
-            <Main values={values} />
+        {({ values, isValid, isSubmitting, handleSubmit }) => (
+          <Layout onSubmit={handleSubmit}>
+            <Sidebar pages={pages} page={page} />
+            <Main edit={edit} values={values} />
             <Bottom
-              // onPrevious={onPrevious}
-              // isSubmitting={isSubmitting}
-              // isFirstPage={isFirstPage}
-              // isLastPage={isLastPage}
+              onPrevious={onPrevious}
+              isSubmitting={isSubmitting}
+              isFirstPage={isFirstPage}
+              isLastPage={isLastPage}
               isValid={isValid}
             />
           </Layout>
@@ -46,3 +48,15 @@ export default () => (
     )}
   </Wizard>
 );
+
+Form.propTypes = {
+  edit: PropTypes.bool,
+  onComplete: PropTypes.func.isRequired,
+  initialValues: PropTypes.object.isRequired,
+};
+
+Form.defaultProps = {
+  edit: false,
+};
+
+export default Form;

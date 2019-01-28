@@ -40,7 +40,7 @@ Select.Option = Option;
 
 Select.propTypes = {
   name: PropTypes.string.isRequired,
-  children: PropTypes.string.isRequired,
+  children: PropTypes.array.isRequired,
 };
 
 export default Select;

@@ -38,11 +38,11 @@ const Bottom = ({
 );
 
 Bottom.propTypes = {
-  onPrevious: PropTypes.bool.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   isFirstPage: PropTypes.bool.isRequired,
   isLastPage: PropTypes.bool.isRequired,
   isValid: PropTypes.bool.isRequired,
+  onPrevious: PropTypes.func.isRequired,
 };
 
 export default Bottom;

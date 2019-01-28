@@ -14,6 +14,16 @@ const Layout = styled.div`
 
 export default () => (
   <Layout>
-    <Form onSubmit={() => console.log('submit')} />
+    <Form
+      initialValues={{
+        title: '',
+        servings: '',
+        totalTime: '',
+        category: 0,
+        difficulty: 0,
+        description: '',
+      }}
+      onComplete={values => console.log('submit', values)}
+    />
   </Layout>
 );

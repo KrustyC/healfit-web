@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 const SidebarContainer = styled.div`
@@ -13,8 +14,19 @@ const SidebarContainer = styled.div`
   `}
 `;
 
-export default ({ pages, currentPage }) => (
+const Sidebar = ({ pages, page }) => (
   <SidebarContainer>
-    Sidebar {pages} {currentPage}
+    Sidebar {pages} {page}
   </SidebarContainer>
 );
+
+Sidebar.propTypes = {
+  pages: PropTypes.number,
+  page: PropTypes.number.isRequired,
+};
+
+Sidebar.defaultProps = {
+  pages: 0,
+};
+
+export default Sidebar;

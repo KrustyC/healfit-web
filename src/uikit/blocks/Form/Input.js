@@ -23,7 +23,7 @@ const Input = styled(Field)`
     }
 
     &[type='number'] {
-      width: 70px;
+      /* width: 500px; */
     }
   `}
 `;

@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import WizardContext from './context';
 
-const Pages = ({ children }) => (
-  <WizardContext.Consumer>
-    {({ page }) => {
-      const activePage = React.Children.toArray(children)[page];
-      return React.cloneElement(activePage);
-    }}
-  </WizardContext.Consumer>
-);
+export default class Pages extends Component {
+  static contextType = WizardContext;
 
-Pages.propTypes = {
-  children: PropTypes.any.isRequired,
-};
+  static propTypes = {
+    children: PropTypes.any.isRequired,
+  };
 
-export default Pages;
+  componentDidMount() {
+    const pages = React.Children.count(this.props.children);
+    this.context.setPages(pages);
+  }
+
+  render() {
+    const { children } = this.props;
+    const { page } = this.context;
+    const activePage = React.Children.toArray(children)[page];
+    return React.cloneElement(activePage);
+  }
+}

@@ -10,17 +10,18 @@ export default class Wizard extends Component {
   static Pages = Pages;
 
   static propTypes = {
-    children: PropTypes.any.isRequired,
+    children: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
   };
 
   state = {
     page: 0,
+    pages: null,
   };
 
   next = values =>
-    this.setState(state => ({
-      page: Math.min(state.page + 1, this.props.children.length - 1),
+    this.setState(({ page, pages }) => ({
+      page: Math.min(page + 1, pages - 1),
       values,
     }));
 
@@ -30,9 +31,8 @@ export default class Wizard extends Component {
     }));
 
   handleSubmit = (values, bag) => {
-    const { children } = this.props;
-    const { page } = this.state;
-    const isLastPage = page === React.Children.count(children) - 1;
+    const { page, pages } = this.state;
+    const isLastPage = page === pages - 1;
 
     if (isLastPage) {
       return this.props.onSubmit(values, bag);
@@ -43,29 +43,25 @@ export default class Wizard extends Component {
     return bag.setSubmitting(false);
   };
 
-  render() {
-    const { children } = this.props;
-    const { page } = this.state;
+  setPages = pages => this.setState({ pages });
 
-    const isFirstPage = page === 0;
-    const isLastPage = page === React.Children.count(children) - 1;
+  render() {
+    const { page, pages } = this.state;
 
     const contextValue = {
       page,
-      isFirstPage,
-      isLastPage,
-      onPrevious: this.previous,
-      onSubmit: this.onSubmit,
+      setPages: this.setPages,
     };
 
     return (
       <WizardContext.Provider value={contextValue}>
         {this.props.children({
           page,
-          isFirstPage,
-          isLastPage,
+          pages,
+          isFirstPage: page === 0,
+          isLastPage: page === pages - 1,
           onPrevious: this.previous,
-          onSubmit: this.onSubmit,
+          onSubmit: this.handleSubmit,
         })}
       </WizardContext.Provider>
     );
