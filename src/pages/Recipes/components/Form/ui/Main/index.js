@@ -28,11 +28,15 @@ const MainContainer = styled.div`
   `}
 `;
 
-export default ({ values }) => (
+export default ({ values, setFieldTouched, setFieldValue }) => (
   <MainContainer>
     <Heading level="h1">Create a recipe</Heading>
     <Wizard.Pages>
-      <Step1 values={values} />
+      <Step1
+        values={values}
+        setFieldTouched={setFieldTouched}
+        setFieldValue={setFieldValue}
+      />
       <Step2 />
       <Step3 />
       <Preview />

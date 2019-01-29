@@ -31,10 +31,22 @@ const Form = ({ edit, initialValues, onComplete }) => (
         validationSchema={validationSchema[page]}
         onSubmit={onSubmit}
       >
-        {({ values, isValid, isSubmitting, handleSubmit }) => (
+        {({
+          values,
+          isValid,
+          isSubmitting,
+          handleSubmit,
+          setFieldTouched,
+          setFieldValue,
+        }) => (
           <Layout onSubmit={handleSubmit}>
             <Sidebar page={page} />
-            <Main edit={edit} values={values} />
+            <Main
+              edit={edit}
+              values={values}
+              setFieldTouched={setFieldTouched}
+              setFieldValue={setFieldValue}
+            />
             <Bottom
               onPrevious={onPrevious}
               isSubmitting={isSubmitting}

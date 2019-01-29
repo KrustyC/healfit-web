@@ -30,7 +30,7 @@ const levels = [
   { id: 3, name: 'Chef' },
 ];
 
-export default () => (
+export default ({ values, setFieldTouched, setFieldValue }) => (
   <Container>
     <Form.FormGroup>
       <Form.Label>Title</Form.Label>
@@ -60,14 +60,14 @@ export default () => (
     </Form.FormGroup>
     <Form.FormGroup>
       <Form.Label>Category</Form.Label>
-      <Form.Select name="category" placeholder="Please choose a category">
-        <Form.Select.Option value={0} disabled>
-          Select a category
-        </Form.Select.Option>
+      <Form.Select
+        placeholder="Select a category"
+        value={values.category || {}}
+        onBlur={() => setFieldTouched('category', true)}
+        onChange={category => setFieldValue('category', category)}
+      >
         {categories.map(({ id, name }) => (
-          <Form.Select.Option key={id} value={id}>
-            {name}
-          </Form.Select.Option>
+          <Form.Select.Option key={id} label={name} value={id} />
         ))}
       </Form.Select>
       <Form.Feedback name="category" />
