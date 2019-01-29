@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import Heading from 'uikit/elements/Heading';
 import Wizard from 'components/Wizard';
@@ -28,7 +29,7 @@ const MainContainer = styled.div`
   `}
 `;
 
-export default ({ values, setFieldTouched, setFieldValue }) => (
+const Main = ({ values, setFieldTouched, setFieldValue }) => (
   <MainContainer>
     <Heading level="h1">Create a recipe</Heading>
     <Wizard.Pages>
@@ -39,7 +40,15 @@ export default ({ values, setFieldTouched, setFieldValue }) => (
       />
       <Step2 />
       <Step3 />
-      <Preview />
+      <Preview value={values} />
     </Wizard.Pages>
   </MainContainer>
 );
+
+Main.propTypes = {
+  values: PropTypes.object.isRequired,
+  setFieldValue: PropTypes.func.isRequired,
+  setFieldTouched: PropTypes.func.isRequired,
+};
+
+export default Main;

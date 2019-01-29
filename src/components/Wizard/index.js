@@ -60,7 +60,7 @@ export default class Wizard extends Component {
           isFirstPage: page === 0,
           isLastPage: page === pages - 1,
           onPrevious: this.previous,
-          onSubmit: this.handleSubmit,
+          onWizardSubmit: this.handleSubmit,
         })}
       </WizardContext.Provider>
     );

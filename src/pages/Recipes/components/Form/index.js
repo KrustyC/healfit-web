@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { Formik } from 'formik';
+import { Form, Formik } from 'formik';
 
 import Wizard from 'components/Wizard';
 import Bottom from './ui/Bottom';
@@ -10,7 +10,7 @@ import Sidebar from './ui/Sidebar';
 
 import validationSchema from './validationSchema';
 
-const Layout = styled.form`
+const Layout = styled(Form)`
   ${({ theme }) => css`
     display: grid;
     width: ${theme.dimensions.containerWidth.fullscreen};
@@ -23,23 +23,22 @@ const Layout = styled.form`
   `}
 `;
 
-const Form = ({ edit, initialValues, onComplete }) => (
+const EditOrCreateForm = ({ edit, initialValues, onComplete }) => (
   <Wizard onSubmit={onComplete}>
-    {({ page, isLastPage, isFirstPage, onPrevious, onSubmit }) => (
+    {({ page, isLastPage, isFirstPage, onPrevious, onWizardSubmit }) => (
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema[page]}
-        onSubmit={onSubmit}
+        onSubmit={onWizardSubmit}
       >
         {({
           values,
           isValid,
           isSubmitting,
-          handleSubmit,
           setFieldTouched,
           setFieldValue,
         }) => (
-          <Layout onSubmit={handleSubmit}>
+          <Layout>
             <Sidebar page={page} />
             <Main
               edit={edit}
@@ -61,14 +60,14 @@ const Form = ({ edit, initialValues, onComplete }) => (
   </Wizard>
 );
 
-Form.propTypes = {
+EditOrCreateForm.propTypes = {
   edit: PropTypes.bool,
   onComplete: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
 };
 
-Form.defaultProps = {
+EditOrCreateForm.defaultProps = {
   edit: false,
 };
 
-export default Form;
+export default EditOrCreateForm;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Form from 'uikit/blocks/Form';
 
@@ -30,7 +31,7 @@ const levels = [
   { id: 3, name: 'Chef' },
 ];
 
-export default ({ values, setFieldTouched, setFieldValue }) => (
+const Step1 = ({ values, setFieldTouched, setFieldValue }) => (
   <Container>
     <Form.FormGroup>
       <Form.Label>Title</Form.Label>
@@ -100,3 +101,11 @@ export default ({ values, setFieldTouched, setFieldValue }) => (
     </Form.FormGroup>
   </Container>
 );
+
+Step1.propTypes = {
+  values: PropTypes.object.isRequired,
+  setFieldValue: PropTypes.func.isRequired,
+  setFieldTouched: PropTypes.func.isRequired,
+};
+
+export default Step1;
