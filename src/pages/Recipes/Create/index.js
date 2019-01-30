@@ -22,6 +22,7 @@ export default () => (
         category: 0,
         difficulty: 0,
         description: '',
+        ingridients: [],
       }}
       onComplete={values => console.log('submit', values)}
     />

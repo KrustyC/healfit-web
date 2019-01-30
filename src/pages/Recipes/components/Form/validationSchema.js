@@ -6,8 +6,10 @@ const validateInfo = {
   description: Yup.string()
     .notRequired()
     .min(50, 'Please add a description of at least 50 letters'),
-  category: Yup.string().required('Please add a category'),
-  totalTime: Yup.string().required('Please how much is needed'),
+  category: Yup.object().required('Please add a category'),
+  totalTime: Yup.string().required(
+    'Please tell us how much is needed for the recipe to be prepared'
+  ),
   level: Yup.number()
     .required()
     .min(1)
@@ -15,11 +17,15 @@ const validateInfo = {
 };
 
 const validateIngridients = {
-  ingridients: Yup.string().required('Please add at least 1 ingridient'),
+  ingridients: Yup.array()
+    .required('Please add some ingridients')
+    .min(1, 'Add at least one ingridient'),
 };
 
 const validateMethod = {
-  method: Yup.string().required('Please add at least 1 step to your method'),
+  method: Yup.array()
+    .required('Please add some steps')
+    .min(1, 'Add at least one step'),
 };
 
 const validateStep1 = Yup.object().shape({ ...validateInfo });

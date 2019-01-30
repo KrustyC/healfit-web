@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Form from 'uikit/blocks/Form';
+import { Field } from 'formik';
 
 import Wizard from 'components/Wizard';
 
@@ -35,12 +36,18 @@ const Step1 = ({ values, setFieldTouched, setFieldValue }) => (
   <Container>
     <Form.FormGroup>
       <Form.Label>Title</Form.Label>
-      <Form.Input name="title" type="text" placeholder="Insert recipe title" />
+      <Form.Input
+        as={Field}
+        name="title"
+        type="text"
+        placeholder="Insert recipe title"
+      />
       <Form.Feedback name="title" />
     </Form.FormGroup>
     <Form.FormGroup>
       <Form.Label>Servings</Form.Label>
       <Form.Input
+        as={Field}
         name="servings"
         type="number"
         min="1"
@@ -52,12 +59,14 @@ const Step1 = ({ values, setFieldTouched, setFieldValue }) => (
     <Form.FormGroup>
       <Form.Label>Total Time (minutes)</Form.Label>
       <Form.Input
+        as={Field}
         name="totalTime"
         type="number"
         min="0"
         max="500"
         placeholder="Insert time in minutes"
       />
+      <Form.Feedback name="totalTime" />
     </Form.FormGroup>
     <Form.FormGroup>
       <Form.Label>Category</Form.Label>
@@ -92,6 +101,8 @@ const Step1 = ({ values, setFieldTouched, setFieldValue }) => (
         Description <small>(optional)</small>
       </Form.Label>
       <Form.Textarea
+        as={Field}
+        component="textarea"
         name="description"
         type="string"
         placeholder="Insert a short description"

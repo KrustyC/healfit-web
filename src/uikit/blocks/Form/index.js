@@ -9,6 +9,7 @@ import Label from './Label';
 import Multichoice from './Multichoice';
 import Textarea from './Textarea';
 import Password from './Password';
+import RemoteFilter from './RemoteFilter';
 import Select from './Select';
 
 const Form = styled.form`
@@ -25,5 +26,6 @@ Form.Multichoice = Multichoice;
 Form.Textarea = Textarea;
 Form.Password = Password;
 Form.Select = Select;
+Form.RemoteFilter = RemoteFilter;
 
 export default Form;

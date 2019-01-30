@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
-import { Field } from 'formik';
 
-const Input = styled(Field)`
+const Input = styled.input`
   ${({ theme, noMargin }) => css`
     width: 100%;
     outline: none;
@@ -10,6 +9,7 @@ const Input = styled(Field)`
     margin-bottom: ${noMargin ? 0 : '10px'};
     display: flex;
     justify-content: center;
+    align-items: flex-start;
 
     padding: 0px ${theme.padding.sm};
     border: 2px solid ${theme.colors.border};
