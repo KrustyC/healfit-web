@@ -29,7 +29,7 @@ const H4 = styled(H1)`
   ${({ theme }) => css`
     font-size: ${theme.fontSize.h4};
     font-weight: bold;
-    margin: 0px 0 ${theme.spaces.small} 0;
+    margin: ${theme.spaces.small} 0;
   `}
 `;
 
@@ -54,7 +54,7 @@ const Heading = ({ children, level, align, ...rest }) => {
   }
 
   return (
-    <Tag level={level} align={align} {...rest}>
+    <Tag level={level} as={level} align={align} {...rest}>
       {children}
     </Tag>
   );

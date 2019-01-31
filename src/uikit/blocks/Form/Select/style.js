@@ -60,8 +60,8 @@ export const Box = styled.div`
       default: css`
         padding: 0 ${theme.padding.sm};
         margin-bottom: 2px;
-        max-height: 50px;
-        min-height: 50px;
+        max-height: 45px;
+        min-height: 45px;
       `,
     })}
 
@@ -105,18 +105,12 @@ export const Actions = styled.div`
 `;
 
 export const Action = styled.div`
-  ${({ theme }) => css`
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
-    padding: 0 3px;
-
-    /* :first-of-type {
-      border-right: 2px solid ${theme.colors.border};
-    } */
-  `}
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  padding: 0 3px;
 `;
 
 export const Input = styled(ContentEditable)`

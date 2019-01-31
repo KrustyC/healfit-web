@@ -14,30 +14,39 @@ const SidebarContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
+
+    h1 {
+      padding: ${theme.padding.md} 0;
+    }
   `}
+`;
+
+const Title = styled(Heading)`
+  margin: 0;
 `;
 
 const Sidebar = ({ page }) => (
   <SidebarContainer>
+    <Heading>Info</Heading>
     <VerticalProgress currentStep={page}>
       <VerticalProgress.Step>
-        <Heading level="h4">Generic Information</Heading>
+        <Title level="h4">Generic Information</Title>
         <P>Provide some generic information about the recipes</P>
       </VerticalProgress.Step>
       <VerticalProgress.Step>
-        <Heading level="h4">Ingridients</Heading>
+        <Title level="h4">Ingridients</Title>
         <P>
           Provide all needed ingridients, they come from a list of preselected
           one, if you can;t find your ingridient, feel free to create one
         </P>
       </VerticalProgress.Step>
       <VerticalProgress.Step>
-        <Heading level="h4">Method</Heading>
+        <Title level="h4">Method</Title>
         <P>Add all the necessary steps</P>
       </VerticalProgress.Step>
       <VerticalProgress.Step>
-        <Heading level="h4">Preview {'&'} Confirm</Heading>
+        <Title level="h4">Preview {'&'} Confirm</Title>
       </VerticalProgress.Step>
     </VerticalProgress>
   </SidebarContainer>

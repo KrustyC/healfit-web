@@ -22,7 +22,35 @@ export default () => (
         category: 0,
         difficulty: 0,
         description: '',
-        ingridients: [],
+        ingridients: [
+          {
+            id: 'acghasiufgeh',
+            name: 'celery',
+            quantity: 100,
+            measurement: {
+              id: 1,
+              label: 'g',
+            },
+          },
+          {
+            id: 'fefefefefe',
+            name: 'parsley',
+            quantity: 2,
+            measurement: {
+              id: 1,
+              label: 'g',
+            },
+          },
+          {
+            id: 'e86g4fewr6g7e9ge4',
+            name: 'celery salt',
+            quantity: 1,
+            measurement: {
+              id: 1,
+              label: 'cup',
+            },
+          },
+        ],
       }}
       onComplete={values => console.log('submit', values)}
     />

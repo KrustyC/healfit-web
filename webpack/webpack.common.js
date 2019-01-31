@@ -54,7 +54,21 @@ module.exports = {
         },
       },
       {
-        test: /\.(ttf|eot|svg|otf|woff|woff2)(\?[\s\S]+)?$/,
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+          {
+            loader: 'react-svg-loader',
+            options: {
+              jsx: true, // true outputs JSX tags
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(ttf|eot|otf|woff|woff2)(\?[\s\S]+)?$/,
         use: 'url-loader?name=fonts/[name].[ext]',
       },
     ],

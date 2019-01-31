@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import ContentEditable from 'react-contenteditable';
 import { switchProp } from 'styled-tools';
 
 const scrollbar = css`
@@ -44,60 +43,6 @@ export const Wrapper = styled.div`
   })}
 `;
 
-export const Box = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    border-radius: 3px;
-    border: 2px solid ${theme.colors.border};
-    transition: all 0.3s ease-in-out;
-
-    ${switchProp('size', {
-      small: css`
-        min-height: 32px;
-        max-height: 32px;
-        padding: 1px 2px;
-      `,
-      default: css`
-        padding: 0 ${theme.padding.sm};
-        margin-bottom: 2px;
-        max-height: 50px;
-        min-height: 50px;
-      `,
-    })}
-
-    ${({ focus }) =>
-      focus &&
-      css`
-        outline: 0;
-        border: 2px solid ${theme.colors.primary};
-      `}
-  `}
-`;
-
-export const BoxMain = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: 2px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  align-items: center;
-  ${scrollbar};
-`;
-
-export const Selector = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    flex: 1;
-    flex-wrap: no-wrap;
-
-    ${({ focus }) =>
-      focus &&
-      css`
-        border: 2px solid ${theme.colors.primary};
-      `}
-  `}
-`;
-
 export const Options = styled.div`
   position: absolute;
   right: 0;
@@ -117,51 +62,7 @@ export const Options = styled.div`
       display: none;
     `}
 
-  ::-webkit-scrollbar {
-    width: 3px;
-    border-top-right-radius: 3px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #e1e1e1;
-    border-top-right-radius: 3px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #7ccafc;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #7ccafc;
-  }
-`;
-
-export const Text = styled.span`
-  ${({ theme }) => css`
-    font-weight: normal;
-    display: flex;
-    align-items: center;
-
-    ${switchProp('size', {
-      small: css`
-        font-size: 12px;
-      `,
-      default: css`
-        font-size: font-size: ${theme.fontSize.regular};
-      `,
-    })}
-  `}
-`;
-
-export const Empty = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    font-weight: 600;
-    color: ${theme.colors.font};
-  `}
+  ${scrollbar}
 `;
 
 export const Option = styled.div`
@@ -171,15 +72,7 @@ export const Option = styled.div`
     align-items: center;
     padding: 0 ${theme.padding.sm};
     font-weight: 400;
-
-    ${switchProp('size', {
-      small: css`
-        min-height: 35px;
-      `,
-      default: css`
-        min-height: 50px;
-      `,
-    })}
+    min-height: 50px;
 
     :nth-child(odd) {
       background-color: #f4f4f4;
@@ -192,14 +85,13 @@ export const Option = styled.div`
   `}
 `;
 
-export const Icon = styled.img`
-  width: 15px;
-  height: 15px;
-
-  cursor: pointer;
-  ${({ hide }) =>
-    hide &&
-    css`
-      display: none;
-    `}
+export const Empty = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    font-weight: 600;
+    color: ${theme.colors.font};
+  `}
 `;
