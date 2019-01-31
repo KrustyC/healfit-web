@@ -79,7 +79,7 @@ export default {
     h1: '4.4rem',
     h2: '3.6rem',
     h3: '2.8rem',
-    h4: '1.8rem',
+    h4: '2.2rem',
   },
   forms: {
     inputHeight: '2.3rem',

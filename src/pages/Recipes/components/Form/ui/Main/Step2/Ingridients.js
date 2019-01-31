@@ -48,14 +48,13 @@ const Ingridient = styled(
     background: ${theme.colors.white};
     height: 50px;
     padding: 0 ${theme.padding.sm};
-    margin-bottom: ${theme.margin.sm};
+    margin-top: ${theme.margin.md};
     border-radius: 5px;
+    // font-weight: bold;
 
     text-transform: lowercase;
 
-    :last-of-type {
-      margin-bottom: 0;
-    }
+    box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.14);
   `}
 `;
 
