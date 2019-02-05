@@ -28,32 +28,37 @@ const EditOrCreateForm = ({ edit, initialValues, onComplete }) => (
     {({ page, isLastPage, isFirstPage, onPrevious, onWizardSubmit }) => (
       <Formik
         initialValues={initialValues}
+        isInitialValid={edit}
         validationSchema={validationSchema[page]}
         onSubmit={onWizardSubmit}
       >
         {({
           values,
+          errors,
           isValid,
           isSubmitting,
           setFieldTouched,
           setFieldValue,
         }) => (
-          <Layout>
-            <Sidebar page={page} />
-            <Main
-              edit={edit}
-              values={values}
-              setFieldTouched={setFieldTouched}
-              setFieldValue={setFieldValue}
-            />
-            <Bottom
-              onPrevious={onPrevious}
-              isSubmitting={isSubmitting}
-              isFirstPage={isFirstPage}
-              isLastPage={isLastPage}
-              isValid={isValid}
-            />
-          </Layout>
+          console.log(isValid, errors),
+          (
+            <Layout>
+              <Sidebar page={page} />
+              <Main
+                edit={edit}
+                values={values}
+                setFieldTouched={setFieldTouched}
+                setFieldValue={setFieldValue}
+              />
+              <Bottom
+                onPrevious={onPrevious}
+                isSubmitting={isSubmitting}
+                isFirstPage={isFirstPage}
+                isLastPage={isLastPage}
+                isValid={isValid}
+              />
+            </Layout>
+          )
         )}
       </Formik>
     )}
