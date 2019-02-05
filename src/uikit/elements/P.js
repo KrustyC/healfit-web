@@ -1,8 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
-const PTag = styled.p`
+const P = styled.p`
   font-size: ${({ theme }) => theme.fontSize.regular};
 
   ${({ font }) =>
@@ -62,22 +61,9 @@ const PTag = styled.p`
     `}
 `;
 
-const SpanTag = styled(PTag.withComponent('span'))`
-  margin: 0px;
-`;
-
-const P = ({ tag, children, font, size, align, ...rest }) => {
-  const UseTag = tag === 'span' ? SpanTag : PTag;
-  return (
-    <UseTag font={font} size={size} align={align} {...rest}>
-      {children}
-    </UseTag>
-  );
-};
-
 P.propTypes = {
   children: PropTypes.any.isRequired,
-  tag: PropTypes.string,
+  as: PropTypes.string,
   font: PropTypes.oneOf(['default', 'serif']),
   size: PropTypes.oneOf(['small', 'regular', 'large']),
   color: PropTypes.oneOf(['default', 'muted', 'primary', 'error', 'white']),
@@ -85,13 +71,11 @@ P.propTypes = {
 };
 
 P.defaultProps = {
-  tag: 'P',
+  as: 'p',
   font: 'default',
   size: 'regular',
   color: 'default',
   align: '',
 };
-
-export const Span = props => <P tag="span" {...props} />;
 
 export default P;

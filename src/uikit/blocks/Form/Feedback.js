@@ -1,7 +1,4 @@
-import React from 'react';
 import styled, { css } from 'styled-components';
-
-import { ErrorMessage } from 'formik';
 
 const StyledFeedback = styled.span`
   ${({ theme }) => css`
@@ -13,10 +10,4 @@ const StyledFeedback = styled.span`
   `}
 `;
 
-const Feedback = props => (
-  <ErrorMessage {...props}>
-    {msg => <StyledFeedback>{msg}</StyledFeedback>}
-  </ErrorMessage>
-);
-
-export default Feedback;
+export default StyledFeedback;

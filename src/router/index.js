@@ -3,6 +3,7 @@ import { Switch, Redirect, Route, Router } from 'react-router-dom';
 import ReactGA from 'react-ga';
 
 import * as Routes from './routes';
+import AdminRoute from './routes-templates/AdminRoute';
 import PrivateRoute from './routes-templates/PrivateRoute';
 import history from './history';
 
@@ -15,6 +16,7 @@ const CustomRouter = () => (
   <Router history={history}>
     <Switch>
       <Route exact path="/" component={Routes.Home} />
+      <AdminRoute path="/admin" component={Routes.Admin} />
       <Route path="/auth" component={Routes.Auth} />
       <PrivateRoute path="/dashboard" component={Routes.Dashboard} />
       <Route path="/recipes" component={Routes.Recipes} />

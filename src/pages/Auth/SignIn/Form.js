@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Formik } from 'formik';
+import { Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 import Link from 'uikit/elements/Link';
@@ -17,48 +17,46 @@ const validationSchema = Yup.object().shape({
 
 const SignInForm = ({ onSubmit }) => (
   <Formik
-    initialValues={{ email: '', password: '' }}
+    initialValues={{ email: '', password: '', showPassword: false }}
     onSubmit={onSubmit}
     validationSchema={validationSchema}
   >
-    {({
-      values,
-      touched,
-      errors,
-      isSubmitting,
-      handleChange,
-      isValid,
-      handleBlur,
-      handleSubmit,
-    }) => (
+    {({ values, handleChange, isSubmitting, isValid, handleSubmit }) => (
       <Form onSubmit={handleSubmit}>
         <Form.FormGroup>
-          <Form.Label htmlFor="name">Email</Form.Label>
+          <Form.Label>Email</Form.Label>
           <Form.Input
-            id="email"
-            placeholder="Enter your email"
+            as={Field}
+            name="email"
             type="text"
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
+            placeholder="hello@healfit.co.uk"
           />
-          {/* <Form.Feedback show={errors.email && touched.email}>
-            {errors.email}
-          </Form.Feedback> */}
+          <ErrorMessage name="email">
+            {msg => <Form.Feedback>{msg}</Form.Feedback>}
+          </ErrorMessage>
         </Form.FormGroup>
         <Form.FormGroup>
           <Form.Label htmlFor="password">Password</Form.Label>
-          <Form.Password
-            id="password"
-            placeholder="Enter your password"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
+          <Form.Input
+            as={Field}
+            name="password"
+            type={values.showPassword ? 'text' : 'password'}
+            placeholder="*******"
           />
-          {/* <Form.Feedback show={errors.password && touched.password}>
-            {errors.password}
-          </Form.Feedback> */}
+          <ErrorMessage name="password">
+            {msg => <Form.Feedback>{msg}</Form.Feedback>}
+          </ErrorMessage>
         </Form.FormGroup>
+        <Form.Checkbox
+          name="showPassword"
+          checked={values.showPassword}
+          onChange={handleChange}
+        >
+          <P size="small" style={{ margin: 0 }}>
+            Show Password
+          </P>
+        </Form.Checkbox>
+
         <P size="small" style={{ marginTop: '5px' }}>
           <Link to="/auth/forgot-password">Forgot Password?</Link>
         </P>
