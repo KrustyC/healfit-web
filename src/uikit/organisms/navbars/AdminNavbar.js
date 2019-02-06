@@ -10,5 +10,13 @@ export default () => (
         <Logo />
       </Navbar.Brand>
     </Navbar.Header>
+    <Navbar.Collapse>
+      <Navbar.Menu hideSmall>
+        <Navbar.Link type="index" to="/admin/users">
+          Users
+        </Navbar.Link>
+        <Navbar.Link to="/admin/ingridients">Ingridients</Navbar.Link>
+      </Navbar.Menu>
+    </Navbar.Collapse>
   </Navbar>
 );

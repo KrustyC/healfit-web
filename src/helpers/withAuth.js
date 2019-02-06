@@ -1,12 +1,13 @@
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
-const GET_CURRENT_USER = gql`
+const GET_CURRENT_ACCOUNT = gql`
   {
-    currentUser @client {
-      user {
+    currentAccount @client {
+      account {
         firstName
         lastName
+        roles
       }
     }
     authStatus @client {
@@ -15,12 +16,12 @@ const GET_CURRENT_USER = gql`
   }
 `;
 
-const currentUserQueryHandler = {
-  props: ({ data: { currentUser, authStatus } }) => ({
-    authUser: currentUser.user,
+const currentAccountQueryHandler = {
+  props: ({ data: { currentAccount, authStatus } }) => ({
+    account: currentAccount.account,
     isAuthenticated: authStatus.isAuthenticated,
   }),
 };
 
 export default Component =>
-  graphql(GET_CURRENT_USER, currentUserQueryHandler)(Component);
+  graphql(GET_CURRENT_ACCOUNT, currentAccountQueryHandler)(Component);

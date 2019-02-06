@@ -5,18 +5,18 @@ import withAuth from 'helpers/withAuth';
 
 const AdminRoute = ({
   isAuthenticated,
-  user,
+  account,
   component: Component,
   ...rest
 }) => (
   <Route
     {...rest}
     render={props =>
-      isAuthenticated && user.roles.include('ADMIN') ? (
+      isAuthenticated && account.roles.includes('ADMIN') ? (
         <Component {...props} />
       ) : (
         <Redirect
-          to={{ pathname: '/auth/login', state: { from: props.location } }}
+          to={{ pathname: '/dashboard', state: { from: props.location } }}
         />
       )
     }
@@ -24,13 +24,13 @@ const AdminRoute = ({
 );
 
 AdminRoute.propTypes = {
-  user: PropTypes.object,
+  account: PropTypes.object,
   isAuthenticated: PropTypes.bool.isRequired,
   component: PropTypes.any.isRequired,
 };
 
 AdminRoute.defaultProps = {
-  user: null,
+  account: null,
 };
 
 export default withAuth(AdminRoute);

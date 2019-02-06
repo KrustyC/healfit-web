@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withAuth from 'helpers/withAuth';
 
-const MealPlanner = ({ currentUser }) => (
-  <div>Ciao {currentUser.firstName}</div>
+const MealPlanner = ({ currentAccount }) => (
+  <div>Ciao {currentAccount.firstName}</div>
 );
 
 MealPlanner.propTypes = {
-  currentUser: PropTypes.object.isRequired,
+  currentAccount: PropTypes.object.isRequired,
 };
 
 export default withAuth(MealPlanner);

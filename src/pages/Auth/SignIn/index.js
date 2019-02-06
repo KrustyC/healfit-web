@@ -26,7 +26,7 @@ class SignIn extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
     login: PropTypes.func.isRequired,
-    setCurrentUser: PropTypes.func.isRequired,
+    setCurrentAccount: PropTypes.func.isRequired,
   };
 
   state = {
@@ -45,7 +45,7 @@ class SignIn extends Component {
       const result = await this.props.login({ variables: values });
       const { account, token } = result.data.login;
 
-      await this.props.setCurrentUser({ variables: { user: account } });
+      await this.props.setCurrentAccount({ variables: { user: account } });
       localStorage.setItem('healfit:token', token);
       return this.setState(({ ui }) => ({ ui: ui.toAuthenticated() }));
     } catch (error) {
@@ -105,14 +105,14 @@ const LOGIN = gql`
   }
 `;
 
-const SET_CURRENT_USER = gql`
-  mutation setCurrentUser($user: Object) {
-    setCurrentUser(user: $user) @client
+const SET_CURRENT_ACCOUNT = gql`
+  mutation setCurrentAccount($account: Object) {
+    setCurrentAccount(account: $account) @client
   }
 `;
 
 export default compose(
   graphql(LOGIN, { name: 'login' }),
-  graphql(SET_CURRENT_USER, { name: 'setCurrentUser' }),
+  graphql(SET_CURRENT_ACCOUNT, { name: 'setCurrentAccount' }),
   withAuth
 )(SignIn);

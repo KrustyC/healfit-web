@@ -6,17 +6,16 @@ import withApolloClient from 'hoc/withApolloClient';
 import withAuth from 'helpers/withAuth';
 import CookiePopup from 'uikit/organisms/CookiePopup';
 
-const FetchCurrentUserQuery = gql`
-  fragment UserInfo on User {
+const FetchCurrentAccountQuery = gql`
+  fragment AccountInfo on Account {
     firstName
     lastName
+    roles
   }
 
-  query FetchCurrentUserInfo {
-    currentUserInfo {
-      user {
-        ...UserInfo
-      }
+  query FetchCurrentAccountInfo {
+    currentAccountInfo {
+      ...AccountInfo
     }
   }
 `;
@@ -27,7 +26,7 @@ class Wrapper extends Component {
     client: PropTypes.shape({
       query: PropTypes.func.isRequired,
     }).isRequired,
-    setCurrentUser: PropTypes.func.isRequired,
+    setCurrentAccount: PropTypes.func.isRequired,
   };
 
   state = {
@@ -37,12 +36,14 @@ class Wrapper extends Component {
   async componentDidMount() {
     try {
       const result = await this.props.client.query({
-        query: FetchCurrentUserQuery,
+        query: FetchCurrentAccountQuery,
       });
+      console.log(result.data.currentAccountInfo);
 
-      const { user } = result.data.currentUserInfo;
-      if (user) {
-        await this.props.setCurrentUser({ variables: { user } });
+      const { currentAccountInfo: account } = result.data;
+      if (account) {
+        console.log('SI SI SI ');
+        await this.props.setCurrentAccount({ variables: { account } });
       }
 
       return this.setState({ isMounted: true });
@@ -51,7 +52,8 @@ class Wrapper extends Component {
     }
   }
 
-  setAuthUser = user => this.props.setCurrentUser({ variables: { user } });
+  setAuthAccount = account =>
+    this.props.setCurrentAccount({ variables: { account } });
 
   logout = () => console.log('logout');
 
@@ -70,13 +72,13 @@ class Wrapper extends Component {
 }
 
 const SET_CURRENT_USER = gql`
-  mutation setCurrentUser($user: Object) {
-    setCurrentUser(user: $user) @client
+  mutation setCurrentAccount($account: Object) {
+    setCurrentAccount(account: $account) @client
   }
 `;
 
 export default compose(
-  graphql(SET_CURRENT_USER, { name: 'setCurrentUser' }),
+  graphql(SET_CURRENT_USER, { name: 'setCurrentAccount' }),
   withAuth,
   withApolloClient
 )(Wrapper);

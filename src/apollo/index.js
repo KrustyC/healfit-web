@@ -17,19 +17,19 @@ const httpLink = createHttpLink({
 const cache = new InMemoryCache();
 
 const typeDefs = `
-  type Usert {
+  type Account {
     id: ID!
     firstName: String
     lastName: String
   }
 
   type Mutation {
-    setCurrentuser(user: User!): User
-    clearuser(user: User!): Boolean
+    setCurrentAccount(account: Account!): Account
+    clearAccount(account: Account!): Boolean
   }
 
   type Query {
-    currentUser: User
+    currentAccount: Account
   }
 `;
 

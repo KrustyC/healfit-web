@@ -1,7 +1,7 @@
 const defaults = {
-  currentUser: {
-    user: null,
-    __typename: 'CurrentUser',
+  currentAccount: {
+    account: null,
+    __typename: 'CurrentAccount',
   },
   authStatus: {
     isAuthenticated: false,
@@ -11,11 +11,11 @@ const defaults = {
 
 const resolvers = {
   Mutation: {
-    setCurrentUser: (_, { user }, { cache }) => {
+    setCurrentAccount: (_, { account }, { cache }) => {
       const data = {
-        currentUser: {
-          user,
-          __typename: 'CurrentUser',
+        currentAccount: {
+          account,
+          __typename: 'CurrentAccount',
         },
         authStatus: {
           isAuthenticated: true,
@@ -25,11 +25,11 @@ const resolvers = {
       cache.writeData({ data });
       return null;
     },
-    clearUser: (_, _args, { cache }) => {
+    clearAccount: (_, _args, { cache }) => {
       const data = {
-        currentUser: {
-          user: null,
-          __typename: 'CurrentUser',
+        currentAccount: {
+          account: null,
+          __typename: 'CurrentAccount',
         },
       };
       localStorage.removeItem('healfit:token');

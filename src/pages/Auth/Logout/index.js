@@ -5,7 +5,7 @@ import withAuth from 'helpers/withAuth';
 
 class Logout extends Component {
   static propTypes = {
-    clearUser: PropTypes.func.isRequired,
+    clearAccount: PropTypes.func.isRequired,
   };
 
   state = {
@@ -13,7 +13,7 @@ class Logout extends Component {
   };
 
   componentDidMount() {
-    this.props.clearUser().then(() => this.setState({ redirect: true }));
+    this.props.clearAccount().then(() => this.setState({ redirect: true }));
   }
 
   render() {

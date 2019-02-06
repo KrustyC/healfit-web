@@ -11,7 +11,6 @@ if (process.env.APP_ENV !== 'development') {
   history.listen(location => ReactGA.pageview(location.pathname));
 }
 
-console.log(Routes);
 const CustomRouter = () => (
   <Router history={history}>
     <Switch>
