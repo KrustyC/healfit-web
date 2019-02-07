@@ -1,13 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import withAuth from 'helpers/withAuth';
+import { compose } from 'react-apollo';
 
-const Dashboard = ({ authAccount }) => (
-  <div>Welcome to your dashboard {authAccount.firstName}!</div>
+import { withToastManager } from 'uikit/blocks/Toast';
+
+const Dashboard = ({ account, toastManager }) => (
+  <>
+    <div>Welcome to your dashboard {account.firstName}!</div>
+    <button
+      type="button"
+      onClick={() =>
+        toastManager.add('Done', {
+          appearance: 'error',
+        })
+      }
+    >
+      Ciao
+    </button>
+  </>
 );
 
 Dashboard.propTypes = {
-  authAccount: PropTypes.object.isRequired,
+  account: PropTypes.object.isRequired,
 };
 
-export default withAuth(Dashboard);
+export default compose(
+  withAuth,
+  withToastManager
+)(Dashboard);

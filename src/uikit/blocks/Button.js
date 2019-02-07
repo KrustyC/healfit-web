@@ -19,7 +19,6 @@ export const StyledButton = styled.button`
   display: inline-block;
   padding: ${defaultYPadding} ${defaultXPadding};
   font-family: ${({ theme }) => theme.fonts.default};
-  font-size: ${({ theme }) => theme.fontSize.regular};
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -34,6 +33,8 @@ export const StyledButton = styled.button`
   transition: all ${({ theme }) => theme.transition.easingQuick} ease-in-out;
   font-weight: bold;
   box-shadow: ${({ theme }) => theme.shadows.default};
+  font-size: ${({ theme }) => theme.fontSize.regular};
+  height: 40px;
 
   ${({ squircled }) =>
     squircled &&

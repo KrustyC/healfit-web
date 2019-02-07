@@ -6,23 +6,31 @@ const Input = styled.input`
     width: ${prop('width', '100%')};
     outline: none;
     height: 45px;
-    min-height: 45px;
     margin-bottom: ${noMargin ? 0 : '10px'};
     display: flex;
     justify-content: center;
     align-items: flex-start;
 
-    padding: 0px ${theme.padding.sm};
     border: 2px solid ${theme.colors.border};
     border-radius: 2px;
     color: ${theme.colors.font};
     background: ${theme.colors.white};
 
-    font-size: ${switchProp(prop('size', 'regular'), {
-      small: theme.fontSize.small,
-      regular: theme.fontSize.regular,
-      large: theme.fontSize.large,
-    })};
+    padding: 0px ${theme.padding.sm};
+
+    ${switchProp(prop('size', 'regular'), {
+      small: css`
+        font-size: ${theme.fontSize.small};
+        height: 30px;
+        min-height: 30px;
+      `,
+      regular: css`
+        font-size: ${theme.fontSize.regular};
+      `,
+      large: css`
+        font-size: ${theme.fontSize.large};
+      `,
+    })}
 
     :focus {
       border: 2px solid ${theme.colors.primary};

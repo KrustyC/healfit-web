@@ -1,5 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { prop } from 'styled-tools';
 
@@ -12,21 +10,20 @@ export const Body = styled.div`
   flex-direction: column;
 `;
 
-const Empty = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100px;
-  font-size: 20px;
-  font-weight: bold;
-  color: #bfbfbf;
-`;
-
 export const Header = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  justify-content: center;
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    background: ${theme.colors.light};
+    ${({ sticky }) =>
+      sticky &&
+      css`
+        position: sticky;
+        top: 0;
+      `};
+  `}
 `;
 
 export const Tr = styled.div`
@@ -42,11 +39,11 @@ export const Tr = styled.div`
 
 const Column = styled.div`
   display: flex;
-  flex-direction: column;
   flex-basis: 0;
   flex-grow: ${({ flex }) => flex};
-  justify-content: center;
-  align-items: center;
+  flex-direction: ${prop('direction', 'row')};
+  justify-content: ${prop('justify', 'center')};
+  align-items: ${prop('align', 'center')};
   padding: 3px 5px;
 `;
 
@@ -55,7 +52,6 @@ export const Th = styled(Column)`
   padding: 5px;
   border-bottom: 2px solid #efefef;
   font-weight: bold;
-  justify-content: flex-start;
 
   ${({ theme }) => css`
     input {
@@ -76,13 +72,28 @@ export const Th = styled(Column)`
   `}
 `;
 
+export const SubHeaderContainer = styled.div`
+  ${({ theme }) => css`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: ${theme.margin.sm};
+  `}
+`;
+
+export const SubHeader = styled.div`
+  display: flex;
+  flex-basis: 0;
+  flex-grow: ${({ flex }) => flex};
+  flex-direction: ${prop('direction', 'row')};
+  ${({ theme }) => css`
+    font-size: ${theme.fontSize.small};
+  `}
+`;
+
 export const Td = styled(Column)`
   padding: 3px 5px;
   display: flex;
-  flex-direction: ${prop('direction', 'row')};
-  justify-content: ${prop('justify', 'center')};
-  align-items: ${prop('align', 'center')};
-  text-align: center;
 `;
 
 Th.Row = styled.div`

@@ -4,6 +4,7 @@ import { hot } from 'react-hot-loader';
 import { ApolloProvider } from 'react-apollo';
 import ReactGA from 'react-ga';
 
+import { ToastProvider } from 'uikit/blocks/Toast';
 import { FullPageLoader } from 'uikit/elements/Loaders';
 import apolloClient from './apollo';
 import Router from './router';
@@ -20,11 +21,13 @@ const App = () => (
     <ThemeProvider theme={theme}>
       <Fragment>
         <GlobalStyle />
-        <Suspense fallback={<FullPageLoader />}>
-          <Wrapper>
-            <Router />
-          </Wrapper>
-        </Suspense>
+        <ToastProvider>
+          <Suspense fallback={<FullPageLoader />}>
+            <Wrapper>
+              <Router />
+            </Wrapper>
+          </Suspense>
+        </ToastProvider>
       </Fragment>
     </ThemeProvider>
   </ApolloProvider>

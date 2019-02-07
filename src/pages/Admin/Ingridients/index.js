@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
+import { compose, graphql } from 'react-apollo';
 import withApolloClient from 'hoc/withApolloClient';
-import { Table, Header, Body, Th } from 'uikit/blocks/Table';
+
+import {
+  Table,
+  Header,
+  Body,
+  Th,
+  SubHeader,
+  SubHeaderContainer,
+} from 'uikit/blocks/Table';
 import Heading from 'uikit/elements/Heading';
 import styled, { css } from 'styled-components';
 import ReactProgressiveList from 'react-progressive-list';
@@ -11,7 +20,6 @@ import Ingridient from './Ingridient';
 const Div = styled.div`
   ${({ theme }) => css`
     margin: ${theme.margin.md} 0;
-    /* height: 70vh; */
     width: 100%;
   `}
 `;
@@ -46,6 +54,8 @@ class Ingridients extends Component {
     client: PropTypes.shape({
       query: PropTypes.func.isRequired,
     }).isRequired,
+    deleteIngridient: PropTypes.func.isRequired,
+    updateIngridient: PropTypes.func.isRequired,
   };
 
   state = {
@@ -59,7 +69,7 @@ class Ingridients extends Component {
       const result = await this.props.client.query({
         query: GET_INGRIDIENTS,
       });
-      console.log(result.data.ingridients);
+
       return this.setState({
         ingridients: result.data.ingridients,
         loading: false,
@@ -69,14 +79,42 @@ class Ingridients extends Component {
     }
   }
 
+  onDelete = async index => {
+    const { id } = this.state.ingridients[index];
+    try {
+      await this.props.deleteIngridient({ variables: { id } });
+      return this.setState(({ ingridients }) => ({
+        ingridients: [
+          ...ingridients.slice(0, index),
+          ...ingridients.slice(index + 1),
+        ],
+      }));
+    } catch (error) {
+      return this.setState({ error });
+    }
+  };
+
+  onUpdate = async ingridient => {
+    try {
+      return this.props.updateIngridient({ variables: { ...ingridient } });
+    } catch (error) {
+      return this.setState({ error });
+    }
+  };
+
   renderRow = index => {
-    console.log(index);
     const ingridient = this.state.ingridients[index];
     if (!ingridient) {
       return null;
     }
     return (
-      <Ingridient index={index} key={ingridient.id} ingridient={ingridient} />
+      <Ingridient
+        index={index}
+        key={ingridient.id}
+        ingridient={ingridient}
+        onUpdate={this.onUpdate}
+        onDelete={this.onDelete}
+      />
     );
   };
 
@@ -95,11 +133,24 @@ class Ingridients extends Component {
       <Div>
         <Heading level="h2">Ingridients</Heading>
         <Table>
-          <Header>
-            <Th flex="4">Name</Th>
-            <Th flex="3">Category</Th>
-            <Th flex="6">Fat</Th>
-            <Th flex="4">Carbs</Th>
+          <Header sticky>
+            <Th flex="2">Name</Th>
+            <Th flex="2">Category</Th>
+            <Th flex="3" direction="column">
+              Fat
+              <SubHeaderContainer>
+                <SubHeader flex="1">Mono</SubHeader>
+                <SubHeader flex="1">Poly</SubHeader>
+                <SubHeader flex="1">Saturated</SubHeader>
+              </SubHeaderContainer>
+            </Th>
+            <Th flex="2" direction="column">
+              Carbohydrate
+              <SubHeaderContainer>
+                <SubHeader flex="1">Fiber</SubHeader>
+                <SubHeader flex="1">Sugars</SubHeader>
+              </SubHeaderContainer>
+            </Th>
             <Th flex="1">Potassium</Th>
             <Th flex="1">Sodium</Th>
             <Th flex="1">Protein</Th>
@@ -107,8 +158,8 @@ class Ingridients extends Component {
           </Header>
           <Body>
             <ReactProgressiveList
-              initialAmount={10}
-              progressiveAmount={5}
+              initialAmount={40}
+              progressiveAmount={10}
               renderItem={this.renderRow}
               renderLoader={() => <div>Load</div>}
               rowCount={this.state.ingridients.length}
@@ -121,4 +172,34 @@ class Ingridients extends Component {
   }
 }
 
-export default withApolloClient(Ingridients);
+const DELETE_INGRIDIENT = gql`
+  mutation deleteIngridient($id: ID!) {
+    deleteIngridient(id: $id)
+  }
+`;
+
+const UPDATE_INGRIDIENT = gql`
+  mutation updateIngridient(
+    $id: ID!
+    $name: String!
+    $category: ID
+    $calories: Int!
+    $nutrients: NutrientsInput!
+  ) {
+    updateIngridient(
+      input: {
+        id: $id
+        name: $name
+        category: $category
+        calories: $calories
+        nutrients: $nutrients
+      }
+    )
+  }
+`;
+
+export default compose(
+  graphql(UPDATE_INGRIDIENT, { name: 'updateIngridient' }),
+  graphql(DELETE_INGRIDIENT, { name: 'deleteIngridient' }),
+  withApolloClient
+)(Ingridients);
