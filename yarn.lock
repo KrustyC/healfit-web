@@ -672,7 +672,7 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
-"@babel/runtime@^7.3.1":
+"@babel/runtime@^7.2.0", "@babel/runtime@^7.3.1":
   version "7.3.1"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.3.1.tgz#574b03e8e8a9898eaf4a872a92ea20b7846f6f2a"
   integrity sha512-7jGW8ppV0ant637pIqAcFfQDDH1orEPGJb8aXfUozuCU3QqX7rX4DA8iwrbPrR1hcH0FTTHz47yQnk+bl5xHQA==
@@ -6079,7 +6079,7 @@ promise@^7.0.3, promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.4, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
+prop-types@^15.5.4, prop-types@^15.5.7, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   integrity sha512-3pboPvLiWD7dkI3qf3KbUe6hKFKa52w+AE0VCqECtf+QHAKgOL37tTaNCnuX1nAAQ4ZhyP+kYVKf8rLmJ/feDQ==
@@ -6322,6 +6322,13 @@ react-pose@^4.0.5:
     popmotion-pose "^3.4.0"
     tslib "^1.9.1"
 
+react-progressive-list@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/react-progressive-list/-/react-progressive-list-0.1.2.tgz#a01285687f88c98984daaa9eb14151abf7db9ca8"
+  integrity sha512-sjgX+TqHKoZgIfJeV0Gv3cMJceLIABFAUVZtftOkGKfu8cMh1FZvr7wkbchF1GNmLXKsb/6vkcIyGhafuHZvqQ==
+  dependencies:
+    lodash "^4.17.4"
+
 react-router-dom@4.4.0-beta.5:
   version "4.4.0-beta.5"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-4.4.0-beta.5.tgz#9247379e42606e117144339af40249977d1f1f08"
@@ -6350,6 +6357,15 @@ react-router@^4.4.0-beta.5:
     react-is "^16.5.2"
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
+
+react-sortable-hoc@^1.5.3:
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/react-sortable-hoc/-/react-sortable-hoc-1.5.3.tgz#99482ee6435e898cae3cd4632958bb9c7cc5a948"
+  integrity sha512-suRfXqq3KRzhpHsUoc+srHBp5o7cwx7ZXSNH/PKtKOtKBw18JgXNQ7QbIMTCcH3mdog3espf+A9hybTixNfe3Q==
+  dependencies:
+    "@babel/runtime" "^7.2.0"
+    invariant "^2.2.4"
+    prop-types "^15.5.7"
 
 react-svg-core@^2.1.0:
   version "2.1.0"

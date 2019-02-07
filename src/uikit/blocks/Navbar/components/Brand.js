@@ -23,12 +23,7 @@ const Brand = styled(Link)`
 
 Brand.propTypes = {
   to: PropTypes.string.isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      type: PropTypes.oneOf(['img']),
-    }),
-  ]).isRequired,
+  children: PropTypes.any.isRequired,
 };
 
 Brand.displayName = 'NavbarBrand';
