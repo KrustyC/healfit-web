@@ -40,7 +40,7 @@ class SignIn extends Component {
     }
   }
 
-  onHandleSubmit = async (values, { resetForm }) => {
+  onHandleSubmit = async (values, { setSubmitting }) => {
     try {
       const result = await this.props.login({ variables: values });
       const { account, token } = result.data.login;
@@ -51,7 +51,7 @@ class SignIn extends Component {
     } catch (error) {
       const errors = error.graphQLErrors.map(x => x.message);
       this.setState(({ ui }) => ({ ui: ui.toError(errors[0]) }));
-      resetForm();
+      setSubmitting(false);
       return setTimeout(
         () => this.setState(({ ui }) => ({ ui: ui.toIdle() })),
         3000

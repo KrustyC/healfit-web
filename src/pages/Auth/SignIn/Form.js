@@ -7,6 +7,7 @@ import Link from 'uikit/elements/Link';
 import P from 'uikit/elements/P';
 import Form from 'uikit/blocks/Form';
 import Button from 'uikit/blocks/Button';
+import SvgEye from 'assets/icons/blind.svg';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -21,41 +22,43 @@ const SignInForm = ({ onSubmit }) => (
     onSubmit={onSubmit}
     validationSchema={validationSchema}
   >
-    {({ values, handleChange, isSubmitting, isValid, handleSubmit }) => (
+    {({ values, setFieldValue, isSubmitting, isValid, handleSubmit }) => (
       <Form onSubmit={handleSubmit}>
         <Form.FormGroup>
-          <Form.Label>Email</Form.Label>
-          <Form.Input
-            as={Field}
-            name="email"
-            type="text"
-            placeholder="hello@healfit.co.uk"
-          />
+          <Form.Label>
+            Email
+            <Form.Input
+              as={Field}
+              name="email"
+              type="text"
+              placeholder="hello@healfit.co.uk"
+            />
+          </Form.Label>
           <ErrorMessage name="email">
             {msg => <Form.Feedback>{msg}</Form.Feedback>}
           </ErrorMessage>
         </Form.FormGroup>
         <Form.FormGroup>
-          <Form.Label htmlFor="password">Password</Form.Label>
-          <Form.Input
-            as={Field}
-            name="password"
-            type={values.showPassword ? 'text' : 'password'}
-            placeholder="*******"
-          />
+          <Form.Label htmlFor="password">
+            Password
+            <Form.Input
+              as={Field}
+              name="password"
+              type={values.showPassword ? 'text' : 'password'}
+              placeholder="*******"
+            />
+            <i>
+              <SvgEye
+                onClick={() =>
+                  setFieldValue('showPassword', !values.showPassword)
+                }
+              />
+            </i>
+          </Form.Label>
           <ErrorMessage name="password">
             {msg => <Form.Feedback>{msg}</Form.Feedback>}
           </ErrorMessage>
         </Form.FormGroup>
-        <Form.Checkbox
-          name="showPassword"
-          checked={values.showPassword}
-          onChange={handleChange}
-        >
-          <P size="small" style={{ margin: 0 }}>
-            Show Password
-          </P>
-        </Form.Checkbox>
 
         <P size="small" style={{ marginTop: '5px' }}>
           <Link to="/auth/forgot-password">Forgot Password?</Link>

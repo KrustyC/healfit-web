@@ -4,18 +4,16 @@ import history from 'app/router/history';
 
 import Button from 'uikit/blocks/Button';
 
-/* eslint-disable global-require */
 const Layout = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url(${require('assets/images/undrawn/finish-line.svg')});
+  background-image: url('/assets/images/undrawn/finish-line.svg');
   background-repeat: no-repeat;
   background-position: center;
 `;
-/* eslint-enable global-require */
 
 const Div = styled.div`
   ${({ theme }) => css`

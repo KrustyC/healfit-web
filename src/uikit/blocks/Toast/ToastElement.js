@@ -26,14 +26,15 @@ const Content = styled.div`
 
 const Toast = styled(
   posed.div({
-    closed: {
-      y: '0px',
+    open: {
+      y: '0%',
       transition: {
-        y: { type: 'spring', stiffness: 200, damping: 80 },
+        duration: 50,
+        ease: 'linear',
       },
     },
-    open: {
-      y: '100px',
+    closed: {
+      y: '100%',
     },
   })
 )`
@@ -69,19 +70,15 @@ const Toast = styled(
   `}
 `;
 
-const Item = posed.li({
-  enter: { opacity: 1, x: 0 },
-});
-
 const ToastElement = ({ type, children, onDismiss }) => (
-  <Item type={type} initialPose="open" pose="closed">
+  <Toast type={type} initialPose="closed" pose="open">
     <Content>{children}</Content>
     {onDismiss && (
       <Button onClick={onDismiss} role="button">
         close
       </Button>
     )}
-  </Item>
+  </Toast>
 );
 
 ToastElement.propTypes = {

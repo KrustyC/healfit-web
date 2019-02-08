@@ -2,7 +2,6 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import withPortal from 'helpers/withPortal';
 import { prop, switchProp } from 'styled-tools';
-import { PoseGroup } from 'react-pose';
 
 // @TODO Add transisiton group - React Pose shit
 const ToastContainer = styled.div`
@@ -41,35 +40,4 @@ const ToastContainer = styled.div`
   })}
 `;
 
-// const ToastContainer = ({ children, placement }) => (
-//   <div
-//     css={{
-//       boxSizing: 'border-box',
-//       maxHeight: '100%',
-//       overflowX: 'hidden',
-//       overflowY: 'auto',
-//       padding: gutter,
-//       pointerEvents: Children.count(children) ? 'auto' : 'none',
-//       position: 'fixed',
-//       ...placements[placement],
-//     }}
-//   >
-//     {children}
-//     {/* <TransitionGroup component={null}>{children}</TransitionGroup> */}
-//   </div>
-// );
-
-const Con = ({ children, key, placement }) => (
-  <ToastContainer placement={placement}>
-    <PoseGroup>
-      {React.Children.map(
-        children,
-        React.cloneElement({
-          id: key,
-        })
-      )}
-    </PoseGroup>
-  </ToastContainer>
-);
-
-export default withPortal(Con, 'toast-root');
+export default withPortal(ToastContainer, 'toast-root');

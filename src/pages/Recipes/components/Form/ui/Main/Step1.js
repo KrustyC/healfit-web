@@ -35,79 +35,89 @@ const levels = [
 const Step1 = ({ values, setFieldTouched, setFieldValue }) => (
   <Container>
     <Form.FormGroup>
-      <Form.Label>Title</Form.Label>
-      <Form.Input
-        as={Field}
-        name="title"
-        type="text"
-        placeholder="Insert recipe title"
-      />
+      <Form.Label>
+        Title
+        <Form.Input
+          as={Field}
+          name="title"
+          type="text"
+          placeholder="Insert recipe title"
+        />
+      </Form.Label>
       <Form.Feedback name="title" />
     </Form.FormGroup>
     <Form.FormGroup>
-      <Form.Label>Servings</Form.Label>
-      <Form.Input
-        as={Field}
-        name="servings"
-        type="number"
-        min="1"
-        max="10"
-        placeholder="Insert number of servings"
-      />
+      <Form.Label>
+        Servings
+        <Form.Input
+          as={Field}
+          name="servings"
+          type="number"
+          min="1"
+          max="10"
+          placeholder="Insert number of servings"
+        />
+      </Form.Label>
       <Form.Feedback name="servings" />
     </Form.FormGroup>
     <Form.FormGroup>
-      <Form.Label>Total Time (minutes)</Form.Label>
-      <Form.Input
-        as={Field}
-        name="totalTime"
-        type="number"
-        min="0"
-        max="500"
-        placeholder="Insert time in minutes"
-      />
+      <Form.Label>
+        Total Time (minutes)
+        <Form.Input
+          as={Field}
+          name="totalTime"
+          type="number"
+          min="0"
+          max="500"
+          placeholder="Insert time in minutes"
+        />
+      </Form.Label>
       <Form.Feedback name="totalTime" />
     </Form.FormGroup>
     <Form.FormGroup>
-      <Form.Label>Category</Form.Label>
-      <Form.Select
-        placeholder="Select a category"
-        value={values.category || {}}
-        onBlur={() => setFieldTouched('category', true)}
-        onChange={category => setFieldValue('category', category)}
-      >
-        {categories.map(({ id, name }) => (
-          <Form.Select.Option key={id} label={name} value={id} />
-        ))}
-      </Form.Select>
+      <Form.Label>
+        Category
+        <Form.Select
+          placeholder="Select a category"
+          value={values.category || {}}
+          onBlur={() => setFieldTouched('category', true)}
+          onChange={category => setFieldValue('category', category)}
+        >
+          {categories.map(({ id, name }) => (
+            <Form.Select.Option key={id} label={name} value={id} />
+          ))}
+        </Form.Select>
+      </Form.Label>
       <Form.Feedback name="category" />
     </Form.FormGroup>
     <Form.FormGroup>
-      <Form.Label>Level</Form.Label>
-      <Form.Multichoice>
-        {levels.map(({ id, name }) => (
-          <Form.Multichoice.Choice
-            key={id}
-            id={id}
-            name="level"
-            label={name}
-            value={id}
-          />
-        ))}
-      </Form.Multichoice>
+      <Form.Label>
+        Level
+        <Form.Multichoice>
+          {levels.map(({ id, name }) => (
+            <Form.Multichoice.Choice
+              key={id}
+              id={id}
+              name="level"
+              label={name}
+              value={id}
+            />
+          ))}
+        </Form.Multichoice>
+      </Form.Label>
     </Form.FormGroup>
     <Form.FormGroup>
       <Form.Label>
         Description <small>(optional)</small>
+        <Form.Textarea
+          as={Field}
+          component="textarea"
+          name="description"
+          type="string"
+          placeholder="Insert a short description"
+          style={{ height: '150px' }}
+        />
       </Form.Label>
-      <Form.Textarea
-        as={Field}
-        component="textarea"
-        name="description"
-        type="string"
-        placeholder="Insert a short description"
-        style={{ height: '150px' }}
-      />
       <Form.Feedback name="description" />
     </Form.FormGroup>
   </Container>

@@ -107,27 +107,31 @@ export default class Step2 extends Component {
           </P>
           <Row>
             <Form.FormGroup>
-              <Form.Label>Quantity</Form.Label>
-              <Form.Input
-                type="number"
-                value={quantity}
-                onChange={this.onChangeQuantity}
-              />
+              <Form.Label>
+                Quantity
+                <Form.Input
+                  type="number"
+                  value={quantity}
+                  onChange={this.onChangeQuantity}
+                />
+              </Form.Label>
             </Form.FormGroup>
             <Form.FormGroup>
-              <Form.Label>Measurement</Form.Label>
-              <Form.Select
-                placeholder="Choose..."
-                value={measurement || {}}
-                onChange={this.onSelectMeasurement}
-              >
-                {measurements.map((
-                  // This should be this.props.measurements
-                  { id, name }
-                ) => (
-                  <Form.Select.Option key={id} label={name} value={id} />
-                ))}
-              </Form.Select>
+              <Form.Label>
+                Measurement
+                <Form.Select
+                  placeholder="Choose..."
+                  value={measurement || {}}
+                  onChange={this.onSelectMeasurement}
+                >
+                  {measurements.map((
+                    // This should be this.props.measurements
+                    { id, name }
+                  ) => (
+                    <Form.Select.Option key={id} label={name} value={id} />
+                  ))}
+                </Form.Select>
+              </Form.Label>
             </Form.FormGroup>
           </Row>
           <Row>
