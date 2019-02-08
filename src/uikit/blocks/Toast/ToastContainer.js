@@ -1,9 +1,7 @@
-import React from 'react';
 import styled, { css } from 'styled-components';
 import withPortal from 'helpers/withPortal';
 import { prop, switchProp } from 'styled-tools';
 
-// @TODO Add transisiton group - React Pose shit
 const ToastContainer = styled.div`
   box-sizing: border-box;
   max-height: 100vh;

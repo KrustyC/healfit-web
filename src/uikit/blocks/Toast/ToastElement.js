@@ -3,24 +3,35 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { switchProp, prop } from 'styled-tools';
 import posed from 'react-pose';
+import CrossSvg from 'assets/icons/cancel-grey.svg';
 
-const Button = styled.div`
+const Button = styled.span`
   cursor: pointer;
   flex-shrink: 0;
-  opacity: 0.5;
+  opacity: 0.7;
   transition: opacity 150ms;
+  width: 20px;
   :hover {
     opacity: 1;
+  }
+
+  svg {
+    fill: white !important;
+    width: 15px;
+    height: 15px;
   }
 `;
 
 const Content = styled.div`
   ${({ theme }) => css`
-    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     font-size: 14;
     line-height: 1.4;
-    min-height: 40;
-    padding: ${theme.padding.sm};
+    min-height: 50px;
+    padding: 0 ${theme.padding.sm};
+    width: 80vh;
   `}
 `;
 
@@ -73,11 +84,9 @@ const Toast = styled(
 const ToastElement = ({ type, children, onDismiss }) => (
   <Toast type={type} initialPose="closed" pose="open">
     <Content>{children}</Content>
-    {onDismiss && (
-      <Button onClick={onDismiss} role="button">
-        close
-      </Button>
-    )}
+    <Button onClick={onDismiss} role="button">
+      <CrossSvg />
+    </Button>
   </Toast>
 );
 

@@ -1,28 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class ToastController extends Component {
+  static propTypes = {
+    autoDismiss: PropTypes.bool,
+    autoDismissTimeout: PropTypes.number,
+  };
+
   static defaultProps = {
-    autoDismiss: false,
+    autoDismiss: true,
+    autoDismissTimeout: 5000,
   };
-
-  state = {
-    autoDismissTimeout: this.props.autoDismissTimeout,
-  };
-
-  static getDerivedStateFromProps({ autoDismiss, autoDismissTimeout }) {
-    if (!autoDismiss) {
-      return null;
-    }
-
-    const timeout =
-      typeof autoDismiss === 'number' ? autoDismiss : autoDismissTimeout;
-
-    return { autoDismissTimeout: timeout };
-  }
 
   componentDidMount() {
-    const { autoDismiss, onDismiss } = this.props;
-    const { autoDismissTimeout } = this.state;
+    const { autoDismiss, autoDismissTimeout, onDismiss } = this.props;
 
     if (autoDismiss) {
       this.timeout = setTimeout(onDismiss, autoDismissTimeout);
