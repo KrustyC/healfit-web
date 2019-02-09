@@ -1,24 +1,16 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import gql from 'graphql-tag';
 import { compose, graphql } from 'react-apollo';
 import withApolloClient from 'hoc/withApolloClient';
-import withAuth from 'helpers/withAuth';
+import withAuth from 'hoc/withAuth';
+import withGlobalData from 'hoc/withGlobalData';
 import CookiePopup from 'uikit/organisms/CookiePopup';
-
-const FetchCurrentAccountQuery = gql`
-  fragment AccountInfo on Account {
-    firstName
-    lastName
-    roles
-  }
-
-  query FetchCurrentAccountInfo {
-    currentAccountInfo {
-      ...AccountInfo
-    }
-  }
-`;
+import {
+  FETCH_INITIAL_DATA,
+  FETCH_CURRENT_ACCOUNT_QUERY,
+  SET_CURRENT_USER,
+  SET_GLOBAL_DATA,
+} from './queries';
 
 class Wrapper extends Component {
   static propTypes = {
@@ -26,6 +18,7 @@ class Wrapper extends Component {
     client: PropTypes.shape({
       query: PropTypes.func.isRequired,
     }).isRequired,
+    setGlobalData: PropTypes.func.isRequired,
     setCurrentAccount: PropTypes.func.isRequired,
   };
 
@@ -35,12 +28,19 @@ class Wrapper extends Component {
 
   async componentDidMount() {
     try {
-      const result = await this.props.client.query({
-        query: FetchCurrentAccountQuery,
+      const {
+        data: { globalData },
+      } = await this.props.client.query({
+        query: FETCH_INITIAL_DATA,
       });
-      console.log(result.data.currentAccountInfo);
 
-      const { currentAccountInfo: account } = result.data;
+      await this.props.setGlobalData({ variables: { globalData } });
+
+      const currentAccount = await this.props.client.query({
+        query: FETCH_CURRENT_ACCOUNT_QUERY,
+      });
+
+      const { currentAccountInfo: account } = currentAccount.data;
       if (account) {
         console.log('SI SI SI ');
         await this.props.setCurrentAccount({ variables: { account } });
@@ -71,14 +71,10 @@ class Wrapper extends Component {
   }
 }
 
-const SET_CURRENT_USER = gql`
-  mutation setCurrentAccount($account: Object) {
-    setCurrentAccount(account: $account) @client
-  }
-`;
-
 export default compose(
   graphql(SET_CURRENT_USER, { name: 'setCurrentAccount' }),
+  graphql(SET_GLOBAL_DATA, { name: 'setGlobalData' }),
+  withGlobalData,
   withAuth,
   withApolloClient
 )(Wrapper);

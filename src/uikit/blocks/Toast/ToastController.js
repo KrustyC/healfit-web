@@ -27,9 +27,8 @@ export default class ToastController extends Component {
   }
 
   render() {
-    const { Toast, ...props } = this.props;
-    const { autoDismissTimeout } = this.state;
+    const { Toast, ...rest } = this.props;
 
-    return <Toast autoDismissTimeout={autoDismissTimeout} {...props} />;
+    return <Toast {...rest} />;
   }
 }

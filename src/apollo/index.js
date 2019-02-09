@@ -23,13 +23,24 @@ const typeDefs = `
     lastName: String
   }
 
+  type ValueObject {
+    id
+    name
+  }
+
+  type GlobalData {
+    ingridientsCategories: ValueObject
+  }
+
   type Mutation {
+    setGlobalData(globalData: GlobalData!)
     setCurrentAccount(account: Account!): Account
     clearAccount(account: Account!): Boolean
   }
 
   type Query {
     currentAccount: Account
+    globalData: GlobalData
   }
 `;
 

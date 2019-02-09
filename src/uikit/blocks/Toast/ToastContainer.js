@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import withPortal from 'helpers/withPortal';
+import withPortal from 'hoc/withPortal';
 import { prop, switchProp } from 'styled-tools';
 
 const ToastContainer = styled.div`

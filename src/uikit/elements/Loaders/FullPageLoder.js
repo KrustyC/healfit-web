@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
-import withPortal from 'helpers/withPortal';
+import withPortal from 'hoc/withPortal';
 
 const spin = keyframes`
   0% {

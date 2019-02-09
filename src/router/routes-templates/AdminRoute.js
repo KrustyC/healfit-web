@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
-import withAuth from 'helpers/withAuth';
+import withAuth from 'hoc/withAuth';
 
 const AdminRoute = ({
   isAuthenticated,

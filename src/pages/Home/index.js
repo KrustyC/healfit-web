@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Redirect } from 'react-router-dom';
-import withAuth from 'helpers/withAuth';
+import withAuth from 'hoc/withAuth';
 
 import Navbar from 'uikit/organisms/navbars/EmptyNavbar';
 import Footer from 'uikit/organisms/Footer';

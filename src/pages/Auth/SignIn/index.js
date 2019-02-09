@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import gql from 'graphql-tag';
 import PossibleStates from 'possible-states';
 import { compose, graphql } from 'react-apollo';
-import withAuth from 'helpers/withAuth';
+import withAuth from 'hoc/withAuth';
 
 import Heading from 'uikit/elements/Heading';
 import Link from 'uikit/elements/Link';
@@ -45,7 +45,7 @@ class SignIn extends Component {
       const result = await this.props.login({ variables: values });
       const { account, token } = result.data.login;
 
-      await this.props.setCurrentAccount({ variables: { user: account } });
+      await this.props.setCurrentAccount({ variables: { account } });
       localStorage.setItem('healfit:token', token);
       return this.setState(({ ui }) => ({ ui: ui.toAuthenticated() }));
     } catch (error) {

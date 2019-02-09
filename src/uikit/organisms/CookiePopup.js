@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import withPortal from 'helpers/withPortal';
-import withAuth from 'helpers/withAuth';
+import withPortal from 'hoc/withPortal';
+import withAuth from 'hoc/withAuth';
 
 import P from 'uikit/elements/P';
 import Button from 'uikit/blocks/Button';
