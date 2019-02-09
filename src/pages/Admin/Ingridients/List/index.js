@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
 import gql from 'graphql-tag';
 import { compose, graphql } from 'react-apollo';
 import withApolloClient from 'hoc/withApolloClient';
 import { withToastManager } from 'uikit/blocks/Toast';
+import Link from 'uikit/elements/Link';
 
 import {
   Table,
@@ -14,7 +16,6 @@ import {
   SubHeaderContainer,
 } from 'uikit/blocks/Table';
 import Heading from 'uikit/elements/Heading';
-import styled, { css } from 'styled-components';
 import ReactProgressiveList from 'react-progressive-list';
 import Ingridient from './Ingridient';
 
@@ -48,6 +49,12 @@ const GET_INGRIDIENTS = gql`
       }
     }
   }
+`;
+
+const Row = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 class Ingridients extends Component {
@@ -141,7 +148,10 @@ class Ingridients extends Component {
 
     return (
       <Div>
-        <Heading level="h2">Ingridients</Heading>
+        <Row>
+          <Heading level="h2">Ingridients</Heading>
+          <Link to="/admin/ingridients/create">Add Ingridient</Link>
+        </Row>
         <Table>
           <Header sticky>
             <Th flex="2">Name</Th>
