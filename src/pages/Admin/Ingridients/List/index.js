@@ -20,8 +20,8 @@ import Ingridient from './Ingridient';
 
 const Div = styled.div`
   ${({ theme }) => css`
-    margin: ${theme.margin.md} 0;
-    width: 100vh;
+    margin: ${theme.margin.md} auto;
+    width: ${theme.dimensions.containerWidth.large};
   `}
 `;
 
@@ -103,7 +103,10 @@ class Ingridients extends Component {
 
   onUpdate = async ingridient => {
     try {
-      return this.props.updateIngridient({ variables: { ...ingridient } });
+      this.props.updateIngridient({ variables: { ...ingridient } });
+      return this.props.toastManager.add('Item has been succesfully updated!', {
+        type: 'success',
+      });
     } catch (error) {
       return this.setState({ error });
     }

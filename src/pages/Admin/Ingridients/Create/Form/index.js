@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 
 import Form from 'uikit/blocks/Form';
 import Button from 'uikit/blocks/Button';
+import Heading from 'uikit/elements/Heading';
 import Carbohydrate from './Carbohydrate';
 import Fat from './Fat';
 import General from './General';
@@ -89,14 +90,18 @@ const AddIngridientForm = ({ onSubmit }) => (
       setFieldValue,
     }) => (
       <Form onSubmit={handleSubmit}>
+        <Heading level="h3">BASIC INFO</Heading>
         <General
           values={values}
           setFieldTouched={setFieldTouched}
           setFieldValue={setFieldValue}
         />
-        <Other />
-        <Fat />
-        <Carbohydrate />
+        <div style={{ paddingTop: '5px', borderTop: '2px solid #EFEFEF' }}>
+          <Heading level="h3">NUTRIENTS</Heading>
+          <Other />
+          <Fat />
+          <Carbohydrate />
+        </div>
         <Button
           type="submit"
           size="large"

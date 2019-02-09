@@ -70,7 +70,6 @@ export default class Ingridient extends Component {
             noMargin
             type="text"
             name="name"
-            size="small"
             value={ingridient.name || ''}
             onChange={this.onChangeValue}
           />
@@ -82,7 +81,6 @@ export default class Ingridient extends Component {
             css="margin-right: 4px;"
             type="number"
             step="any"
-            size="small"
             name="nutrients.fat.monounsaturated"
             value={ingridient.nutrients.fat.monounsaturated || ''}
             onChange={this.onChangeValue}
@@ -92,7 +90,6 @@ export default class Ingridient extends Component {
             css="margin-right: 4px;"
             type="number"
             step="any"
-            size="small"
             name="nutrients.fat.saturated"
             value={ingridient.nutrients.fat.saturated || ''}
             onChange={this.onChangeValue}
@@ -101,7 +98,6 @@ export default class Ingridient extends Component {
             noMargin
             type="number"
             step="any"
-            size="small"
             name="nutrients.fat.polyunsaturated"
             value={ingridient.nutrients.fat.polyunsaturated || ''}
             onChange={this.onChangeValue}
@@ -113,7 +109,6 @@ export default class Ingridient extends Component {
             css="margin-right: 4px;"
             type="number"
             step="any"
-            size="small"
             name="nutrients.carbohydrate.fiber"
             value={ingridient.nutrients.carbohydrate.fiber || ''}
             onChange={this.onChangeValue}
@@ -122,7 +117,6 @@ export default class Ingridient extends Component {
             noMargin
             type="number"
             step="any"
-            size="small"
             name="nutrients.carbohydrate.sugar"
             value={ingridient.nutrients.carbohydrate.sugar || ''}
             onChange={this.onChangeValue}
@@ -133,7 +127,6 @@ export default class Ingridient extends Component {
             noMargin
             type="number"
             step="any"
-            size="small"
             name="nutrients.potassium"
             value={ingridient.nutrients.potassium || ''}
             onChange={this.onChangeValue}
@@ -144,7 +137,6 @@ export default class Ingridient extends Component {
             noMargin
             type="number"
             step="any"
-            size="small"
             name="nutrients.sodium"
             value={ingridient.nutrients.sodium || ''}
             onChange={this.onChangeValue}
@@ -155,7 +147,6 @@ export default class Ingridient extends Component {
             noMargin
             type="number"
             step="any"
-            size="small"
             name="nutrients.protein"
             value={ingridient.nutrients.protein || ''}
             onChange={this.onChangeValue}
@@ -164,7 +155,6 @@ export default class Ingridient extends Component {
         <Td flex="2">
           <Button
             color="primary"
-            size="small"
             onClick={this.onUpdate}
             loading={pendingUpdate}
           >
@@ -174,7 +164,6 @@ export default class Ingridient extends Component {
 
           <Button
             color="accent"
-            size="small"
             loading={pendingDelete}
             onClick={this.onDelete}
             style={{ marginLeft: '5px' }}

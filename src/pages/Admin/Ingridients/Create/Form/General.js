@@ -16,7 +16,12 @@ const General = ({
     <Form.FormGroup>
       <Form.Label>
         Name
-        <Form.Input name="name" as={Field} type="string" />
+        <Form.Input
+          name="name"
+          as={Field}
+          type="string"
+          placeholder="Add ingridient name..."
+        />
       </Form.Label>
       <ErrorMessage name="name">
         {msg => <Form.Feedback>{msg}</Form.Feedback>}

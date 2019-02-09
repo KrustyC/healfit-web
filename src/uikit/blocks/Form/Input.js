@@ -36,8 +36,14 @@ const Input = styled.input`
       border: 2px solid ${theme.colors.primary};
     }
 
+    &[type='number']::-webkit-outer-spin-button,
+    &[type='number']::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
     &[type='number'] {
-      /* width: 500px; */
+      -moz-appearance: textfield;
     }
   `}
 `;

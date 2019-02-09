@@ -11,7 +11,7 @@ import Form from './Form';
 const Div = styled.div`
   ${({ theme }) => css`
     margin: ${theme.margin.md} auto;
-    width: ${theme.dimensions.containerWidth.large};
+    width: ${theme.dimensions.containerWidth.default};
   `}
 `;
 
@@ -23,11 +23,20 @@ class CreateIngridient extends Component {
     }).isRequired,
   };
 
-  onCreate = data => {
-    console.log(data);
-    return this.props.toastManager.add('Item has been succesfully added!', {
-      type: 'success',
-    });
+  onCreate = async (values, { resetForm }) => {
+    try {
+      await this.props.createIngridient({
+        variables: { ...values, category: values.category.id },
+      });
+      this.props.toastManager.add('Item has been succesfully added!', {
+        type: 'success',
+      });
+      return resetForm();
+    } catch (error) {
+      return this.props.toastManager.add('Ops! Something wrong happened!', {
+        type: 'error',
+      });
+    }
   };
 
   render() {
@@ -41,22 +50,22 @@ class CreateIngridient extends Component {
 }
 
 const CREATE_INGRIDIENT = gql`
-  mutation updateIngridient(
-    $id: ID!
+  mutation addIngridient(
     $name: String!
     $category: ID
     $calories: Int!
     $nutrients: NutrientsInput!
   ) {
-    updateIngridient(
+    addIngridient(
       input: {
-        id: $id
         name: $name
         category: $category
         calories: $calories
         nutrients: $nutrients
       }
-    )
+    ) {
+      id
+    }
   }
 `;
 
