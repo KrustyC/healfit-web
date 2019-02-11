@@ -23,7 +23,7 @@ class Select extends Component {
 
   static defaultProps = {
     placeholder: 'Select...',
-    size: 'default',
+    size: 'regular',
     width: 'auto',
     withoutInput: false,
     multi: false,

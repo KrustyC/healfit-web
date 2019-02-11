@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import ContentEditable from 'react-contenteditable';
-import { switchProp } from 'styled-tools';
+import { switchProp, prop } from 'styled-tools';
 
 const scrollbar = css`
   ::-webkit-scrollbar {
@@ -47,21 +47,31 @@ export const Wrapper = styled.div`
 export const Box = styled.div`
   ${({ theme }) => css`
     display: flex;
-    border-radius: 3px;
+    width: ${prop('width', '100%')};
+    outline: none;
+    margin-top: ${theme.margin.xs};
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 2px solid ${theme.colors.border};
-    transition: all 0.3s ease-in-out;
+    border-radius: 2px;
+    color: ${theme.colors.font};
+    background: ${theme.colors.white};
+    padding: 0px ${theme.padding.sm};
 
-    ${switchProp('size', {
+    ${switchProp(prop('size', 'regular'), {
       small: css`
-        min-height: 32px;
-        max-height: 32px;
-        padding: 1px 2px;
+        font-size: ${theme.fontSize.small};
+        height: 30px;
+        min-height: 30px;
       `,
-      default: css`
-        padding: 0 ${theme.padding.sm};
-        margin-bottom: 2px;
-        max-height: 45px;
-        min-height: 45px;
+      regular: css`
+        font-size: ${theme.fontSize.regular};
+        height: 50px;
+        min-height: 50px;
+      `,
+      large: css`
+        font-size: ${theme.fontSize.large};
       `,
     })}
 
@@ -114,36 +124,19 @@ export const Action = styled.div`
 `;
 
 export const Input = styled(ContentEditable)`
-  ${({ theme }) => css`
-    border: none;
-    min-width: 20px;
-    display: flex;
-    align-items: center;
+  border: none;
+  min-width: 20px;
+  display: flex;
+  outline: 0;
 
-    ${switchProp('size', {
-      small: css`
-        margin-bottom: 0px;
-        max-width: 200px;
-        font-weight: normal;
-        font-size: 12px;
-      `,
-      default: css`
-        padding: 2px 5px;
-        margin-top: 2px;
-        margin-bottom: 2px;
-        font-size: ${theme.fontSize.regular};
-      `,
-    })}
-    outline: 0;
-
-    :empty:before {
-      ${({ placeholder }) =>
-        placeholder &&
-        css`
-          content: attr(placeholder);
-        `}
-    }
-  `}
+  :empty:before {
+    ${({ placeholder }) =>
+      placeholder &&
+      css`
+        font-weight: 400;
+        content: attr(placeholder);
+      `}
+  }
 `;
 
 export const ChipWrapper = styled.div`
@@ -285,6 +278,7 @@ export const OptionItem = styled.div`
     align-items: center;
     padding: 0 ${theme.padding.sm};
     font-weight: 400;
+    height: 50px;
 
     ${switchProp('size', {
       small: css`

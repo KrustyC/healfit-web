@@ -5,7 +5,6 @@ const Input = styled.input`
   ${({ theme }) => css`
     width: ${prop('width', '100%')};
     outline: none;
-    height: 45px;
     margin-top: ${theme.margin.xs};
     display: flex;
     justify-content: center;

@@ -103,7 +103,7 @@ class AddIngridient extends Component {
               <Form.Label>
                 Measurement
                 <Form.Select
-                  placeholder="Choose..."
+                  placeholder="Select measurements..."
                   value={measurement || {}}
                   onChange={this.onSelectMeasurement}
                 >
@@ -119,7 +119,6 @@ class AddIngridient extends Component {
               color="primary"
               onClick={this.onAddIngridient}
               disabled={!quantity || !measurement}
-              size="large"
             >
               Add Ingridient
             </Button>
