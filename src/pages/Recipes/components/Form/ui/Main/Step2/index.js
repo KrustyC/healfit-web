@@ -1,15 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import gql from 'graphql-tag';
+import withApolloClient from 'hoc/withApolloClient';
 
 import Form from 'uikit/blocks/Form';
 import Wizard from 'components/Wizard';
 import AddIngridient from './AddIngridient';
 import Ingridients from './Ingridients';
 
-export default class Step2 extends Component {
+const SEARCH_INGRIDIENTS = gql`
+  query ingridients($name: String) {
+    ingridientsByName(name: $name) {
+      id
+      name
+    }
+  }
+`;
+
+class Step2 extends Component {
   static propTypes = {
     values: PropTypes.shape({
       ingridients: PropTypes.array.isRequired,
+    }).isRequired,
+    client: PropTypes.shape({
+      query: PropTypes.func.isRequired,
     }).isRequired,
     setFieldValue: PropTypes.func.isRequired,
   };
@@ -19,35 +33,23 @@ export default class Step2 extends Component {
     currentIngridient: null,
   };
 
-  onSearchIngridient = value => {
-    console.log(value);
+  onSearchIngridient = async value => {
+    if (value.length === 0) {
+      return this.setState({ availableIngridients: [] });
+    }
 
-    // @TDO perfom query through graphql
-    return new Promise(resolve => {
-      const availableIngridients = [
-        {
-          id: 1,
-          name: 'Celery',
-        },
-        {
-          id: 2,
-          name: 'Cinnamon',
-        },
-        {
-          id: 3,
-          name: 'Water',
-        },
-        {
-          id: 4,
-          name: 'Red bell pepper',
-        },
-        {
-          id: 5,
-          name: 'Celery',
-        },
-      ];
-      return resolve(availableIngridients);
-    });
+    try {
+      const result = await this.props.client.query({
+        query: SEARCH_INGRIDIENTS,
+        variables: { name: value },
+      });
+
+      return this.setState({
+        availableIngridients: result.data.ingridientsByName,
+      });
+    } catch (error) {
+      return console.log('error', error);
+    }
   };
 
   onCancelIngridient = () => this.setState({ currentIngridient: null });
@@ -75,13 +77,16 @@ export default class Step2 extends Component {
 
   render() {
     const { values } = this.props;
-    const { currentIngridient } = this.state;
+    const { currentIngridient, availableIngridients } = this.state;
 
     return (
       <Wizard.Page>
         <Form.FormGroup>
           <Form.RemoteFilter
-            placeholder="Look for ingridients..."
+            placeholder="Search for ingridients..."
+            list={availableIngridients}
+            labelField="name"
+            emptyMessage="No Ingridients Avaialable"
             query={this.onSearchIngridient}
             onSelect={this.onSelectIngridient}
           />
@@ -102,3 +107,5 @@ export default class Step2 extends Component {
     );
   }
 }
+
+export default withApolloClient(Step2);

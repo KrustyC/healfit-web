@@ -12,6 +12,9 @@ export const FETCH_INITIAL_DATA = gql`
       ingridientsCategories {
         ...ValueObjectData
       }
+      measurements {
+        ...ValueObjectData
+      }
     }
   }
 `;

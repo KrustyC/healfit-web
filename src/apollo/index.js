@@ -30,6 +30,7 @@ const typeDefs = `
 
   type GlobalData {
     ingridientsCategories: ValueObject
+    measurements: ValueObject
   }
 
   type Mutation {

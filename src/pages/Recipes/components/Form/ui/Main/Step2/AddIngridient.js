@@ -5,6 +5,7 @@ import posed from 'react-pose';
 import Form from 'uikit/blocks/Form';
 import Button from 'uikit/blocks/Button';
 import P from 'uikit/elements/P';
+import withGlobalData from 'hoc/withGlobalData';
 
 const AddIngridientRow = styled(
   posed.div({
@@ -39,35 +40,14 @@ const Row = styled.div`
   }
 `;
 
-const measurements = [
-  {
-    id: 1,
-    name: 'Tablespoon',
-  },
-  {
-    id: 2,
-    name: 'Cup',
-  },
-  {
-    id: 3,
-    name: 'Teaspoon',
-  },
-  {
-    id: 4,
-    name: 'grams',
-  },
-  {
-    id: 5,
-    name: 'oz',
-  },
-];
-export default class Step2 extends Component {
+class AddIngridient extends Component {
   static propTypes = {
     ingridient: PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
     }).isRequired,
-    measurements: PropTypes.array.isRequired, // This should be fetched as initial data
+    globalData: PropTypes.shape({ measurements: PropTypes.array.isRequired })
+      .isRequired,
     onConfirm: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
   };
@@ -97,7 +77,10 @@ export default class Step2 extends Component {
 
   render() {
     const { quantity, measurement } = this.state;
-    const { ingridient } = this.props;
+    const {
+      ingridient,
+      globalData: { measurements },
+    } = this.props;
 
     return (
       <>
@@ -124,10 +107,7 @@ export default class Step2 extends Component {
                   value={measurement || {}}
                   onChange={this.onSelectMeasurement}
                 >
-                  {measurements.map((
-                    // This should be this.props.measurements
-                    { id, name }
-                  ) => (
+                  {measurements.map(({ id, name }) => (
                     <Form.Select.Option key={id} label={name} value={id} />
                   ))}
                 </Form.Select>
@@ -150,3 +130,5 @@ export default class Step2 extends Component {
     );
   }
 }
+
+export default withGlobalData(AddIngridient);
