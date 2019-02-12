@@ -6,6 +6,7 @@ import Wizard from 'components/Wizard';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
+import Step4 from './Step4';
 import Preview from './Preview';
 
 const MainContainer = styled.div`
@@ -47,6 +48,7 @@ const Main = ({ values, setFieldTouched, setFieldValue }) => (
         setFieldTouched={setFieldTouched}
         setFieldValue={setFieldValue}
       />
+      <Step4 />
       <Preview value={values} />
     </Wizard.Pages>
   </MainContainer>

@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Plain from 'slate-plain-serializer';
 
 import Wizard from 'components/Wizard';
 import Editor from 'uikit/organisms/Editor';
 import Heading from 'uikit/elements/Heading';
-
-import { Value } from 'slate';
 
 export default class Step3 extends Component {
   static propTypes = {
@@ -28,7 +25,7 @@ export default class Step3 extends Component {
       this.setState({ touched: true });
       this.props.setFieldTouched('method');
     }
-    console.log(value);
+
     this.props.setFieldValue('method', value);
   };
 

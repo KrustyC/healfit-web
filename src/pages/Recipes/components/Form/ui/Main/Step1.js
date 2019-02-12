@@ -104,20 +104,6 @@ const Step1 = ({ values, setFieldTouched, setFieldValue }) => (
         </Form.Multichoice>
       </Form.Label>
     </Form.FormGroup>
-    <Form.FormGroup>
-      <Form.Label>
-        Description <small>(optional)</small>
-        <Form.Textarea
-          as={Field}
-          component="textarea"
-          name="description"
-          type="string"
-          placeholder="Insert a short description"
-          style={{ height: '150px' }}
-        />
-      </Form.Label>
-      <Form.Feedback name="description" />
-    </Form.FormGroup>
   </Wizard.Page>
 );
 

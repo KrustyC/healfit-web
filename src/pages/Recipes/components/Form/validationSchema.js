@@ -4,9 +4,6 @@ import Plain from 'slate-plain-serializer';
 const validateInfo = {
   title: Yup.string().required('Please add a title to your recipe'),
   servings: Yup.number().required('Please add the servings'),
-  description: Yup.string()
-    .notRequired()
-    .min(50, 'Please add a description of at least 50 letters'),
   category: Yup.object().required('Please add a category'),
   totalTime: Yup.string().required(
     'Please tell us how much is needed for the recipe to be prepared'
@@ -31,20 +28,32 @@ const validateMethod = {
     ),
 };
 
+const validateMore = {
+  description: Yup.string().notRequired(),
+  // .min(50, 'Please add a description of at least 50 letters'),
+  calories: Yup.number().notRequired(),
+  carbohydrates: Yup.number().notRequired(),
+  protein: Yup.number().notRequired(),
+  fat: Yup.number().notRequired(),
+};
+
 const validateStep1 = Yup.object().shape({ ...validateInfo });
 const validateStep2 = Yup.object().shape({ ...validateIngridients });
 const validateStep3 = Yup.object().shape({ ...validateMethod });
+const validateStep4 = Yup.object().shape({ ...validateMore });
 
 const validatePreview = Yup.object().shape({
   ...validateInfo,
   ...validateIngridients,
   ...validateMethod,
+  ...validateMore,
 });
 
 const validationSchema = [
   validateStep1,
   validateStep2,
   validateStep3,
+  validateStep4,
   validatePreview,
 ];
 
