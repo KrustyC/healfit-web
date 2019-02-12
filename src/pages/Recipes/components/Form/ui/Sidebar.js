@@ -28,7 +28,7 @@ const Title = styled(Heading)`
 
 const Sidebar = ({ page }) => (
   <SidebarContainer>
-    <Heading>Info</Heading>
+    <Heading>Create Recipe</Heading> {/* @TODO add check for edit */}
     <VerticalProgress currentStep={page}>
       <VerticalProgress.Step>
         <Title level="h4">Generic Information</Title>

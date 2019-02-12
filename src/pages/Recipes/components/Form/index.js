@@ -34,7 +34,6 @@ const EditOrCreateForm = ({ edit, initialValues, onComplete }) => (
       >
         {({
           values,
-          errors,
           isValid,
           isSubmitting,
           setFieldTouched,

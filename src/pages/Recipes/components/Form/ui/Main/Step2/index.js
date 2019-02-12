@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import withApolloClient from 'hoc/withApolloClient';
+import Heading from 'uikit/elements/Heading';
 
 import Form from 'uikit/blocks/Form';
 import Wizard from 'components/Wizard';
@@ -48,7 +49,8 @@ class Step2 extends Component {
         availableIngridients: result.data.ingridientsByName,
       });
     } catch (error) {
-      return console.log('error', error);
+      return error;
+      // return console.log('error', error);
     }
   };
 
@@ -81,6 +83,8 @@ class Step2 extends Component {
 
     return (
       <Wizard.Page>
+        <Heading level="h1">Ingridients</Heading>
+        <Heading />
         <Form.FormGroup>
           <Form.RemoteFilter
             placeholder="Search for ingridients..."

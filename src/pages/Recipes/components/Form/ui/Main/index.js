@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import Heading from 'uikit/elements/Heading';
 import Wizard from 'components/Wizard';
 
 import Step1 from './Step1';
@@ -17,7 +16,8 @@ const MainContainer = styled.div`
     justify-content: flex-start;
     grid-area: main;
     padding: 0 ${theme.padding.md};
-    width: 50%;
+    width: ${theme.dimensions.containerWidth.large};
+    width: 50vw;
 
     h1 {
       padding: ${theme.padding.md} 0;
@@ -31,7 +31,6 @@ const MainContainer = styled.div`
 
 const Main = ({ values, setFieldTouched, setFieldValue }) => (
   <MainContainer>
-    <Heading level="h1">Create a recipe</Heading>
     <Wizard.Pages>
       <Step1
         values={values}
@@ -43,7 +42,11 @@ const Main = ({ values, setFieldTouched, setFieldValue }) => (
         setFieldTouched={setFieldTouched}
         setFieldValue={setFieldValue}
       />
-      <Step3 />
+      <Step3
+        values={values}
+        setFieldTouched={setFieldTouched}
+        setFieldValue={setFieldValue}
+      />
       <Preview value={values} />
     </Wizard.Pages>
   </MainContainer>

@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import Form from 'uikit/blocks/Form';
 import { Field } from 'formik';
 
 import Wizard from 'components/Wizard';
+import Heading from 'uikit/elements/Heading';
 
-const Container = styled(Wizard.Page)`
-  width: 50%;
-`;
-
+// @TODO take this from global data
 const categories = [
   { id: 1, name: 'Breakfast' },
   { id: 2, name: 'Lunch' },
@@ -33,7 +30,8 @@ const levels = [
 ];
 
 const Step1 = ({ values, setFieldTouched, setFieldValue }) => (
-  <Container>
+  <Wizard.Page>
+    <Heading level="h1">Generic Info</Heading>
     <Form.FormGroup>
       <Form.Label>
         Title
@@ -120,7 +118,7 @@ const Step1 = ({ values, setFieldTouched, setFieldValue }) => (
       </Form.Label>
       <Form.Feedback name="description" />
     </Form.FormGroup>
-  </Container>
+  </Wizard.Page>
 );
 
 Step1.propTypes = {

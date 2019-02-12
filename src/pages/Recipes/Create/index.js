@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import Plain from 'slate-plain-serializer';
 import Form from '../components/Form';
 
 const Layout = styled.div`
@@ -23,6 +24,7 @@ export default () => (
         difficulty: 0,
         description: '',
         ingridients: [],
+        method: Plain.deserialize(''),
       }}
       onComplete={values => console.log('submit', values)}
     />

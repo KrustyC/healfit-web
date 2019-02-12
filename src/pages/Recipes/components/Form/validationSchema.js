@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import Plain from 'slate-plain-serializer';
 
 const validateInfo = {
   title: Yup.string().required('Please add a title to your recipe'),
@@ -23,9 +24,11 @@ const validateIngridients = {
 };
 
 const validateMethod = {
-  method: Yup.array()
-    .required('Please add some steps')
-    .min(1, 'Add at least one step'),
+  method: Yup.mixed()
+    .required('Please add your recipe method')
+    .test('is-empty', 'Please add at least 50 charachters', value =>
+      Promise.resolve(Plain.serialize(value).trim().length > 50)
+    ),
 };
 
 const validateStep1 = Yup.object().shape({ ...validateInfo });
