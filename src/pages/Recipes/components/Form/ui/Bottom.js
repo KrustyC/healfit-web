@@ -6,6 +6,7 @@ import Button from 'uikit/blocks/Button';
 
 const BottomContainer = styled.div`
   ${({ theme }) => css`
+    background: ${theme.colors.light};
     border-top: 1px solid ${theme.colors.border};
     display: flex;
     align-items: center;

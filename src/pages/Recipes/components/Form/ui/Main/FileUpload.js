@@ -1,34 +1,21 @@
 import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
-import SvgUpload from 'assets/icons/uploading-archive.svg';
+import { prop } from 'styled-tools';
+import Button from 'uikit/blocks/Button';
 
-const Label = styled.label`
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.02);
-  cursor: pointer;
+const Wrapper = styled.div`
   display: flex;
-  height: 300px;
+  flex-direction: column;
   justify-content: center;
-  outline: 3px dashed #ccc;
-  outline-offset: 5px;
-  position: relative;
-  width: 300px;
+  align-items: flex-start;
 `;
 
 const Img = styled.img`
-  ${({ theme, loaded }) => css`
-    left: 50%;
-    opacity: 0;
-    max-height: 100%;
-    max-width: 100%;
-    transition: all 300ms ease-in;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-
-    ${loaded &&
-      css`
-        opacity: 1;
-      `}
+  ${({ theme }) => css`
+    margin-bottom: ${theme.margin.md};
+    height: ${prop('height', '300px')};
+    width: ${prop('width', '100%')};
+    border: 1px solid ${theme.colors.border};
   `}
 `;
 
@@ -38,89 +25,45 @@ const FileInput = styled.input.attrs({ type: 'file' })`
 
 export default class FileUploader extends Component {
   state = {
-    active: false,
-    imageSrc: '',
-    loaded: false,
-  };
-
-  onDragEnter = () => {
-    this.setState({ active: true });
-  };
-
-  onDragLeave = () => {
-    this.setState({ active: false });
-  };
-
-  onDragOver = e => {
-    e.preventDefault();
-  };
-
-  onDrop = e => {
-    e.preventDefault();
-    this.setState({ active: false });
-    this.onFileChange(e, e.dataTransfer.files[0]);
+    imgSrc: null,
   };
 
   onFileChange = (e, file) => {
     const uploadFile = file || e.target.files[0];
-
     const pattern = /image-*/;
-
     const reader = new window.FileReader();
 
     if (!uploadFile.type.match(pattern)) {
-      alert('Invalid format');
-      return;
+      // eslint-disable-next-line
+      return alert('Invalid format');
     }
 
-    this.setState({ loaded: false });
-
-    reader.onload = () => {
-      this.setState({
-        imageSrc: reader.result,
-        loaded: true,
-      });
-    };
-
-    reader.readAsDataURL(uploadFile);
+    reader.onload = () => this.setState({ imgSrc: reader.result });
+    return reader.readAsDataURL(uploadFile);
   };
-
-  getFileObject = () => this.inputRef.files[0];
-
-  getFileString = () => this.state.imageSrc;
 
   ref = inputRef => {
     this.inputRef = inputRef;
   };
 
+  onClick = () => this.inputRef.click();
+
   render() {
-    const { loaded, active, imageSrc } = this.state;
-
-    const { activeColor, baseColor, overlayColor } = this.props;
-
-    const labelClass = `uploader ${loaded && 'loaded'}`;
-
-    const borderColor = active ? activeColor : baseColor;
-
-    const iconColor = active ? activeColor : loaded ? overlayColor : baseColor;
+    const { active, imgSrc } = this.state;
+    const { width, height, ...rest } = this.props;
 
     return (
-      <Label
-        className={labelClass}
-        onDragEnter={this.onDragEnter}
-        onDragLeave={this.onDragLeave}
-        onDragOver={this.onDragOver}
-        onDrop={this.onDrop}
-        style={{ outlineColor: borderColor }}
-      >
-        <Img src={imageSrc} loaded={loaded} alt="upload-file" />
-        <SvgUpload />
+      <Wrapper {...rest} active={active}>
+        <Img src={imgSrc} width={width} height={height} />
+        <Button onClick={this.onClick} type="button">
+          Choose Image
+        </Button>
         <FileInput
           accept="image/*"
           onChange={this.onFileChange}
           ref={this.ref}
         />
-      </Label>
+      </Wrapper>
     );
   }
 }

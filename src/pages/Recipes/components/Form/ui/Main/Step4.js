@@ -24,10 +24,13 @@ export default () => (
   <Wizard.Page>
     <Heading level="h1">More Info</Heading>
     <Form.FormGroup>
-      <Form.Label>
-        Picture
-        <FileUpload onLoad={file => console.log(file)} />
-      </Form.Label>
+      <div style={{ width: '100%' }}>
+        <b>Picture</b>
+        <FileUpload
+          onLoad={file => console.log(file)}
+          style={{ marginTop: '2rem' }}
+        />
+      </div>
     </Form.FormGroup>
     <Form.FormGroup>
       <Form.Label>

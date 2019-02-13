@@ -17,11 +17,14 @@ const MainContainer = styled.div`
     justify-content: flex-start;
     grid-area: main;
     padding: 0 ${theme.padding.md};
-    width: ${theme.dimensions.containerWidth.large};
-    width: 50vw;
+    overflow-y: scroll;
 
     h1 {
       padding: ${theme.padding.md} 0;
+    }
+
+    > div {
+      width: 50vw;
     }
 
     @media (max-width: ${theme.sizes.md}) {
@@ -32,25 +35,27 @@ const MainContainer = styled.div`
 
 const Main = ({ values, setFieldTouched, setFieldValue }) => (
   <MainContainer>
-    <Wizard.Pages>
-      <Step1
-        values={values}
-        setFieldTouched={setFieldTouched}
-        setFieldValue={setFieldValue}
-      />
-      <Step2
-        values={values}
-        setFieldTouched={setFieldTouched}
-        setFieldValue={setFieldValue}
-      />
-      <Step3
-        values={values}
-        setFieldTouched={setFieldTouched}
-        setFieldValue={setFieldValue}
-      />
-      <Step4 />
-      <Preview value={values} />
-    </Wizard.Pages>
+    <div>
+      <Wizard.Pages>
+        <Step1
+          values={values}
+          setFieldTouched={setFieldTouched}
+          setFieldValue={setFieldValue}
+        />
+        <Step2
+          values={values}
+          setFieldTouched={setFieldTouched}
+          setFieldValue={setFieldValue}
+        />
+        <Step3
+          values={values}
+          setFieldTouched={setFieldTouched}
+          setFieldValue={setFieldValue}
+        />
+        <Step4 />
+        <Preview value={values} />
+      </Wizard.Pages>
+    </div>
   </MainContainer>
 );
 
