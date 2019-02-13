@@ -24,7 +24,7 @@ const MainContainer = styled.div`
     }
 
     > div {
-      width: 50vw;
+      width: ${theme.dimensions.containerWidth.large};
     }
 
     @media (max-width: ${theme.sizes.md}) {
