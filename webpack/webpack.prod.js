@@ -35,6 +35,7 @@ const plugins = [
       BUGSNAG_API_KEY: JSON.stringify(process.env.BUGSNAG_API_KEY),
       API_URL: JSON.stringify(process.env.API_URL),
       GA_API_KEY: JSON.stringify(process.env.GA_API_KEY),
+      CLOUDINARY_PRESET: JSON.stringify(process.env.CLOUDINARY_PRESET),
     },
   }),
   new TerserPlugin({

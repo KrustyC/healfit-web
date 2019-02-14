@@ -43,7 +43,11 @@ const Sidebar = ({ page }) => (
       </VerticalProgress.Step>
       <VerticalProgress.Step>
         <Title level="h4">Method</Title>
-        <P>Add all the necessary steps</P>
+        <P>Add your very own method</P>
+      </VerticalProgress.Step>
+      <VerticalProgress.Step>
+        <Title level="h4">More info</Title>
+        <P>Add additional info such as calories and macronutrients</P>
       </VerticalProgress.Step>
       <VerticalProgress.Step>
         <Title level="h4">Preview {'&'} Confirm</Title>

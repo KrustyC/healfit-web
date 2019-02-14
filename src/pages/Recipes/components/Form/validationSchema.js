@@ -30,7 +30,7 @@ const validateMethod = {
 
 const validateMore = {
   description: Yup.string().notRequired(),
-  // .min(50, 'Please add a description of at least 50 letters'),
+  picture: Yup.string().notRequired(),
   calories: Yup.number().notRequired(),
   carbohydrates: Yup.number().notRequired(),
   protein: Yup.number().notRequired(),

@@ -1,12 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import Form from 'uikit/blocks/Form';
 import { Field } from 'formik';
 
+import { Image as CloudinaryImage, Transformation } from 'cloudinary-react';
 import Wizard from 'components/Wizard';
 import Heading from 'uikit/elements/Heading';
-
-import FileUpload from './FileUpload';
+import FileUpload from 'uikit/organisms/FileUpload';
 
 const Row = styled.div`
   ${({ theme }) => css`
@@ -20,14 +21,39 @@ const Row = styled.div`
   `}
 `;
 
-export default () => (
+const Image = styled(CloudinaryImage)`
+  ${({ theme }) => css`
+    border: 1px solid ${theme.colors.border};
+    height: 300px;
+    width: 400px;
+  `}
+`;
+
+const Step4 = ({ values, setFieldValue }) => (
   <Wizard.Page>
     <Heading level="h1">More Info</Heading>
     <Form.FormGroup>
-      <div style={{ width: '100%' }}>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
         <b>Picture</b>
+        <Image publicId={values.picture}>
+          <Transformation dpr="auto" responsive width="auto" crop="scale" />
+          {!values.picture && (
+            <Transformation
+              overlay={{
+                fontFamily: 'Cookie',
+                fontSize: 40,
+                fontWeight: 'bold',
+                text: 'Love',
+              }}
+              effect="colorize"
+              color="#f08"
+            />
+          )}
+        </Image>
+        <br />
         <FileUpload
-          onLoad={file => console.log(file)}
+          height="300px"
+          onLoad={publicId => setFieldValue('picture', publicId)}
           style={{ marginTop: '2rem' }}
         />
       </div>
@@ -106,3 +132,10 @@ export default () => (
     </Form.FormGroup>
   </Wizard.Page>
 );
+
+Step4.propTypes = {
+  values: PropTypes.object.isRequired,
+  setFieldValue: PropTypes.func.isRequired,
+};
+
+export default Step4;

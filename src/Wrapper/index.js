@@ -1,6 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
+import { CloudinaryContext } from 'cloudinary-react';
 import withApolloClient from 'hoc/withApolloClient';
 import withAuth from 'hoc/withAuth';
 import withGlobalData from 'hoc/withGlobalData';
@@ -27,6 +28,8 @@ class Wrapper extends Component {
   };
 
   async componentDidMount() {
+    window.cloudinary.setCloudName('healfituk');
+
     try {
       const {
         data: { globalData },
@@ -62,10 +65,10 @@ class Wrapper extends Component {
   render() {
     return (
       this.state.isMounted && (
-        <Fragment>
+        <CloudinaryContext cloudName="healfituk">
           {this.props.children}
           <CookiePopup />
-        </Fragment>
+        </CloudinaryContext>
       )
     );
   }

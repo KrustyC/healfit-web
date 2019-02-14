@@ -24,7 +24,7 @@ const MainContainer = styled.div`
     }
 
     > div {
-      width: ${theme.dimensions.containerWidth.large};
+      width: 50vw;
     }
 
     @media (max-width: ${theme.sizes.md}) {
@@ -52,7 +52,7 @@ const Main = ({ values, setFieldTouched, setFieldValue }) => (
           setFieldTouched={setFieldTouched}
           setFieldValue={setFieldValue}
         />
-        <Step4 />
+        <Step4 values={values} setFieldValue={setFieldValue} />
         <Preview value={values} />
       </Wizard.Pages>
     </div>
