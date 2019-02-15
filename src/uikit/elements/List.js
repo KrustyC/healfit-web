@@ -28,6 +28,8 @@ const OLTag = styled.ol`
     `};
 `;
 
+const Item = styled.li``;
+
 const ULTag = OLTag.withComponent('ul');
 
 const List = ({ children, type, font, size }) => {
@@ -51,5 +53,7 @@ List.defaultProps = {
   font: 'default',
   size: 'default',
 };
+
+List.Item = Item;
 
 export default List;

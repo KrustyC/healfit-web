@@ -116,20 +116,6 @@ const Step4 = ({ values, setFieldValue }) => (
         <Form.Feedback name="fat" />
       </Form.FormGroup>
     </Row>
-    <Form.FormGroup>
-      <Form.Label>
-        Description
-        <Form.Textarea
-          as={Field}
-          component="textarea"
-          name="description"
-          type="string"
-          placeholder="Insert a short description"
-          css="height: 150px;"
-        />
-      </Form.Label>
-      <Form.Feedback name="description" />
-    </Form.FormGroup>
   </Wizard.Page>
 );
 

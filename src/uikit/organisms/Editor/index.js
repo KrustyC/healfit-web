@@ -28,6 +28,7 @@ export default class Editor extends Component {
     placeholder: 'Type something...',
     readOnly: false,
     value: Value.fromJSON({}),
+    onChange: () => null,
   };
 
   ref = editor => {

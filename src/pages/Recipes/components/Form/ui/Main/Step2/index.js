@@ -60,6 +60,7 @@ class Step2 extends Component {
     this.setState({ currentIngridient: ingridient });
 
   onAddIngridient = ingridient => {
+    console.log(ingridient);
     const ingridients = [...this.props.values.ingridients, ingridient];
     this.props.setFieldValue('ingridients', ingridients);
     this.setState({ currentIngridient: null });
@@ -84,7 +85,6 @@ class Step2 extends Component {
     return (
       <Wizard.Page>
         <Heading level="h1">Ingridients</Heading>
-        <Heading />
         <Form.FormGroup>
           <Form.RemoteFilter
             placeholder="Search for ingridients..."

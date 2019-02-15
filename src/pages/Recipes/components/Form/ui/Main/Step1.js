@@ -89,20 +89,18 @@ const Step1 = ({ values, setFieldTouched, setFieldValue }) => (
       <Form.Feedback name="category" />
     </Form.FormGroup>
     <Form.FormGroup>
-      <Form.Label>
-        Level
-        <Form.Multichoice>
-          {levels.map(({ id, name }) => (
-            <Form.Multichoice.Choice
-              key={id}
-              id={id}
-              name="level"
-              label={name}
-              value={id}
-            />
-          ))}
-        </Form.Multichoice>
-      </Form.Label>
+      <Form.Label>Level</Form.Label>
+      <Form.Multichoice>
+        {levels.map(({ id, name }) => (
+          <Form.Multichoice.Choice
+            key={id}
+            id={id}
+            name="level"
+            label={name}
+            value={id}
+          />
+        ))}
+      </Form.Multichoice>
     </Form.FormGroup>
   </Wizard.Page>
 );

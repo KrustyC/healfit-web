@@ -29,7 +29,6 @@ const validateMethod = {
 };
 
 const validateMore = {
-  description: Yup.string().notRequired(),
   picture: Yup.string().notRequired(),
   calories: Yup.number().notRequired(),
   carbohydrates: Yup.number().notRequired(),
