@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import PossibleStates from 'possible-states';
 import { graphql } from 'react-apollo';
 import styled, { css } from 'styled-components';
-import Plain from 'slate-plain-serializer';
+import html from 'uikit/organisms/Editor/htmlSerializer';
 import Form from '../components/Form';
 
 const Layout = styled.div`
@@ -62,6 +62,10 @@ const ingridients = [
   },
 ];
 
+// console.log(
+//   html.deserialize('<p>I&#x27;m  write  freaky fraky freky thigh </p>')
+// );
+
 const seededInitialValues = {
   title: 'Lemon Garlic Shrimp',
   servings: 3,
@@ -69,7 +73,9 @@ const seededInitialValues = {
   category: 0,
   level: '3',
   ingridients,
-  method: Plain.deserialize('This is my recipe method man'),
+  method: html.deserialize(
+    '<p>I&#x27;m  write<em> freaky fraky freky thigh</em> grg er ger ger ger ger ger ger ger ger gerg ergerg erge<strong>rgergerg er</strong></p>'
+  ),
   picture: 'dev/akw0bgvorn2fiftl0nv7',
   calories: 24,
   carbohydrates: 35,
@@ -88,7 +94,7 @@ class CreateRecipe extends Component {
 
   onCreateRecipe = async values => {
     // this.setState(({ ui }) => ({ ui: ui.toPending() }));
-    console.log(values);
+    console.log(values.method, html.serialize(values.method));
     const preparedData = {};
 
     // try {
@@ -106,8 +112,9 @@ class CreateRecipe extends Component {
         {this.state.ui.caseOf({
           idle: () => (
             <Form
+              edit
               initialValues={seededInitialValues}
-              onComplete={values => console.log('submit', values)}
+              onComplete={this.onCreateRecipe}
             />
           ),
           pending: () => 'Creating recipe...',
@@ -127,7 +134,7 @@ const CREATE_RECIPE = gql`
     $category: Int!
     $level: Int!
     $ingridients: [Object]
-    $method: Object
+    $method: String
     $picture: String
     $calories: Int
     $carbohydrates: Float

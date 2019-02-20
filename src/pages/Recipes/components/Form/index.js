@@ -31,6 +31,8 @@ const EditOrCreateForm = ({ edit, initialValues, onComplete }) => (
         isInitialValid={edit}
         validationSchema={validationSchema[page]}
         onSubmit={onWizardSubmit}
+        validateOnBlur
+        validateOnChange
       >
         {({
           values,

@@ -42,10 +42,10 @@ const validateStep3 = Yup.object().shape({ ...validateMethod });
 const validateStep4 = Yup.object().shape({ ...validateMore });
 
 const validatePreview = Yup.object().shape({
-  ...validateInfo,
-  ...validateIngridients,
-  ...validateMethod,
-  ...validateMore,
+  // ...validateInfo,
+  // ...validateIngridients,
+  // ...validateMethod,
+  // ...validateMore,
 });
 
 const validationSchema = [

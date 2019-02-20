@@ -21,7 +21,7 @@ export default class Editor extends Component {
     readOnly: PropTypes.bool,
     value: PropTypes.object,
     placeholder: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
+    onChange: PropTypes.func,
   };
 
   static defaultProps = {
@@ -41,13 +41,15 @@ export default class Editor extends Component {
   };
 
   renderMark = (props, editor, next) => {
-    switch (props.mark.type) {
+    const { mark, attributes } = props;
+
+    switch (mark.type) {
       case 'bold':
-        return <strong>{props.children}</strong>;
+        return <strong {...attributes}>{props.children}</strong>;
       case 'italic':
-        return <em>{props.children}</em>;
+        return <em {...attributes}>{props.children}</em>;
       case 'underline':
-        return <u>{props.children}</u>;
+        return <u {...attributes}>{props.children}</u>;
       default:
         return next();
     }
