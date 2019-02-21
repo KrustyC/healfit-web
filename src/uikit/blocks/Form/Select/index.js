@@ -71,6 +71,7 @@ class Select extends Component {
   }
 
   onAddOption = selected => {
+    console.log(selected);
     if (this.props.multi) {
       return this.props.onChange([...this.props.value, selected]);
     }
@@ -165,14 +166,13 @@ class Select extends Component {
       multi,
       selected: value,
       placeholder,
-      onAddOption: this.onAddOption,
+      onSelect: this.onAddOption,
       onRemoveOption: this.onRemoveOption,
       onRemoveAll: this.onRemoveAll,
       onInputChange: this.onInputChange,
       onFocus: this.onFocus,
       onBlur: this.onBlur,
       isOptionSelected: this.isOptionSelected,
-      onSelect: this.onAddOption,
     };
 
     return (

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import PossibleStates from 'possible-states';
@@ -36,17 +36,17 @@ const ingridients = [
   {
     id: '5c617606fe02140152a8e057',
     measurement: {
-      label: 'Grams',
-      value: 1,
+      id: 1,
+      name: 'Grams',
     },
     name: 'Fennel',
-    quantity: '35',
+    quantity: 35,
   },
   {
     id: '5c617606fe02140152a8e058',
     measurement: {
-      label: 'Cups',
-      value: 2,
+      id: 2,
+      name: 'Cups',
     },
     name: 'Spinach',
     quantity: 1,
@@ -54,24 +54,23 @@ const ingridients = [
   {
     id: '5c617606fe02140152a8e059',
     measurement: {
-      label: 'Grams',
-      value: 1,
+      id: 1,
+      name: 'Grams',
     },
     name: 'Fennels',
     quantity: 320,
   },
 ];
 
-// console.log(
-//   html.deserialize('<p>I&#x27;m  write  freaky fraky freky thigh </p>')
-// );
-
 const seededInitialValues = {
   title: 'Lemon Garlic Shrimp',
   servings: 3,
   totalTime: 15,
-  category: 0,
-  level: '3',
+  category: {
+    label: 'Breakfast',
+    value: 1,
+  },
+  level: 2,
   ingridients,
   method: html.deserialize(
     '<p>I&#x27;m  write<em> freaky fraky freky thigh</em> grg er ger ger ger ger ger ger ger ger gerg ergerg erge<strong>rgergerg er</strong></p>'
@@ -83,59 +82,55 @@ const seededInitialValues = {
   fat: 89,
 };
 
-class CreateRecipe extends Component {
-  static propTypes = {
-    createRecipe: PropTypes.func.isRequired,
+const CreateRecipe = ({ createRecipe }) => {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState(null);
+  const [idle, setIdle] = useState(true);
+
+  const onCreateRecipe = async values => {
+    setPending(true);
+    setIdle(false);
+
+    try {
+      const result = await createRecipe({ variables: values });
+      setData(result.data.createRecipe);
+    } catch (err) {
+      setError('OOps! Looks like something happened, please try again later!');
+    }
+    setPending(false);
   };
 
-  state = {
-    ui: PossibleStates('idle', 'pending', 'error<reason>', 'success<recipe>'),
-  };
-
-  onCreateRecipe = async values => {
-    // this.setState(({ ui }) => ({ ui: ui.toPending() }));
-    console.log(values.method, html.serialize(values.method));
-    const preparedData = {};
-
-    // try {
-    //   const result = await this.props.createRecipe(preparedData);
-    //   const recipe = result.soemthing
-    //   this.setState(({ ui }) => ({ ui: ui.toSuccess(recipeerror) }));
-    // } catch (error) {
-    //   this.setState(({ ui }) => ({ ui: ui.toError(error) }));
-    // }
-  };
-
-  render() {
-    return (
-      <Layout>
-        {this.state.ui.caseOf({
-          idle: () => (
-            <Form
-              edit
-              initialValues={seededInitialValues}
-              onComplete={this.onCreateRecipe}
-            />
-          ),
-          pending: () => 'Creating recipe...',
-          error: ({ reason }) => reason,
-          success: ({ recipe }) => recipe.id,
-        })}
-      </Layout>
-    );
-  }
-}
+  return (
+    <Layout>
+      {error && <div>Error: {error}</div>}
+      {pending && <div>pending...</div>}
+      {data && (
+        <div>
+          Success: {data.id} {data.title}
+        </div>
+      )}
+      {idle && (
+        <Form
+          edit
+          initialValues={seededInitialValues}
+          onComplete={onCreateRecipe}
+        />
+      )}
+    </Layout>
+  );
+};
 
 const CREATE_RECIPE = gql`
   mutation createRecipe(
     $title: String!
     $servings: Int!
     $totalTime: Int!
-    $category: Int!
-    $level: Int!
-    $ingridients: [Object]
-    $method: String
-    $picture: String
+    $category: RecipeCategoryInput!
+    $level: RecipeLevelInput!
+    $ingridients: [RecipeIngridientInput]!
+    $method: String!
+    $picture: String!
     $calories: Int
     $carbohydrates: Float
     $protein: Float
@@ -162,5 +157,9 @@ const CREATE_RECIPE = gql`
     }
   }
 `;
+
+CreateRecipe.propTypes = {
+  createRecipe: PropTypes.func.isRequired,
+};
 
 export default graphql(CREATE_RECIPE, { name: 'createRecipe' })(CreateRecipe);

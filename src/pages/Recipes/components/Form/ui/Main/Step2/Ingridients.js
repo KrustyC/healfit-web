@@ -76,7 +76,7 @@ export default class Ingridients extends Component {
           {ingridients.map(ingridient => (
             <Ingridient key={ingridient.id} initialPose="closed" pose="open">
               <P>
-                {ingridient.quantity} {ingridient.measurement.label}{' '}
+                {ingridient.quantity} {ingridient.measurement.name}{' '}
                 {ingridient.name}
               </P>
               <RubbishIcon

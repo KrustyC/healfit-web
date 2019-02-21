@@ -16,6 +16,16 @@ const validateInfo = {
 
 const validateIngridients = {
   ingridients: Yup.array()
+    .of(
+      Yup.object().shape({
+        id: Yup.string().required(),
+        quantity: Yup.number().required(),
+        masurement: Yup.object().shape({
+          id: Yup.number().required(),
+          name: Yup.string().required(),
+        }).required,
+      })
+    )
     .required('Please add some ingridients')
     .min(1, 'Add at least one ingridient'),
 };
@@ -41,12 +51,7 @@ const validateStep2 = Yup.object().shape({ ...validateIngridients });
 const validateStep3 = Yup.object().shape({ ...validateMethod });
 const validateStep4 = Yup.object().shape({ ...validateMore });
 
-const validatePreview = Yup.object().shape({
-  // ...validateInfo,
-  // ...validateIngridients,
-  // ...validateMethod,
-  // ...validateMore,
-});
+const validatePreview = Yup.object().shape({});
 
 const validationSchema = [
   validateStep1,

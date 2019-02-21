@@ -60,7 +60,7 @@ const Preview = ({ values }) => (
         </Item>
         <Item>
           <b>Category</b>
-          {values.category}
+          {values.category.label}
         </Item>
         <Item>
           <b>Total minutes</b>
@@ -93,7 +93,7 @@ const Preview = ({ values }) => (
       <List type="unordered">
         {values.ingridients.map(({ id, name, measurement, quantity }) => (
           <List.Item key={id}>
-            {quantity} {measurement.label} {name}
+            {quantity} {measurement.name} {name}
           </List.Item>
         ))}
       </List>

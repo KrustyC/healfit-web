@@ -66,10 +66,14 @@ class AddIngridient extends Component {
   onAddIngridient = () => {
     const { ingridient } = this.props;
     const { quantity, measurement } = this.state;
+    console.log(quantity);
     const newIngridient = {
       ...ingridient,
       quantity,
-      measurement,
+      measurement: {
+        id: measurement.value,
+        name: measurement.label,
+      },
     };
 
     this.props.onConfirm(newIngridient);

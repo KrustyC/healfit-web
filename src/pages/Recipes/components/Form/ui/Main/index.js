@@ -33,7 +33,12 @@ const MainContainer = styled.div`
   `}
 `;
 
-const Main = ({ values, setFieldTouched, setFieldValue }) => (
+const Main = ({
+  values,
+  setFieldTouched,
+  setFieldValue,
+  globalData: { recipeCategories, recipeLevels },
+}) => (
   <MainContainer>
     <div>
       <Wizard.Pages>
@@ -41,6 +46,8 @@ const Main = ({ values, setFieldTouched, setFieldValue }) => (
           values={values}
           setFieldTouched={setFieldTouched}
           setFieldValue={setFieldValue}
+          recipeLevels={recipeLevels}
+          recipeCategories={recipeCategories}
         />
         <Step2
           values={values}
@@ -63,6 +70,20 @@ Main.propTypes = {
   values: PropTypes.object.isRequired,
   setFieldValue: PropTypes.func.isRequired,
   setFieldTouched: PropTypes.func.isRequired,
+  globalData: PropTypes.shape({
+    recipeLevels: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+    recipeCategories: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
 };
 
 export default Main;
