@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import gql from 'graphql-tag';
 import { compose, graphql, Query } from 'react-apollo';
