@@ -5,9 +5,9 @@ import { Query } from 'react-apollo';
 import EditForm from './EditForm';
 
 const GET_RECIPE = gql`
-  query GetRecipe($id: ID!) {
-    recipe(id: $id) {
-      id
+  query GetRecipe($slug: String!) {
+    recipe(slug: $slug) {
+      slug
       title
       servings
       totalTime
@@ -40,10 +40,10 @@ const GET_RECIPE = gql`
 
 const EditRecipeWrapper = ({
   match: {
-    params: { id },
+    params: { slug },
   },
 }) => (
-  <Query query={GET_RECIPE} variables={{ id }}>
+  <Query query={GET_RECIPE} variables={{ slug }}>
     {({ loading, error, data }) => {
       if (loading) return 'Loading...';
       if (error) return `Error! ${error.message}`;
@@ -56,7 +56,7 @@ const EditRecipeWrapper = ({
 EditRecipeWrapper.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      slug: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
 };

@@ -57,7 +57,8 @@ class AddIngridient extends Component {
     measurement: null,
   };
 
-  onChangeQuantity = e => this.setState({ quantity: e.target.value });
+  onChangeQuantity = e =>
+    this.setState({ quantity: parseInt(e.target.value, 10) });
 
   onSelectMeasurement = measurement => this.setState({ measurement });
 

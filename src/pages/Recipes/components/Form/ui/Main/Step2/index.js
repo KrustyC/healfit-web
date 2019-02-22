@@ -81,7 +81,7 @@ class Step2 extends Component {
   render() {
     const { values } = this.props;
     const { currentIngridient, availableIngridients } = this.state;
-
+    console.log(values);
     return (
       <Wizard.Page>
         <Heading level="h1">Ingridients</Heading>

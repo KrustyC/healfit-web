@@ -72,6 +72,17 @@ const Step4 = ({ values, setFieldValue }) => (
       </Form.Label>
       <Form.Feedback name="calories" />
     </Form.FormGroup>
+    <Form.FormGroup>
+      <Form.Label>
+        Description
+        <Form.Textarea
+          as={Field}
+          name="description"
+          placeholder="Please add as short description of your recipe..."
+        />
+      </Form.Label>
+      <Form.Feedback name="calories" />
+    </Form.FormGroup>
     <Row>
       <Form.FormGroup>
         <Form.Label>

@@ -39,7 +39,8 @@ const validateMethod = {
 };
 
 const validateMore = {
-  picture: Yup.string().notRequired(),
+  picture: Yup.string().required('Please add a picture of your recipe'),
+  description: Yup.string().required('Please add a short description'),
   calories: Yup.number().notRequired(),
   carbohydrates: Yup.number().notRequired(),
   protein: Yup.number().notRequired(),

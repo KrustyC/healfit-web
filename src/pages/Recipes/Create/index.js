@@ -20,6 +20,7 @@ const initialValues = {
   title: '',
   servings: '',
   totalTime: '',
+  description: '',
   category: 0,
   level: 0,
   ingridients: [],
@@ -56,7 +57,7 @@ const CreateRecipe = ({ createRecipe }) => {
       {pending && <div>pending...</div>}
       {data && (
         <div>
-          Success: {data.id} {data.title}
+          Success: {data.slug} {data.title}
         </div>
       )}
       {idle && (
@@ -71,6 +72,7 @@ const CREATE_RECIPE = gql`
     $title: String!
     $servings: Int!
     $totalTime: Int!
+    $description: String!
     $category: RecipeCategoryInput!
     $level: RecipeLevelInput!
     $ingridients: [RecipeIngridientInput]!
@@ -85,6 +87,7 @@ const CREATE_RECIPE = gql`
       input: {
         title: $title
         servings: $servings
+        description: $description
         totalTime: $totalTime
         category: $category
         level: $level
@@ -97,7 +100,7 @@ const CREATE_RECIPE = gql`
         fat: $fat
       }
     ) {
-      id
+      slug
       title
     }
   }
