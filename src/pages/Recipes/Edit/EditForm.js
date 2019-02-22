@@ -16,22 +16,25 @@ const Layout = styled.div`
   `}
 `;
 
-const initialValues = {
-  title: '',
-  servings: '',
-  totalTime: '',
-  category: 0,
-  level: 0,
-  ingridients: [],
-  method: html.deserialize(''),
-  picture: '',
-  calories: 0,
-  carbohydrates: 0,
-  protein: 0,
-  fat: 0,
-};
+const getInitiallValuesFromRecipe = recipe => ({
+  title: recipe.title,
+  servings: recipe.servings,
+  totalTime: recipe.totalTime,
+  category: {
+    label: recipe.category.name,
+    value: recipe.category.id,
+  },
+  level: recipe.category.id,
+  ingridients: recipe.ingridients,
+  method: html.deserialize(recipe.method),
+  picture: recipe.picture,
+  calories: recipe.calories,
+  carbohydrates: recipe.carbohydrates,
+  protein: recipe.protein,
+  fat: recipe.fat,
+});
 
-const CreateRecipe = ({ createRecipe }) => {
+const EditForm = ({ recipe, editRecipe }) => {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
@@ -42,8 +45,10 @@ const CreateRecipe = ({ createRecipe }) => {
     setIdle(false);
 
     try {
-      const result = await createRecipe({ variables: values });
-      setData(result.data.createRecipe);
+      const result = await editRecipe({ variables: values });
+      console.log(result);
+      // Redirect to View
+      setData(result.data.editRecipe);
     } catch (err) {
       setError('OOps! Looks like something happened, please try again later!');
     }
@@ -60,14 +65,19 @@ const CreateRecipe = ({ createRecipe }) => {
         </div>
       )}
       {idle && (
-        <Form edit initialValues={initialValues} onComplete={onCreateRecipe} />
+        <Form
+          edit
+          initialValues={getInitiallValuesFromRecipe(recipe)}
+          onComplete={onCreateRecipe}
+        />
       )}
     </Layout>
   );
 };
 
-const CREATE_RECIPE = gql`
-  mutation createRecipe(
+const EDIT_RECIPE = gql`
+  mutation editRecipe(
+    $id: ID!
     $title: String!
     $servings: Int!
     $totalTime: Int!
@@ -81,8 +91,9 @@ const CREATE_RECIPE = gql`
     $protein: Float
     $fat: Float
   ) {
-    createRecipe(
+    editRecipe(
       input: {
+        id: $id
         title: $title
         servings: $servings
         totalTime: $totalTime
@@ -103,8 +114,9 @@ const CREATE_RECIPE = gql`
   }
 `;
 
-CreateRecipe.propTypes = {
-  createRecipe: PropTypes.func.isRequired,
+EditForm.propTypes = {
+  recipe: PropTypes.object.isRequired,
+  editRecipe: PropTypes.func.isRequired,
 };
 
-export default graphql(CREATE_RECIPE, { name: 'createRecipe' })(CreateRecipe);
+export default graphql(EDIT_RECIPE, { name: 'editRecipe' })(EditForm);

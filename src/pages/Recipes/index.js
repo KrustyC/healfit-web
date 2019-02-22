@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
 
 import Navbar from 'uikit/organisms/navbars/EmptyNavbar';
-import Footer from 'uikit/organisms/Footer';
 
 import CreateRecipe from './Create';
 import EditRecipe from './Edit';
@@ -19,7 +18,6 @@ const RecipesIndex = ({ match: { path } }) => (
       <Route path={`${path}/:id`} component={ViewRecipe} />
       <Route component={ListRecipes} />
     </Switch>
-    {/* <Footer /> */}
   </Fragment>
 );
 
