@@ -9,7 +9,7 @@ export const FETCH_INITIAL_DATA = gql`
 
   query FetchGlobalData {
     globalData {
-      ingridientsCategories {
+      ingredientsCategories {
         ...ValueObjectData
       }
       measurements {

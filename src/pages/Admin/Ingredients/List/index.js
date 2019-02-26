@@ -17,7 +17,7 @@ import {
 } from 'uikit/blocks/Table';
 import Heading from 'uikit/elements/Heading';
 import ReactProgressiveList from 'react-progressive-list';
-import Ingridient from './Ingridient';
+import Ingredient from './Ingredient';
 
 const Div = styled.div`
   ${({ theme }) => css`
@@ -27,8 +27,8 @@ const Div = styled.div`
 `;
 
 const GET_INGRIDIENTS = gql`
-  query GetIngridients {
-    ingridients {
+  query GetIngredients {
+    ingredients {
       id
       name
       calories
@@ -57,7 +57,7 @@ const Row = styled.div`
   align-items: center;
 `;
 
-class Ingridients extends Component {
+class Ingredients extends Component {
   static propTypes = {
     client: PropTypes.shape({
       query: PropTypes.func.isRequired,
@@ -65,14 +65,14 @@ class Ingridients extends Component {
     toastManager: PropTypes.shape({
       add: PropTypes.func.isRequired,
     }).isRequired,
-    deleteIngridient: PropTypes.func.isRequired,
-    updateIngridient: PropTypes.func.isRequired,
+    deleteIngredient: PropTypes.func.isRequired,
+    updateIngredient: PropTypes.func.isRequired,
   };
 
   state = {
     loading: true,
     error: null,
-    ingridients: [],
+    ingredients: [],
   };
 
   async componentDidMount() {
@@ -82,7 +82,7 @@ class Ingridients extends Component {
       });
 
       return this.setState({
-        ingridients: result.data.ingridients,
+        ingredients: result.data.ingredients,
         loading: false,
       });
     } catch (error) {
@@ -91,13 +91,13 @@ class Ingridients extends Component {
   }
 
   onDelete = async index => {
-    const { id } = this.state.ingridients[index];
+    const { id } = this.state.ingredients[index];
     try {
-      await this.props.deleteIngridient({ variables: { id } });
-      this.setState(({ ingridients }) => ({
-        ingridients: [
-          ...ingridients.slice(0, index),
-          ...ingridients.slice(index + 1),
+      await this.props.deleteIngredient({ variables: { id } });
+      this.setState(({ ingredients }) => ({
+        ingredients: [
+          ...ingredients.slice(0, index),
+          ...ingredients.slice(index + 1),
         ],
       }));
       return this.props.toastManager.add('Item has been succesfully deleted!', {
@@ -108,9 +108,9 @@ class Ingridients extends Component {
     }
   };
 
-  onUpdate = async ingridient => {
+  onUpdate = async ingredient => {
     try {
-      this.props.updateIngridient({ variables: { ...ingridient } });
+      this.props.updateIngredient({ variables: { ...ingredient } });
       return this.props.toastManager.add('Item has been succesfully updated!', {
         type: 'success',
       });
@@ -120,15 +120,15 @@ class Ingridients extends Component {
   };
 
   renderRow = index => {
-    const ingridient = this.state.ingridients[index];
-    if (!ingridient) {
+    const ingredient = this.state.ingredients[index];
+    if (!ingredient) {
       return null;
     }
     return (
-      <Ingridient
+      <Ingredient
         index={index}
-        key={ingridient.id}
-        ingridient={ingridient}
+        key={ingredient.id}
+        ingredient={ingredient}
         onUpdate={this.onUpdate}
         onDelete={this.onDelete}
       />
@@ -149,8 +149,8 @@ class Ingridients extends Component {
     return (
       <Div>
         <Row>
-          <Heading level="h2">Ingridients</Heading>
-          <Link to="/admin/ingridients/create">Add Ingridient</Link>
+          <Heading level="h2">Ingredients</Heading>
+          <Link to="/admin/ingredients/create">Add Ingredient</Link>
         </Row>
         <Table>
           <Header sticky>
@@ -182,7 +182,7 @@ class Ingridients extends Component {
               progressiveAmount={10}
               renderItem={this.renderRow}
               renderLoader={() => <div>Load</div>}
-              rowCount={this.state.ingridients.length}
+              rowCount={this.state.ingredients.length}
               useWindowScroll
             />
           </Body>
@@ -193,20 +193,20 @@ class Ingridients extends Component {
 }
 
 const DELETE_INGRIDIENT = gql`
-  mutation deleteIngridient($id: ID!) {
-    deleteIngridient(id: $id)
+  mutation deleteIngredient($id: ID!) {
+    deleteIngredient(id: $id)
   }
 `;
 
 const UPDATE_INGRIDIENT = gql`
-  mutation updateIngridient(
+  mutation updateIngredient(
     $id: ID!
     $name: String!
     $category: ID
     $calories: Int!
     $nutrients: NutrientsInput!
   ) {
-    updateIngridient(
+    updateIngredient(
       input: {
         id: $id
         name: $name
@@ -219,8 +219,8 @@ const UPDATE_INGRIDIENT = gql`
 `;
 
 export default compose(
-  graphql(UPDATE_INGRIDIENT, { name: 'updateIngridient' }),
-  graphql(DELETE_INGRIDIENT, { name: 'deleteIngridient' }),
+  graphql(UPDATE_INGRIDIENT, { name: 'updateIngredient' }),
+  graphql(DELETE_INGRIDIENT, { name: 'deleteIngredient' }),
   withApolloClient,
   withToastManager
-)(Ingridients);
+)(Ingredients);

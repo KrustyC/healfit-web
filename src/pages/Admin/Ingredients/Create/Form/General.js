@@ -7,7 +7,7 @@ import withGlobalData from 'hoc/withGlobalData';
 import { Row } from './style';
 
 const General = ({
-  globalData: { ingridientsCategories },
+  globalData: { ingredientsCategories },
   setFieldTouched,
   setFieldValue,
   values,
@@ -20,7 +20,7 @@ const General = ({
           name="name"
           as={Field}
           type="string"
-          placeholder="Add ingridient name..."
+          placeholder="Add ingredient name..."
         />
       </Form.Label>
       <ErrorMessage name="name">
@@ -38,7 +38,7 @@ const General = ({
               onBlur={() => setFieldTouched('category', true)}
               onChange={category => setFieldValue('category', category)}
             >
-              {ingridientsCategories.map(({ id, name }) => (
+              {ingredientsCategories.map(({ id, name }) => (
                 <Form.Select.Option key={id} label={name} value={id} />
               ))}
             </Form.Select>
@@ -63,7 +63,7 @@ const General = ({
 
 General.propTypes = {
   globalData: PropTypes.shape({
-    ingridientsCategories: PropTypes.arrayOf(
+    ingredientsCategories: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,

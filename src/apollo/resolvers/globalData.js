@@ -1,6 +1,6 @@
 const defaults = {
   globalData: {
-    ingridientCategories: [],
+    ingredientCategories: [],
     __typename: 'GlobalData',
   },
 };

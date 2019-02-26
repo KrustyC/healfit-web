@@ -23,7 +23,7 @@ const initialValues = {
   description: '',
   category: 0,
   level: 0,
-  ingridients: [],
+  ingredients: [],
   method: html.deserialize(''),
   picture: '',
   calories: 0,
@@ -75,7 +75,7 @@ const CREATE_RECIPE = gql`
     $description: String!
     $category: RecipeCategoryInput!
     $level: RecipeLevelInput!
-    $ingridients: [RecipeIngridientInput]!
+    $ingredients: [RecipeIngredientInput]!
     $method: String!
     $picture: String!
     $calories: Int
@@ -91,7 +91,7 @@ const CREATE_RECIPE = gql`
         totalTime: $totalTime
         category: $category
         level: $level
-        ingridients: $ingridients
+        ingredients: $ingredients
         method: $method
         picture: $picture
         calories: $calories

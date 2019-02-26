@@ -4,24 +4,24 @@ import { Switch, Redirect, Route } from 'react-router-dom';
 import Navbar from 'uikit/organisms/navbars/AdminNavbar';
 import Container from 'uikit/blocks/Container';
 
-import Ingridients from './Ingridients';
+import Ingredients from './Ingredients';
 
-const IngridientIndex = ({ match: { path } }) => (
+const IngredientIndex = ({ match: { path } }) => (
   <>
     <Navbar />
     <Container size="fullscreen">
       <Switch>
-        <Route path={`${path}/ingridients`} component={Ingridients} />
+        <Route path={`${path}/ingredients`} component={Ingredients} />
         <Redirect to={`${path}/signin`} />
       </Switch>
     </Container>
   </>
 );
 
-IngridientIndex.propTypes = {
+IngredientIndex.propTypes = {
   match: PropTypes.shape({
     path: PropTypes.string.isRequired,
   }).isRequired,
 };
 
-export default IngridientIndex;
+export default IngredientIndex;

@@ -20,13 +20,13 @@ const RubbishIcon = styled(RubbishBin)`
   `}
 `;
 
-const IngridientList = styled.div`
+const IngredientList = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
 
-const Ingridient = styled(
+const Ingredient = styled(
   posed.div({
     closed: {
       y: '-50px',
@@ -58,35 +58,35 @@ const Ingridient = styled(
   `}
 `;
 
-export default class Ingridients extends Component {
+export default class Ingredients extends Component {
   static propTypes = {
-    ingridients: PropTypes.array.isRequired,
-    onRemoveIngridient: PropTypes.func.isRequired,
+    ingredients: PropTypes.array.isRequired,
+    onRemoveIngredient: PropTypes.func.isRequired,
   };
 
-  onRemoveIngridient = ingridient => () =>
-    this.props.onRemoveIngridient(ingridient.id);
+  onRemoveIngredient = ingredient => () =>
+    this.props.onRemoveIngredient(ingredient.id);
 
   render() {
-    const { ingridients } = this.props;
+    const { ingredients } = this.props;
     return (
       <>
-        <Heading level="h4">Selected Ingridients</Heading>
-        <IngridientList>
-          {ingridients.map(ingridient => (
-            <Ingridient key={ingridient.id} initialPose="closed" pose="open">
+        <Heading level="h4">Selected Ingredients</Heading>
+        <IngredientList>
+          {ingredients.map(ingredient => (
+            <Ingredient key={ingredient.id} initialPose="closed" pose="open">
               <P>
-                {ingridient.quantity} {ingridient.measurement.name}{' '}
-                {ingridient.name}
+                {ingredient.quantity} {ingredient.measurement.name}{' '}
+                {ingredient.name}
               </P>
               <RubbishIcon
                 role="button"
-                onClick={this.onRemoveIngridient(ingridient)}
+                onClick={this.onRemoveIngredient(ingredient)}
                 tabIndex="0"
               />
-            </Ingridient>
+            </Ingredient>
           ))}
-        </IngridientList>
+        </IngredientList>
       </>
     );
   }

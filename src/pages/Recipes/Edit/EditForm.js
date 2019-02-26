@@ -25,7 +25,7 @@ const getInitiallValuesFromRecipe = recipe => ({
     value: recipe.category.id,
   },
   level: recipe.category.id,
-  ingridients: recipe.ingridients,
+  ingredients: recipe.ingredients,
   method: html.deserialize(recipe.method),
   picture: recipe.picture,
   calories: recipe.calories,
@@ -83,7 +83,7 @@ const EDIT_RECIPE = gql`
     $totalTime: Int!
     $category: RecipeCategoryInput!
     $level: RecipeLevelInput!
-    $ingridients: [RecipeIngridientInput]!
+    $ingredients: [RecipeIngredientInput]!
     $method: String!
     $picture: String!
     $calories: Int
@@ -99,7 +99,7 @@ const EDIT_RECIPE = gql`
         totalTime: $totalTime
         category: $category
         level: $level
-        ingridients: $ingridients
+        ingredients: $ingredients
         method: $method
         picture: $picture
         calories: $calories

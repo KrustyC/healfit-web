@@ -14,8 +14,8 @@ const validateInfo = {
     .max(3),
 };
 
-const validateIngridients = {
-  ingridients: Yup.array()
+const validateIngredients = {
+  ingredients: Yup.array()
     .of(
       Yup.object().shape({
         id: Yup.string().required(),
@@ -26,8 +26,8 @@ const validateIngridients = {
         }).required,
       })
     )
-    .required('Please add some ingridients')
-    .min(1, 'Add at least one ingridient'),
+    .required('Please add some ingredients')
+    .min(1, 'Add at least one ingredient'),
 };
 
 const validateMethod = {
@@ -48,7 +48,7 @@ const validateMore = {
 };
 
 const validateStep1 = Yup.object().shape({ ...validateInfo });
-const validateStep2 = Yup.object().shape({ ...validateIngridients });
+const validateStep2 = Yup.object().shape({ ...validateIngredients });
 const validateStep3 = Yup.object().shape({ ...validateMethod });
 const validateStep4 = Yup.object().shape({ ...validateMore });
 

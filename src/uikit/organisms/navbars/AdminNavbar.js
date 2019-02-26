@@ -15,7 +15,7 @@ export default () => (
         <Navbar.Link type="index" to="/admin/users">
           Users
         </Navbar.Link>
-        <Navbar.Link to="/admin/ingridients">Ingridients</Navbar.Link>
+        <Navbar.Link to="/admin/ingredients">Ingredients</Navbar.Link>
       </Navbar.Menu>
     </Navbar.Collapse>
   </Navbar>

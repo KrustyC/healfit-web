@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 const GET_GLOBAL_DATA = gql`
   {
     globalData @client {
-      ingridientsCategories {
+      ingredientsCategories {
         id
         name
       }

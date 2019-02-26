@@ -18,39 +18,39 @@ const validationSchema = Yup.object().shape({
   category: Yup.string().required('Please add a category'),
   calories: Yup.number()
     .min(0, 'Use a positive number')
-    .required('Please add the kcal of this ingridient'),
+    .required('Please add the kcal of this ingredient'),
   nutrients: Yup.object().shape({
     cholesterol: Yup.number()
       .min(0, 'Use a positive number')
-      .required('Please add cholesterol % of this ingridient'),
+      .required('Please add cholesterol % of this ingredient'),
     fat: Yup.object().shape({
       monounsaturated: Yup.number()
         .min(0, 'Use a positive number')
-        .required('Please add monounsaturated fat % of this ingridient'),
+        .required('Please add monounsaturated fat % of this ingredient'),
       saturated: Yup.number()
         .min(0, 'Use a positive number')
-        .required('Please add saturated fat % of this ingridient'),
+        .required('Please add saturated fat % of this ingredient'),
       polyunsaturated: Yup.number()
         .min(0, 'Use a positive number')
-        .required('Please add polyunsaturated fat % of this ingridient'),
+        .required('Please add polyunsaturated fat % of this ingredient'),
     }),
     carbohydrate: Yup.object().shape({
       fiber: Yup.number()
         .min(0, 'Use a positive number')
-        .required('Please add fiber % of this ingridient'),
+        .required('Please add fiber % of this ingredient'),
       sugar: Yup.number()
         .min(0, 'Use a positive number')
-        .required('Please add sugar % of this ingridient'),
+        .required('Please add sugar % of this ingredient'),
     }),
     potassium: Yup.number()
       .min(0, 'Use a positive number')
-      .required('Please add potassium % of this ingridient'),
+      .required('Please add potassium % of this ingredient'),
     protein: Yup.number()
       .min(0, 'Use a positive number')
-      .required('Please add protein % of this ingridient'),
+      .required('Please add protein % of this ingredient'),
     sodium: Yup.number()
       .min(0, 'Use a positive number')
-      .required('Please add sodium % of this ingridient'),
+      .required('Please add sodium % of this ingredient'),
   }),
 });
 
@@ -75,7 +75,7 @@ const initialValues = {
   },
 };
 
-const AddIngridientForm = ({ onSubmit }) => (
+const AddIngredientForm = ({ onSubmit }) => (
   <Formik
     initialValues={initialValues}
     onSubmit={onSubmit}
@@ -109,15 +109,15 @@ const AddIngridientForm = ({ onSubmit }) => (
           loading={isSubmitting}
           disabled={isSubmitting || !isValid}
         >
-          Add Ingridient
+          Add Ingredient
         </Button>
       </Form>
     )}
   </Formik>
 );
 
-AddIngridientForm.propTypes = {
+AddIngredientForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
 
-export default AddIngridientForm;
+export default AddIngredientForm;

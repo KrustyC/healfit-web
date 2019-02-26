@@ -7,7 +7,7 @@ import Button from 'uikit/blocks/Button';
 import P from 'uikit/elements/P';
 import withGlobalData from 'hoc/withGlobalData';
 
-const AddIngridientRow = styled(
+const AddIngredientRow = styled(
   posed.div({
     closed: {
       height: '0px',
@@ -40,9 +40,9 @@ const Row = styled.div`
   }
 `;
 
-class AddIngridient extends Component {
+class AddIngredient extends Component {
   static propTypes = {
-    ingridient: PropTypes.shape({
+    ingredient: PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
     }).isRequired,
@@ -62,14 +62,14 @@ class AddIngridient extends Component {
 
   onSelectMeasurement = measurement => this.setState({ measurement });
 
-  onCancelIngridient = () => this.props.onCancel();
+  onCancelIngredient = () => this.props.onCancel();
 
-  onAddIngridient = () => {
-    const { ingridient } = this.props;
+  onAddIngredient = () => {
+    const { ingredient } = this.props;
     const { quantity, measurement } = this.state;
     console.log(quantity);
-    const newIngridient = {
-      ...ingridient,
+    const newIngredient = {
+      ...ingredient,
       quantity,
       measurement: {
         id: measurement.value,
@@ -77,21 +77,21 @@ class AddIngridient extends Component {
       },
     };
 
-    this.props.onConfirm(newIngridient);
+    this.props.onConfirm(newIngredient);
   };
 
   render() {
     const { quantity, measurement } = this.state;
     const {
-      ingridient,
+      ingredient,
       globalData: { measurements },
     } = this.props;
 
     return (
       <>
-        <AddIngridientRow initialPose="closed" pose="open">
+        <AddIngredientRow initialPose="closed" pose="open">
           <P>
-            <b>Ingridient:</b> {ingridient.name}
+            <b>Ingredient:</b> {ingredient.name}
           </P>
           <Row>
             <Form.FormGroup>
@@ -122,17 +122,17 @@ class AddIngridient extends Component {
           <Row>
             <Button
               color="primary"
-              onClick={this.onAddIngridient}
+              onClick={this.onAddIngredient}
               disabled={!quantity || !measurement}
             >
-              Add Ingridient
+              Add Ingredient
             </Button>
-            <Button onClick={this.onCancelIngridient}>Cancel</Button>
+            <Button onClick={this.onCancelIngredient}>Cancel</Button>
           </Row>
-        </AddIngridientRow>
+        </AddIngredientRow>
       </>
     );
   }
 }
 
-export default withGlobalData(AddIngridient);
+export default withGlobalData(AddIngredient);

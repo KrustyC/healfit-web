@@ -35,10 +35,10 @@ const Sidebar = ({ page }) => (
         <P>Provide some generic information about the recipes</P>
       </VerticalProgress.Step>
       <VerticalProgress.Step>
-        <Title level="h4">Ingridients</Title>
+        <Title level="h4">Ingredients</Title>
         <P>
-          Provide all needed ingridients, they come from a list of preselected
-          one, if you can;t find your ingridient, feel free to create one
+          Provide all needed ingredients, they come from a list of preselected
+          one, if you can;t find your ingredient, feel free to create one
         </P>
       </VerticalProgress.Step>
       <VerticalProgress.Step>

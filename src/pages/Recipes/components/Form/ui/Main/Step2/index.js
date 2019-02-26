@@ -6,12 +6,12 @@ import Heading from 'uikit/elements/Heading';
 
 import Form from 'uikit/blocks/Form';
 import Wizard from 'components/Wizard';
-import AddIngridient from './AddIngridient';
-import Ingridients from './Ingridients';
+import AddIngredient from './AddIngredient';
+import Ingredients from './Ingredients';
 
 const SEARCH_INGRIDIENTS = gql`
-  query ingridients($name: String) {
-    ingridientsByName(name: $name) {
+  query ingredients($name: String) {
+    ingredientsByName(name: $name) {
       id
       name
     }
@@ -21,7 +21,7 @@ const SEARCH_INGRIDIENTS = gql`
 class Step2 extends Component {
   static propTypes = {
     values: PropTypes.shape({
-      ingridients: PropTypes.array.isRequired,
+      ingredients: PropTypes.array.isRequired,
     }).isRequired,
     client: PropTypes.shape({
       query: PropTypes.func.isRequired,
@@ -30,13 +30,13 @@ class Step2 extends Component {
   };
 
   state = {
-    availableIngridients: [],
-    currentIngridient: null,
+    availableIngredients: [],
+    currentIngredient: null,
   };
 
-  onSearchIngridient = async value => {
+  onSearchIngredient = async value => {
     if (value.length === 0) {
-      return this.setState({ availableIngridients: [] });
+      return this.setState({ availableIngredients: [] });
     }
 
     try {
@@ -46,7 +46,7 @@ class Step2 extends Component {
       });
 
       return this.setState({
-        availableIngridients: result.data.ingridientsByName,
+        availableIngredients: result.data.ingredientsByName,
       });
     } catch (error) {
       return error;
@@ -54,58 +54,58 @@ class Step2 extends Component {
     }
   };
 
-  onCancelIngridient = () => this.setState({ currentIngridient: null });
+  onCancelIngredient = () => this.setState({ currentIngredient: null });
 
-  onSelectIngridient = ingridient =>
-    this.setState({ currentIngridient: ingridient });
+  onSelectIngredient = ingredient =>
+    this.setState({ currentIngredient: ingredient });
 
-  onAddIngridient = ingridient => {
-    console.log(ingridient);
-    const ingridients = [...this.props.values.ingridients, ingridient];
-    this.props.setFieldValue('ingridients', ingridients);
-    this.setState({ currentIngridient: null });
+  onAddIngredient = ingredient => {
+    console.log(ingredient);
+    const ingredients = [...this.props.values.ingredients, ingredient];
+    this.props.setFieldValue('ingredients', ingredients);
+    this.setState({ currentIngredient: null });
   };
 
-  onRemoveIngridient = id => {
-    const { ingridients } = this.props.values;
-    const index = ingridients.findIndex(ingridient => ingridient.id === id);
+  onRemoveIngredient = id => {
+    const { ingredients } = this.props.values;
+    const index = ingredients.findIndex(ingredient => ingredient.id === id);
 
-    const updatedIngridients = [
-      ...ingridients.slice(0, index),
-      ...ingridients.slice(index + 1, ingridients.length),
+    const updatedIngredients = [
+      ...ingredients.slice(0, index),
+      ...ingredients.slice(index + 1, ingredients.length),
     ];
 
-    this.props.setFieldValue('ingridients', updatedIngridients);
+    this.props.setFieldValue('ingredients', updatedIngredients);
   };
 
   render() {
     const { values } = this.props;
-    const { currentIngridient, availableIngridients } = this.state;
+    const { currentIngredient, availableIngredients } = this.state;
     console.log(values);
     return (
       <Wizard.Page>
-        <Heading level="h1">Ingridients</Heading>
+        <Heading level="h1">Ingredients</Heading>
         <Form.FormGroup>
           <Form.RemoteFilter
-            placeholder="Search for ingridients..."
-            list={availableIngridients}
+            placeholder="Search for ingredients..."
+            list={availableIngredients}
             labelField="name"
-            emptyMessage="No Ingridients Avaialable"
-            query={this.onSearchIngridient}
-            onSelect={this.onSelectIngridient}
+            emptyMessage="No Ingredients Avaialable"
+            query={this.onSearchIngredient}
+            onSelect={this.onSelectIngredient}
           />
-          <Form.Feedback name="ingridients" />
+          <Form.Feedback name="ingredients" />
         </Form.FormGroup>
-        {currentIngridient && (
-          <AddIngridient
-            ingridient={currentIngridient}
-            onConfirm={this.onAddIngridient}
-            onCancel={this.onCancelIngridient}
+        {currentIngredient && (
+          <AddIngredient
+            ingredient={currentIngredient}
+            onConfirm={this.onAddIngredient}
+            onCancel={this.onCancelIngredient}
           />
         )}
-        <Ingridients
-          ingridients={values.ingridients}
-          onRemoveIngridient={this.onRemoveIngridient}
+        <Ingredients
+          ingredients={values.ingredients}
+          onRemoveIngredient={this.onRemoveIngredient}
         />
       </Wizard.Page>
     );

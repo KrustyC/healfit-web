@@ -33,7 +33,7 @@ export default class Step3 extends Component {
     const { method: value } = this.props.values;
     return (
       <Wizard.Page>
-        <Heading level="h1">Ingridients</Heading>
+        <Heading level="h1">Ingredients</Heading>
         <Editor
           placeholder="Write your recipe method..."
           value={value}

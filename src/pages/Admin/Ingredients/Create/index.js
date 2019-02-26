@@ -15,9 +15,9 @@ const Div = styled.div`
   `}
 `;
 
-class CreateIngridient extends Component {
+class CreateIngredient extends Component {
   static propTypes = {
-    createIngridient: PropTypes.func.isRequired,
+    createIngredient: PropTypes.func.isRequired,
     toastManager: PropTypes.shape({
       add: PropTypes.func.isRequired,
     }).isRequired,
@@ -25,7 +25,7 @@ class CreateIngridient extends Component {
 
   onCreate = async (values, { resetForm }) => {
     try {
-      await this.props.createIngridient({
+      await this.props.createIngredient({
         variables: { ...values, category: values.category.id },
       });
       this.props.toastManager.add('Item has been succesfully added!', {
@@ -42,7 +42,7 @@ class CreateIngridient extends Component {
   render() {
     return (
       <Div>
-        <Heading>Add a new ingridient</Heading>
+        <Heading>Add a new ingredient</Heading>
         <Form onSubmit={this.onCreate} />
       </Div>
     );
@@ -50,13 +50,13 @@ class CreateIngridient extends Component {
 }
 
 const CREATE_INGRIDIENT = gql`
-  mutation addIngridient(
+  mutation addIngredient(
     $name: String!
     $category: ID
     $calories: Int!
     $nutrients: NutrientsInput!
   ) {
-    addIngridient(
+    addIngredient(
       input: {
         name: $name
         category: $category
@@ -70,6 +70,6 @@ const CREATE_INGRIDIENT = gql`
 `;
 
 export default compose(
-  graphql(CREATE_INGRIDIENT, { name: 'createIngridient' }),
+  graphql(CREATE_INGRIDIENT, { name: 'createIngredient' }),
   withToastManager
-)(CreateIngridient);
+)(CreateIngredient);

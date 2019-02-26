@@ -29,7 +29,7 @@ const typeDefs = `
   }
 
   type GlobalData {
-    ingridientsCategories: ValueObject
+    ingredientsCategories: ValueObject
     measurements: ValueObject
   }
 

@@ -19,7 +19,7 @@ const GET_RECIPE = gql`
         id
         name
       }
-      ingridients {
+      ingredients {
         id
         name
         measurement {

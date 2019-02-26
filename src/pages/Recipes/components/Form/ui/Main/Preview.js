@@ -89,9 +89,9 @@ const Preview = ({ values }) => (
           {values.fat}
         </Item>
       </Row>
-      <Heading level="h4">Ingridients List</Heading>
+      <Heading level="h4">Ingredients List</Heading>
       <List type="unordered">
-        {values.ingridients.map(({ id, name, measurement, quantity }) => (
+        {values.ingredients.map(({ id, name, measurement, quantity }) => (
           <List.Item key={id}>
             {quantity} {measurement.name} {name}
           </List.Item>
