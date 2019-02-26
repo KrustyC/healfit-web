@@ -112,7 +112,7 @@ const Recipes = () => (
                 <Card.Footer>
                   <Circle>d</Circle>
                   by Davide Crestini
-                  <Link css="margin-left: auto;" to={`recipes/${recipe.slug}`}>
+                  <Link css="margin-left: auto;" to={`/recipes/${recipe.slug}`}>
                     View
                   </Link>
                 </Card.Footer>

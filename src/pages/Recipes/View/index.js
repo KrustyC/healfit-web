@@ -10,6 +10,7 @@ const GET_RECIPE = gql`
       slug
       title
       servings
+      description
       totalTime
       category {
         id
