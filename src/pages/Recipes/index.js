@@ -14,8 +14,8 @@ const RecipesIndex = ({ match: { path } }) => (
     <Navbar />
     <Switch>
       <Route path={`${path}/create`} component={CreateRecipe} />
-      <Route path={`${path}/edit/:id`} component={EditRecipe} />
-      <Route path={`${path}/:id`} component={ViewRecipe} />
+      <Route path={`${path}/edit/:slug`} component={EditRecipe} />
+      <Route path={`${path}/:slug`} component={ViewRecipe} />
       <Route component={ListRecipes} />
     </Switch>
   </Fragment>

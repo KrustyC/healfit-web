@@ -43,7 +43,7 @@ const Grid = styled.div`
 const GET_RECIPES = gql`
   query GetRecipes {
     recipes {
-      id
+      slug
       title
       calories
       picture
@@ -112,7 +112,7 @@ const Recipes = () => (
                 <Card.Footer>
                   <Circle>d</Circle>
                   by Davide Crestini
-                  <Link css="margin-left: auto;" to={`recipes/${recipe.id}`}>
+                  <Link css="margin-left: auto;" to={`recipes/${recipe.slug}`}>
                     View
                   </Link>
                 </Card.Footer>
