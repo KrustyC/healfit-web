@@ -10,8 +10,8 @@ const GET_RECIPE = gql`
     recipe(slug: $slug) {
       slug
       title
-      servings
       description
+      servings
       totalTime
       category {
         name
@@ -20,6 +20,7 @@ const GET_RECIPE = gql`
         name
       }
       ingredients {
+        id
         name
         measurement {
           name

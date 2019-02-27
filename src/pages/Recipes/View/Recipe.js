@@ -5,6 +5,11 @@ import styled, { css } from 'styled-components';
 import Heading from 'uikit/elements/Heading';
 import Link from 'uikit/elements/Link';
 import Button from 'uikit/blocks/Button';
+import ServingIcon from 'assets/icons/dinner.svg';
+import ClockIcon from 'assets/icons/clock.svg';
+import CategoryIcon from 'assets/icons/list.svg';
+import LevelIcon from 'assets/icons/level.svg';
+
 import { Image as CloudinaryImage, Transformation } from 'cloudinary-react';
 import P from 'uikit/elements/P';
 
@@ -115,7 +120,7 @@ const RecipeInfo = styled.div`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     grid-column-gap: 15px;
     width: ${theme.dimensions.containerWidth.fullscreen};
     padding: ${theme.padding.lg} 0;
@@ -125,26 +130,22 @@ const RecipeInfo = styled.div`
 `;
 
 const Info = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    align-items: center;
-    flex: 1;
-    flex-direction: column;
-    b {
-      font-size: ${theme.fontSize.small};
-      text-transform: uppercase;
-    }
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex: 1;
+`;
 
-    span {
-      margin-top: ${theme.margin.xs};
-      font-size: ${theme.fontSize.regular};
-    }
-  `}
+const InfoTitle = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  height: 23px;
 `;
 
 const Actions = styled.div`
   ${({ theme }) => css`
-    margin: ${theme.margin.md} 0 0 0;
+    margin: ${theme.margin.sm} 0;
     margin-top: bottom;
     height: 100%;
 
@@ -159,11 +160,9 @@ const EditLink = styled(Link)`
 `;
 
 const Ingredients = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  `}
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `;
 
 const Method = styled.div`
@@ -201,6 +200,30 @@ const Circle = styled.div`
     align-items: center;
     justify-content: center;
     margin-right: ${theme.margin.sm};
+  `}
+`;
+
+const Left = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    height: 23px;
+    svg {
+      margin-right: ${theme.margin.sm};
+      width: 15px;
+      height: 15px;
+    }
+  `}
+`;
+
+const Right = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    span {
+      margin-top: ${theme.margin.xs};
+    }
   `}
 `;
 
@@ -280,24 +303,40 @@ const Recipe = ({ recipe }) => (
     </Top>
     <RecipeInfo>
       <Info>
-        <b>Servings</b>
-        <span>{recipe.servings}</span>
+        <Left>
+          <ServingIcon />
+        </Left>
+        <Right>
+          <InfoTitle>Servings</InfoTitle>
+          <span>{recipe.servings}</span>
+        </Right>
       </Info>
       <Info>
-        <b>Prep Time</b>
-        <span>{recipe.totalTime} min</span>
+        <Left>
+          <ClockIcon />
+        </Left>
+        <Right>
+          <InfoTitle>Prep Time</InfoTitle>
+          <span>{recipe.totalTime} min</span>
+        </Right>
       </Info>
       <Info>
-        <b>Difficulty</b>
-        <span>{recipe.level.name}</span>
+        <Left>
+          <LevelIcon />
+        </Left>
+        <Right>
+          <InfoTitle>Level</InfoTitle>
+          <span>{recipe.level.name}</span>
+        </Right>
       </Info>
       <Info>
-        <b>carbohydrates</b>
-        <span>{recipe.carbohydrates}g</span>
-      </Info>
-      <Info>
-        <b>fat</b>
-        <span>{recipe.fat}g</span>
+        <Left>
+          <CategoryIcon />
+        </Left>
+        <Right>
+          <InfoTitle>Category</InfoTitle>
+          <span>{recipe.category.name}</span>
+        </Right>
       </Info>
     </RecipeInfo>
     <Ingredients>
