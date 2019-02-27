@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
+import Footer from 'uikit/organisms/Footer';
 import Recipe from './Recipe';
 
 const GET_RECIPE = gql`
@@ -13,19 +14,15 @@ const GET_RECIPE = gql`
       description
       totalTime
       category {
-        id
         name
       }
       level {
-        id
         name
       }
       ingredients {
-        id
         name
         measurement {
           name
-          id
         }
         quantity
       }
@@ -44,14 +41,17 @@ const ViewRecipe = ({
     params: { slug },
   },
 }) => (
-  <Query query={GET_RECIPE} variables={{ slug }}>
-    {({ loading, error, data }) => {
-      if (loading) return 'Loading...';
-      if (error) return `Error! ${error.message}`;
+  <>
+    <Query query={GET_RECIPE} variables={{ slug }}>
+      {({ loading, error, data }) => {
+        if (loading) return 'Loading...';
+        if (error) return `Error! ${error.message}`;
 
-      return <Recipe recipe={data.recipe} />;
-    }}
-  </Query>
+        return <Recipe recipe={data.recipe} />;
+      }}
+    </Query>
+    <Footer />
+  </>
 );
 
 ViewRecipe.propTypes = {

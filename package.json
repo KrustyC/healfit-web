@@ -6,7 +6,7 @@
   "repository": "git@github.com:KrustyC/fitelity-web.git",
   "author": "Davide Crestini <davide.crestini94@gmail.com>",
   "scripts": {
-    "start": "webpack-dev-server --config webpack/webpack.dev.js",
+    "dev": "webpack-dev-server --config webpack/webpack.dev.js",
     "build": "webpack --config webpack/webpack.prod.js",
     "test:lint": "eslint src/"
   },
@@ -94,6 +94,7 @@
     "react-hot-loader": "^4.7.1",
     "react-pose": "^4.0.5",
     "react-progressive-list": "^0.1.2",
+    "react-render-html": "^0.6.0",
     "react-router-dom": "4.4.0-beta.5",
     "react-sortable-hoc": "^1.5.3",
     "react-svg": "^7.2.5",
