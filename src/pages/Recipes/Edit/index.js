@@ -30,6 +30,7 @@ const GET_RECIPE = gql`
       }
       method
       picture
+      description
       calories
       carbohydrates
       protein

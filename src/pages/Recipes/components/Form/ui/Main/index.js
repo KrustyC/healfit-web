@@ -59,7 +59,11 @@ const Main = ({
           setFieldTouched={setFieldTouched}
           setFieldValue={setFieldValue}
         />
-        <Step4 values={values} setFieldValue={setFieldValue} />
+        <Step4
+          values={values}
+          setFieldValue={setFieldValue}
+          setFieldTouched={setFieldTouched}
+        />
         <Preview values={values} />
       </Wizard.Pages>
     </div>

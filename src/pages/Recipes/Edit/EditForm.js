@@ -28,6 +28,7 @@ const getInitiallValuesFromRecipe = recipe => ({
   ingredients: recipe.ingredients,
   method: html.deserialize(recipe.method),
   picture: recipe.picture,
+  description: recipe.description,
   calories: recipe.calories,
   carbohydrates: recipe.carbohydrates,
   protein: recipe.protein,
@@ -40,12 +41,13 @@ const EditForm = ({ recipe, editRecipe }) => {
   const [data, setData] = useState(null);
   const [idle, setIdle] = useState(true);
 
-  const onCreateRecipe = async values => {
+  const onEditRecipe = async values => {
     setPending(true);
     setIdle(false);
 
     try {
-      const result = await editRecipe({ variables: values });
+      const { slug } = recipe;
+      const result = await editRecipe({ variables: { ...values, slug } });
       console.log(result);
       // Redirect to View
       setData(result.data.editRecipe);
@@ -68,7 +70,7 @@ const EditForm = ({ recipe, editRecipe }) => {
         <Form
           edit
           initialValues={getInitiallValuesFromRecipe(recipe)}
-          onComplete={onCreateRecipe}
+          onComplete={onEditRecipe}
         />
       )}
     </Layout>
@@ -77,7 +79,7 @@ const EditForm = ({ recipe, editRecipe }) => {
 
 const EDIT_RECIPE = gql`
   mutation editRecipe(
-    $id: ID!
+    $slug: String!
     $title: String!
     $servings: Int!
     $totalTime: Int!
@@ -93,7 +95,7 @@ const EDIT_RECIPE = gql`
   ) {
     editRecipe(
       input: {
-        id: $id
+        slug: $slug
         title: $title
         servings: $servings
         totalTime: $totalTime
@@ -108,7 +110,7 @@ const EDIT_RECIPE = gql`
         fat: $fat
       }
     ) {
-      id
+      slug
       title
     }
   }

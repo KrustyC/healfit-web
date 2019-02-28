@@ -29,7 +29,7 @@ const Image = styled(CloudinaryImage)`
   `}
 `;
 
-const Step4 = ({ values, setFieldValue }) => (
+const Step4 = ({ values, setFieldValue, setFieldTouched }) => (
   <Wizard.Page>
     <Heading level="h1">More Info</Heading>
     <Form.FormGroup>
@@ -76,8 +76,10 @@ const Step4 = ({ values, setFieldValue }) => (
       <Form.Label>
         Description
         <Form.Textarea
-          as={Field}
-          name="description"
+          value={values.description}
+          onChange={e => setFieldValue('description', e.target.value)}
+          onFocus={() => setFieldTouched('description')}
+          rows="4"
           placeholder="Please add as short description of your recipe..."
         />
       </Form.Label>
@@ -133,6 +135,7 @@ const Step4 = ({ values, setFieldValue }) => (
 Step4.propTypes = {
   values: PropTypes.object.isRequired,
   setFieldValue: PropTypes.func.isRequired,
+  setFieldTouched: PropTypes.func.isRequired,
 };
 
 export default Step4;
