@@ -1,22 +1,61 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Heading from 'uikit/elements/Heading';
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+const OuterContainer = styled.div`
+  ${({ theme }) => css`
+    width: ${theme.dimensions.containerWidth.fullscreen};
+    margin: ${theme.margin.md} 0;
+    padding: ${theme.padding.lg} 0;
+    background: #efefef;
+  `}
+`;
+
+const InnerContainer = styled.div`
+  ${({ theme }) => css`
+    width: ${theme.dimensions.containerWidth.large};
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  `}
+`;
+
+const Grid = styled.div`
+  ${({ theme }) => css`
+    margin-top: ${theme.margin.sm};
+    display: grid;
+    /* @TODO Here I should calculate based on number of items */
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+
+    grid-gap: ${theme.margin.sm};
+    grid-auto-flow: column;
+  `}
+`;
+
+const Ingredient = styled.div``;
+
+const Quantity = styled.span`
+  ${({ theme }) => css`
+    font-size: ${theme.fontSize.large};
+  `}
 `;
 
 const Ingredients = ({ ingredients }) => (
-  <Container>
-    <Heading level="h4">Ingredients</Heading>
-    {ingredients.map(
-      ({ name, quantity, measurement }) =>
-        `${quantity} ${measurement.name.toLowerCase()} ${name.toLowerCase()}`
-    )}
-  </Container>
+  <OuterContainer>
+    <InnerContainer>
+      <Heading level="h4">Ingredients</Heading>
+      <Grid>
+        {ingredients.map(({ name, quantity, measurement }) => (
+          <Ingredient>
+            <Quantity>{quantity}</Quantity> {measurement.name.toLowerCase()}{' '}
+            <b>{name.toLowerCase()}</b>
+          </Ingredient>
+        ))}
+      </Grid>
+    </InnerContainer>
+  </OuterContainer>
 );
 
 Ingredients.propTypes = {

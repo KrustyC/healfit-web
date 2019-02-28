@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import Header from './Header';
+import Nutrients from './Nutrients';
 import Info from './Info';
 import Ingredients from './Ingredients';
 import Method from './Method';
@@ -22,6 +23,7 @@ const Layout = styled.div`
 const Recipe = ({ recipe }) => (
   <Layout>
     <Header recipe={recipe} />
+    <Nutrients recipe={recipe} />
     <Info recipe={recipe} />
     <Ingredients ingredients={recipe.ingredients} />
     <Method method={recipe.method} />

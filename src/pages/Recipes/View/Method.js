@@ -1,23 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import renderHTML from 'react-render-html';
 import Heading from 'uikit/elements/Heading';
+import htmlParser from 'helpers/htmlParser';
 
-const Container = styled.div`
+const OuterContainer = styled.div`
   ${({ theme }) => css`
+    width: ${theme.dimensions.containerWidth.fullscreen};
+    padding: ${theme.padding.lg} 0;
+    margin: ${theme.margin.md} 0;
+  `}
+`;
+
+const InnerContainer = styled.div`
+  ${({ theme }) => css`
+    width: ${theme.dimensions.containerWidth.large};
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    margin-top: ${theme.margin.lg};
   `}
 `;
 
 const Method = ({ method }) => (
-  <Container>
-    <Heading level="h4">Method</Heading>
-    {renderHTML(method)}
-  </Container>
+  <OuterContainer>
+    <InnerContainer>
+      <Heading level="h4">Method</Heading>
+      {htmlParser(method)}
+    </InnerContainer>
+  </OuterContainer>
 );
 
 Method.propTypes = {

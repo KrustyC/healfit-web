@@ -11,7 +11,7 @@ import { Hr } from './shared';
 const Top = styled.div`
   ${({ theme }) => css`
     display: flex;
-    margin-top: ${theme.margin.lg};
+    margin: ${theme.margin.lg} 0 ${theme.margin.md} 0;
     min-height: 50vh;
   `}
 `;
@@ -49,41 +49,6 @@ const Description = styled(P)`
   `}
 `;
 
-const Nutrients = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    flex-direction: row;
-    /* margin: ${theme.margin.lg} 0; */
-  `}
-`;
-
-const Nutrient = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    flex: 1;
-    flex-direction: row;
-    align-items: flex-end;
-    /* border-right: 3px solid ${theme.colors.border}; */
-    margin: ${theme.margin.sm} 0;
-    /* padding: ${theme.margin.sm} ${theme.margin.sm} ${theme.margin.sm} 0; */
-
-    h2 {
-      margin-bottom: 0;
-    }
-
-    span:first-of-type {
-      margin-right: ${theme.margin.xs};
-    }
-
-    span:last-of-type {
-      text-transform: uppercase;
-      font-size: ${theme.fontSize.small};
-      font-weight: bold;
-      margin-bottom: ${theme.margin.xs};
-    }
-  `}
-`;
-
 const Actions = styled.div`
   ${({ theme }) => css`
     margin: ${theme.margin.sm} 0;
@@ -101,60 +66,26 @@ const EditLink = styled(Link)`
 `;
 
 const Header = ({ recipe }) => (
-  <Top>
-    <Picture>
-      <Image publicId={recipe.picture}>
-        <Transformation dpr="auto" width="auto" crop="scale" />
-      </Image>
-    </Picture>
-    <HeadInfo>
-      <Heading level="h1">{recipe.title}</Heading>
-      <Hr />
-      <Nutrients>
-        <Nutrient>
-          <Heading level="h2" color="primary">
-            {recipe.calories}
-          </Heading>
-          <span /> <span>calories</span>
-        </Nutrient>
-        <Nutrient>
-          <Heading level="h2" color="primary">
-            {recipe.protein}
-          </Heading>
-          <span>g</span>
-          <span>protein</span>
-        </Nutrient>
-        <Nutrient>
-          <Heading level="h2" color="primary">
-            {recipe.fiber || 25}
-          </Heading>
-          <span>g</span> <span>fiber</span>
-        </Nutrient>
-        <Nutrient>
-          <Heading level="h2" color="primary">
-            {recipe.carbohydrates}
-          </Heading>
-          <span>g</span>
-          <span>carbs</span>
-        </Nutrient>
-        <Nutrient>
-          <Heading level="h2" color="primary">
-            {recipe.fat}
-          </Heading>
-          <span>g</span>
-          <span>fat</span>
-        </Nutrient>
-      </Nutrients>
-      <Description>{recipe.description}</Description>
-
-      <Actions>
-        <Button squircled size="large" color="primary">
-          Add To Meal Plan
-        </Button>
-        <EditLink to={`/recipes/edit/${recipe.slug}`}>Edit Recipe</EditLink>
-      </Actions>
-    </HeadInfo>
-  </Top>
+  <>
+    <Top>
+      <Picture>
+        <Image publicId={recipe.picture}>
+          <Transformation dpr="auto" width="auto" crop="scale" />
+        </Image>
+      </Picture>
+      <HeadInfo>
+        <Heading level="h1">{recipe.title}</Heading>
+        <Hr />
+        <Description>{recipe.description}</Description>
+        <Actions>
+          <Button squircled size="large" color="primary">
+            Add To Meal Plan
+          </Button>
+          <EditLink to={`/recipes/edit/${recipe.slug}`}>Edit Recipe</EditLink>
+        </Actions>
+      </HeadInfo>
+    </Top>
+  </>
 );
 
 Header.propTypes = {

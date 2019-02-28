@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
+import BookmarkIcon from 'assets/icons/bookmark.svg';
 import { Hr } from './shared';
 
 const Container = styled.div`
@@ -8,8 +9,8 @@ const Container = styled.div`
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    margin: ${theme.margin.lg} 0;
-    padding: ${theme.padding.md} 0;
+    margin: ${theme.margin.md} 0;
+    padding: ${theme.padding.lg} 0;
     border-top: 2px solid ${theme.colors.border};
   `}
 `;
@@ -36,16 +37,28 @@ const Author = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: ${theme.padding.xs};
+    /* padding: ${theme.padding.xs}; */
   `}
 `;
 
 const Bookmark = styled.div`
-  ${({ theme }) => css`
+  ${({ theme, bookmarked }) => css`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: ${theme.padding.xs};
+
+    svg {
+      height: 25px;
+      width: 25px;
+      path {
+        stroke: ${theme.colors.primary};
+        stroke-width: 20;
+        /* stroke-linejoin: round; */
+        stroke-linecap: butt;
+      }
+      fill: ${bookmarked ? theme.colors.primary : theme.colors.light};
+    }
   `}
 `;
 
@@ -56,20 +69,30 @@ const Row = styled.div`
   align-items: center;
 `;
 
-const Bottom = () => (
-  <Container>
-    <Row>
-      <Circle>d</Circle>
-      <Author>
-        <b>Created by</b>
-        Davide Crestini
-        <Hr />
-      </Author>
-    </Row>
-    <Bookmark>
-      <b>Save this recipe for later</b>
-    </Bookmark>
-  </Container>
-);
+const Bottom = () => {
+  const [bookmarked, setBookmarked] = useState(false);
+
+  const onBookmark = () => {
+    // Call Api
+    setBookmarked(!bookmarked);
+  };
+
+  return (
+    <Container>
+      <Row>
+        <Circle>d</Circle>
+        <Author>
+          <b style={{ marginBottom: '1rem' }}>Created by</b>
+          Davide Crestini
+          <Hr css="margin-top: 2rem;" />
+        </Author>
+      </Row>
+      <Bookmark bookmarked={bookmarked}>
+        <b>Save this recipe for later</b>
+        <BookmarkIcon onClick={onBookmark} />
+      </Bookmark>
+    </Container>
+  );
+};
 
 export default Bottom;

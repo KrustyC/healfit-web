@@ -7,16 +7,24 @@ import ClockIcon from 'assets/icons/clock.svg';
 import CategoryIcon from 'assets/icons/list.svg';
 import LevelIcon from 'assets/icons/level.svg';
 
-const Container = styled.div`
+const OuterContainer = styled.div`
   ${({ theme }) => css`
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    grid-column-gap: 15px;
     width: ${theme.dimensions.containerWidth.fullscreen};
     padding: ${theme.padding.lg} 0;
-    margin: ${theme.margin.lg} 0;
-    background: #efefef;
+    margin: ${theme.margin.md} 0;
+    /* margin: ${theme.margin.lg} 0; */
+    /* background: #efefef; */
+  `}
+`;
+
+const InnerContainer = styled.div`
+  ${({ theme }) => css`
+    width: ${theme.dimensions.containerWidth.large};
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-column-gap: 15px;
   `}
 `;
 
@@ -59,44 +67,46 @@ const Right = styled.div`
 `;
 
 const RecipeInfo = ({ recipe }) => (
-  <Container>
-    <Info>
-      <Left>
-        <ServingIcon />
-      </Left>
-      <Right>
-        <InfoTitle>Servings</InfoTitle>
-        <span>{recipe.servings}</span>
-      </Right>
-    </Info>
-    <Info>
-      <Left>
-        <ClockIcon />
-      </Left>
-      <Right>
-        <InfoTitle>Prep Time</InfoTitle>
-        <span>{recipe.totalTime} min</span>
-      </Right>
-    </Info>
-    <Info>
-      <Left>
-        <LevelIcon />
-      </Left>
-      <Right>
-        <InfoTitle>Level</InfoTitle>
-        <span>{recipe.level.name}</span>
-      </Right>
-    </Info>
-    <Info>
-      <Left>
-        <CategoryIcon />
-      </Left>
-      <Right>
-        <InfoTitle>Category</InfoTitle>
-        <span>{recipe.category.name}</span>
-      </Right>
-    </Info>
-  </Container>
+  <OuterContainer>
+    <InnerContainer>
+      <Info>
+        <Left>
+          <ServingIcon />
+        </Left>
+        <Right>
+          <InfoTitle>Servings</InfoTitle>
+          <span>{recipe.servings}</span>
+        </Right>
+      </Info>
+      <Info>
+        <Left>
+          <ClockIcon />
+        </Left>
+        <Right>
+          <InfoTitle>Prep Time</InfoTitle>
+          <span>{recipe.totalTime} min</span>
+        </Right>
+      </Info>
+      <Info>
+        <Left>
+          <LevelIcon />
+        </Left>
+        <Right>
+          <InfoTitle>Level</InfoTitle>
+          <span>{recipe.level.name}</span>
+        </Right>
+      </Info>
+      <Info>
+        <Left>
+          <CategoryIcon />
+        </Left>
+        <Right>
+          <InfoTitle>Category</InfoTitle>
+          <span>{recipe.category.name}</span>
+        </Right>
+      </Info>
+    </InnerContainer>
+  </OuterContainer>
 );
 
 RecipeInfo.propTypes = {
