@@ -88,10 +88,11 @@ const EDIT_RECIPE = gql`
     $ingredients: [RecipeIngredientInput]!
     $method: String!
     $picture: String!
-    $calories: Int
-    $carbohydrates: Float
-    $protein: Float
-    $fat: Float
+    $description: String!
+    $calories: Int!
+    $carbohydrates: Float!
+    $protein: Float!
+    $fat: Float!
   ) {
     editRecipe(
       input: {
@@ -102,6 +103,7 @@ const EDIT_RECIPE = gql`
         category: $category
         level: $level
         ingredients: $ingredients
+        description: $description
         method: $method
         picture: $picture
         calories: $calories
