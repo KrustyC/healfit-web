@@ -14,8 +14,9 @@ const OuterContainer = styled.div`
 
 const InnerContainer = styled.div`
   ${({ theme }) => css`
-    width: ${theme.dimensions.containerWidth.large};
+    width: ${theme.dimensions.containerWidth.default};
     margin: 0 auto;
+    font-size: ${theme.fontSize.reading};
     display: flex;
     flex-direction: column;
   `}

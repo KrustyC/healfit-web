@@ -74,6 +74,7 @@ export default {
     xsmall: '1rem',
     small: '1.3rem',
     regular: '1.6rem',
+    reading: '2.0rem',
     large: '2.8rem',
     title: '5.4rem',
     h1: '4.4rem',

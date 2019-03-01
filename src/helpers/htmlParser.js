@@ -11,9 +11,14 @@ const isValidNode = node => {
 
     if (children.length === 1) {
       /**
-       * If there's only one child and it's empty, then the item should not
+       * If there's only one child and it's empty, or has one child only
+       * which only contains text, then the item should not
        * be rendered
        */
+      if (!children[0].children && children[0].data.length > 0) {
+        return true;
+      }
+
       return children[0].children.length > 0;
     }
 

@@ -28,6 +28,7 @@ const initialValues = {
   picture: '',
   calories: 0,
   carbohydrates: 0,
+  fiber: 0,
   protein: 0,
   fat: 0,
 };
@@ -61,7 +62,7 @@ const CreateRecipe = ({ createRecipe }) => {
         </div>
       )}
       {idle && (
-        <Form edit initialValues={initialValues} onComplete={onCreateRecipe} />
+        <Form initialValues={initialValues} onComplete={onCreateRecipe} />
       )}
     </Layout>
   );
@@ -81,6 +82,7 @@ const CREATE_RECIPE = gql`
     $calories: Int
     $carbohydrates: Float
     $protein: Float
+    $fiber: Float
     $fat: Float
   ) {
     createRecipe(
@@ -95,6 +97,7 @@ const CREATE_RECIPE = gql`
         method: $method
         picture: $picture
         calories: $calories
+        fiber: $fiber
         carbohydrates: $carbohydrates
         protein: $protein
         fat: $fat

@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import Form from 'uikit/blocks/Form';
 import { Field } from 'formik';
 
-import { Image as CloudinaryImage, Transformation } from 'cloudinary-react';
+import { getImageURL } from 'app/helpers/images';
 import Wizard from 'components/Wizard';
 import Heading from 'uikit/elements/Heading';
 import FileUpload from 'uikit/organisms/FileUpload';
@@ -21,11 +21,11 @@ const Row = styled.div`
   `}
 `;
 
-const Image = styled(CloudinaryImage)`
+const Image = styled.img`
   ${({ theme }) => css`
     border: 1px solid ${theme.colors.border};
-    height: 300px;
-    width: 400px;
+    height: 500px;
+    width: 700px;
   `}
 `;
 
@@ -33,30 +33,16 @@ const Step4 = ({ values, setFieldValue, setFieldTouched }) => (
   <Wizard.Page>
     <Heading level="h1">More Info</Heading>
     <Form.FormGroup>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <b>Picture</b>
-        <Image publicId={values.picture}>
-          <Transformation dpr="auto" responsive width="auto" crop="scale" />
-          {!values.picture && (
-            <Transformation
-              overlay={{
-                fontFamily: 'Cookie',
-                fontSize: 40,
-                fontWeight: 'bold',
-                text: 'Love',
-              }}
-              effect="colorize"
-              color="#f08"
-            />
-          )}
-        </Image>
-        <br />
-        <FileUpload
-          height="300px"
-          onLoad={publicId => setFieldValue('picture', publicId)}
-          style={{ marginTop: '2rem' }}
-        />
-      </div>
+      <Image
+        src={getImageURL(values.picture, 'w_700,h_600,g_face,c_thumb')}
+        alt="recipe image"
+      />
+      <br />
+      <FileUpload
+        height="300px"
+        onLoad={publicId => setFieldValue('picture', publicId)}
+        style={{ marginTop: '2rem' }}
+      />
     </Form.FormGroup>
     <Form.FormGroup>
       <Form.Label>
@@ -113,6 +99,20 @@ const Step4 = ({ values, setFieldValue, setFieldTouched }) => (
           />
         </Form.Label>
         <Form.Feedback name="protein" />
+      </Form.FormGroup>
+      <Form.FormGroup>
+        <Form.Label>
+          Fiber
+          <Form.Input
+            as={Field}
+            name="fiber"
+            type="number"
+            min="0"
+            max="500"
+            placeholder="Insert fiber"
+          />
+        </Form.Label>
+        <Form.Feedback name="fiber" />
       </Form.FormGroup>
       <Form.FormGroup>
         <Form.Label>

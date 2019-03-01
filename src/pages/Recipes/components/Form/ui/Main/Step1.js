@@ -81,6 +81,10 @@ const Step1 = ({
               key={id}
               id={id}
               name="level"
+              checked={values.level === id}
+              onChange={e =>
+                setFieldValue('level', parseInt(e.target.value, 10))
+              }
               label={name}
               value={id}
             />

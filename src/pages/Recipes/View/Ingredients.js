@@ -47,8 +47,8 @@ const Ingredients = ({ ingredients }) => (
     <InnerContainer>
       <Heading level="h4">Ingredients</Heading>
       <Grid>
-        {ingredients.map(({ name, quantity, measurement }) => (
-          <Ingredient>
+        {ingredients.map(({ id, name, quantity, measurement }) => (
+          <Ingredient key={id}>
             <Quantity>{quantity}</Quantity> {measurement.name.toLowerCase()}{' '}
             <b>{name.toLowerCase()}</b>
           </Ingredient>

@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { Image as CloudinaryImage, Transformation } from 'cloudinary-react';
+import { getImageURL } from 'app/helpers/images';
 
 import Wizard from 'components/Wizard';
 import Editor from 'uikit/organisms/Editor';
 import Heading from 'uikit/elements/Heading';
 import List from 'uikit/elements/List';
 
-const Image = styled(CloudinaryImage)`
+const Image = styled.img`
   ${({ theme }) => css`
     border: 1px solid ${theme.colors.border};
     height: 300px;
@@ -38,21 +38,10 @@ const Preview = ({ values }) => (
   <Wizard.Page>
     <Container>
       <Heading level="h1">{values.title}</Heading>
-      <Image publicId={values.picture}>
-        <Transformation dpr="auto" responsive width="auto" crop="scale" />
-        {!values.picture && (
-          <Transformation
-            overlay={{
-              fontFamily: 'Cookie',
-              fontSize: 40,
-              fontWeight: 'bold',
-              text: 'Love',
-            }}
-            effect="colorize"
-            color="#f08"
-          />
-        )}
-      </Image>
+      <Image
+        src={getImageURL(values.picture, 'w_700,h_600,g_face,c_thumb')}
+        alt="recipe image"
+      />
       <Row>
         <Item>
           <b>Servings</b>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { Image as CloudinaryImage, Transformation } from 'cloudinary-react';
+import { getImageURL } from 'app/helpers/images';
 import Heading from 'uikit/elements/Heading';
 import Link from 'uikit/elements/Link';
 import Button from 'uikit/blocks/Button';
@@ -16,7 +16,7 @@ const Top = styled.div`
   `}
 `;
 
-const Picture = styled.div`
+const PictureContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,12 +33,12 @@ const HeadInfo = styled.div`
   `}
 `;
 
-const Image = styled(CloudinaryImage)`
+const Image = styled.img`
   ${({ theme }) => css`
     border: 1px solid ${theme.colors.border};
     border-radius: 5px;
-    height: 100%;
-    width: 100%;
+    height: 600px;
+    width: 700px;
   `}
 `;
 
@@ -68,11 +68,12 @@ const EditLink = styled(Link)`
 const Header = ({ recipe }) => (
   <>
     <Top>
-      <Picture>
-        <Image publicId={recipe.picture}>
-          <Transformation dpr="auto" width="auto" crop="scale" />
-        </Image>
-      </Picture>
+      <PictureContainer>
+        <Image
+          src={getImageURL(recipe.picture, 'w_700,h_600,g_face,c_thumb')}
+          alt="recipe image"
+        />
+      </PictureContainer>
       <HeadInfo>
         <Heading level="h1">{recipe.title}</Heading>
         <Hr />

@@ -33,6 +33,7 @@ const GET_RECIPE = gql`
       description
       calories
       carbohydrates
+      fiber
       protein
       fat
     }

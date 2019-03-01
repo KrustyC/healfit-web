@@ -31,6 +31,7 @@ const GET_RECIPE = gql`
       picture
       calories
       carbohydrates
+      fiber
       protein
       fat
     }

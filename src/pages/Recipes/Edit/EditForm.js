@@ -32,6 +32,7 @@ const getInitiallValuesFromRecipe = recipe => ({
   calories: recipe.calories,
   carbohydrates: recipe.carbohydrates,
   protein: recipe.protein,
+  fiber: recipe.fiber,
   fat: recipe.fat,
 });
 
@@ -91,6 +92,7 @@ const EDIT_RECIPE = gql`
     $description: String!
     $calories: Int!
     $carbohydrates: Float!
+    $fiber: Float!
     $protein: Float!
     $fat: Float!
   ) {
@@ -108,6 +110,7 @@ const EDIT_RECIPE = gql`
         picture: $picture
         calories: $calories
         carbohydrates: $carbohydrates
+        fiber: $fiber
         protein: $protein
         fat: $fat
       }

@@ -44,6 +44,7 @@ const validateMore = {
   calories: Yup.number().notRequired(),
   carbohydrates: Yup.number().notRequired(),
   protein: Yup.number().notRequired(),
+  fiber: Yup.number().notRequired(),
   fat: Yup.number().notRequired(),
 };
 
