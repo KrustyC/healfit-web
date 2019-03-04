@@ -15,7 +15,7 @@ const StyledNavbar = styled.nav`
 
     ${!bordered &&
       css`
-        border-bottom: 2px solid ${theme.colors.border};
+        border-bottom: 1px solid ${theme.colors.border};
       `}
 
     @media (min-width: ${theme.sizes.md}) {

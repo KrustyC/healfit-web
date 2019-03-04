@@ -4,9 +4,11 @@ import withAuth from 'hoc/withAuth';
 import { compose } from 'react-apollo';
 
 import { withToastManager } from 'uikit/blocks/Toast';
+import Navbar from 'uikit/organisms/navbars/DefaultNavbar';
 
 const Dashboard = ({ account, toastManager }) => (
   <>
+    <Navbar />
     <div>Welcome to your dashboard {account.firstName}!</div>
     <button
       type="button"
@@ -16,7 +18,7 @@ const Dashboard = ({ account, toastManager }) => (
         })
       }
     >
-      Ciao
+      hello mate!
     </button>
   </>
 );

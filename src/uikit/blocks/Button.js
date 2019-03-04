@@ -1,7 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css, keyframes } from 'styled-components';
-import kebabCase from 'lodash/kebabCase';
 
 const rotate360 = keyframes`
   from {
@@ -15,7 +13,7 @@ const rotate360 = keyframes`
 const defaultYPadding = '.55rem';
 const defaultXPadding = '1.5rem';
 
-export const StyledButton = styled.button`
+const Button = styled.button`
   display: inline-block;
   padding: ${defaultYPadding} ${defaultXPadding};
   font-family: ${({ theme }) => theme.fonts.default};
@@ -265,38 +263,7 @@ export const StyledButton = styled.button`
       `}
 `;
 
-const ButtonComponent = ({
-  id,
-  onClick,
-  children,
-  type,
-  size,
-  color,
-  squircled,
-  disabled,
-  loading,
-  rounded,
-  style,
-  radius,
-}) => (
-  <StyledButton
-    id={id || `btn-${kebabCase(children)}`}
-    onClick={() => onClick()}
-    type={type}
-    size={size}
-    color={color}
-    disabled={disabled}
-    loading={loading}
-    style={style}
-    squircled={squircled}
-    rounded={rounded}
-    radius={radius}
-  >
-    {children}
-  </StyledButton>
-);
-
-ButtonComponent.propTypes = {
+Button.propTypes = {
   id: PropTypes.string, // for later, when we want to track clicks
   onClick: PropTypes.func,
   children: PropTypes.any.isRequired,
@@ -314,7 +281,7 @@ ButtonComponent.propTypes = {
   loading: PropTypes.bool,
 };
 
-ButtonComponent.defaultProps = {
+Button.defaultProps = {
   id: null,
   type: 'button',
   rounded: false,
@@ -328,4 +295,4 @@ ButtonComponent.defaultProps = {
   loading: false,
 };
 
-export default ButtonComponent;
+export default Button;

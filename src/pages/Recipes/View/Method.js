@@ -1,34 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import Heading from 'uikit/elements/Heading';
 import htmlParser from 'helpers/htmlParser';
+import Button from 'uikit/blocks/Button';
 
-const OuterContainer = styled.div`
-  ${({ theme }) => css`
-    width: ${theme.dimensions.containerWidth.fullscreen};
-    padding: ${theme.padding.lg} 0;
-    margin: ${theme.margin.md} 0;
-  `}
-`;
-
-const InnerContainer = styled.div`
+const Container = styled.div`
   ${({ theme }) => css`
     width: ${theme.dimensions.containerWidth.default};
     margin: 0 auto;
     font-size: ${theme.fontSize.reading};
     display: flex;
+    align-items: center;
     flex-direction: column;
+    padding: ${theme.padding.lg} 0;
   `}
 `;
 
 const Method = ({ method }) => (
-  <OuterContainer>
-    <InnerContainer>
-      <Heading level="h4">Method</Heading>
-      {htmlParser(method)}
-    </InnerContainer>
-  </OuterContainer>
+  <Container>
+    {htmlParser(method)}
+    <Button squircled css="width: auto; margin-top: 4rem;">
+      Add to Meal Plan
+    </Button>
+  </Container>
 );
 
 Method.propTypes = {

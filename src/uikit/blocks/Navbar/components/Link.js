@@ -3,57 +3,33 @@ import styled, { css } from 'styled-components';
 import BaseLink from 'uikit/elements/Link';
 
 const StyledLink = styled(BaseLink)`
-  display: flex;
-  text-decoration: none;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-  z-index: 100;
-  height: 100%;
-  min-width: 60px;
-
-  &:hover,
-  &:focus {
-    text-decoration: none;
-  }
-
   ${({ theme }) => css`
+    display: flex;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    z-index: 100;
+    height: 100%;
+    min-width: 60px;
+    color: ${theme.colors.font};
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+
     padding-left: 20px;
     padding-right: 20px;
 
     &.active {
-      background: ${theme.colors.primary};
+      color: ${theme.colors.primary};
     }
 
     &:hover,
     &:focus {
-      background: ${theme.colors.primary};
-    }
-
-    @media (min-width: ${theme.sizes.md}) {
-      &::after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        transform: scaleX(0);
-        height: 2px;
-        bottom: 0;
-        left: 0;
-        background: ${theme.colors.primary};
-        transform-origin: bottom right;
-        transition: transform 0.25s ease-out;
-      }
-
-      &:hover::after {
-        transform: scaleX(1);
-        transform-origin: bottom left;
-      }
-
-      &.active::after {
-        transform: scaleX(1);
-        transform-origin: bottom left;
-      }
+      color: ${theme.colors.primary};
     }
 
     @media (max-width: ${theme.sizes.md}) {
@@ -61,18 +37,16 @@ const StyledLink = styled(BaseLink)`
       justify-content: flex-start;
       min-height: 50px;
     }
-  `}
 
-  span {
-    display: none;
-    ${({ theme }) => css`
+    span {
+      display: none;
       @media (max-width: ${theme.sizes.md}) {
         display: block;
         text-transform: capitalize;
         margin-left: 10px;
       }
-    `}
-  }
+    }
+  `}
 `;
 
 const Link = props => <StyledLink type="nav" {...props} />;

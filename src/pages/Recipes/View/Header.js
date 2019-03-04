@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components';
 import { getImageURL } from 'app/helpers/images';
 import Heading from 'uikit/elements/Heading';
 import Link from 'uikit/elements/Link';
-import Button from 'uikit/blocks/Button';
 import P from 'uikit/elements/P';
 import { Hr } from './shared';
 
@@ -28,8 +27,8 @@ const HeadInfo = styled.div`
     flex: 1;
     display: flex;
     flex-direction: column;
+    align-items: space-between;
     padding-left: ${theme.padding.md};
-    height: 100%;
   `}
 `;
 
@@ -51,9 +50,8 @@ const Description = styled(P)`
 
 const Actions = styled.div`
   ${({ theme }) => css`
-    margin: ${theme.margin.sm} 0;
-    margin-top: bottom;
-    height: 100%;
+    margin: ${theme.margin.xs} 0;
+    margin-top: auto;
 
     button {
       margin-right: ${theme.margin.md};
@@ -75,13 +73,12 @@ const Header = ({ recipe }) => (
         />
       </PictureContainer>
       <HeadInfo>
-        <Heading level="h1">{recipe.title}</Heading>
-        <Hr />
-        <Description>{recipe.description}</Description>
+        <div>
+          <Heading level="h1">{recipe.title}</Heading>
+          <Hr />
+          <Description>{recipe.description}</Description>
+        </div>
         <Actions>
-          <Button squircled size="large" color="primary">
-            Add To Meal Plan
-          </Button>
           <EditLink to={`/recipes/edit/${recipe.slug}`}>Edit Recipe</EditLink>
         </Actions>
       </HeadInfo>

@@ -3,13 +3,11 @@ import styled, { css } from 'styled-components';
 import gql from 'graphql-tag';
 import { compose, graphql, Query } from 'react-apollo';
 import { Image as CloudinaryImage, Transformation } from 'cloudinary-react';
-import Heading from 'uikit/elements/Heading';
 import Link from 'uikit/elements/Link';
 import Card from 'uikit/blocks/Card'; // @TODO Move to UIKIT
 
 const Layout = styled.div`
   ${({ theme }) => css`
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,6 +15,7 @@ const Layout = styled.div`
 
     width: ${theme.dimensions.containerWidth.default};
     margin: 0 auto;
+    margin-top: ${theme.margin.lg};
 
     @media (max-width: ${theme.sizes.md}) {
       width: ${theme.dimensions.containerWidth.fullscreen};
@@ -77,7 +76,6 @@ const Circle = styled.div`
 
 const Recipes = () => (
   <Layout>
-    <Heading>Recipes</Heading>
     <Query query={GET_RECIPES}>
       {({ loading, error, data, refetch }) => {
         if (loading) return 'Loading...';
