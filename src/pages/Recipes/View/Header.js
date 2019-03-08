@@ -12,6 +12,11 @@ const Top = styled.div`
     display: flex;
     margin: ${theme.margin.lg} 0 ${theme.margin.md} 0;
     min-height: 50vh;
+
+    @media (max-width: ${theme.sizes.md}) {
+      flex-direction: column;
+      margin: 0;
+    }
   `}
 `;
 
@@ -29,6 +34,10 @@ const HeadInfo = styled.div`
     flex-direction: column;
     align-items: space-between;
     padding-left: ${theme.padding.md};
+
+    @media (max-width: ${theme.sizes.md}) {
+      padding: 0 ${theme.padding.sm};
+    }
   `}
 `;
 
@@ -38,13 +47,17 @@ const Image = styled.img`
     border-radius: 5px;
     height: 600px;
     width: 700px;
+
+    @media (max-width: ${theme.sizes.md}) {
+      width: 100vw;
+      height: 55vh;
+    }
   `}
 `;
 
 const Description = styled(P)`
   ${({ theme }) => css`
     margin: ${theme.margin.md} 0;
-    height: 150px;
   `}
 `;
 

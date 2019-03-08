@@ -13,12 +13,22 @@ const Container = styled.div`
     align-items: center;
     flex-direction: column;
     padding: ${theme.padding.lg} 0;
+
+    @media (max-width: ${theme.sizes.md}) {
+      width: ${theme.dimensions.containerWidth.fullscreen};
+      padding: 0 ${theme.padding.xs};
+    }
+    overflow: hidden;
   `}
+`;
+
+const Text = styled.div`
+  overflow: hidden;
 `;
 
 const Method = ({ method }) => (
   <Container>
-    {htmlParser(method)}
+    <Text>{htmlParser(method)}</Text>
     <Button squircled css="width: auto; margin-top: 4rem;">
       Add to Meal Plan
     </Button>

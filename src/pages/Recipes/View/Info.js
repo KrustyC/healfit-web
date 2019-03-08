@@ -12,8 +12,6 @@ const OuterContainer = styled.div`
     width: ${theme.dimensions.containerWidth.fullscreen};
     padding: ${theme.padding.lg} 0;
     margin: ${theme.margin.md} 0;
-    /* margin: ${theme.margin.lg} 0; */
-    /* background: #efefef; */
   `}
 `;
 
@@ -25,14 +23,27 @@ const InnerContainer = styled.div`
     align-items: center;
     justify-content: center;
     grid-column-gap: 15px;
+
+    @media (max-width: ${theme.sizes.md}) {
+      width: 80vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-row-gap: ${theme.margin.sm};
+    }
   `}
 `;
 
 const Info = styled.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex: 1;
+  ${({ theme }) => css`
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex: 1;
+
+    @media (max-width: ${theme.sizes.md}) {
+      justify-content: flex-start;
+    }
+  `}
 `;
 
 const InfoTitle = styled.div`

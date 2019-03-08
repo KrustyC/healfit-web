@@ -18,6 +18,12 @@ const InnerContainer = styled.div`
     margin: 0 auto;
     display: flex;
     flex-direction: row;
+
+    @media (max-width: ${theme.sizes.md}) {
+      width: 80vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
   `}
 `;
 
@@ -43,6 +49,10 @@ const Nutrient = styled.div`
       font-size: ${theme.fontSize.small};
       font-weight: bold;
       margin-bottom: ${theme.margin.xs};
+    }
+
+    @media (max-width: ${theme.sizes.md}) {
+      justify-content: flex-start;
     }
   `}
 `;

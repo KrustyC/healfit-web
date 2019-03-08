@@ -17,6 +17,10 @@ const Layout = styled.div`
     align-items: center;
     width: ${theme.dimensions.containerWidth.large};
     margin: 0 auto;
+
+    @media (max-width: ${theme.sizes.md}) {
+      width: ${theme.dimensions.containerWidth.fullscreen};
+    }
   `}
 `;
 

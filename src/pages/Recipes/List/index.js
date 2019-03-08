@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components';
 import gql from 'graphql-tag';
 import { compose, graphql, Query } from 'react-apollo';
 import { Image as CloudinaryImage, Transformation } from 'cloudinary-react';
+import { getImageURL } from 'app/helpers/images';
+
 import Link from 'uikit/elements/Link';
 import Card from 'uikit/blocks/Card'; // @TODO Move to UIKIT
 
@@ -50,7 +52,7 @@ const GET_RECIPES = gql`
   }
 `;
 
-const Image = styled(CloudinaryImage)`
+const Image = styled.img`
   ${({ theme }) => css`
     border: 1px solid ${theme.colors.border};
     height: 150px;
@@ -86,14 +88,13 @@ const Recipes = () => (
             {data.recipes.map(recipe => (
               <Card width="300px">
                 <Card.Thumb>
-                  <Image publicId={recipe.picture}>
-                    <Transformation
-                      dpr="auto"
-                      responsive
-                      width="auto"
-                      crop="scale"
-                    />
-                  </Image>
+                  <Image
+                    src={getImageURL(
+                      recipe.picture,
+                      'w_350,h_200,g_face,c_thumb'
+                    )}
+                    alt="recipe image"
+                  />
                 </Card.Thumb>
                 <Card.Main>
                   <Card.Title>{recipe.title}</Card.Title>

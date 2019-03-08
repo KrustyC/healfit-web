@@ -12,6 +12,9 @@ const Container = styled.div`
     margin: ${theme.margin.md} 0;
     padding: ${theme.padding.lg} 0;
     border-top: 2px solid ${theme.colors.border};
+    @media (max-width: ${theme.sizes.md}) {
+      padding: ${theme.padding.md} ${theme.padding.sm};
+    }
   `}
 `;
 
@@ -37,7 +40,9 @@ const Author = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* padding: ${theme.padding.xs}; */
+    @media (max-width: ${theme.sizes.md}) {
+      padding: ${theme.padding.xs};
+    }
   `}
 `;
 
@@ -47,6 +52,12 @@ const Bookmark = styled.div`
     flex-direction: column;
     justify-content: space-between;
     padding: ${theme.padding.xs};
+
+    @media (max-width: ${theme.sizes.md}) {
+      b {
+        display: none;
+      }
+    }
 
     svg {
       height: 25px;
