@@ -38,9 +38,3 @@ export const FETCH_CURRENT_ACCOUNT_QUERY = gql`
     }
   }
 `;
-
-export const SET_CURRENT_USER = gql`
-  mutation setCurrentAccount($account: Object) {
-    setCurrentAccount(account: $account) @client
-  }
-`;

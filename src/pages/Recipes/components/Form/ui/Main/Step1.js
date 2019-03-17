@@ -13,86 +13,81 @@ const Step1 = ({
   recipeCategories,
   recipeLevels,
 }) => (
-  console.log(values),
-  (
-    <Wizard.Page>
-      <Heading level="h1">Generic Info</Heading>
-      <Form.FormGroup>
-        <Form.Label>
-          Title
-          <Form.Input
-            as={Field}
-            name="title"
-            type="text"
-            placeholder="Insert recipe title"
-          />
-        </Form.Label>
-        <Form.Feedback name="title" />
-      </Form.FormGroup>
-      <Form.FormGroup>
-        <Form.Label>
-          Servings
-          <Form.Input
-            as={Field}
-            name="servings"
-            type="number"
-            min="1"
-            max="10"
-            placeholder="Insert number of servings"
-          />
-        </Form.Label>
-        <Form.Feedback name="servings" />
-      </Form.FormGroup>
-      <Form.FormGroup>
-        <Form.Label>
-          Total Time (minutes)
-          <Form.Input
-            as={Field}
-            name="totalTime"
-            type="number"
-            min="0"
-            max="500"
-            placeholder="Insert time in minutes"
-          />
-        </Form.Label>
-        <Form.Feedback name="totalTime" />
-      </Form.FormGroup>
-      <Form.FormGroup>
-        <Form.Label>
-          Category
-          <Form.Select
-            placeholder="Select a category"
-            value={values.category || {}}
-            onBlur={() => setFieldTouched('category', true)}
-            onChange={category => setFieldValue('category', category)}
-          >
-            {recipeCategories.map(({ id, name }) => (
-              <Form.Select.Option key={id} label={name} value={id} />
-            ))}
-          </Form.Select>
-        </Form.Label>
-        <Form.Feedback name="category" />
-      </Form.FormGroup>
-      <Form.FormGroup>
-        <Form.Label>Level</Form.Label>
-        <Form.Multichoice>
-          {recipeLevels.map(({ id, name }) => (
-            <Form.Multichoice.Choice
-              key={id}
-              id={id}
-              name="level"
-              checked={values.level === id}
-              onChange={e =>
-                setFieldValue('level', parseInt(e.target.value, 10))
-              }
-              label={name}
-              value={id}
-            />
+  <Wizard.Page>
+    <Heading level="h1">Generic Info</Heading>
+    <Form.FormGroup>
+      <Form.Label>
+        Title
+        <Form.Input
+          as={Field}
+          name="title"
+          type="text"
+          placeholder="Insert recipe title"
+        />
+      </Form.Label>
+      <Form.Feedback name="title" />
+    </Form.FormGroup>
+    <Form.FormGroup>
+      <Form.Label>
+        Servings
+        <Form.Input
+          as={Field}
+          name="servings"
+          type="number"
+          min="1"
+          max="10"
+          placeholder="Insert number of servings"
+        />
+      </Form.Label>
+      <Form.Feedback name="servings" />
+    </Form.FormGroup>
+    <Form.FormGroup>
+      <Form.Label>
+        Total Time (minutes)
+        <Form.Input
+          as={Field}
+          name="totalTime"
+          type="number"
+          min="0"
+          max="500"
+          placeholder="Insert time in minutes"
+        />
+      </Form.Label>
+      <Form.Feedback name="totalTime" />
+    </Form.FormGroup>
+    <Form.FormGroup>
+      <Form.Label>
+        Category
+        <Form.Select
+          placeholder="Select a category"
+          value={values.category || {}}
+          onBlur={() => setFieldTouched('category', true)}
+          onChange={category => setFieldValue('category', category)}
+        >
+          {recipeCategories.map(({ id, name }) => (
+            <Form.Select.Option key={id} label={name} value={id} />
           ))}
-        </Form.Multichoice>
-      </Form.FormGroup>
-    </Wizard.Page>
-  )
+        </Form.Select>
+      </Form.Label>
+      <Form.Feedback name="category" />
+    </Form.FormGroup>
+    <Form.FormGroup>
+      <Form.Label>Level</Form.Label>
+      <Form.Multichoice>
+        {recipeLevels.map(({ id, name }) => (
+          <Form.Multichoice.Choice
+            key={id}
+            id={id}
+            name="level"
+            checked={values.level === id}
+            onChange={e => setFieldValue('level', parseInt(e.target.value, 10))}
+            label={name}
+            value={id}
+          />
+        ))}
+      </Form.Multichoice>
+    </Form.FormGroup>
+  </Wizard.Page>
 );
 
 Step1.propTypes = {

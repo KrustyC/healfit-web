@@ -9,7 +9,6 @@ import CookiePopup from 'uikit/organisms/CookiePopup';
 import {
   FETCH_INITIAL_DATA,
   FETCH_CURRENT_ACCOUNT_QUERY,
-  SET_CURRENT_USER,
   SET_GLOBAL_DATA,
 } from './queries';
 
@@ -29,7 +28,7 @@ class Wrapper extends Component {
 
   async componentDidMount() {
     window.cloudinary.setCloudName('healfituk');
-
+    this.setState({ isMounted: true });
     try {
       const {
         data: { globalData },
@@ -45,7 +44,7 @@ class Wrapper extends Component {
 
       const { currentAccountInfo: account } = currentAccount.data;
       if (account) {
-        console.log('SI SI SI ');
+        console.log('general mount account');
         await this.props.setCurrentAccount({ variables: { account } });
       }
 
@@ -55,9 +54,6 @@ class Wrapper extends Component {
     }
   }
 
-  setAuthAccount = account =>
-    this.props.setCurrentAccount({ variables: { account } });
-
   logout = () => console.log('logout');
 
   setMounted = () => this.setState({ isMounted: true });
@@ -65,17 +61,16 @@ class Wrapper extends Component {
   render() {
     return (
       this.state.isMounted && (
-        <CloudinaryContext cloudName="healfituk">
+        <>
           {this.props.children}
           <CookiePopup />
-        </CloudinaryContext>
+        </>
       )
     );
   }
 }
 
 export default compose(
-  graphql(SET_CURRENT_USER, { name: 'setCurrentAccount' }),
   graphql(SET_GLOBAL_DATA, { name: 'setGlobalData' }),
   withGlobalData,
   withAuth,

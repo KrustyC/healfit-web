@@ -6,7 +6,7 @@ import {
   NavLink as ReactRouterNavLink,
 } from 'react-router-dom';
 
-import { StyledButton } from '../blocks/Button';
+import Button from 'uikit/blocks/Button';
 
 const Link = styled(ReactRouterLink)`
   color: ${({ theme }) => theme.colors.accent};
@@ -49,7 +49,7 @@ const LinkElement = props => {
   switch (component) {
     case 'button':
       return (
-        <Link to={to} as={StyledButton} {...rest}>
+        <Link to={to} as={Button} {...rest}>
           {children}
         </Link>
       );

@@ -28,6 +28,7 @@ module.exports = {
       helpers: path.join(src, 'helpers'),
       hoc: path.join(src, 'hoc'),
       assets: path.join(src, 'assets'),
+      '@uikit': path.join(src, 'uik'),
       uikit: path.join(src, 'uikit'),
     },
   },
@@ -43,6 +44,10 @@ module.exports = {
         test: /\.js/,
         exclude: /node_modules/,
         use: ['babel-loader'],
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(png|j|jpeg|jpg|gif)$/,

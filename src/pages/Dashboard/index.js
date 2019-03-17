@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import withAuth from 'hoc/withAuth';
 import { compose } from 'react-apollo';
 
+import { UikButton } from '@uikit';
 import { withToastManager } from 'uikit/blocks/Toast';
 import Navbar from 'uikit/organisms/navbars/DefaultNavbar';
 
@@ -19,6 +20,7 @@ const Dashboard = ({ account, toastManager }) => (
       }
     >
       hello mate!
+      <UikButton>Hello</UikButton>
     </button>
   </>
 );

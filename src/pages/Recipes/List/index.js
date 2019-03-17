@@ -2,9 +2,9 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import gql from 'graphql-tag';
 import { compose, graphql, Query } from 'react-apollo';
-import { Image as CloudinaryImage, Transformation } from 'cloudinary-react';
 import { getImageURL } from 'app/helpers/images';
 
+import { UikButton } from '@uikit';
 import Link from 'uikit/elements/Link';
 import Card from 'uikit/blocks/Card'; // @TODO Move to UIKIT
 
@@ -17,7 +17,7 @@ const Layout = styled.div`
 
     width: ${theme.dimensions.containerWidth.default};
     margin: 0 auto;
-    margin-top: ${theme.margin.lg};
+    margin: ${theme.margin.lg} 0;
 
     @media (max-width: ${theme.sizes.md}) {
       width: ${theme.dimensions.containerWidth.fullscreen};
@@ -47,6 +47,7 @@ const GET_RECIPES = gql`
       slug
       title
       calories
+      description
       picture
     }
   }
@@ -79,14 +80,14 @@ const Circle = styled.div`
 const Recipes = () => (
   <Layout>
     <Query query={GET_RECIPES}>
-      {({ loading, error, data, refetch }) => {
+      {({ loading, error, data }) => {
         if (loading) return 'Loading...';
         if (error) return `Error! ${error.message}`;
 
         return (
           <Grid>
             {data.recipes.map(recipe => (
-              <Card width="300px">
+              <Card width="300px" key={recipe.slug}>
                 <Card.Thumb>
                   <Image
                     src={getImageURL(
@@ -98,15 +99,7 @@ const Recipes = () => (
                 </Card.Thumb>
                 <Card.Main>
                   <Card.Title>{recipe.title}</Card.Title>
-                  <Card.Description>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industrys
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only five centuries,
-                    but also the leap into electronic typesetting, remaining
-                    essentially unchanged.
-                  </Card.Description>
+                  <Card.Description>{recipe.description}</Card.Description>
                 </Card.Main>
                 <Card.Footer>
                   <Circle>d</Circle>
@@ -117,6 +110,7 @@ const Recipes = () => (
                 </Card.Footer>
               </Card>
             ))}
+            <UikButton primary>Hello</UikButton>
           </Grid>
         );
       }}

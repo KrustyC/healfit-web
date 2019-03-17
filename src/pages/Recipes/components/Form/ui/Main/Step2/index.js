@@ -50,7 +50,6 @@ class Step2 extends Component {
       });
     } catch (error) {
       return error;
-      // return console.log('error', error);
     }
   };
 
@@ -60,7 +59,6 @@ class Step2 extends Component {
     this.setState({ currentIngredient: ingredient });
 
   onAddIngredient = ingredient => {
-    console.log(ingredient);
     const ingredients = [...this.props.values.ingredients, ingredient];
     this.props.setFieldValue('ingredients', ingredients);
     this.setState({ currentIngredient: null });
@@ -81,7 +79,7 @@ class Step2 extends Component {
   render() {
     const { values } = this.props;
     const { currentIngredient, availableIngredients } = this.state;
-    console.log(values);
+
     return (
       <Wizard.Page>
         <Heading level="h1">Ingredients</Heading>

@@ -71,7 +71,6 @@ class Select extends Component {
   }
 
   onAddOption = selected => {
-    console.log(selected);
     if (this.props.multi) {
       return this.props.onChange([...this.props.value, selected]);
     }

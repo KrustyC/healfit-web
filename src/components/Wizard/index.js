@@ -31,11 +31,9 @@ export default class Wizard extends Component {
     }));
 
   handleSubmit = (values, bag) => {
-    console.log('submit');
     const { page, pages } = this.state;
     const isLastPage = page === pages - 1;
     if (isLastPage) {
-      console.log('laast');
       return this.props.onSubmit(values, bag);
     }
 

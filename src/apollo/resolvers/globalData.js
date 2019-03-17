@@ -8,8 +8,6 @@ const defaults = {
 const resolvers = {
   Mutation: {
     setGlobalData: (_, { globalData }, { cache }) => {
-      console.log(globalData);
-      // const data = { globalData };
       cache.writeData({ data: { globalData } });
       return null;
     },

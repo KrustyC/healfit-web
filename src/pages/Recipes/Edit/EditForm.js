@@ -49,7 +49,7 @@ const EditForm = ({ recipe, editRecipe }) => {
     try {
       const { slug } = recipe;
       const result = await editRecipe({ variables: { ...values, slug } });
-      console.log(result);
+
       // Redirect to View
       setData(result.data.editRecipe);
     } catch (err) {

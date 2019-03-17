@@ -63,6 +63,7 @@ class SignIn extends Component {
     const { ui } = this.state;
 
     if (ui.current() === 'authenticated') {
+      console.log('redirect');
       return <Redirect to="/dashboard" />;
     }
 
@@ -113,6 +114,6 @@ const SET_CURRENT_ACCOUNT = gql`
 
 export default compose(
   graphql(LOGIN, { name: 'login' }),
-  graphql(SET_CURRENT_ACCOUNT, { name: 'setCurrentAccount' }),
+  // graphql(SET_CURRENT_ACCOUNT, { name: 'setCurrentAccount' }),
   withAuth
 )(SignIn);

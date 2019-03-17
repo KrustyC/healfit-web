@@ -67,7 +67,7 @@ class AddIngredient extends Component {
   onAddIngredient = () => {
     const { ingredient } = this.props;
     const { quantity, measurement } = this.state;
-    console.log(quantity);
+
     const newIngredient = {
       ...ingredient,
       quantity,
