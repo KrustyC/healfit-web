@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Redirect } from 'react-router-dom';
 import withAuth from 'hoc/withAuth';
 
-import Navbar from 'uikit/organisms/navbars/EmptyNavbar';
+import Navbar from 'components/navbars/DefaultNavbar';
 import Footer from 'uikit/organisms/Footer';
 import Hero from './Hero';
 import Features from './Features';

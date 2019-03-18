@@ -28,7 +28,7 @@ module.exports = {
       helpers: path.join(src, 'helpers'),
       hoc: path.join(src, 'hoc'),
       assets: path.join(src, 'assets'),
-      '@uikit': path.join(src, 'uik'),
+      '@duik': path.join(src, 'duik'),
       uikit: path.join(src, 'uikit'),
     },
   },
@@ -46,8 +46,8 @@ module.exports = {
         use: ['babel-loader'],
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        test: /\.(scss|css)$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(png|j|jpeg|jpg|gif)$/,

@@ -2,36 +2,6 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 const P = styled.p`
-  font-size: ${({ theme }) => theme.fontSize.regular};
-
-  ${({ font }) =>
-    font === 'default' &&
-    css`
-      font-family: ${({ theme }) => theme.fonts.default};
-    `}
-
-  ${({ font }) =>
-    font === 'serif' &&
-    css`
-      font-family: ${({ theme }) => theme.fonts.serif};
-    `}
-
-  ${({ size }) =>
-    size === 'small' &&
-    css`
-      font-size: ${({ theme }) => theme.fontSize.small};
-    `}
-
-  ${({ size }) =>
-    size === 'large' &&
-    css`
-      font-size: calc(${({ theme }) => theme.fontSize.large} - 0.1rem);
-
-      @media only screen and (min-width: ${({ theme }) => theme.sizes.sm}) {
-        font-size: ${({ theme }) => theme.fontSize.large};
-      }
-    `}
-
   ${({ align }) => css`
     text-align: ${align};
   `}

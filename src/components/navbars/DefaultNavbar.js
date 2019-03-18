@@ -1,10 +1,10 @@
 import React from 'react';
-import { UikTopBar, UikTopBarSection, UikTopBarTitle, UikButton } from '@uikit';
+import { UikTopBar, UikTopBarSection, UikTopBarTitle, UikButton } from '@duik';
 
 const Navbar = () => (
   <UikTopBar>
     <UikTopBarSection>
-      <UikTopBarTitle>Dashboard</UikTopBarTitle>
+      <UikTopBarTitle>Healfit</UikTopBarTitle>
     </UikTopBarSection>
 
     <UikTopBarSection>

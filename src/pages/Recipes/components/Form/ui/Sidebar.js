@@ -16,41 +16,37 @@ const SidebarContainer = styled.div`
     align-items: flex-start;
     justify-content: flex-start;
 
-    h1 {
-      padding: ${theme.padding.md} 0;
+    h4 {
+      margin: 0;
     }
   `}
 `;
 
-const Title = styled(Heading)`
-  margin: 0;
-`;
-
 const Sidebar = ({ page }) => (
   <SidebarContainer>
-    <Heading>Create Recipe</Heading> {/* @TODO add check for edit */}
+    <h1>Create Recipe</h1> {/* @TODO add check for edit */}
     <VerticalProgress currentStep={page}>
       <VerticalProgress.Step>
-        <Title level="h4">Generic Information</Title>
+        <Heading level="h4">Generic Information</Heading>
         <P>Provide some generic information about the recipes</P>
       </VerticalProgress.Step>
       <VerticalProgress.Step>
-        <Title level="h4">Ingredients</Title>
+        <Heading level="h4">Ingredients</Heading>
         <P>
           Provide all needed ingredients, they come from a list of preselected
           one, if you can;t find your ingredient, feel free to create one
         </P>
       </VerticalProgress.Step>
       <VerticalProgress.Step>
-        <Title level="h4">Method</Title>
+        <Heading level="h4">Method</Heading>
         <P>Add your very own method</P>
       </VerticalProgress.Step>
       <VerticalProgress.Step>
-        <Title level="h4">More info</Title>
+        <Heading level="h4">More info</Heading>
         <P>Add additional info such as calories and macronutrients</P>
       </VerticalProgress.Step>
       <VerticalProgress.Step>
-        <Title level="h4">Preview {'&'} Confirm</Title>
+        <Heading level="h4">Preview {'&'} Confirm</Heading>
       </VerticalProgress.Step>
     </VerticalProgress>
   </SidebarContainer>

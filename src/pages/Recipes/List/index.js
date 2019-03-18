@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import { compose, graphql, Query } from 'react-apollo';
 import { getImageURL } from 'app/helpers/images';
 
-import { UikButton } from '@uikit';
+import { UikStarRating, UikAvatar, Uikon } from '@duik';
 import Link from 'uikit/elements/Link';
 import Card from 'uikit/blocks/Card'; // @TODO Move to UIKIT
 
@@ -61,20 +61,17 @@ const Image = styled.img`
   `}
 `;
 
-const Circle = styled.div`
+const Info = styled.div`
   ${({ theme }) => css`
-    text-transform: uppercase;
-    background: ${theme.colors.primary};
-    color: ${theme.colors.light};
-    font-size: ${theme.fontSize.regular};
-    height: 35px;
-    width: 35px;
-    border-radius: 50%;
+    margin-top: ${theme.margin.sm};
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: ${theme.margin.sm};
+    justify-content: space-between;
   `}
+`;
+
+const Time = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const Recipes = () => (
@@ -100,17 +97,29 @@ const Recipes = () => (
                 <Card.Main>
                   <Card.Title>{recipe.title}</Card.Title>
                   <Card.Description>{recipe.description}</Card.Description>
+                  <Info>
+                    <UikAvatar
+                      name="Davide Crestini"
+                      textTop="Created by"
+                      avatarPlaceholder={{
+                        content: 'DC',
+                        color: 'blue',
+                      }}
+                    />
+                    <Time>
+                      <Uikon>clock</Uikon> 15 min
+                    </Time>
+                  </Info>
                 </Card.Main>
                 <Card.Footer>
-                  <Circle>d</Circle>
-                  by Davide Crestini
+                  <Uikon>love</Uikon> 120
                   <Link css="margin-left: auto;" to={`/recipes/${recipe.slug}`}>
                     View
                   </Link>
+                  <UikStarRating rating={2} />
                 </Card.Footer>
               </Card>
             ))}
-            <UikButton primary>Hello</UikButton>
           </Grid>
         );
       }}

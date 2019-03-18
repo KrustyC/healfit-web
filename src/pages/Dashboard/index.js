@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import withAuth from 'hoc/withAuth';
 import { compose } from 'react-apollo';
 
-import { UikButton } from '@uikit';
+import { UikButton } from '@duik';
 import { withToastManager } from 'uikit/blocks/Toast';
-import Navbar from 'uikit/organisms/navbars/DefaultNavbar';
+import Navbar from 'components/navbars/DefaultNavbar';
 
 const Dashboard = ({ account, toastManager }) => (
   <>

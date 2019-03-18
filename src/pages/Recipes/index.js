@@ -2,7 +2,8 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
 
-import Navbar from 'uikit/organisms/navbars/DefaultNavbar';
+// import Navbar from 'uikit/organisms/navbars/DefaultNavbar';
+import Navbar from 'components/navbars/LoggedNavbar';
 
 import CreateRecipe from './Create';
 import EditRecipe from './Edit';
