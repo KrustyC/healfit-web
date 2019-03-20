@@ -15,14 +15,17 @@ const CustomRouter = () => (
   <Router history={history}>
     <Switch>
       <Route exact path="/" component={Routes.Home} />
-      <AdminRoute path="/admin" component={Routes.Admin} />
+      <Route path="/legal" component={Routes.Legal} />
       <Route path="/auth" component={Routes.Auth} />
+
+      <AdminRoute path="/admin" component={Routes.Admin} />
+
       <PrivateRoute path="/dashboard" component={Routes.Dashboard} />
       <Route path="/recipes" component={Routes.Recipes} />
-      {/* <PrivateRoute path="/recipes" component={Routes.Recipes} /> */}
       <PrivateRoute path="/meal-planner" component={Routes.MealPlanner} />
-      <Route path="/legal" component={Routes.Legal} />
+
       <Route path="/404" component={Routes.NotFound} />
+
       <Redirect to="/404" />
     </Switch>
   </Router>

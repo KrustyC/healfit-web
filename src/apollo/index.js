@@ -86,13 +86,14 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const createOmitTypenameLink = new ApolloLink((operation, forward) => {
+  const newOperation = operation;
   if (operation.variables) {
-    operation.variables = JSON.parse(
+    newOperation.variables = JSON.parse(
       JSON.stringify(operation.variables),
       (key, value) => (key === '__typename' ? undefined : value)
     );
   }
-  return forward ? forward(operation) : null;
+  return forward ? forward(newOperation) : null;
 });
 
 const link = ApolloLink.from([

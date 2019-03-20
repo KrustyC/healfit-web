@@ -8,7 +8,7 @@ import { ToastProvider } from 'uikit/blocks/Toast';
 import { FullPageLoader } from 'uikit/elements/Loaders';
 import apolloClient from './apollo';
 import Router from './router';
-import Wrapper from './Wrapper';
+import { RootProvider } from './contexts/RootContext';
 import theme from './themes';
 import GlobalStyle from './GlobalStyle';
 
@@ -23,9 +23,9 @@ const App = () => (
         <GlobalStyle />
         <ToastProvider>
           <Suspense fallback={<FullPageLoader />}>
-            <Wrapper>
+            <RootProvider>
               <Router />
-            </Wrapper>
+            </RootProvider>
           </Suspense>
         </ToastProvider>
       </Fragment>

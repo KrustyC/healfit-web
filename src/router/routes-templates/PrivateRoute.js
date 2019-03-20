@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import withAuth from 'hoc/withAuth';
+import { RootContext } from 'app/contexts/RootContext';
 
-const PrivateRoute = ({ isAuthenticated, component: Component, ...rest }) => (
-  console.log('isAuthenticated', isAuthenticated),
-  (
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  const rootContext = useContext(RootContext);
+
+  return (
     <Route
       {...rest}
       render={props =>
-        isAuthenticated ? (
+        rootContext.amILoggedIn ? (
           <Component {...props} />
         ) : (
           <Redirect
@@ -17,7 +18,7 @@ const PrivateRoute = ({ isAuthenticated, component: Component, ...rest }) => (
         )
       }
     />
-  )
-);
+  );
+};
 
-export default withAuth(PrivateRoute);
+export default PrivateRoute;

@@ -30,6 +30,7 @@ const SignInForm = ({ onSubmit }) => (
             <Form.Input
               as={Field}
               name="email"
+              autoComplete="email"
               type="text"
               placeholder="hello@healfit.co.uk"
             />
@@ -44,6 +45,7 @@ const SignInForm = ({ onSubmit }) => (
             <Form.Input
               as={Field}
               name="password"
+              autoComplete="current-password"
               type={values.showPassword ? 'text' : 'password'}
               placeholder="*******"
             />

@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 
+// eslint-disable-next-line
 export const Row = styled.div`
   ${({ theme, columns }) => css`
     display: grid;

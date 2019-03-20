@@ -25,21 +25,26 @@ const CLEAR_ACCOUNT = gql`
 `;
 
 // const currentAccountQueryHandler = {
-//   props: ({ ownProps, data: { account = null, isAuthenticated = false } }) => ({
-//     ...ownProps,
-//     account,
-//     isAuthenticated,
-//   }),
+//   props: ({ ownProps, data: { account = null, isAuthenticated = false } }) => {
+//     console.log(account, isAuthenticated);
+//     return {
+//       ...ownProps,
+//       account,
+//       isAuthenticated,
+//     };
+//   },
 // };
 
 const currentAccountQueryHandler = {
-  props: prop =>
-    // console.log('withAUth', prop.data);
-    ({
-      account: {},
-      isAuthenticated: false,
-    }),
-  // skip: data => console.log('skip', data),
+  props: ({ ownProps, data }) => {
+    console.log(data.account);
+    return {
+      ...ownProps,
+      ...data,
+      // account: data.account,
+      // isAuthenticated: data.isAuthenticated,
+    };
+  },
 };
 
 export default Component =>

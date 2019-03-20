@@ -20,7 +20,7 @@ export const FETCH_INITIAL_DATA = gql`
 `;
 
 export const SET_GLOBAL_DATA = gql`
-  mutation setCurrentAccount($globalData: Object) {
+  mutation setGlobalData($globalData: Object) {
     setGlobalData(globalData: $globalData) @client
   }
 `;
@@ -35,6 +35,18 @@ export const FETCH_CURRENT_ACCOUNT_QUERY = gql`
   query FetchCurrentAccountInfo {
     currentAccountInfo {
       ...AccountInfo
+    }
+  }
+`;
+
+export const LOGIN = gql`
+  mutation login($email: String!, $password: String!) {
+    login(input: { email: $email, password: $password }) {
+      token
+      account {
+        firstName
+        lastName
+      }
     }
   }
 `;
