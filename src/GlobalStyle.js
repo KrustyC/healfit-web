@@ -72,6 +72,10 @@ const GloablStyle = createGlobalStyle`
     * {
       font-family: '${theme.fonts.default}', sans-serif;
     }
+
+    a {
+      text-decoration: none !important;
+    }
   `}
 `;
 

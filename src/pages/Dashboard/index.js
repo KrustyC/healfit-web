@@ -5,7 +5,7 @@ import { RootContext } from 'app/contexts/RootContext';
 
 import { UikButton } from '@duik';
 import { withToastManager } from 'uikit/blocks/Toast';
-import Navbar from 'components/navbars/DefaultNavbar';
+import Navbar from 'components/navbars/LoggedNavbar';
 
 const Dashboard = ({ toastManager }) => {
   const rootContext = useContext(RootContext);

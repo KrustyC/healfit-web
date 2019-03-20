@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
+import { RootContext } from 'app/contexts/RootContext';
+import { getUserInitials } from 'helpers/user';
 import {
   UikTopBar,
   UikTopBarSection,
@@ -9,27 +12,37 @@ import {
   UikDivider,
 } from '@duik';
 
-const Navbar = () => (
-  <UikTopBar>
-    <UikTopBarSection>
-      <UikTopBarTitle>Healfit</UikTopBarTitle>
-      <UikDivider margin vertical />
-      <UikTopBarLinkContainer>
-        <UikTopBarLink>Dashboard</UikTopBarLink>
-        <UikTopBarLink>Recipes</UikTopBarLink>
-        <UikTopBarLink>Meal Plan</UikTopBarLink>
-      </UikTopBarLinkContainer>
-    </UikTopBarSection>
+const Navbar = () => {
+  const { authUser } = useContext(RootContext);
 
-    <UikTopBarSection>
-      <UikAvatar
-        avatarPlaceholder={{
-          content: 'DC',
-          color: 'blue',
-        }}
-      />
-    </UikTopBarSection>
-  </UikTopBar>
-);
+  return (
+    <UikTopBar>
+      <UikTopBarSection>
+        <UikTopBarTitle>Healfit</UikTopBarTitle>
+        <UikDivider margin vertical />
+        <UikTopBarLinkContainer>
+          <UikTopBarLink Component={NavLink} to="/dashboard">
+            Dashboard
+          </UikTopBarLink>
+          <UikTopBarLink Component={NavLink} to="/recipes">
+            Recipes
+          </UikTopBarLink>
+          <UikTopBarLink Component={NavLink} to="/meal-planner">
+            Meal Planner
+          </UikTopBarLink>
+        </UikTopBarLinkContainer>
+      </UikTopBarSection>
+
+      <UikTopBarSection>
+        <UikAvatar
+          avatarPlaceholder={{
+            content: getUserInitials(authUser),
+            color: 'blue',
+          }}
+        />
+      </UikTopBarSection>
+    </UikTopBar>
+  );
+};
 
 export default Navbar;

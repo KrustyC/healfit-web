@@ -1,36 +1,33 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
-import withAuth from 'hoc/withAuth';
+import { RootContext } from 'app/contexts/RootContext';
 
 const AdminRoute = ({
   isAuthenticated,
   account,
   component: Component,
   ...rest
-}) => (
-  <Route
-    {...rest}
-    render={props =>
-      isAuthenticated && account.roles.includes('ADMIN') ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{ pathname: '/dashboard', state: { from: props.location } }}
-        />
-      )
-    }
-  />
-);
+}) => {
+  const { amILoggedIn, authUser } = useContext(RootContext);
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        amILoggedIn && authUser.roles.includes('ADMIN') ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{ pathname: '/dashboard', state: { from: props.location } }}
+          />
+        )
+      }
+    />
+  );
+};
 
 AdminRoute.propTypes = {
-  account: PropTypes.object,
-  isAuthenticated: PropTypes.bool.isRequired,
   component: PropTypes.any.isRequired,
 };
 
-AdminRoute.defaultProps = {
-  account: null,
-};
-
-export default withAuth(AdminRoute);
+export default AdminRoute;

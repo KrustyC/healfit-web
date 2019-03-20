@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import withAuth from 'hoc/withAuth';
+import Navbar from 'components/navbars/LoggedNavbar';
 
-const MealPlanner = ({ account }) => <div>Ciao {account.firstName}</div>;
+const MealPlanner = () => (
+  <>
+    <Navbar />
+    <div>Meal Planner</div>
+  </>
+);
 
-MealPlanner.propTypes = {
-  account: PropTypes.object.isRequired,
-};
-
-export default withAuth(MealPlanner);
+export default MealPlanner;
