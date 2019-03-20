@@ -84,24 +84,28 @@ const EditOrCreateForm = ({ edit, initialValues, onComplete }) => {
             isSubmitting,
             setFieldTouched,
             setFieldValue,
+            errors,
           }) => (
-            <Layout>
-              <Sidebar page={page} />
-              <Main
-                edit={edit}
-                values={values}
-                setFieldTouched={setFieldTouched}
-                setFieldValue={setFieldValue}
-                globalData={globalData}
-              />
-              <Bottom
-                onPrevious={onPrevious}
-                isSubmitting={isSubmitting}
-                isFirstPage={isFirstPage}
-                isLastPage={isLastPage}
-                isValid={isValid}
-              />
-            </Layout>
+            console.log(isValid, errors, values),
+            (
+              <Layout>
+                <Sidebar page={page} />
+                <Main
+                  edit={edit}
+                  values={values}
+                  setFieldTouched={setFieldTouched}
+                  setFieldValue={setFieldValue}
+                  globalData={globalData}
+                />
+                <Bottom
+                  onPrevious={onPrevious}
+                  isSubmitting={isSubmitting}
+                  isFirstPage={isFirstPage}
+                  isLastPage={isLastPage}
+                  isValid={isValid}
+                />
+              </Layout>
+            )
           )}
         </Formik>
       )}
