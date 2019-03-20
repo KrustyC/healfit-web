@@ -10,36 +10,26 @@ const Card = styled.div`
     position: relative;
     top: 0;
     transition: all 0.1s ease-in;
-    border-radius: 5px;
+    border-radius: 4px;
     width: ${width || 'auto'};
-
-    &:hover {
-      top: -2px;
-      box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
-    }
   `}
 `;
 
 const Main = styled.div`
   ${({ theme }) => css`
-    padding: ${theme.padding.sm};
+    padding: calc(${theme.padding.sm} * 1.5) ${theme.padding.md};
   `}
 `;
 
 const Thumb = styled.div`
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  overflow: hidden;
 `;
 
-const Title = styled.h1`
-  ${({ theme }) => css`
-    font-size: ${theme.fontSize.regular};
-    white-space: nowrap;
-    width: ${`calc(100% - (2 * ${theme.padding.sm}))`};
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin: 0;
-  `}
+const Title = styled.h3`
+  white-space: wrap;
+  margin: 0;
 `;
 
 const Description = styled.div`
@@ -49,6 +39,7 @@ const Description = styled.div`
     max-height: 100px;
     font-size: ${theme.fontSize.small};
     overflow: hidden;
+    color: ${theme.colors.grey};
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -56,13 +47,16 @@ const Description = styled.div`
 `;
 
 const Footer = styled.div`
-  ${({ theme }) => css`
-    padding: ${theme.padding.sm};
-    font-size: ${theme.fontSize.small};
+  ${({ theme, bordered }) => css`
+    padding: ${theme.padding.sm} ${theme.padding.md};
     font-weight: bold;
-    letter-spacing: 0.05em;
     display: flex;
     align-items: center;
+
+    ${bordered &&
+      css`
+        border-top: 1px solid ${theme.colors.border};
+      `}
   `}
 `;
 

@@ -9,7 +9,7 @@ const SUCCESS = '#5cb85c';
 const INFO = '#33a9da';
 const ERROR = '#d9534f';
 const WARNING = '#f9d834';
-const GREY = '#aaaaaa';
+const GREY = '#9EA0A5';
 const DARK = '#000000';
 
 const sizes = {
