@@ -65,10 +65,7 @@ const Navbar = () => (
     </UikTopBarSection>
 
     <UikTopBarSection>
-      <UikDropdown
-        position="bottomaRight"
-        DisplayComponent={UiKitUserDropwdown}
-      >
+      <UikDropdown position="bottomRight" DisplayComponent={UiKitUserDropwdown}>
         <UikDropdownItem Component={Link} to="/me/profile">
           Profile
         </UikDropdownItem>
