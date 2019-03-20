@@ -5,6 +5,7 @@ import { graphql } from 'react-apollo';
 import styled, { css } from 'styled-components';
 import html from 'uikit/organisms/Editor/htmlSerializer';
 import Form from '../components/Form';
+import Success from './Success';
 
 const Layout = styled.div`
   ${({ theme }) => css`
@@ -39,7 +40,7 @@ const getInitiallValuesFromRecipe = recipe => ({
 const EditForm = ({ recipe, editRecipe }) => {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
+  const [updatedRecipe, setRecipe] = useState(null);
   const [idle, setIdle] = useState(true);
 
   const onEditRecipe = async values => {
@@ -51,7 +52,7 @@ const EditForm = ({ recipe, editRecipe }) => {
       const result = await editRecipe({ variables: { ...values, slug } });
 
       // Redirect to View
-      setData(result.data.editRecipe);
+      setRecipe(result.data.editRecipe);
     } catch (err) {
       setError('OOps! Looks like something happened, please try again later!');
     }
@@ -62,11 +63,7 @@ const EditForm = ({ recipe, editRecipe }) => {
     <Layout>
       {error && <div>Error: {error}</div>}
       {pending && <div>pending...</div>}
-      {data && (
-        <div>
-          Success: {data.id} {data.title}
-        </div>
-      )}
+      {updatedRecipe && <Success recipe={updatedRecipe} />}
       {idle && (
         <Form
           edit

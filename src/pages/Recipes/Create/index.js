@@ -5,6 +5,7 @@ import { graphql } from 'react-apollo';
 import styled, { css } from 'styled-components';
 import html from 'uikit/organisms/Editor/htmlSerializer';
 import Form from '../components/Form';
+import Success from './Success';
 
 const Layout = styled.div`
   ${({ theme }) => css`
@@ -56,11 +57,7 @@ const CreateRecipe = ({ createRecipe }) => {
     <Layout>
       {error && <div>Error: {error}</div>}
       {pending && <div>pending...</div>}
-      {data && (
-        <div>
-          Success: {data.slug} {data.title}
-        </div>
-      )}
+      {data && <Success recipe={data} />}
       {idle && (
         <Form initialValues={initialValues} onComplete={onCreateRecipe} />
       )}
