@@ -49,7 +49,7 @@ const Quantity = styled.span`
 const Ingredients = ({ ingredients }) => (
   <OuterContainer>
     <InnerContainer>
-      <Heading level="h4">Ingredients</Heading>
+      <Heading level="h2">Ingredients</Heading>
       <Grid>
         {ingredients.map(({ id, name, quantity, measurement }) => (
           <Ingredient key={id}>
@@ -67,9 +67,7 @@ Ingredients.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-
       quantity: PropTypes.number.isRequired,
-
       measurement: PropTypes.shape({
         name: PropTypes.string.isRequired,
       }).isRequired,

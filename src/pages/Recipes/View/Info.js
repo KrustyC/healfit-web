@@ -57,11 +57,11 @@ const Left = styled.div`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
-    height: 23px;
+    height: 40px;
     svg {
       margin-right: ${theme.margin.sm};
-      width: 15px;
-      height: 15px;
+      width: 40px;
+      height: 40px;
     }
   `}
 `;

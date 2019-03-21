@@ -88,116 +88,6 @@ const Provider = ({ client, children, login, setGlobalData }) => {
   );
 };
 
-// class RootProvider extends Component {
-//   state = {
-//     isMounted: false,
-//     amILoggedIn: false,
-//     authUser: null,
-//   };
-
-//   componentDidMount() {
-//     const userEmail = localStorage.getItem('llah-user-email');
-//     const jwt = localStorage.getItem('llah-token');
-//     const subdomain = localStorage.getItem('llah-subdomain');
-
-//     if (userEmail && jwt && subdomain) {
-//       return api.auth
-//         .fetchUserInfo(userEmail)
-//         .then(this.setRootUser)
-//         .catch(this.onLogout)
-//         .finally(this.setMounted);
-//     }
-//     this.setMounted();
-//   }
-
-//   setMounted = () => this.setState({ isMounted: true });
-
-//   isTokenExpired = () => {
-//     const jwt = localStorage.getItem('llah-token');
-//     if (isNull(jwt)) {
-//       return true;
-//     }
-//     const { exp } = parseJwt(jwt);
-//     return moment().unix() >= exp;
-//   };
-
-//   setRootUser = user => {
-//     this.setState({ amILoggedIn: true, authUser: user });
-//   };
-
-//   setAuthUserAndToken = (user, token) => {
-//     localStorage.setItem('llah-token', token);
-//     this.setRootUser(user);
-//   };
-
-//   onFetchAccountInfo = (email, tokenValue) =>
-//     api.auth.fetchAccountInfo(email, tokenValue);
-
-//   onConfirmAccount = data => api.auth.confirmAccount(data);
-
-//   onRecoverAccount = email => api.auth.recoverAccount(email);
-
-//   onResetPassword = (email, token, password) =>
-//     api.auth.resetPassword(email, token, password);
-
-//   const onLogin = async({ email, password }) => {
-//     try {
-//       const result = await this.props.login({ variables: { email, password } });
-//       const { account, token } = result.data.login;
-
-//       localStorage.setItem('healfit:token', token);
-//       setUserAndToken(account)
-//       return result
-//     } catch(e) {
-//       const errors = error.graphQLErrors.map(x => x.message);
-//       console.log(error)
-//       throw new Error(error)
-//       // this.setState(({ ui }) => ({ ui: ui.toError(errors[0]) }));
-//       // setSubmitting(false);
-//       // return setTimeout(
-//       //   () => this.setState(({ ui }) => ({ ui: ui.toIdle() })),
-//       //   3000
-//       // );
-//     }
-
-//   }
-//     api.auth.login(email, password).then(({ user, token, subdomain }) => {
-//       this.setAuthUserAndToken(user, token, subdomain);
-//       return user;
-//     });
-
-//   onLogout = () => {
-//     this.setState({ amILoggedIn: false, authUser: null });
-//     localStorage.removeItem('llah-user');
-//     localStorage.removeItem('llah-token');
-//     localStorage.removeItem('llah-subdomain');
-//     history.push('/');
-//   };
-
-//   render() {
-//     const context = {
-//       amILoggedIn: this.state.amILoggedIn,
-//       authUser: this.state.authUser,
-//       onFetchAccountInfo: this.onFetchAccountInfo,
-//       onConfirmAccount: this.onConfirmAccount,
-//       onLogin: this.onLogin,
-//       onLogout: this.onLogout,
-//       onRecoverAccount: this.onRecoverAccount,
-//       onResetPassword: this.onResetPassword,
-//       onUpdateUser: this.updateUserOnLocalStorage,
-//       isTokenExpired: this.isTokenExpired,
-//     };
-
-//     return (
-//       <RootContext.Provider value={context}>
-//         {this.state.isMounted && this.props.children}
-//       </RootContext.Provider>
-//     );
-//   }
-// }
-
-const RootConsumer = RootContext.Consumer;
-
 Provider.propTypes = {
   children: PropTypes.any.isRequired,
   login: PropTypes.func.isRequired,
@@ -213,5 +103,7 @@ const RootProvider = compose(
   withGlobalData,
   withApolloClient
 )(Provider);
+
+const RootConsumer = RootContext.Consumer;
 
 export { RootProvider, RootConsumer, RootContext };

@@ -4,7 +4,8 @@ import styled, { css } from 'styled-components';
 import { getImageURL } from 'helpers/images';
 // import { getUserInitials } from 'helpers/user';
 
-import { UikStarRating, UikAvatar, Uikon } from '@duik';
+import { UikAvatar, Uikon } from '@duik';
+import UikStarRating from 'uikit/blocks/StarRating';
 import Link from 'uikit/elements/Link';
 import Card from 'uikit/blocks/Card';
 

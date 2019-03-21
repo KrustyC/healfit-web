@@ -31,7 +31,7 @@ const Recipe = ({ recipe }) => (
     <Info recipe={recipe} />
     <Ingredients ingredients={recipe.ingredients} />
     <Method method={recipe.method} />
-    <Bottom />
+    <Bottom recipe={recipe} />
   </Layout>
 );
 

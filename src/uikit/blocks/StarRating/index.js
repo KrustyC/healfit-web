@@ -1,0 +1,57 @@
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+import Star from './Star';
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const rates = [1, 2, 3, 4, 5];
+
+const UikStarRating = ({ rating = 5, onRate }) => {
+  const [colouredUntil, setColouredUntil] = useState(rating);
+  const handleClick = r => () => onRate(r);
+
+  const onEnter = r => () => {
+    if (onRate !== null) {
+      setColouredUntil(r);
+    }
+  };
+
+  const onLeave = () => {
+    if (onRate !== null) {
+      setColouredUntil(rating);
+    }
+  };
+
+  return (
+    <Row>
+      {rates.map(r => (
+        <Star
+          key={r}
+          isFilled={r <= colouredUntil}
+          isClickable={onRate !== null}
+          onSelect={handleClick(r)}
+          onEnter={onEnter(r)}
+          onLeave={onLeave}
+        />
+      ))}
+    </Row>
+  );
+};
+
+UikStarRating.propTypes = {
+  rating: PropTypes.number,
+  onRate: PropTypes.func,
+};
+
+UikStarRating.defaultProps = {
+  rating: 5,
+  onRate: null,
+};
+
+export default UikStarRating;
