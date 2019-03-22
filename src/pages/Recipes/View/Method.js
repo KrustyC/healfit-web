@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import htmlParser from 'helpers/htmlParser';
-import Button from 'uikit/blocks/Button';
 
 const Container = styled.div`
   ${({ theme }) => css`
@@ -12,7 +11,8 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: ${theme.padding.lg} 0;
+
+    padding-top: ${theme.padding.lg};
 
     @media (max-width: ${theme.sizes.md}) {
       width: ${theme.dimensions.containerWidth.fullscreen};
@@ -29,9 +29,6 @@ const Text = styled.div`
 const Method = ({ method }) => (
   <Container>
     <Text>{htmlParser(method)}</Text>
-    <Button squircled css="width: auto; margin-top: 4rem;">
-      Add to Meal Plan
-    </Button>
   </Container>
 );
 

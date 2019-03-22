@@ -44,6 +44,7 @@ const GET_RECIPES = gql`
       calories
       description
       picture
+      rating
     }
   }
 `;

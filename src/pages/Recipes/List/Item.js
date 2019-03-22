@@ -84,7 +84,7 @@ const Item = ({ recipe }) => (
       >
         View
       </Link>
-      <UikStarRating rating={2} />
+      <UikStarRating rating={recipe.rating} />
     </Card.Footer>
   </Card>
 );
@@ -95,6 +95,7 @@ Item.propTypes = {
     picture: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
   }).isRequired,
 };
 

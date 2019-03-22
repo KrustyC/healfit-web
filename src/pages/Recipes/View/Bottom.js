@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { UikAvatar } from '@duik';
-import BookmarkIcon from 'assets/icons/bookmark.svg';
 import StarRating from 'uikit/blocks/StarRating';
 
 const Container = styled.div`
@@ -14,7 +13,7 @@ const Container = styled.div`
     justify-content: space-between;
     width: 100%;
     margin: ${theme.margin.md} 0;
-    padding: ${theme.padding.lg} 0;
+    padding: ${theme.padding.md} 0;
     border-top: 2px solid ${theme.colors.border};
     @media (max-width: ${theme.sizes.md}) {
       padding: ${theme.padding.md} ${theme.padding.sm};
@@ -22,35 +21,26 @@ const Container = styled.div`
   `}
 `;
 
-const Bookmark = styled.div`
-  ${({ theme, bookmarked }) => css`
+const Rate = styled.div`
+  ${({ theme }) => css`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding: ${theme.padding.xs};
+
+    b {
+      margin-bottom: ${theme.margin.xs};
+    }
 
     @media (max-width: ${theme.sizes.md}) {
       b {
         display: none;
       }
     }
-
-    svg {
-      height: 25px;
-      width: 25px;
-      path {
-        stroke: ${theme.colors.primary};
-        stroke-width: 20;
-        /* stroke-linejoin: round; */
-        stroke-linecap: butt;
-      }
-      fill: ${bookmarked ? theme.colors.primary : theme.colors.light};
-    }
   `}
 `;
 
 const Row = styled.div`
-  flex: 1;
+  /* flex: 1; */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -59,27 +49,21 @@ const Row = styled.div`
 const Avatar = styled(UikAvatar)`
   ${({ theme }) => css`
     > div:first-of-type {
-      height: 80px !important;
-      width: 80px !important;
-      font-size: 30px !important;
+      height: 60px !important;
+      width: 60px !important;
+      font-size: 24px !important;
     }
 
     > div:nth-of-type(2) {
       * {
-        font-size: ${theme.fontSize.regular} !important;
+        font-size: ${theme.fontSize.small} !important;
       }
     }
   `}
 `;
 
 const Bottom = ({ recipe, rateRecipe }) => {
-  const [bookmarked, setBookmarked] = useState(false);
   const [rating, setRating] = useState(recipe.rating);
-
-  const onBookmark = () => {
-    // Call Api
-    setBookmarked(!bookmarked);
-  };
 
   const onRate = async rate => {
     const previousRating = rating;
@@ -94,6 +78,10 @@ const Bottom = ({ recipe, rateRecipe }) => {
 
   return (
     <Container>
+      <Rate>
+        <b>Rate this recipe</b>
+        <StarRating rating={rating} onRate={onRate} />
+      </Rate>
       <Row>
         <Avatar
           name="Davide Crestini"
@@ -104,11 +92,6 @@ const Bottom = ({ recipe, rateRecipe }) => {
           }}
         />
       </Row>
-      <StarRating rating={rating} onRate={onRate} />
-      <Bookmark bookmarked={bookmarked}>
-        <b>Save this recipe for later</b>
-        <BookmarkIcon onClick={onBookmark} />
-      </Bookmark>
     </Container>
   );
 };

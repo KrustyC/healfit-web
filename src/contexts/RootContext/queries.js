@@ -27,6 +27,7 @@ export const SET_GLOBAL_DATA = gql`
 
 export const FETCH_CURRENT_ACCOUNT_QUERY = gql`
   fragment AccountInfo on Account {
+    _id
     firstName
     lastName
     roles
@@ -44,6 +45,7 @@ export const LOGIN = gql`
     login(input: { email: $email, password: $password }) {
       token
       account {
+        _id
         firstName
         lastName
       }

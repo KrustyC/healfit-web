@@ -52,17 +52,11 @@ const Provider = ({ client, children, login, setGlobalData }) => {
   );
 
   const onLogin = async ({ email, password }) => {
-    // try {
     const result = await login({ variables: { email, password } });
     const { account, token } = result.data.login;
 
     localStorage.setItem('healfit:token', token);
     setAuthUserAndToken({ token, account });
-    setMounted(true);
-    // } catch (error) {
-    //   const errors = error.graphQLErrors.map(x => x.message);
-    //   throw new Error(errors[0]);
-    // }
   };
 
   const onLogout = () => {

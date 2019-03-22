@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { Uikon } from '@duik';
@@ -8,6 +8,10 @@ const Icon = styled(Uikon)`
     height: 16px !important;
     margin-right: 2px;
     color: ${theme.colors.accent};
+
+    &:last-of-type {
+      margin-right: 0;
+    }
 
     ${clickable &&
       css`

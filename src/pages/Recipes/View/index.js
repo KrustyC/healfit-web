@@ -34,6 +34,8 @@ const GET_RECIPE = gql`
       fiber
       protein
       fat
+      rating
+      likedBy
     }
   }
 `;
