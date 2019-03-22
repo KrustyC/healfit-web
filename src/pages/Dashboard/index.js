@@ -1,13 +1,36 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import withAuth from 'helpers/withAuth';
+import { compose } from 'react-apollo';
+import { RootContext } from 'app/contexts/RootContext';
 
-const Dashboard = ({ authUser }) => (
-  <div>Welcome to your dashboard {authUser.firstName}!</div>
-);
+import { UikButton } from '@duik';
+import { withToastManager } from 'uikit/blocks/Toast';
+import Navbar from 'components/navbars/LoggedNavbar';
 
-Dashboard.propTypes = {
-  authUser: PropTypes.object.isRequired,
+const Dashboard = ({ toastManager }) => {
+  const rootContext = useContext(RootContext);
+  const { authUser } = rootContext;
+
+  return (
+    <>
+      <Navbar />
+      <div>Welcome to your dashboard {authUser.firstName}!</div>
+
+      <UikButton
+        onClick={() =>
+          toastManager.add('Done', {
+            appearance: 'error',
+          })
+        }
+      >
+        Hello
+      </UikButton>
+    </>
+  );
 };
 
-export default withAuth(Dashboard);
+Dashboard.propTypes = {
+  toastManager: PropTypes.object.isRequired,
+};
+
+export default compose(withToastManager)(Dashboard);

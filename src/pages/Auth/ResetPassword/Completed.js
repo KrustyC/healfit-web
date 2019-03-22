@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import P from 'uikit/elements/P';
 import history from 'app/router/history';
 import Button from 'uikit/blocks/Button';
+import Svg from 'assets/icons/paper-plane.svg';
 
 const Box = styled(
   posed.div({
@@ -24,19 +25,17 @@ const Box = styled(
   align-items: center;
 `;
 
-const Image = styled.img`
+const Image = styled(Svg)`
   ${({ theme }) => css`
     height: 200px;
     width: 200px;
-    border-radius: 50%;
     margin-bottom: ${theme.margin.md};
   `}
 `;
 
 export default () => (
   <Box initialPose="open" pose="closed">
-    {/* eslint-disable-next-line */}
-    <Image src={require('assets/icons/paper-plane.svg')} />
+    <Image />
     <P align="center">Your password has been succesfully restored!</P>
     <Button size="large" onClick={() => history.push('/auth/signin')}>
       Back To Login

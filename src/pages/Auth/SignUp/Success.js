@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import posed from 'react-pose';
 import Heading from 'uikit/elements/Heading';
 import P from 'uikit/elements/P';
+import Egg from 'assets/icons/egg.svg';
 
 const Container = styled(
   posed.div({
@@ -28,20 +29,17 @@ const Container = styled(
   align-items: center;
 `;
 
-const Image = styled.img`
+const Image = styled(Egg)`
   ${({ theme }) => css`
     height: 200px;
     width: 200px;
-    border-radius: 50%;
-    border: 2px solid ${theme.colors.border};
     margin-bottom: ${theme.margin.md};
   `}
 `;
 
 export default () => (
   <Container initialPose="open" pose="closed">
-    {/* eslint-disable-next-line global-require */}
-    <Image src={require('assets/icons/egg.svg')} />
+    <Image />
     <Heading level="h2">Cracking!</Heading>
     <P align="center">
       Shortly you{"'"}ll receive an email to confirm you email address!{' '}

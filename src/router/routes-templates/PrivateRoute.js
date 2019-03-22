@@ -1,20 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
-import withAuth from 'helpers/withAuth';
+import { RootContext } from 'app/contexts/RootContext';
 
-const PrivateRoute = ({ isAuthenticated, component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      isAuthenticated ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{ pathname: '/auth/login', state: { from: props.location } }}
-        />
-      )
-    }
-  />
-);
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  const rootContext = useContext(RootContext);
 
-export default withAuth(PrivateRoute);
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        rootContext.amILoggedIn ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{ pathname: '/auth/login', state: { from: props.location } }}
+          />
+        )
+      }
+    />
+  );
+};
+
+PrivateRoute.propTypes = {
+  component: PropTypes.any.isRequired,
+};
+
+export default PrivateRoute;

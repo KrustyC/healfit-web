@@ -1,36 +1,22 @@
 const defaults = {
-  currentUser: {
-    user: null,
-    __typename: 'CurrentUser',
-  },
-  authStatus: {
-    isAuthenticated: false,
-    __typename: 'AuthStatus',
-  },
+  account: null,
+  isAuthenticated: false,
 };
 
 const resolvers = {
   Mutation: {
-    setCurrentUser: (_, { user }, { cache }) => {
+    setCurrentAccount: (_, { account }, { cache }) => {
       const data = {
-        currentUser: {
-          user,
-          __typename: 'CurrentUser',
-        },
-        authStatus: {
-          isAuthenticated: true,
-          __typename: 'AuthStatus',
-        },
+        account,
+        isAuthenticated: true,
       };
       cache.writeData({ data });
       return null;
     },
-    clearUser: (_, _args, { cache }) => {
+    clearAccount: (_, _args, { cache }) => {
       const data = {
-        currentUser: {
-          user: null,
-          __typename: 'CurrentUser',
-        },
+        account: null,
+        isAuthenticated: false,
       };
       localStorage.removeItem('healfit:token');
       cache.writeData({ data });

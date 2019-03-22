@@ -1,9 +1,10 @@
 import { createGlobalStyle, css } from 'styled-components';
+import './font.scss';
 
 /* eslint-disable global-require */
 const GloablStyle = createGlobalStyle`
   ${({ theme }) => css`
-    @font-face {
+    /* @font-face {
       font-family: 'Montserrat';
       src: url(${require('assets/fonts/montserrat/Montserrat-Light.ttf')})
         format('truetype');
@@ -41,7 +42,7 @@ const GloablStyle = createGlobalStyle`
         format('truetype');
       font-weight: bold;
       font-style: italic;
-    }
+    } */
 
     *,
     ::after,
@@ -51,9 +52,9 @@ const GloablStyle = createGlobalStyle`
 
     html {
       font-family: sans-serif;
+      font-family: 'Roboto', sans-serif;
       box-sizing: border-box;
-      font-weight: 300;
-      font-size: 62.5%;
+      /* font-size: 62.5%; */
     }
 
     body {
@@ -70,6 +71,10 @@ const GloablStyle = createGlobalStyle`
     html,
     * {
       font-family: '${theme.fonts.default}', sans-serif;
+    }
+
+    a {
+      text-decoration: none !important;
     }
   `}
 `;

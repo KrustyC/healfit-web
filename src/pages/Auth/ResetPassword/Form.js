@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Formik } from 'formik';
+import { Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 import Form from 'uikit/blocks/Form';
 import Button from 'uikit/blocks/Button';
+import SvgEye from 'assets/icons/blind.svg';
 
 const validationSchema = Yup.object().shape({
   password: Yup.string()
@@ -21,48 +22,63 @@ const validationSchema = Yup.object().shape({
 
 const SignInForm = ({ onSubmit }) => (
   <Formik
-    initialValues={{ password: '', passwordConfirm: '' }}
+    initialValues={{
+      password: '',
+      passwordConfirm: '',
+      showPassword: false,
+      showRepeatPassword: false,
+    }}
     onSubmit={onSubmit}
     validationSchema={validationSchema}
   >
-    {({
-      values,
-      touched,
-      errors,
-      isValid,
-      isSubmitting,
-      handleChange,
-      handleBlur,
-      handleSubmit,
-    }) => (
+    {({ isValid, isSubmitting, handleSubmit, values, setFieldValue }) => (
       <Form onSubmit={handleSubmit}>
         <Form.FormGroup>
-          <Form.Label htmlFor="name">Password</Form.Label>
-          <Form.Password
-            id="password"
-            placeholder="Enter your password"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          {/* <Form.Feedback show={errors.password && touched.password}>
-            {errors.password}
-          </Form.Feedback> */}
+          <Form.Label htmlFor="name">
+            Password
+            <Form.Input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Enter a new password"
+              as={Field}
+            />
+            <i>
+              <SvgEye
+                onClick={() =>
+                  setFieldValue('showPassword', !values.showPassword)
+                }
+              />
+            </i>
+          </Form.Label>
+          <ErrorMessage name="password">
+            {msg => <Form.Feedback>{msg}</Form.Feedback>}
+          </ErrorMessage>
         </Form.FormGroup>
         <Form.FormGroup>
-          <Form.Label htmlFor="name">Repeat Password</Form.Label>
-          <Form.Password
-            id="passwordConfirm"
-            placeholder="Repeat your password"
-            value={values.passwordConfirm}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          {/* <Form.Feedback
-            show={errors.passwordConfirm && touched.passwordConfirm}
-          >
-            {errors.passwordConfirm}
-          </Form.Feedback> */}
+          <Form.Label htmlFor="name">
+            Repeat Password
+            <Form.Input
+              id="passwordConfirm"
+              name="passwordConfirm"
+              type="password"
+              placeholder="Repeat your password"
+              as={Field}
+            />
+            <i>
+              <SvgEye
+                onClick={() =>
+                  setFieldValue(
+                    'showRepeatPassword',
+                    !values.showRepeatPassword
+                  )
+                }
+              />
+            </i>
+          </Form.Label>
+          <ErrorMessage name="passwordConfirm">
+            {msg => <Form.Feedback>{msg}</Form.Feedback>}
+          </ErrorMessage>
         </Form.FormGroup>
         <Button
           type="submit"

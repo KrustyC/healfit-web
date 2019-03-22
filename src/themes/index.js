@@ -9,7 +9,7 @@ const SUCCESS = '#5cb85c';
 const INFO = '#33a9da';
 const ERROR = '#d9534f';
 const WARNING = '#f9d834';
-const GREY = '#aaaaaa';
+const GREY = '#9EA0A5';
 const DARK = '#000000';
 
 const sizes = {
@@ -68,18 +68,19 @@ export default {
     },
   },
   fonts: {
-    default: 'Montserrat',
+    default: 'Roboto',
   },
   fontSize: {
-    xsmall: '1rem',
-    small: '1.2rem',
-    regular: '1.6rem',
-    large: '2.8rem',
+    xsmall: '12px',
+    small: '14px',
+    regular: '16px',
+    reading: '22px',
+    large: '30px',
     title: '5.4rem',
     h1: '4.4rem',
     h2: '3.6rem',
     h3: '2.8rem',
-    h4: '1.8rem',
+    h4: '2.2rem',
   },
   forms: {
     inputHeight: '2.3rem',

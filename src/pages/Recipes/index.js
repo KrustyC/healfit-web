@@ -2,8 +2,8 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
 
-import Navbar from 'uikit/organisms/navbars/EmptyNavbar';
-import Footer from 'uikit/organisms/Footer';
+// import Navbar from 'uikit/organisms/navbars/DefaultNavbar';
+import Navbar from 'components/navbars/LoggedNavbar';
 
 import CreateRecipe from './Create';
 import EditRecipe from './Edit';
@@ -15,11 +15,10 @@ const RecipesIndex = ({ match: { path } }) => (
     <Navbar />
     <Switch>
       <Route path={`${path}/create`} component={CreateRecipe} />
-      <Route path={`${path}/edit/:id`} component={EditRecipe} />
-      <Route path={`${path}/:id`} component={ViewRecipe} />
+      <Route path={`${path}/edit/:slug`} component={EditRecipe} />
+      <Route path={`${path}/:slug`} component={ViewRecipe} />
       <Route component={ListRecipes} />
     </Switch>
-    {/* <Footer /> */}
   </Fragment>
 );
 

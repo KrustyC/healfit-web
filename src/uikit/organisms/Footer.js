@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
+import LogoSvg from 'assets/icons/logo.svg';
 import Heading from 'uikit/elements/Heading';
 import Link from 'uikit/elements/Link';
 import P from 'uikit/elements/P';
@@ -74,7 +75,7 @@ const Bottom = styled.div`
     justify-content: flex-start;
     width: 100%;
 
-    img {
+    svg {
       width: 30px;
       height: 30px;
       margin-right: ${theme.margin.md};
@@ -114,8 +115,7 @@ export default () => (
       </Grid>
       <Hr />
       <Bottom>
-        {/* eslint-disable-next-line */}
-        <img src={require('assets/icons/logo.svg')} />
+        <LogoSvg />
         <P size="small">© 2019 Healfit. All Rights Reserved.</P>
       </Bottom>
     </Box>

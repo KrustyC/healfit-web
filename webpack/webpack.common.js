@@ -24,9 +24,11 @@ module.exports = {
     modules: [src, 'node_modules'],
     alias: {
       app: src,
+      components: path.join(src, 'components'),
       helpers: path.join(src, 'helpers'),
       hoc: path.join(src, 'hoc'),
       assets: path.join(src, 'assets'),
+      '@duik': path.join(src, 'duik'),
       uikit: path.join(src, 'uikit'),
     },
   },
@@ -44,6 +46,10 @@ module.exports = {
         use: ['babel-loader'],
       },
       {
+        test: /\.(scss|css)$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
         test: /\.(png|j|jpeg|jpg|gif)$/,
         use: {
           loader: 'url-loader',
@@ -53,7 +59,21 @@ module.exports = {
         },
       },
       {
-        test: /\.(ttf|eot|svg|otf|woff|woff2)(\?[\s\S]+)?$/,
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+          {
+            loader: 'react-svg-loader',
+            options: {
+              jsx: true, // true outputs JSX tags
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(ttf|eot|otf|woff|woff2)(\?[\s\S]+)?$/,
         use: 'url-loader?name=fonts/[name].[ext]',
       },
     ],

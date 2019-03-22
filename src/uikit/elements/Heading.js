@@ -4,9 +4,6 @@ import styled, { css } from 'styled-components';
 
 const H1 = styled.h1`
   ${({ theme, align, color }) => css`
-    font-weight: 300;
-    margin: 0px 0 ${theme.spaces.regular} 0;
-    font-size: ${theme.fontSize.h1};
     text-align: ${align};
     color: ${theme.colors[color]};
   `}
@@ -14,29 +11,29 @@ const H1 = styled.h1`
 
 const H2 = styled(H1)`
   ${({ theme }) => css`
-    font-size: ${theme.fontSize.h2};
+    /* font-size: ${theme.fontSize.h2}; */
   `}
 `;
 
 const H3 = styled(H1)`
   ${({ theme }) => css`
-    font-size: ${theme.fontSize.h3};
-    font-weight: bold;
+    /* font-size: ${theme.fontSize.h3}; */
+    /* font-weight: bold; */
   `}
 `;
 
 const H4 = styled(H1)`
   ${({ theme }) => css`
-    font-size: ${theme.fontSize.h4};
+    /* font-size: ${theme.fontSize.h4};
     font-weight: bold;
-    margin: 0px 0 ${theme.spaces.small} 0;
+    margin: ${theme.spaces.small} 0; */
   `}
 `;
 
 const Title = styled(H1)`
   ${({ theme }) => css`
-    margin: ${theme.margin.sm};
-    font-size: ${theme.fontSize.title};
+    /* margin: ${theme.margin.sm};
+    font-size: ${theme.fontSize.title}; */
   `}
 `;
 
@@ -54,7 +51,7 @@ const Heading = ({ children, level, align, ...rest }) => {
   }
 
   return (
-    <Tag level={level} align={align} {...rest}>
+    <Tag level={level} as={level} align={align} {...rest}>
       {children}
     </Tag>
   );

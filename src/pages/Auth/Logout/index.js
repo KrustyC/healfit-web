@@ -1,25 +1,14 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
-import withAuth from 'helpers/withAuth';
+import { useEffect, useContext } from 'react';
+import { RootContext } from 'app/contexts/RootContext';
 
-class Logout extends Component {
-  static propTypes = {
-    clearUser: PropTypes.func.isRequired,
-  };
+const Logout = () => {
+  const rootContext = useContext(RootContext);
 
-  state = {
-    redirect: false,
-  };
+  useEffect(() => {
+    rootContext.onLogout();
+  }, []);
 
-  componentDidMount() {
-    this.props.clearUser().then(() => this.setState({ redirect: true }));
-  }
+  return null;
+};
 
-  render() {
-    const { redirect } = this.state;
-    return redirect ? <Redirect to="" /> : null;
-  }
-}
-
-export default withAuth(Logout);
+export default Logout;

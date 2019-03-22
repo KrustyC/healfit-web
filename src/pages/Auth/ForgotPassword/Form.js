@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Formik } from 'formik';
+import { Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 import Form from 'uikit/blocks/Form';
@@ -18,30 +18,22 @@ const SignInForm = ({ onSubmit }) => (
     onSubmit={onSubmit}
     validationSchema={validationSchema}
   >
-    {({
-      values,
-      touched,
-      errors,
-      isValid,
-      isSubmitting,
-      handleChange,
-      handleBlur,
-      handleSubmit,
-    }) => (
+    {({ isValid, isSubmitting, handleSubmit }) => (
       <Form onSubmit={handleSubmit}>
         <Form.FormGroup>
-          <Form.Label htmlFor="name">Email</Form.Label>
-          <Form.Input
-            id="email"
-            placeholder="Enter your email"
-            type="text"
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          {/* <Form.Feedback show={errors.email && touched.email}>
-            {errors.email}
-          </Form.Feedback> */}
+          <Form.Label htmlFor="name">
+            Email
+            <Form.Input
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              type="text"
+              as={Field}
+            />
+          </Form.Label>
+          <ErrorMessage name="email">
+            {msg => <Form.Feedback>{msg}</Form.Feedback>}
+          </ErrorMessage>
         </Form.FormGroup>
         <Button
           type="submit"

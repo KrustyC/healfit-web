@@ -17,19 +17,31 @@ const httpLink = createHttpLink({
 const cache = new InMemoryCache();
 
 const typeDefs = `
-  type Usert {
+  type Account {
     id: ID!
     firstName: String
     lastName: String
   }
 
+  type ValueObject {
+    id
+    name
+  }
+
+  type GlobalData {
+    ingredientsCategories: ValueObject
+    measurements: ValueObject
+  }
+
   type Mutation {
-    setCurrentuser(user: User!): User
-    clearuser(user: User!): Boolean
+    setGlobalData(globalData: GlobalData!)
+    setCurrentAccount(account: Account!): Account
+    clearAccount(account: Account!): Boolean
   }
 
   type Query {
-    currentUser: User
+    currentAccount: Account
+    globalData: GlobalData
   }
 `;
 
@@ -54,9 +66,10 @@ const authMiddlewareLink = setContext(() => {
 
   const currentTime = Date.now().valueOf() / 1000;
   const tokenExpiration = decode(token).exp;
-  // if (currentTime > tokenExpiration) {
-  //   history.push('/auth/signin');
-  // }
+  if (currentTime > tokenExpiration) {
+    localStorage.removeItem('healfit:token');
+    history.push('/auth/signin');
+  }
 
   return headers;
 });
@@ -72,9 +85,21 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (networkError) console.log(`[Network error]: ${networkError}`);
 });
 
+const createOmitTypenameLink = new ApolloLink((operation, forward) => {
+  const newOperation = operation;
+  if (operation.variables) {
+    newOperation.variables = JSON.parse(
+      JSON.stringify(operation.variables),
+      (key, value) => (key === '__typename' ? undefined : value)
+    );
+  }
+  return forward ? forward(newOperation) : null;
+});
+
 const link = ApolloLink.from([
   errorLink,
   stateLink,
+  createOmitTypenameLink,
   authMiddlewareLink,
   httpLink,
 ]);

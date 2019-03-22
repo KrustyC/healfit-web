@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Formik } from 'formik';
+import { ErrorMessage, Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import Form from 'uikit/blocks/Form';
 import Button from 'uikit/blocks/Button';
 import Link from 'uikit/elements/Link';
 import P from 'uikit/elements/P';
+import SvgEye from 'assets/icons/blind.svg';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -30,6 +31,7 @@ const initialValues = {
   password: '',
   firstName: '',
   lastName: '',
+  showPassword: false,
   acceptTermAndCondition: false,
 };
 
@@ -41,74 +43,84 @@ const UserSignUpForm = ({ onSubmit }) => (
   >
     {({
       values,
-      touched,
-      errors,
       isSubmitting,
       handleChange,
       isValid,
       handleBlur,
       handleSubmit,
+      setFieldValue,
     }) => (
       <Form onSubmit={handleSubmit}>
         <Form.FormGroup>
-          <Form.Label htmlFor="email">Email</Form.Label>
-          <Form.Input
-            id="email"
-            placeholder="Enter your email"
-            type="text"
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          {/* <Form.Feedback show={errors.email && touched.email}>
-            {errors.email}
-          </Form.Feedback> */}
+          <Form.Label htmlFor="email">
+            Email
+            <Form.Input
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              type="text"
+              as={Field}
+            />
+          </Form.Label>
+          <ErrorMessage name="email">
+            {msg => <Form.Feedback>{msg}</Form.Feedback>}
+          </ErrorMessage>
         </Form.FormGroup>
         <Form.FormGroup>
-          <Form.Label htmlFor="firstName">First Name</Form.Label>
-          <Form.Input
-            id="firstName"
-            placeholder="Enter your first name"
-            type="text"
-            value={values.firstName}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          {/* <Form.Feedback show={errors.firstName && touched.firstName}>
-            {errors.firstName}
-          </Form.Feedback> */}
+          <Form.Label htmlFor="firstName">
+            First Name
+            <Form.Input
+              id="firstName"
+              name="firstName"
+              placeholder="Enter your first name"
+              type="text"
+              as={Field}
+            />
+          </Form.Label>
+          <ErrorMessage name="firstName">
+            {msg => <Form.Feedback>{msg}</Form.Feedback>}
+          </ErrorMessage>
         </Form.FormGroup>
         <Form.FormGroup>
-          <Form.Label htmlFor="lastName">Last Name</Form.Label>
-          <Form.Input
-            id="lastName"
-            placeholder="Enter your Last Name"
-            type="text"
-            value={values.lastName}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          {/* <Form.Feedback show={errors.lastName && touched.lastName}>
-            {errors.lastName}
-          </Form.Feedback> */}
+          <Form.Label htmlFor="lastName">
+            Last Name
+            <Form.Input
+              id="lastName"
+              name="lastName"
+              placeholder="Enter your Last Name"
+              type="text"
+              as={Field}
+            />
+          </Form.Label>
+          <ErrorMessage name="lastName">
+            {msg => <Form.Feedback>{msg}</Form.Feedback>}
+          </ErrorMessage>
         </Form.FormGroup>
         <Form.FormGroup>
-          <Form.Label htmlFor="password">Password</Form.Label>
-          <Form.Password
-            id="password"
-            placeholder="Enter your password"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          {/* <Form.Feedback show={errors.password && touched.password}>
-            {errors.password}
-          </Form.Feedback> */}
+          <Form.Label htmlFor="password">
+            Password
+            <Form.Input
+              id="password"
+              as={Field}
+              name="password"
+              type={values.showPassword ? 'text' : 'password'}
+              placeholder="*******"
+            />
+            <i>
+              <SvgEye
+                onClick={() =>
+                  setFieldValue('showPassword', !values.showPassword)
+                }
+              />
+            </i>
+          </Form.Label>
+          <ErrorMessage name="password">
+            {msg => <Form.Feedback>{msg}</Form.Feedback>}
+          </ErrorMessage>
         </Form.FormGroup>
         <Form.Checkbox
           name="acceptTermAndCondition"
           checked={values.acceptTermAndCondition}
-          value="Bike"
           onChange={handleChange}
           onBlur={handleBlur}
         >

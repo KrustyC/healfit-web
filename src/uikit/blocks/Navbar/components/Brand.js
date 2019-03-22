@@ -13,7 +13,7 @@ const Brand = styled(Link)`
       margin-left: 20px;
     }
 
-    img {
+    svg {
       margin-right: 40px;
       width: 50px;
       height: 50px;
@@ -21,16 +21,9 @@ const Brand = styled(Link)`
   `}
 `;
 
-// const Brand = props => <Brand {...props} />;
-
 Brand.propTypes = {
   to: PropTypes.string.isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.shape({
-      type: PropTypes.oneOf(['img']),
-    }),
-  ]).isRequired,
+  children: PropTypes.any.isRequired,
 };
 
 Brand.displayName = 'NavbarBrand';

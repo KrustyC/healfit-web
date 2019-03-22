@@ -1,10 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Redirect } from 'react-router-dom';
-import withAuth from 'helpers/withAuth';
+import { RootContext } from 'app/contexts/RootContext';
 
-import Navbar from 'uikit/organisms/navbars/EmptyNavbar';
+import Navbar from 'components/navbars/DefaultNavbar';
 import Footer from 'uikit/organisms/Footer';
 import Hero from './Hero';
 import Features from './Features';
@@ -18,8 +17,9 @@ const Layout = styled.div`
   width: 100vw;
 `;
 
-const Home = ({ isAuthenticated }) => {
-  if (isAuthenticated) {
+const Home = () => {
+  const { amILoggedIn } = useContext(RootContext);
+  if (amILoggedIn) {
     return <Redirect to="/dashboard" />;
   }
 
@@ -36,8 +36,4 @@ const Home = ({ isAuthenticated }) => {
   );
 };
 
-Home.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
-};
-
-export default withAuth(Home);
+export default Home;

@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
-import gql from 'graphql-tag';
-import PossibleStates from 'possible-states';
-import { compose, graphql } from 'react-apollo';
-import withAuth from 'helpers/withAuth';
+import React, { useState, useContext } from 'react';
+import history from 'app/router/history';
+import { RootContext } from 'app/contexts/RootContext';
+import LoginImg from 'assets/images/login.jpg';
 
 import Heading from 'uikit/elements/Heading';
 import Link from 'uikit/elements/Link';
@@ -22,97 +19,43 @@ import {
   StyledAlert,
 } from '../components';
 
-class SignIn extends Component {
-  static propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
-    login: PropTypes.func.isRequired,
-    setCurrentUser: PropTypes.func.isRequired,
-  };
+const SignIn = () => {
+  const rootContext = useContext(RootContext);
+  const [error, setError] = useState(null);
 
-  state = {
-    ui: PossibleStates('idle', 'error<reason>', 'authenticated'),
-  };
-
-  componentDidMount() {
-    const { isAuthenticated } = this.props;
-    if (isAuthenticated) {
-      this.setState(({ ui }) => ({ ui: ui.toAuthenticated() }));
-    }
-  }
-
-  onHandleSubmit = async (values, { resetForm }) => {
+  const onHandleSubmit = async ({ email, password }, { setSubmitting }) => {
     try {
-      const result = await this.props.login({ variables: values });
-      const { account, token } = result.data.login;
-
-      await this.props.setCurrentUser({ variables: { user: account } });
-      localStorage.setItem('healfit:token', token);
-      return this.setState(({ ui }) => ({ ui: ui.toAuthenticated() }));
-    } catch (error) {
-      const errors = error.graphQLErrors.map(x => x.message);
-      this.setState(({ ui }) => ({ ui: ui.toError(errors[0]) }));
-      resetForm();
-      return setTimeout(
-        () => this.setState(({ ui }) => ({ ui: ui.toIdle() })),
-        3000
-      );
+      await rootContext.onLogin({ email, password });
+      return history.push('/dashboard');
+    } catch (loginError) {
+      const errors = loginError.graphQLErrors.map(x => x.message);
+      setError(errors[0]);
+      setSubmitting(false);
+      return setTimeout(() => setError(null), 3000);
     }
   };
 
-  render() {
-    const { ui } = this.state;
+  return (
+    <Container>
+      <ImgSide url={LoginImg} />
+      <FormSide>
+        <Header>
+          <Heading>Healfit</Heading>
+        </Header>
+        <Frame>
+          <FormContainer>
+            {error && <StyledAlert type="error">{error}</StyledAlert>}
+            <Form onSubmit={onHandleSubmit} />
+            <P size="small">
+              Do you not have an account yet?{' '}
+              <Link to="/auth/signup">Sign Up</Link>
+            </P>
+          </FormContainer>
+        </Frame>
+        <Bottom />
+      </FormSide>
+    </Container>
+  );
+};
 
-    if (ui.current() === 'authenticated') {
-      return <Redirect to="/dashboard" />;
-    }
-
-    return (
-      <Container>
-        {/* eslint-disable-next-line global-require */}
-        <ImgSide url={require('assets/images/login.jpg')} />
-        <FormSide>
-          <Header>
-            <Heading level="title">Healfit</Heading>
-          </Header>
-          <Frame>
-            <FormContainer>
-              {ui.whenError(({ reason }) => (
-                <StyledAlert type="error">{reason}</StyledAlert>
-              ))}
-              <Form onSubmit={this.onHandleSubmit} />
-              <P size="small">
-                Do you not have an account yet?{' '}
-                <Link to="/auth/signup">Sign Up</Link>
-              </P>
-            </FormContainer>
-          </Frame>
-          <Bottom />
-        </FormSide>
-      </Container>
-    );
-  }
-}
-
-const LOGIN = gql`
-  mutation login($email: String!, $password: String!) {
-    login(input: { email: $email, password: $password }) {
-      token
-      account {
-        firstName
-        lastName
-      }
-    }
-  }
-`;
-
-const SET_CURRENT_USER = gql`
-  mutation setCurrentUser($user: Object) {
-    setCurrentUser(user: $user) @client
-  }
-`;
-
-export default compose(
-  graphql(LOGIN, { name: 'login' }),
-  graphql(SET_CURRENT_USER, { name: 'setCurrentUser' }),
-  withAuth
-)(SignIn);
+export default SignIn;
