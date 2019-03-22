@@ -12,7 +12,7 @@ const Row = styled.div`
 
 const rates = [1, 2, 3, 4, 5];
 
-const UikStarRating = ({ rating = 5, onRate }) => {
+const UikStarRating = ({ rating = 0, size, onRate }) => {
   const [colouredUntil, setColouredUntil] = useState(rating);
   const handleClick = r => () => onRate(r);
 
@@ -33,6 +33,7 @@ const UikStarRating = ({ rating = 5, onRate }) => {
       {rates.map(r => (
         <Star
           key={r}
+          size={size}
           isFilled={r <= colouredUntil}
           isClickable={onRate !== null}
           onSelect={handleClick(r)}
@@ -45,11 +46,13 @@ const UikStarRating = ({ rating = 5, onRate }) => {
 };
 
 UikStarRating.propTypes = {
+  size: PropTypes.oneOf(['small', 'regular', 'large']),
   rating: PropTypes.number,
   onRate: PropTypes.func,
 };
 
 UikStarRating.defaultProps = {
+  size: 'regular',
   rating: 5,
   onRate: null,
 };

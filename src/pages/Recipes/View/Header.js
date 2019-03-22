@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import P from 'uikit/elements/P';
 import SocialShare from 'uikit/organisms/SocialShare';
 import { Uikon } from '@duik';
-
+import StarRating from 'uikit/blocks/StarRating';
 import { Hr } from './shared';
 
 const Top = styled.div`
@@ -113,6 +113,21 @@ const Description = styled(P)`
   `}
 `;
 
+const Rating = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
+    padding: ${theme.margin.sm} 0;
+    z-index: 1000000;
+    background: rgba(255, 255, 255, 0.6);
+  `}
+`;
+
 const Header = ({ recipe, likeOrDislikeRecipe }) => {
   const { amILoggedIn, authUser } = useContext(RootContext);
   const [amILiking, setLike] = useState(recipe.likedBy.includes(authUser._id));
@@ -146,6 +161,9 @@ const Header = ({ recipe, likeOrDislikeRecipe }) => {
               <Icon>edit</Icon>
             </Link>
           </Edit>
+          <Rating>
+            <StarRating rating={recipe.rating} size="large" />
+          </Rating>
         </PictureContainer>
         <HeadInfo>
           <div>
@@ -177,6 +195,7 @@ Header.propTypes = {
       lastName: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  rating: PropTypes.number.isRequired,
   likeOrDislikeRecipe: PropTypes.func.isRequired,
 };
 

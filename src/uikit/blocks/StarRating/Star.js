@@ -1,11 +1,12 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
+import { switchProp } from 'styled-tools';
 import { Uikon } from '@duik';
 
 const Icon = styled(Uikon)`
   ${({ theme, clickable }) => css`
-    height: 16px !important;
+    font-size: 16px !important;
     margin-right: 2px;
     color: ${theme.colors.accent};
 
@@ -13,16 +14,26 @@ const Icon = styled(Uikon)`
       margin-right: 0;
     }
 
-    ${clickable &&
+    ${clickable === 'yes' &&
       css`
         cursor: pointer;
       `}
+
+    ${switchProp('size', {
+      small: css`
+        font-size: 12px !important;
+      `,
+      large: css`
+        font-size: 30px !important;
+      `,
+    })}
   `}
 `;
 
-const Star = ({ isClickable, isFilled, onEnter, onLeave, onSelect }) => (
+const Star = ({ size, isClickable, isFilled, onEnter, onLeave, onSelect }) => (
   <Icon
-    clickable={isClickable}
+    size={size}
+    clickable={isClickable ? 'yes' : 'no'}
     onMouseEnter={onEnter}
     onMouseLeave={onLeave}
     onClick={onSelect}
@@ -32,6 +43,7 @@ const Star = ({ isClickable, isFilled, onEnter, onLeave, onSelect }) => (
 );
 
 Star.propTypes = {
+  size: PropTypes.oneOf(['small', 'regular', 'big']).isRequired,
   isClickable: PropTypes.bool.isRequired,
   isFilled: PropTypes.bool.isRequired,
   onSelect: PropTypes.func.isRequired,
