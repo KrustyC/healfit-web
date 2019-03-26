@@ -9,6 +9,7 @@ import { FullPageLoader } from 'uikit/elements/Loaders';
 import apolloClient from './apollo';
 import Router from './router';
 import { RootProvider } from './contexts/RootContext';
+import { DrawerProvider } from './contexts/DrawerContext';
 import theme from './themes';
 import GlobalStyle from './GlobalStyle';
 
@@ -24,7 +25,9 @@ const App = () => (
         <ToastProvider>
           <Suspense fallback={<FullPageLoader />}>
             <RootProvider>
-              <Router />
+              <DrawerProvider>
+                <Router />
+              </DrawerProvider>
             </RootProvider>
           </Suspense>
         </ToastProvider>
