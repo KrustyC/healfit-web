@@ -82,7 +82,9 @@ class Step2 extends Component {
 
     return (
       <Wizard.Page>
-        <Heading level="h1">Ingredients</Heading>
+        <Heading level="h1" noPadding>
+          Ingredients
+        </Heading>
         <Form.FormGroup>
           <Form.RemoteFilter
             placeholder="Search for ingredients..."

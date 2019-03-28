@@ -14,7 +14,9 @@ const Step1 = ({
   recipeLevels,
 }) => (
   <Wizard.Page>
-    <Heading level="h1">Generic Info</Heading>
+    <Heading level="h1" noPadding>
+      Generic Info
+    </Heading>
     <Form.FormGroup>
       <Form.Label>
         Title

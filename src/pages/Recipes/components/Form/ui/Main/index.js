@@ -29,6 +29,9 @@ const MainContainer = styled.div`
 
     @media (max-width: ${theme.sizes.md}) {
       width: 100%;
+      > div {
+        width: 100%;
+      }
     }
   `}
 `;

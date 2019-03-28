@@ -15,12 +15,20 @@ const Layout = styled(Form)`
   ${({ theme }) => css`
     display: grid;
     width: ${theme.dimensions.containerWidth.fullscreen};
-    height: 100%;
+    height: calc(100vh - 70px);
     grid-template-areas:
       'sidebar main'
       'sidebar footer';
     grid-template-columns: 1fr 3fr;
     grid-template-rows: 1fr 100px;
+
+    @media (max-width: ${theme.sizes.md}) {
+      grid-template-areas:
+        'main'
+        'footer';
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 13vh;
+    }
   `}
 `;
 
@@ -84,28 +92,24 @@ const EditOrCreateForm = ({ edit, initialValues, onComplete }) => {
             isSubmitting,
             setFieldTouched,
             setFieldValue,
-            errors,
           }) => (
-            console.log(isValid, errors, values),
-            (
-              <Layout>
-                <Sidebar page={page} />
-                <Main
-                  edit={edit}
-                  values={values}
-                  setFieldTouched={setFieldTouched}
-                  setFieldValue={setFieldValue}
-                  globalData={globalData}
-                />
-                <Bottom
-                  onPrevious={onPrevious}
-                  isSubmitting={isSubmitting}
-                  isFirstPage={isFirstPage}
-                  isLastPage={isLastPage}
-                  isValid={isValid}
-                />
-              </Layout>
-            )
+            <Layout>
+              <Sidebar page={page} />
+              <Main
+                edit={edit}
+                values={values}
+                setFieldTouched={setFieldTouched}
+                setFieldValue={setFieldValue}
+                globalData={globalData}
+              />
+              <Bottom
+                onPrevious={onPrevious}
+                isSubmitting={isSubmitting}
+                isFirstPage={isFirstPage}
+                isLastPage={isLastPage}
+                isValid={isValid}
+              />
+            </Layout>
           )}
         </Formik>
       )}

@@ -31,7 +31,9 @@ const Image = styled.img`
 
 const Step4 = ({ values, setFieldValue, setFieldTouched }) => (
   <Wizard.Page>
-    <Heading level="h1">More Info</Heading>
+    <Heading level="h1" noPadding>
+      More Info
+    </Heading>
     <Form.FormGroup>
       <Image
         src={getImageURL(values.picture, 'w_700,h_600,g_face,c_thumb')}

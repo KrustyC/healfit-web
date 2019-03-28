@@ -28,7 +28,7 @@ export const Panel = styled(UikNavPanel)`
 
 export const Header = styled.div`
   ${({ theme }) => css`
-    height: 56px;
+    height: 70px;
     background: ${theme.colors.primary};
     padding-left: ${theme.padding.sm};
     display: flex;

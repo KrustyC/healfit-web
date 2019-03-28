@@ -19,6 +19,10 @@ const SidebarContainer = styled.div`
     h4 {
       margin: 0;
     }
+
+    @media (max-width: ${theme.sizes.md}) {
+      display: none;
+    }
   `}
 `;
 

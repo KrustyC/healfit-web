@@ -3,9 +3,13 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 const H1 = styled.h1`
-  ${({ theme, align, color }) => css`
+  ${({ theme, align, color, noPadding }) => css`
     text-align: ${align};
     color: ${theme.colors[color]};
+    ${noPadding &&
+      css`
+        padding: 0 !important;
+      `}
   `}
 `;
 
