@@ -6,10 +6,12 @@ const DrawerContext = React.createContext();
 const DrawerProvider = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const onToggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const onCloseMenu = () => setIsMenuOpen(false);
 
   const context = {
     isMenuOpen,
     onToggleMenu,
+    onCloseMenu,
   };
 
   return (

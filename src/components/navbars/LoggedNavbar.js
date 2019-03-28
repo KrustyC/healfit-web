@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { NavLink, Link } from 'react-router-dom';
@@ -7,8 +7,8 @@ import { DrawerContext } from 'app/contexts/DrawerContext';
 
 import { getUserInitials } from 'helpers/user';
 import {
-  UikTopBar,
   UikTopBarSection,
+  UikTopBar,
   UikTopBarTitle,
   UikAvatar,
   UikTopBarLinkContainer,
@@ -39,6 +39,7 @@ const Burger = styled(UikButton)`
     border: none !important;
     box-shadow: none !important;
     background: white;
+    padding: 0 ${theme.padding.sm};
     @media (min-width: ${theme.sizes.md}) {
       display: none;
     }
@@ -58,6 +59,12 @@ const Divider = styled(UikTopBarMenuDivider)`
     @media (max-width: ${theme.sizes.md}) {
       display: none;
     }
+  `}
+`;
+
+const Section = styled(UikTopBarSection)`
+  ${({ theme }) => css`
+    padding: 0 ${theme.padding.sm};
   `}
 `;
 
@@ -88,7 +95,7 @@ const Navbar = () => {
       <Burger onClick={onToggleMenu}>
         <UikNavBurger isOpen={isMenuOpen} />
       </Burger>
-      <UikTopBarSection>
+      <Section>
         <UikTopBarTitle>Healfit</UikTopBarTitle>
         <Divider />
         <Links>
@@ -102,9 +109,9 @@ const Navbar = () => {
             Meal Planner
           </UikTopBarLink>
         </Links>
-      </UikTopBarSection>
+      </Section>
 
-      <UikTopBarSection>
+      <Section>
         <UikDropdown
           position="bottomRight"
           DisplayComponent={UiKitUserDropwdown}
@@ -119,7 +126,7 @@ const Navbar = () => {
             Logout
           </UikDropdownItem>
         </UikDropdown>
-      </UikTopBarSection>
+      </Section>
     </UikTopBar>
   );
 };

@@ -1,58 +1,43 @@
 import React, { useContext } from 'react';
-import styled, { css } from 'styled-components';
 import { DrawerContext } from 'app/contexts/DrawerContext';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
 import {
   UikNavSectionTitle,
   UikNavSection,
   UikNavTitle,
   UikNavLink,
-  UikNavPanel,
 } from '@duik';
 
-const Panel = styled(UikNavPanel)`
-  ${({ theme, display }) => css`
-    display: none;
+import Container from './Container';
 
-    @media (max-width: ${theme.sizes.md}) {
-      display: block;
-      position: fixed;
-      top: 0;
-      right: 100%;
-      border-right: none;
-      box-shadow: 0 1px 10px 0 rgba(201, 53, 53, 0.07);
-      height: calc(100vh - 70px);
-      top: 70px;
-      transition: 0.3s all;
-      transform: translateX(o);
-      height: calc(100vh - 56px);
-      top: 56px;
-      z-index: 1000000;
-
-      ${display &&
-        css`
-          transform: translateX(100%);
-        `}
-    }
-  `}
-`;
+import { Panel, Header } from './style';
 
 const Drawer = () => {
   const { isMenuOpen } = useContext(DrawerContext);
 
   return (
-    <Panel display={isMenuOpen}>
-      <UikNavTitle>Healfit</UikNavTitle>
-      <UikNavSection>
-        <UikNavSectionTitle>Navigate</UikNavSectionTitle>
-        <UikNavLink Component={NavLink} to="/dashboard" />
-        <UikNavLink Component={NavLink} to="/recipes" />
-        <UikNavLink Component={NavLink} to="/meal-plan" />
-      </UikNavSection>
-    </Panel>
+    <Container>
+      <Panel display={isMenuOpen || undefined}>
+        <Header>
+          <UikNavTitle>Healfit</UikNavTitle>
+        </Header>
+        <UikNavSection>
+          <UikNavSectionTitle>Navigate</UikNavSectionTitle>
+          <UikNavLink Component={NavLink} to="/dashboard">
+            Dashboard
+          </UikNavLink>
+          <UikNavLink Component={NavLink} to="/recipes">
+            Recipes
+          </UikNavLink>
+          <UikNavLink Component={NavLink} to="/meal-plan">
+            Meal Plan
+          </UikNavLink>
+        </UikNavSection>
+      </Panel>
+    </Container>
   );
 };
 
-export default Drawer;
+export default withRouter(Drawer);

@@ -1,34 +1,44 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Switch, Redirect, Route, Router } from 'react-router-dom';
 import ReactGA from 'react-ga';
+import { DrawerContext } from 'app/contexts/DrawerContext';
 
 import * as Routes from './routes';
 import AdminRoute from './routes-templates/AdminRoute';
 import PrivateRoute from './routes-templates/PrivateRoute';
 import history from './history';
 
-if (process.env.APP_ENV !== 'development') {
-  history.listen(location => ReactGA.pageview(location.pathname));
-}
+const CustomRouter = () => {
+  const { onCloseMenu } = useContext(DrawerContext);
 
-const CustomRouter = () => (
-  <Router history={history}>
-    <Switch>
-      <Route exact path="/" component={Routes.Home} />
-      <Route path="/legal" component={Routes.Legal} />
-      <Route path="/auth" component={Routes.Auth} />
+  useEffect(() => {
+    history.listen(location => {
+      onCloseMenu();
+      if (process.env.APP_ENV !== 'development') {
+        ReactGA.pageview(location.pathname);
+      }
+    });
+  }, []);
 
-      <AdminRoute path="/admin" component={Routes.Admin} />
+  return (
+    <Router history={history}>
+      <Switch>
+        <Route exact path="/" component={Routes.Home} />
+        <Route path="/legal" component={Routes.Legal} />
+        <Route path="/auth" component={Routes.Auth} />
 
-      <PrivateRoute path="/dashboard" component={Routes.Dashboard} />
-      <Route path="/recipes" component={Routes.Recipes} />
-      <PrivateRoute path="/meal-planner" component={Routes.MealPlanner} />
+        <AdminRoute path="/admin" component={Routes.Admin} />
 
-      <Route path="/404" component={Routes.NotFound} />
+        <PrivateRoute path="/dashboard" component={Routes.Dashboard} />
+        <Route path="/recipes" component={Routes.Recipes} />
+        <PrivateRoute path="/meal-planner" component={Routes.MealPlanner} />
 
-      <Redirect to="/404" />
-    </Switch>
-  </Router>
-);
+        <Route path="/404" component={Routes.NotFound} />
+
+        <Redirect to="/404" />
+      </Switch>
+    </Router>
+  );
+};
 
 export default CustomRouter;
