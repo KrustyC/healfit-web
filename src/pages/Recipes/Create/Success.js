@@ -14,6 +14,10 @@ const Layout = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    @media (max-width: ${theme.sizes.md}) {
+      width: ${theme.dimensions.containerWidth.fullscreen};
+      padding: 0 ${theme.padding.md};
+    }
   `}
 `;
 

@@ -12,6 +12,10 @@ const FooterDiv = styled.div`
     justify-content: center;
     border-top: 1px solid ${theme.colors.border};
     padding: ${theme.padding.md} 0;
+
+    @media (max-width: ${theme.sizes.md}) {
+      padding: 0 ${theme.padding.xs};
+    }
   `}
 `;
 
@@ -25,6 +29,7 @@ const Box = styled.div`
     width: ${theme.dimensions.containerWidth.large};
     @media (max-width: ${theme.sizes.md}) {
       width: ${theme.dimensions.containerWidth.fullscreen};
+      padding: 0 ${theme.padding.sm};
     }
   `}
 `;

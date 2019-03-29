@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import posed from 'react-pose';
 import Form from 'uikit/blocks/Form';
 import Button from 'uikit/blocks/Button';
@@ -29,15 +29,36 @@ const AddIngredientRow = styled(
   padding: 2rem;
 `;
 
-const Row = styled.div`
-  display: flex;
-  width: 100%;
+const Actions = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    width: 100%;
 
-  ${Form.FormGroup}, button {
-    :first-of-type {
-      margin-right: 2rem;
+    @media (max-width: ${theme.sizes.md}) {
+      flex-direction: column;
+      button:first-of-type {
+        margin-bottom: ${theme.margin.sm};
+      }
     }
-  }
+  `}
+`;
+
+const Data = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    width: 100%;
+    @media (max-width: ${theme.sizes.md}) {
+      flex-direction: column;
+    }
+
+    @media (min-width: ${theme.sizes.md}) {
+      ${Form.FormGroup} {
+        :first-of-type {
+          margin-right: 2rem;
+        }
+      }
+    }
+  `}
 `;
 
 class AddIngredient extends Component {
@@ -93,7 +114,7 @@ class AddIngredient extends Component {
           <P>
             <b>Ingredient:</b> {ingredient.name}
           </P>
-          <Row>
+          <Data>
             <Form.FormGroup>
               <Form.Label>
                 Quantity
@@ -118,8 +139,8 @@ class AddIngredient extends Component {
                 </Form.Select>
               </Form.Label>
             </Form.FormGroup>
-          </Row>
-          <Row>
+          </Data>
+          <Actions>
             <Button
               color="primary"
               onClick={this.onAddIngredient}
@@ -128,7 +149,7 @@ class AddIngredient extends Component {
               Add Ingredient
             </Button>
             <Button onClick={this.onCancelIngredient}>Cancel</Button>
-          </Row>
+          </Actions>
         </AddIngredientRow>
       </>
     );

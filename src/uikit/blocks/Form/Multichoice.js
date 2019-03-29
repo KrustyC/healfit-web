@@ -15,10 +15,18 @@ const Multichoice = styled.div`
     justify-content: flex-start;
     align-items: stretch;
 
+    @media (max-width: ${theme.sizes.md}) {
+      width: 100%;
+    }
+
     ${ChoiceInput} + ${ChoiceLabel} {
+      padding: 0 ${theme.padding.xs};
+      @media (min-width: ${theme.sizes.md}) {
+        padding: 0 ${theme.padding.md};
+      } 
       margin: 0;
       height: 45px;
-      min-width: 100px;
+      flex: 1;
       position: relative;
       display: flex;
       align-items: center;

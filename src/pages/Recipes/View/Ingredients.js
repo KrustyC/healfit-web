@@ -33,7 +33,7 @@ const Grid = styled.div`
     grid-auto-flow: column;
 
     @media (max-width: ${theme.sizes.md}) {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr;
     }
   `}
 `;

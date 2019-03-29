@@ -9,7 +9,7 @@ import Wizard from 'components/Wizard';
 import Heading from 'uikit/elements/Heading';
 import FileUpload from 'uikit/organisms/FileUpload';
 
-const Row = styled.div`
+const Info = styled.div`
   ${({ theme }) => css`
     display: flex;
     width: 100%;
@@ -17,6 +17,14 @@ const Row = styled.div`
     ${Form.FormGroup} {
       margin-right: ${theme.margin.md};
       width: 33%;
+    }
+
+    @media (max-width: ${theme.sizes.md}) {
+      flex-direction: column;
+      ${Form.FormGroup} {
+        margin-right: 0;
+        width: 100%;
+      }
     }
   `}
 `;
@@ -26,6 +34,11 @@ const Image = styled.img`
     border: 1px solid ${theme.colors.border};
     height: 500px;
     width: 700px;
+
+    @media (max-width: ${theme.sizes.md}) {
+      height: 300px;
+      width: calc(100vw - (${theme.padding.md} * 2));
+    }
   `}
 `;
 
@@ -73,7 +86,7 @@ const Step4 = ({ values, setFieldValue, setFieldTouched }) => (
       </Form.Label>
       <Form.Feedback name="calories" />
     </Form.FormGroup>
-    <Row>
+    <Info>
       <Form.FormGroup>
         <Form.Label>
           Carbohydrates
@@ -130,7 +143,7 @@ const Step4 = ({ values, setFieldValue, setFieldTouched }) => (
         </Form.Label>
         <Form.Feedback name="fat" />
       </Form.FormGroup>
-    </Row>
+    </Info>
   </Wizard.Page>
 );
 

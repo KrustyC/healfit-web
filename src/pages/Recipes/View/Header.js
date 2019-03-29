@@ -54,6 +54,10 @@ const PictureContainer = styled.div`
     @media (max-width: ${theme.sizes.md}) {
       width: 100vw;
       height: 55vh;
+      img {
+        width: 100vw;
+        height: 55vh;
+      }
     }
   `}
 `;

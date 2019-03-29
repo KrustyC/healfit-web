@@ -20,7 +20,7 @@ const validateIngredients = {
       Yup.object().shape({
         id: Yup.string().required(),
         quantity: Yup.number().required(),
-        masurement: Yup.object()
+        measurement: Yup.object()
           .shape({
             id: Yup.number().required(),
             name: Yup.string().required(),
