@@ -37,6 +37,7 @@ const Description = styled.div`
     line-height: 1.4;
     margin-top: ${theme.margin.xs};
     max-height: 100px;
+    height: auto;
     font-size: ${theme.fontSize.small};
     overflow: hidden;
     color: ${theme.colors.grey};
@@ -52,6 +53,7 @@ const Footer = styled.div`
     font-weight: bold;
     display: flex;
     align-items: center;
+    margin-top: auto;
 
     ${bordered &&
       css`

@@ -45,6 +45,9 @@ const GET_RECIPES = gql`
       description
       picture
       rating
+      category {
+        name
+      }
     }
   }
 `;
