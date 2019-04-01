@@ -5,6 +5,7 @@
   "start_url": "/dashboard",
   "background_color": "#3BB2B8",
   "theme_color": "#3BB2B8",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": ".\/meta\/android-icon-36x36.png",

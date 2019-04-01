@@ -34,8 +34,8 @@ jobs:
           name: Deploy to S3
           environment:
             APP_ENV: production
-            APP_URL: https://healfit.co.uk"
-            API_URL: http://api.healfit.co.uk
+            APP_URL: https://api.healfit.co.uk"
+            API_URL: https://api.healfit.co.uk
             BUGSNAG_API_KEY: 3ed18fabf2445b22b785f539282a439a
             GA_API_KEY: UA-132673441-1
             CLOUDINARY_PRESET: wyifndmn
