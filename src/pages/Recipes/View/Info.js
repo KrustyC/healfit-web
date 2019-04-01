@@ -12,6 +12,10 @@ const OuterContainer = styled.div`
     width: ${theme.dimensions.containerWidth.fullscreen};
     padding: ${theme.padding.lg} 0;
     margin: ${theme.margin.md} 0;
+
+    @media (max-width: ${theme.sizes.md}) {
+      padding: ${theme.padding.xs} 0;
+    }
   `}
 `;
 
@@ -29,6 +33,7 @@ const InnerContainer = styled.div`
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-row-gap: ${theme.margin.sm};
+      padding: 0;
     }
   `}
 `;
@@ -62,6 +67,11 @@ const Left = styled.div`
       margin-right: ${theme.margin.sm};
       width: 40px;
       height: 40px;
+
+      @media (max-width: ${theme.sizes.md}) {
+        width: 25px;
+        height: 25px;
+      }
     }
   `}
 `;

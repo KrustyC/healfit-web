@@ -53,7 +53,7 @@ UikStarRating.propTypes = {
 
 UikStarRating.defaultProps = {
   size: 'regular',
-  rating: 5,
+  rating: 0,
   onRate: null,
 };
 

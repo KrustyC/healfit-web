@@ -9,6 +9,9 @@ const OuterContainer = styled.div`
     margin: ${theme.margin.md} 0;
     padding: ${theme.padding.lg} 0;
     background: #efefef;
+    @media (max-width: ${theme.sizes.md}) {
+      padding: ${theme.padding.sm} 0;
+    }
   `}
 `;
 
@@ -18,6 +21,11 @@ const InnerContainer = styled.div`
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+
+    @media (max-width: ${theme.sizes.md}) {
+      width: ${theme.dimensions.containerWidth.fullscreen};
+      padding: 0 ${theme.padding.sm};
+    }
   `}
 `;
 

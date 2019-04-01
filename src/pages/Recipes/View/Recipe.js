@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import Modal from 'uikit/blocks/Modal';
+import StarRating from 'uikit/blocks/StarRating';
 
 import Header from './Header';
 import Nutrients from './Nutrients';
@@ -24,21 +28,69 @@ const Layout = styled.div`
   `}
 `;
 
-const Recipe = ({ recipe }) => (
-  <Layout>
-    <Header recipe={recipe} />
-    <Nutrients recipe={recipe} />
-    <Info recipe={recipe} />
-    <Ingredients ingredients={recipe.ingredients} />
-    <Method method={recipe.method} />
-    <Bottom recipe={recipe} />
-  </Layout>
-);
+const RatContainer = styled.div`
+  ${({ theme }) => css`
+    margin-top: ${theme.margin.xs};
+  `}
+`;
+
+const Recipe = ({ recipe, rateRecipe }) => {
+  const [wantToRate, setWantToRate] = useState(false);
+  const [rating, setRating] = useState(recipe.rating);
+
+  const onShowModal = () => setWantToRate(true);
+  const onCloseModal = () => setWantToRate(false);
+
+  const onSelectRate = rate => setRating(rate);
+
+  const onRate = async () => {
+    try {
+      await rateRecipe({ variables: { slug: recipe.slug, rate: rating } });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <>
+      <Layout>
+        <Header recipe={recipe} />
+        <Nutrients recipe={recipe} />
+        <Info recipe={recipe} />
+        <Ingredients ingredients={recipe.ingredients} />
+        <Method method={recipe.method} />
+        <Bottom onRateRecipe={onShowModal} />
+      </Layout>
+      <Modal show={wantToRate} onCancel={onCloseModal}>
+        <Modal.Header>Rate this recipe</Modal.Header>
+        <Modal.Body>
+          How much did you like this recipe on a scale from 1 to 5?
+          <RatContainer>
+            <StarRating onRate={onSelectRate} />
+          </RatContainer>
+        </Modal.Body>
+        <Modal.Footer>
+          <Modal.Cancel />
+          <Modal.Confirm onClick={onRate}>Add Review</Modal.Confirm>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+};
 
 Recipe.propTypes = {
   recipe: PropTypes.shape({
     title: PropTypes.string.isRequired,
   }).isRequired,
+  rateRecipe: PropTypes.func.isRequired,
 };
 
-export default Recipe;
+const RATE = gql`
+  mutation rateRecipe($slug: String!, $rate: Int!) {
+    rateRecipe(input: { slug: $slug, rate: $rate }) {
+      recipeId
+    }
+  }
+`;
+
+export default graphql(RATE, { name: 'rateRecipe' })(Recipe);

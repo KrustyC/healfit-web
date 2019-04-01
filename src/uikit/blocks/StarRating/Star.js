@@ -6,7 +6,6 @@ import { Uikon } from '@duik';
 
 const Icon = styled(Uikon)`
   ${({ theme, clickable }) => css`
-    font-size: 16px !important;
     margin-right: 2px;
     color: ${theme.colors.accent};
 
@@ -23,8 +22,11 @@ const Icon = styled(Uikon)`
       small: css`
         font-size: 12px !important;
       `,
+      regular: css`
+        font-size: 20px !important;
+      `,
       large: css`
-        font-size: 30px !important;
+        font-size: 26px !important;
       `,
     })}
   `}
@@ -43,7 +45,7 @@ const Star = ({ size, isClickable, isFilled, onEnter, onLeave, onSelect }) => (
 );
 
 Star.propTypes = {
-  size: PropTypes.oneOf(['small', 'regular', 'big']).isRequired,
+  size: PropTypes.oneOf(['small', 'regular', 'large']).isRequired,
   isClickable: PropTypes.bool.isRequired,
   isFilled: PropTypes.bool.isRequired,
   onSelect: PropTypes.func.isRequired,

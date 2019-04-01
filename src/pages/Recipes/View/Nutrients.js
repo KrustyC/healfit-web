@@ -9,6 +9,10 @@ const OuterContainer = styled.div`
     padding: ${theme.padding.lg} 0;
     margin: ${theme.margin.md} 0;
     background: #efefef;
+
+    @media (max-width: ${theme.sizes.md}) {
+      padding: ${theme.padding.xs} 0;
+    }
   `}
 `;
 

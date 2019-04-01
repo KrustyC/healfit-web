@@ -66,48 +66,58 @@ const Image = styled.img`
   ${({ theme }) => css`
     border: 1px solid ${theme.colors.border};
     border-radius: 5px;
+
+    @media (max-width: ${theme.sizes.md}) {
+      border: 0;
+      border-radius: 0;
+    }
   `}
 `;
 
 const Icon = styled(Uikon)`
-  color: white;
-  font-size: 26px;
-  cursor: pointer;
-`;
-
-const Like = styled.div`
   ${({ theme }) => css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 60px;
-    width: 60px;
-    background: #fd5f4c;
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: ${theme.margin.md};
-    z-index: 1000000;
-    opacity: 0.9;
+    color: white;
+    font-size: 26px;
+    cursor: pointer;
+
+    @media (max-width: ${theme.sizes.md}) {
+      font-size: 18px;
+    }
   `}
 `;
 
-const Edit = styled.div`
+const Action = styled.div`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
     justify-content: center;
     height: 60px;
     width: 60px;
-    background: ${theme.colors.primary};
     border-radius: 50%;
     position: absolute;
-    top: 0;
-    right: 0;
     margin: ${theme.margin.md};
     z-index: 1000000;
     opacity: 0.9;
+
+    @media (max-width: ${theme.sizes.md}) {
+      height: 40px;
+      width: 40px;
+      margin: ${theme.margin.sm};
+    }
+  `}
+`;
+
+const Like = styled(Action)`
+  background: #fd5f4c;
+  top: 0;
+  left: 0;
+`;
+
+const Edit = styled(Action)`
+  ${({ theme }) => css`
+    background: ${theme.colors.primary};
+    top: 0;
+    right: 0;
   `}
 `;
 
@@ -193,13 +203,8 @@ Header.propTypes = {
     protein: PropTypes.number.isRequired,
     carbohydrates: PropTypes.number.isRequired,
     likedBy: PropTypes.array.isRequired,
-    createdBy: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      firstName: PropTypes.string.isRequired,
-      lastName: PropTypes.string.isRequired,
-    }).isRequired,
+    rating: PropTypes.number.isRequired,
   }).isRequired,
-  rating: PropTypes.number.isRequired,
   likeOrDislikeRecipe: PropTypes.func.isRequired,
 };
 

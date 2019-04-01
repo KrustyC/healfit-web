@@ -11,12 +11,11 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-
     padding-top: ${theme.padding.lg};
 
     @media (max-width: ${theme.sizes.md}) {
       width: ${theme.dimensions.containerWidth.fullscreen};
-      padding: 0 ${theme.padding.xs};
+      padding: 0 ${theme.padding.sm};
     }
     overflow: hidden;
   `}
@@ -24,6 +23,12 @@ const Container = styled.div`
 
 const Text = styled.div`
   overflow: hidden;
+  * {
+    font-size: 18px;
+    font-family: 'PT Serif', serif !important;
+    line-height: 180%;
+    letter-spacing: 0.03em;
+  }
 `;
 
 const Method = ({ method }) => (
