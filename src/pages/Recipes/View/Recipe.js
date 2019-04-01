@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { graphql } from 'react-apollo';
+import { compose, graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import { withToastManager } from 'uikit/blocks/Toast';
 import Modal from 'uikit/blocks/Modal';
 import StarRating from 'uikit/blocks/StarRating';
 
@@ -34,7 +35,7 @@ const RatContainer = styled.div`
   `}
 `;
 
-const Recipe = ({ recipe, rateRecipe }) => {
+const Recipe = ({ recipe, rateRecipe, toastManager }) => {
   const [wantToRate, setWantToRate] = useState(false);
   const [rating, setRating] = useState(recipe.rating);
 
@@ -46,8 +47,17 @@ const Recipe = ({ recipe, rateRecipe }) => {
   const onRate = async () => {
     try {
       await rateRecipe({ variables: { slug: recipe.slug, rate: rating } });
+      onCloseModal();
+      toastManager.add('Your review has succesfully been submitted!', {
+        appearance: 'success',
+      });
     } catch (error) {
-      console.log(error);
+      toastManager.add(
+        'Unfortunately your review could not be submitted, please try again later!',
+        {
+          appearance: 'error',
+        }
+      );
     }
   };
 
@@ -93,4 +103,7 @@ const RATE = gql`
   }
 `;
 
-export default graphql(RATE, { name: 'rateRecipe' })(Recipe);
+export default compose(
+  graphql(RATE, { name: 'rateRecipe' }),
+  withToastManager
+)(Recipe);

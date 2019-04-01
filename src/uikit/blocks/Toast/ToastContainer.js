@@ -5,6 +5,7 @@ import { prop, switchProp } from 'styled-tools';
 const ToastContainer = styled.div`
   box-sizing: border-box;
   max-height: 100vh;
+  max-width: 95vw;
   overflow-x: hidden;
   overflow-y: hidden;
   position: fixed;

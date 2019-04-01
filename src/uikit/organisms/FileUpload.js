@@ -15,7 +15,7 @@ export default class FileUploader extends Component {
 
     window.cloudinary.openUploadWidget(options, (error, res) => {
       if (error) {
-        return console.log(error);
+        return null;
       }
       return this.props.onLoad(res[0].public_id);
     });

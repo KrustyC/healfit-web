@@ -27,10 +27,10 @@ const Content = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 14;
+    font-size: ${theme.fontSize.regular};
     line-height: 1.4;
     min-height: 50px;
-    padding: 0 ${theme.padding.sm};
+    padding: ${theme.padding.sm} ${theme.padding.sm};
     width: 80vh;
   `}
 `;
@@ -60,7 +60,7 @@ const Toast = styled(
     border-radius: 5px;
     font-weight: bold;
 
-    ${switchProp(prop('type', 'default'), {
+    ${switchProp(prop('appearance', 'default'), {
       default: css`
         background: ${theme.colors.primary};
         color: ${theme.colors.white};
@@ -81,8 +81,8 @@ const Toast = styled(
   `}
 `;
 
-const ToastElement = ({ type, children, onDismiss }) => (
-  <Toast type={type} initialPose="closed" pose="open">
+const ToastElement = ({ appearance, children, onDismiss }) => (
+  <Toast appearance={appearance} initialPose="closed" pose="open">
     <Content>{children}</Content>
     <Button onClick={onDismiss} role="button">
       <CrossSvg />
@@ -91,13 +91,13 @@ const ToastElement = ({ type, children, onDismiss }) => (
 );
 
 ToastElement.propTypes = {
-  type: PropTypes.oneOf(['default', 'success', 'error', 'danger']),
+  appearance: PropTypes.oneOf(['default', 'success', 'error', 'danger']),
   children: PropTypes.any.isRequired,
   onDismiss: PropTypes.func.isRequired,
 };
 
 ToastElement.defaultProps = {
-  type: 'default',
+  appearance: 'default',
 };
 
 export default ToastElement;
