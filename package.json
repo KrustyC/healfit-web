@@ -105,6 +105,7 @@
     "react-sortable-hoc": "^1.5.3",
     "react-svg": "^7.2.5",
     "sass-loader": "^7.1.0",
+    "serviceworker-webpack-plugin": "^1.0.1",
     "slate": "^0.44.10",
     "slate-html-serializer": "^0.7.34",
     "slate-plain-serializer": "^0.6.34",
