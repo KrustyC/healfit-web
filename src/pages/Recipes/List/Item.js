@@ -3,22 +3,22 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { getImageURL } from 'helpers/images';
 
-import { Uikon } from '@duik';
 import UikStarRating from 'uikit/blocks/StarRating';
 import Link from 'uikit/elements/Link';
 import Card from 'uikit/blocks/Card';
+import Button from 'uikit/blocks/Button';
 
 const PictureContainer = styled.div`
   position: relative;
   height: 190px;
-  width: 350px;
+  max-width: 100%;
 `;
 
 const Image = styled.img`
   ${({ theme }) => css`
     border: 1px solid ${theme.colors.border};
     height: 190px;
-    width: 350px;
+    /* width: 350px; */
     transform: scale(1);
     transition: 0.3s ease-in-out;
 
@@ -37,7 +37,7 @@ const Category = styled.div`
     background: ${theme.colors.primary};
     color: ${theme.colors.white};
     font-size: ${theme.fontSize.small};
-    border-radius: 10px;
+    border-radius: 4px;
     position: absolute;
     top: 0;
     left: 0;
@@ -46,39 +46,13 @@ const Category = styled.div`
   `}
 `;
 
-// const Info = styled.div`
-//   ${({ theme }) => css`
-//     margin-top: calc(${theme.margin.md} * 0.6);
-//     display: flex;
-//     justify-content: space-between;
-//   `}
-// `;
-
-// const Time = styled.div`
-//   ${({ theme }) => css`
-//     display: flex;
-//     align-items: center;
-//     font-size: ${theme.fontSize.small};
-
-//     i {
-//       margin-right: 5px;
-//       font-size: 20px;
-//     }
-//   `}
-// `;
-
-const Heart = styled(Uikon)`
-  margin-right: 3px;
-  font-size: 16px;
-  color: #d5d5d5 !important;
-`;
-
+// @TODO Need to add the like functionality
 const Item = ({ recipe }) => (
-  <Card width="350px">
+  <Card>
     <Card.Thumb>
       <PictureContainer>
         <Image
-          src={getImageURL(recipe.picture, 'w_350,h_200,c_thumb')}
+          src={getImageURL(recipe.picture, 'w_500,h_220,c_thumb')}
           alt="recipe image"
         />
         <Category>{recipe.category.name}</Category>
@@ -87,29 +61,18 @@ const Item = ({ recipe }) => (
     <Card.Main>
       <Card.Title>{recipe.title}</Card.Title>
       <Card.Description>{recipe.description}</Card.Description>
-      {/* <Info>
-        <UikAvatar
-          name="Davide Crestini"
-          textTop="Created by"
-          avatarPlaceholder={{
-            content: 'DC',
-            color: 'blue',
-          }}
-        />
-        <Time>
-          <Uikon>clock</Uikon>15 min
-        </Time>
-      </Info> */}
     </Card.Main>
     <Card.Footer bordered>
-      <Heart>love</Heart>120
-      <Link
-        css="margin-left: 5px; margin-right: auto;"
+      <UikStarRating rating={recipe.rating} />
+      <Button
+        color="primary"
+        css="margin-left: auto; display: flex; align-items: center"
+        as={Link}
         to={`/recipes/${recipe.slug}`}
+        size="small"
       >
         View
-      </Link>
-      <UikStarRating rating={recipe.rating} />
+      </Button>
     </Card.Footer>
   </Card>
 );

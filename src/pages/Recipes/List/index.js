@@ -12,11 +12,12 @@ const Layout = styled.div`
     align-items: center;
     justify-content: flex-start;
 
-    /* width: ${theme.dimensions.containerWidth.default}; */
+    width: ${theme.dimensions.containerWidth.default};
     margin: ${theme.margin.lg} auto;
 
     @media (max-width: ${theme.sizes.md}) {
       width: ${theme.dimensions.containerWidth.fullscreen};
+      padding: 0 ${theme.padding.sm};
     }
   `}
 `;

@@ -12,6 +12,7 @@ const Card = styled.div`
     transition: all 0.1s ease-in;
     border-radius: 4px;
     width: ${width || 'auto'};
+    max-width: 350px;
   `}
 `;
 

@@ -10,6 +10,7 @@ import Button from 'uikit/blocks/Button';
 
 const Link = styled(ReactRouterLink)`
   color: ${({ theme }) => theme.colors.accent};
+  display: flex;
   text-decoration: none;
   cursor: pointer;
 

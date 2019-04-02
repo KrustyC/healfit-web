@@ -64,6 +64,7 @@ const Button = styled.button`
     css`
       font-size: 12px;
       height: 30px;
+      padding: 0 0.7rem;
     `}
 
   ${({ size }) =>
