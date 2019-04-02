@@ -68,7 +68,7 @@ export default {
     },
   },
   fonts: {
-    default: 'Roboto',
+    default: 'Montserrat',
   },
   fontSize: {
     xsmall: '12px',

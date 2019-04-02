@@ -1,21 +1,10 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { NavLink } from 'react-router-dom';
-import {
-  UikTopBar,
-  UikTopBarSection,
-  UikTopBarTitle,
-  UikTopBarMenuDivider,
-  UikTopBarLink,
-} from '@duik';
+import history from 'app/router/history';
 
-const Divider = styled(UikTopBarMenuDivider)`
-  ${({ theme }) => css`
-    @media (max-width: ${theme.sizes.md}) {
-      display: none;
-    }
-  `}
-`;
+import { UikTopBar, UikTopBarSection, UikTopBarTitle } from '@duik';
+
+import Button from 'uikit/blocks/Button';
 
 const Section = styled(UikTopBarSection)`
   ${({ theme }) => css`
@@ -30,12 +19,14 @@ const Navbar = () => (
     </UikTopBarSection>
 
     <Section>
-      <UikTopBarTitle>Healfit</UikTopBarTitle>
-      <Divider />
-
-      <UikTopBarLink Component={NavLink} to="/auth/signin">
+      <Button
+        size="small"
+        color="primary"
+        style={{ marginRight: '10px' }}
+        onClick={() => history.push('/auth/signin')}
+      >
         Login
-      </UikTopBarLink>
+      </Button>
     </Section>
   </UikTopBar>
 );

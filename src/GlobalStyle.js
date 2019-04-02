@@ -4,7 +4,7 @@ import './font.scss';
 /* eslint-disable global-require */
 const GloablStyle = createGlobalStyle`
   ${({ theme }) => css`
-    /* @font-face {
+    @font-face {
       font-family: 'Montserrat';
       src: url(${require('assets/fonts/montserrat/Montserrat-Light.ttf')})
         format('truetype');
@@ -42,7 +42,7 @@ const GloablStyle = createGlobalStyle`
         format('truetype');
       font-weight: bold;
       font-style: italic;
-    } */
+    }
 
     *,
     ::after,
@@ -52,9 +52,7 @@ const GloablStyle = createGlobalStyle`
 
     html {
       font-family: sans-serif;
-      font-family: 'Roboto', sans-serif;
       box-sizing: border-box;
-      /* font-size: 62.5%; */
     }
 
     body {

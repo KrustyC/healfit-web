@@ -1,48 +1,22 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-import Heading from 'uikit/elements/Heading';
+import LoginImg from 'assets/images/landing.jpg';
 import P from 'uikit/elements/P';
-import Layout from './components/Layout';
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100vw;
-`;
-
-const Div = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: ${({ center }) => (center ? 'center' : 'flex-start')};
-  padding: 2rem;
-
-  ${({ theme, hideOnSmallScreen }) =>
-    hideOnSmallScreen &&
-    css`
-      @media (max-width: ${theme.sizes.md}) {
-        display: none;
-      }
-    `}
-`;
-
-const Descritpion = styled(P)`
-  ${({ theme }) => css`
-    color: white;
-    max-width: 600px;
-
-    @media (max-width: ${theme.sizes.md}) {
-      display: none;
-    }
-  `}
-`;
-
-const Img = styled.img`
-  ${({ theme }) => css`
-    max-height: 300px;
-    margin-bottom: ${theme.spaces.small};
+  ${({ theme, url }) => css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100vw;
+    height: 100vh;
+    padding: ${theme.padding.lg} 0;
+    background-image: url(${url});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   `}
 `;
 
@@ -57,36 +31,26 @@ const TitleRow = styled.div`
   }
 `;
 
+const Title = styled.span`
+  font-size: 4rem;
+  color: rgba(32, 48, 60, 1);
+  letter-spacing: 0.03rem;
+`;
+
+const Descritpion = styled(P)`
+  font-size: 1.6rem;
+  color: rgba(32, 48, 60, 1);
+`;
+
 const Header = () => (
-  <Layout coloured size="fullscreen" height="80vh" direction="column">
-    <Container>
-      <Div center hideOnSmallScreen>
-        {/* eslint-disable-next-line */}
-        <Img src={require('assets/images/undrawn/healthy-habit.svg')} />
-      </Div>
-      <Div>
-        <TitleRow>
-          {/* eslint-disable-next-line */}
-          <img src={require('assets/icons/logo.svg')} />
-          <Heading level="title" style={{ color: 'white' }}>
-            Healfit
-          </Heading>
-        </TitleRow>
-        <Heading
-          level="h4"
-          align="left"
-          style={{ fontStyle: 'italic', color: 'white' }}
-        >
-          Keep yourself fit, by tracking your food and your progress
-        </Heading>
-        <Descritpion>
-          It is a long established fact that a reader will be distracted by the
-          readable content of a page when looking at its layout. The point of
-          using Lorem Ipsum is that it has a more-or-less.
-        </Descritpion>
-      </Div>
-    </Container>
-  </Layout>
+  <Container url={LoginImg}>
+    <TitleRow>
+      <Title>Healfit</Title>
+    </TitleRow>
+    <Descritpion>
+      Your best shape is just a few steps away. It{"'"}s easy, with Healfit!
+    </Descritpion>
+  </Container>
 );
 
 export default Header;

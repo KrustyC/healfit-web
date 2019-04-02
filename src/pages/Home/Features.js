@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Heading from 'uikit/elements/Heading';
+import Clipboard from 'assets/icons/clipboard.svg';
+import Calendar from 'assets/icons/calendar.svg';
+import Tablet from 'assets/icons/tablet.svg';
 import Layout from './components/Layout';
 import FeaturesGrid from './components/FeaturesGrid';
 
@@ -11,19 +14,19 @@ const features = [
     title: 'Create your recipes',
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies sodales sodales. Aenean ut ante tempus, feugiat risus et, hendrerit leo. Pellentesque imperdiet ipsum id urna rhoncus elementum sit amet quis nulla.',
-    icon: require('assets/icons/clipboard.svg'),
+    icon: Clipboard,
   },
   {
     title: 'Create your meal plan',
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies sodales sodales. Aenean ut ante tempus, feugiat risus et, hendrerit leo. Pellentesque imperdiet ipsum id urna rhoncus elementum sit amet quis nulla.',
-    icon: require('assets/icons/calendar.svg'),
+    icon: Calendar,
   },
   {
     title: 'Track your progress',
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies sodales sodales. Aenean ut ante tempus, feugiat risus et, hendrerit leo. Pellentesque imperdiet ipsum id urna rhoncus elementum sit amet quis nulla.',
-    icon: require('assets/icons/tablet.svg'),
+    icon: Tablet,
   },
 ];
 

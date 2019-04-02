@@ -30,24 +30,21 @@ const ImgContainer = styled.div`
     align-items: center;
     justify-content: center;
     margin-bottom: ${theme.margin.sm};
-  `}
-`;
 
-const Image = styled.img`
-  ${({ theme }) => css`
-    height: 70px;
-    width: 70px;
-    border-radius: 50%;
-    border: 2px solid ${theme.colors.border};
+    svg {
+      width: 70px;
+      border: 3px solid ${theme.colors.border};
+      border-radius: 50%;
+    }
   `}
 `;
 
 const FeaturesGrid = ({ features }) => (
   <Grid>
-    {features.map(({ title, content, icon }) => (
+    {features.map(({ title, content, icon: Icon }) => (
       <Box key={title}>
         <ImgContainer>
-          <Image src={icon} />
+          <Icon />
         </ImgContainer>
         <Heading level="h3" align="center">
           {title}
