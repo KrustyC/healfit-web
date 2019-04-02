@@ -54,9 +54,14 @@ module.exports = {
         use: {
           loader: 'url-loader',
           options: {
-            limit: 10000,
+            limit: 10 * 1024,
           },
         },
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/,
+        loader: 'image-webpack-loader',
+        enforce: 'pre',
       },
       {
         test: /\.svg$/,
@@ -89,6 +94,7 @@ module.exports = {
     ]),
   ],
   optimization: {
+    concatenateModules: true,
     splitChunks: {
       cacheGroups: {
         commons: {
