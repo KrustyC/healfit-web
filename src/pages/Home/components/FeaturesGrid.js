@@ -13,14 +13,13 @@ const Grid = styled.div`
 
     @media (max-width: ${theme.sizes.md}) {
       grid-template-columns: 1fr;
-      grid-row-gap: ${theme.margin.md};
     }
   `}
 `;
 
 const Box = styled.div`
   ${({ theme }) => css`
-    padding: ${theme.padding.md};
+    padding: ${theme.padding.md} ${theme.padding.xs};
   `}
 `;
 

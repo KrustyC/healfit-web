@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Heading from 'uikit/elements/Heading';
 
@@ -17,12 +17,15 @@ const Container = styled.div`
 `;
 
 const Div = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.5);
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    padding: ${theme.padding.md} ${theme.padding.sm};
+  `}
 `;
 
 const Image = () => (

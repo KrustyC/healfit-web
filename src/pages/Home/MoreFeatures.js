@@ -1,4 +1,5 @@
 import React from 'react';
+import styled, { css } from 'styled-components';
 import Heading from 'uikit/elements/Heading';
 import P from 'uikit/elements/P';
 
@@ -6,7 +7,6 @@ import Transaction from 'assets/icons/transaction.svg';
 import Notes from 'assets/icons/notes.svg';
 import Target from 'assets/icons/target.svg';
 
-import Layout from './components/Layout';
 import FeaturesGrid from './components/FeaturesGrid';
 
 /* eslint-disable global-require */
@@ -33,8 +33,22 @@ const features = [
 
 /* eslint-enable global-require */
 
+const Container = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: ${theme.dimensions.containerWidth.large};
+    padding: ${theme.padding.md} ${theme.padding.xs};
+    @media (max-width: ${theme.sizes.md}) {
+      width: ${theme.dimensions.containerWidth.fullscreen};
+    }
+  `}
+`;
+
 const MoreFeatures = () => (
-  <Layout size="large" direction="column">
+  <Container>
     <Heading level="h1" align="center">
       Designed for you to succeed
     </Heading>
@@ -43,7 +57,7 @@ const MoreFeatures = () => (
       huge chunks into meaningful data. Try the demo now.
     </P>
     <FeaturesGrid features={features} />
-  </Layout>
+  </Container>
 );
 
 export default MoreFeatures;

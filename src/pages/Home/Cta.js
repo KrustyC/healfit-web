@@ -1,11 +1,30 @@
 import React from 'react';
-import Link from 'uikit/elements/Link';
+import styled from 'styled-components';
+import history from 'app/router/history';
+import Button from 'uikit/blocks/Button';
 import Heading from 'uikit/elements/Heading';
 import P from 'uikit/elements/P';
-import Layout from './components/Layout';
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  background: #fff;
+  padding: ${({ theme: { padding } }) => padding.md};
+  min-height: 60vh;
+  background: linear-gradient(
+    to right,
+    #1e5799 0%,
+    #2989d8 0%,
+    #42e595 0%,
+    #3bb2b8 100%
+  );
+`;
 
 const Cta = () => (
-  <Layout size="fullscreen" direction="column" coloured>
+  <Container>
     <Heading level="h1" align="center" color="white">
       Try Healfit, it{"'"}s easy!
     </Heading>
@@ -13,10 +32,10 @@ const Cta = () => (
       And it{"'"}s free as well, how can you not try it?
     </P>
 
-    <Link to="/auth/signup" type="submit" size="large" component="button">
+    <Button size="large" onClick={() => history.push('/auth/signup')}>
       GET STARTED
-    </Link>
-  </Layout>
+    </Button>
+  </Container>
 );
 
 export default Cta;

@@ -1,11 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Heading from 'uikit/elements/Heading';
 import Clipboard from 'assets/icons/clipboard.svg';
 import Calendar from 'assets/icons/calendar.svg';
 import Tablet from 'assets/icons/tablet.svg';
-import Layout from './components/Layout';
 import FeaturesGrid from './components/FeaturesGrid';
 
 /* eslint-disable global-require */
@@ -31,21 +30,26 @@ const features = [
 ];
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: ${theme.dimensions.containerWidth.large};
+    padding: ${theme.padding.md} ${theme.padding.xs};
+    @media (max-width: ${theme.sizes.md}) {
+      width: ${theme.dimensions.containerWidth.fullscreen};
+    }
+  `}
 `;
 
 const Features = () => (
-  <Layout size="large">
-    <Container>
-      <Heading level="h1" align="center">
-        Tracking your progress has never been easier
-      </Heading>
-      <FeaturesGrid features={features} />
-    </Container>
-  </Layout>
+  <Container>
+    <Heading level="h1" align="center">
+      Tracking your progress has never been easier
+    </Heading>
+    <FeaturesGrid features={features} />
+  </Container>
 );
 
 /* eslint-enable global-require */
