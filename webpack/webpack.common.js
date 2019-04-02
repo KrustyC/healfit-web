@@ -13,7 +13,6 @@ module.exports = {
   entry: {
     app: ['@babel/polyfill', './index.js'],
   },
-
   output: {
     filename: '[name]-[hash].js',
     publicPath: '/',

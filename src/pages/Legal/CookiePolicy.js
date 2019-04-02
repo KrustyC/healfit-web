@@ -1,11 +1,16 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import { Helmet } from 'react-helmet';
 
 import Heading from 'uikit/elements/Heading';
 import P from 'uikit/elements/P';
 import Link from 'uikit/elements/Link';
 
 export default () => (
-  <Fragment>
+  <>
+    <Helmet>
+      <title>Cookie Policy | Healfit</title>
+      <meta name="description" content="Healfit Cookie Policy" />
+    </Helmet>
     <Heading levele="h1">Cookie Policy for Healfit</Heading>
 
     <P>
@@ -171,5 +176,5 @@ export default () => (
     <ul>
       <li>Email: davide.crestini94@gmail.com</li>
     </ul>
-  </Fragment>
+  </>
 );

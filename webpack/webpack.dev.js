@@ -26,12 +26,6 @@ const devConfig = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    // new CopyWebpackPlugin([
-    //   {
-    //     from: 'assets/images',
-    //     to: path.resolve(appRoot, 'dist/images'),
-    //   },
-    // ]),
     new HtmlWebpackPlugin({
       hash: true,
       title: '[DEV] Healfit',

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import EditForm from './EditForm';
@@ -50,7 +51,15 @@ const EditRecipeWrapper = ({
       if (loading) return 'Loading...';
       if (error) return `Error! ${error.message}`;
 
-      return <EditForm recipe={data.recipe} />;
+      return (
+        <>
+          <Helmet>
+            <title>Edit {data.recipe.name} | Healfit</title>
+            <meta name="description" content="Edit your recipe" />
+          </Helmet>
+          <EditForm recipe={data.recipe} />
+        </>
+      );
     }}
   </Query>
 );

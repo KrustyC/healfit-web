@@ -1,11 +1,16 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import { Helmet } from 'react-helmet';
 
 import Heading from 'uikit/elements/Heading';
 import P from 'uikit/elements/P';
 import Link from 'uikit/elements/Link';
 
 export default () => (
-  <Fragment>
+  <>
+    <Helmet>
+      <title>T{'&'}Cs | Healfit</title>
+      <meta name="description" content="Healfit Term and Conditions" />
+    </Helmet>
     <Heading level="h2">Welcome to Healfit</Heading>
     <P>
       These terms and conditions outline the rules and regulations for the use
@@ -262,5 +267,5 @@ export default () => (
       generator. If you have any queries regarding any of our terms, please
       contact us.
     </P>
-  </Fragment>
+  </>
 );

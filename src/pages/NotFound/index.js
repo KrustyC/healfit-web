@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import history from 'app/router/history';
+import { Helmet } from 'react-helmet';
 
 import Heading from 'uikit/elements/Heading';
 import P from 'uikit/elements/P';
@@ -97,28 +98,33 @@ const Text = () => (
 );
 
 const Page404 = () => (
-  <Layout>
-    <Small>
-      <Text />
-      <Img src={img} />
-      <Button squircled color="primary" size="large">
-        BACK HOME
-      </Button>
-    </Small>
-    <Standard>
-      <Box>
+  <>
+    <Helmet>
+      <title>404 | Healfit</title>
+    </Helmet>
+    <Layout>
+      <Small>
         <Text />
-        <Button
-          squircled
-          color="primary"
-          size="large"
-          onClick={() => history.push('/')}
-        >
-          Back Home
+        <Img src={img} />
+        <Button squircled color="primary" size="large">
+          BACK HOME
         </Button>
-      </Box>
-    </Standard>
-  </Layout>
+      </Small>
+      <Standard>
+        <Box>
+          <Text />
+          <Button
+            squircled
+            color="primary"
+            size="large"
+            onClick={() => history.push('/')}
+          >
+            Back Home
+          </Button>
+        </Box>
+      </Standard>
+    </Layout>
+  </>
 );
 
 export default Page404;

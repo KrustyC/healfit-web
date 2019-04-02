@@ -1,11 +1,16 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import { Helmet } from 'react-helmet';
 
 import Heading from 'uikit/elements/Heading';
 import P from 'uikit/elements/P';
 import Link from 'uikit/elements/Link';
 
 export default () => (
-  <Fragment>
+  <>
+    <Helmet>
+      <title>Privacy Policy | Healfit</title>
+      <meta name="description" content="Healfit Privacy Policy" />
+    </Helmet>
     <Heading level="h1">Privacy Policy</Heading>
 
     <P>Effective date: January 16, 2019</P>
@@ -259,9 +264,9 @@ export default () => (
       {'"'} at the top of this Privacy Policy.
     </P>
     <P>
-      Fragment You are advised to review this Privacy Policy periodically for
-      any changes. Changes to this Privacy Policy are effective when they are
-      posted on this page.
+      You are advised to review this Privacy Policy periodically for any
+      changes. Changes to this Privacy Policy are effective when they are posted
+      on this page.
     </P>
 
     <Heading level="h2">Contact Us</Heading>
@@ -271,5 +276,5 @@ export default () => (
     <ul>
       <li>By email: davide.crestini94@gmail.com</li>
     </ul>
-  </Fragment>
+  </>
 );

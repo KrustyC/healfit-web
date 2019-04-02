@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PossibleStates from 'possible-states';
+import { Helmet } from 'react-helmet';
 import styled, { css } from 'styled-components';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
@@ -114,26 +115,32 @@ class ResetPassword extends Component {
   render() {
     const { ui } = this.state;
     return (
-      <Layout size="large">
-        <Header>
-          <Heading level="title" align="center">
-            Healfit
-          </Heading>
-          <Heading level="h3" align="center">
-            Reset Your Password
-          </Heading>
-          <P align="center">
-            Remember to choose a strong and memorable password!{' '}
-          </P>
-        </Header>
-        <Main>
-          {ui.caseOf({
-            idle: () => <Form onSubmit={this.onSubmit} />,
-            completed: () => <Completed />,
-            error: ({ reason }) => <Error reason={reason} />,
-          })}
-        </Main>
-      </Layout>
+      <>
+        <Helmet>
+          <title>Reset Password | Healfit</title>
+          <meta name="description" content="Sign In to Healfit" />
+        </Helmet>
+        <Layout size="large">
+          <Header>
+            <Heading level="title" align="center">
+              Healfit
+            </Heading>
+            <Heading level="h3" align="center">
+              Reset Your Password
+            </Heading>
+            <P align="center">
+              Remember to choose a strong and memorable password!{' '}
+            </P>
+          </Header>
+          <Main>
+            {ui.caseOf({
+              idle: () => <Form onSubmit={this.onSubmit} />,
+              completed: () => <Completed />,
+              error: ({ reason }) => <Error reason={reason} />,
+            })}
+          </Main>
+        </Layout>
+      </>
     );
   }
 }

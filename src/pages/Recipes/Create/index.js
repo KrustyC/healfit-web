@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import styled, { css } from 'styled-components';
@@ -54,14 +55,20 @@ const CreateRecipe = ({ createRecipe }) => {
   };
 
   return (
-    <Layout>
-      {error && <div>Error: {error}</div>}
-      {pending && <div>pending...</div>}
-      {data && <Success recipe={data} />}
-      {idle && (
-        <Form initialValues={initialValues} onComplete={onCreateRecipe} />
-      )}
-    </Layout>
+    <>
+      <Helmet>
+        <title>Create a recipe | Healfit</title>
+        <meta name="description" content="Create a recipe" />
+      </Helmet>
+      <Layout>
+        {error && <div>Error: {error}</div>}
+        {pending && <div>pending...</div>}
+        {data && <Success recipe={data} />}
+        {idle && (
+          <Form initialValues={initialValues} onComplete={onCreateRecipe} />
+        )}
+      </Layout>
+    </>
   );
 };
 

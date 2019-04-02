@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'react-apollo';
 import { RootContext } from 'app/contexts/RootContext';
-
+import { Helmet } from 'react-helmet';
 import { UikButton } from '@duik';
 import { withToastManager } from 'uikit/blocks/Toast';
 import Navbar from 'components/navbars/LoggedNavbar';
@@ -14,6 +14,10 @@ const Dashboard = ({ toastManager }) => {
 
   return (
     <>
+      <Helmet>
+        <title>Dashboard | Healfit</title>
+        <meta name="description" content="Your Healfit dashboard" />
+      </Helmet>
       <Navbar />
       <Drawer />
       <div>Welcome to your dashboard {authUser.firstName}!</div>

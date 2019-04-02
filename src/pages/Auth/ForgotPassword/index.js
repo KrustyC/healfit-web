@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import { Helmet } from 'react-helmet';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import Heading from 'uikit/elements/Heading';
@@ -90,24 +91,33 @@ class ForgotPassword extends Component {
   render() {
     const { completed } = this.state;
     return (
-      <Layout>
-        <Header>
-          <Heading level="title" align="center">
-            Healfit
-          </Heading>
-          <Heading level="h3" align="center">
-            Reset Your Password
-          </Heading>
-          <P align="center">
-            Did you forget your password? No worries, you can change it in less
-            than a minute!
-          </P>
-        </Header>
-        <Main>
-          {!completed ? <Form onSubmit={this.onSubmit} /> : <Completed />}
-        </Main>
-        <Bottom />
-      </Layout>
+      <>
+        <Helmet>
+          <title>Forgot Password | Healfit</title>
+          <meta
+            name="description"
+            content="Did you forget your password? No worries!"
+          />
+        </Helmet>
+        <Layout>
+          <Header>
+            <Heading level="title" align="center">
+              Healfit
+            </Heading>
+            <Heading level="h3" align="center">
+              Reset Your Password
+            </Heading>
+            <P align="center">
+              Did you forget your password? No worries, you can change it in
+              less than a minute!
+            </P>
+          </Header>
+          <Main>
+            {!completed ? <Form onSubmit={this.onSubmit} /> : <Completed />}
+          </Main>
+          <Bottom />
+        </Layout>
+      </>
     );
   }
 }

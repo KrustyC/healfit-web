@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import PossibleStates from 'possible-states';
@@ -72,35 +73,41 @@ class Signup extends Component {
     const { ui } = this.state;
 
     return (
-      <Container>
-        <FormSide>
-          <Header>
-            <Heading level="title">Healfit</Heading>
-          </Header>
-          <Frame>
-            {ui.whenError(({ reason }) => (
-              <StyledAlert type="error">{reason}</StyledAlert>
-            ))}
+      <>
+        <Helmet>
+          <title>Sign Up | Healfit</title>
+          <meta name="description" content="Sign In to Healfit" />
+        </Helmet>
+        <Container>
+          <FormSide>
+            <Header>
+              <Heading level="title">Healfit</Heading>
+            </Header>
+            <Frame>
+              {ui.whenError(({ reason }) => (
+                <StyledAlert type="error">{reason}</StyledAlert>
+              ))}
 
-            {ui.caseOf({
-              success: () => <Success />,
-              _: () => (
-                <FormContainer>
-                  <Form onSubmit={this.onSignup} />
-                  <br />
-                  <P size="small" style={{ display: 'flex' }}>
-                    Already have an account?&nbsp;
-                    <Link to="/auth/signin">Sign In</Link>
-                  </P>
-                </FormContainer>
-              ),
-            })}
-          </Frame>
-          <Bottom />
-        </FormSide>
-        {/* eslint-disable-next-line global-require */}
-        <ImgSide url={require('assets/images/signup.jpg')} />
-      </Container>
+              {ui.caseOf({
+                success: () => <Success />,
+                _: () => (
+                  <FormContainer>
+                    <Form onSubmit={this.onSignup} />
+                    <br />
+                    <P size="small" style={{ display: 'flex' }}>
+                      Already have an account?&nbsp;
+                      <Link to="/auth/signin">Sign In</Link>
+                    </P>
+                  </FormContainer>
+                ),
+              })}
+            </Frame>
+            <Bottom />
+          </FormSide>
+          {/* eslint-disable-next-line global-require */}
+          <ImgSide url={require('assets/images/signup.jpg')} />
+        </Container>
+      </>
     );
   }
 }

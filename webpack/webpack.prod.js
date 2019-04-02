@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const sharedConfig = require('./webpack.common.js');
 
@@ -18,12 +17,6 @@ const plugins = [
     minimize: true,
     debug: false,
   }),
-  // new CopyWebpackPlugin([
-  //   {
-  //     from: 'assets/images',
-  //     to: path.resolve(appRoot, 'dist/images'),
-  //   },
-  // ]),
   new HtmlWebpackPlugin({
     hash: true,
     title: 'Healfit',
@@ -55,16 +48,4 @@ module.exports = merge(sharedConfig, {
     path: buildPath,
   },
   plugins,
-  // optimization: {
-  //   runtimeChunk: 'single',
-  //   splitChunks: {
-  //     cacheGroups: {
-  //       vendor: {
-  //         test: /[\\/]node_modules[\\/]/,
-  //         name: 'vendors',
-  //         chunks: 'all',
-  //       },
-  //     },
-  //   },
-  // },
 });

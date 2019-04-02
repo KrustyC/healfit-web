@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import Footer from 'uikit/organisms/Footer';
@@ -51,7 +52,15 @@ const ViewRecipe = ({
         if (loading) return 'Loading...';
         if (error) return `Error! ${error.message}`;
 
-        return <Recipe recipe={data.recipe} />;
+        return (
+          <>
+            <Helmet>
+              <title>{data.recipe.name} | Healfit</title>
+              <meta name="description" content="View recipe" />
+            </Helmet>
+            <Recipe recipe={data.recipe} />
+          </>
+        );
       }}
     </Query>
     <Footer />

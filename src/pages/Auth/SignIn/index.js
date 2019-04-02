@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import history from 'app/router/history';
+import { Helmet } from 'react-helmet';
 import { RootContext } from 'app/contexts/RootContext';
 import LoginImg from 'assets/images/login.jpg';
 
@@ -36,25 +37,31 @@ const SignIn = () => {
   };
 
   return (
-    <Container>
-      <ImgSide url={LoginImg} />
-      <FormSide>
-        <Header>
-          <Heading>Healfit</Heading>
-        </Header>
-        <Frame>
-          <FormContainer>
-            {error && <StyledAlert type="error">{error}</StyledAlert>}
-            <Form onSubmit={onHandleSubmit} />
-            <P size="small">
-              Do you not have an account yet?{' '}
-              <Link to="/auth/signup">Sign Up</Link>
-            </P>
-          </FormContainer>
-        </Frame>
-        <Bottom />
-      </FormSide>
-    </Container>
+    <>
+      <Helmet>
+        <title>Sign In | Healfit</title>
+        <meta name="description" content="Sign In to Healfit" />
+      </Helmet>
+      <Container>
+        <ImgSide url={LoginImg} />
+        <FormSide>
+          <Header>
+            <Heading>Healfit</Heading>
+          </Header>
+          <Frame>
+            <FormContainer>
+              {error && <StyledAlert type="error">{error}</StyledAlert>}
+              <Form onSubmit={onHandleSubmit} />
+              <P size="small">
+                Do you not have an account yet?{' '}
+                <Link to="/auth/signup">Sign Up</Link>
+              </P>
+            </FormContainer>
+          </Frame>
+          <Bottom />
+        </FormSide>
+      </Container>
+    </>
   );
 };
 

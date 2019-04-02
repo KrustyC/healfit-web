@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { UikNavPanel } from '@duik';
 
 export const Panel = styled(UikNavPanel)`
-  ${({ theme, display }) => css`
+  ${({ theme, open }) => css`
     display: none;
 
     @media (max-width: ${theme.sizes.md}) {
@@ -18,7 +18,7 @@ export const Panel = styled(UikNavPanel)`
       height: 100vh;
       z-index: 1000000;
 
-      ${display &&
+      ${open &&
         css`
           transform: translateX(100%);
         `}

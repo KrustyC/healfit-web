@@ -19,7 +19,7 @@ const Drawer = () => {
 
   return (
     <Container>
-      <Panel display={isMenuOpen || undefined}>
+      <Panel open={isMenuOpen || undefined}>
         <Header>
           <UikNavTitle>Healfit</UikNavTitle>
         </Header>

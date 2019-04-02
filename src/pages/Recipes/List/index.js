@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { Helmet } from 'react-helmet';
 import gql from 'graphql-tag';
 import { compose, graphql, Query } from 'react-apollo';
 import Item from './Item';
@@ -53,22 +54,28 @@ const GET_RECIPES = gql`
 `;
 
 const Recipes = () => (
-  <Layout>
-    <Query query={GET_RECIPES}>
-      {({ loading, error, data }) => {
-        if (loading) return 'Loading...';
-        if (error) return `Error! ${error.message}`;
+  <>
+    <Helmet>
+      <title>Recipes | Healfit</title>
+      <meta name="description" content="List of recipes available in Healfit" />
+    </Helmet>
+    <Layout>
+      <Query query={GET_RECIPES}>
+        {({ loading, error, data }) => {
+          if (loading) return 'Loading...';
+          if (error) return `Error! ${error.message}`;
 
-        return (
-          <Grid>
-            {data.recipes.map(recipe => (
-              <Item key={recipe.slug} recipe={recipe} />
-            ))}
-          </Grid>
-        );
-      }}
-    </Query>
-  </Layout>
+          return (
+            <Grid>
+              {data.recipes.map(recipe => (
+                <Item key={recipe.slug} recipe={recipe} />
+              ))}
+            </Grid>
+          );
+        }}
+      </Query>
+    </Layout>
+  </>
 );
 
 export default compose(graphql(GET_RECIPES, { name: 'getRecipes' }))(Recipes);
