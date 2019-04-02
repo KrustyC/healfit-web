@@ -40,6 +40,7 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     width: ${theme.dimensions.containerWidth.large};
+    margin: 0 auto;
     padding: ${theme.padding.md} ${theme.padding.xs};
     @media (max-width: ${theme.sizes.md}) {
       width: ${theme.dimensions.containerWidth.fullscreen};

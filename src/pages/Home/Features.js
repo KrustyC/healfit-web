@@ -32,10 +32,12 @@ const features = [
 const Container = styled.div`
   ${({ theme }) => css`
     display: flex;
+    width:
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: ${theme.dimensions.containerWidth.large};
+    margin: 0 auto;
     padding: ${theme.padding.md} ${theme.padding.xs};
     @media (max-width: ${theme.sizes.md}) {
       width: ${theme.dimensions.containerWidth.fullscreen};
