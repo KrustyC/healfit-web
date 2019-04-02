@@ -2,7 +2,7 @@
   "name": "Healfit",
   "short_name": "Healfit",
   "description": "keep yourself fit by tracking your progress!.",
-  "start_url": "/dashboard",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#3BB2B8",
   "theme_color": "#3BB2B8",
