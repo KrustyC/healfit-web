@@ -45,6 +45,8 @@ jobs:
             yarn install
             yarn build
             aws s3 sync ~/project/dist s3://healfit.co.uk --delete
+            aws cloudfront create-invalidation --distribution-id E2H4X46OP5N91X --paths /*
+            aws cloudfront create-invalidation --distribution-id EEW1QT8BI9JTU --paths /*
 workflows:
   version: 2
   build-deploy:

@@ -48,8 +48,8 @@ const PictureContainer = styled.div`
     justify-content: center;
     flex: 1;
     position: relative;
-    height: 600px;
-    width: 700px;
+    height: 400px;
+    /* width: 500px; */
 
     @media (max-width: ${theme.sizes.md}) {
       width: 100vw;
