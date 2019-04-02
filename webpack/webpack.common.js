@@ -7,7 +7,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const appRoot = path.dirname(__dirname);
 const src = path.join(appRoot, 'src');
-const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
   context: src,
@@ -83,12 +82,6 @@ module.exports = {
   plugins: [
     new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    // new WorkboxPlugin.GenerateSW({
-    //   clientsClaim: true,
-    //   skipWaiting: true,
-    //   swSrc: '../src/service-worker.js',
-    //   swDest: 'service-worker.js',
-    // }),
     new ServiceWorkerWebpackPlugin({
       entry: path.join(__dirname, '../src/service-worker.js'),
     }),
