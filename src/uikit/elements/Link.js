@@ -61,7 +61,7 @@ const LinkElement = props => {
       );
     case 'a':
       return (
-        <ALink {...rest} href={to} target="_blank">
+        <ALink {...rest} href={to} target="_blank" rel="noopener noreferrer">
           {children}
         </ALink>
       );

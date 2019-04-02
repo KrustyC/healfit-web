@@ -2,7 +2,7 @@
   "name": "Healfit",
   "short_name": "Healfit",
   "description": "keep yourself fit by tracking your progress!.",
-  "start_url": "./index.html",
+  "start_url": "/dashboard",
   "display": "standalone",
   "background_color": "#3BB2B8",
   "theme_color": "#3BB2B8",
@@ -43,6 +43,11 @@
       "sizes": "192x192",
       "type": "image/png",
       "density": "4.0"
+    },
+    {
+      "src": "./meta/android-icon-192x192.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ]
 }

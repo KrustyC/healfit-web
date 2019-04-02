@@ -6,6 +6,7 @@ const GloablStyle = createGlobalStyle`
   ${({ theme }) => css`
     @font-face {
       font-family: 'Montserrat';
+      font-display: swap;
       src: url(${require('assets/fonts/montserrat/Montserrat-Light.ttf')})
         format('truetype');
       font-weight: 300;
@@ -14,6 +15,7 @@ const GloablStyle = createGlobalStyle`
 
     @font-face {
       font-family: 'Montserrat';
+      font-display: swap;
       src: url(${require('assets/fonts/montserrat/Montserrat-Regular.ttf')})
         format('truetype');
       font-weight: 400;
@@ -22,6 +24,7 @@ const GloablStyle = createGlobalStyle`
 
     @font-face {
       font-family: 'Montserrat';
+      font-display: swap;
       src: url(${require('assets/fonts/montserrat/Montserrat-Italic.ttf')})
         format('truetype');
       font-weight: 400;
@@ -30,6 +33,7 @@ const GloablStyle = createGlobalStyle`
 
     @font-face {
       font-family: 'Montserrat';
+      font-display: swap;
       src: url(${require('assets/fonts/montserrat/Montserrat-SemiBold.ttf')})
         format('truetype');
       font-weight: bold;
@@ -38,6 +42,7 @@ const GloablStyle = createGlobalStyle`
 
     @font-face {
       font-family: 'Montserrat';
+      font-display: swap;
       src: url(${require('assets/fonts/montserrat/Montserrat-SemiBoldItalic.ttf')})
         format('truetype');
       font-weight: bold;

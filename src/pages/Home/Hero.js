@@ -47,7 +47,7 @@ const Header = () => (
     <TitleRow>
       <Title>Healfit</Title>
     </TitleRow>
-    <Descritpion>
+    <Descritpion align="center">
       Your best shape is just a few steps away. It{"'"}s easy, with Healfit!
     </Descritpion>
   </Container>
