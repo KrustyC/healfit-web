@@ -33,12 +33,13 @@ jobs:
       - run:
           name: Deploy to S3
           environment:
-            APP_ENV: production
+            NODE_ENV: production
             APP_URL: https://api.healfit.co.uk"
             API_URL: https://api.healfit.co.uk
             BUGSNAG_API_KEY: 3ed18fabf2445b22b785f539282a439a
             GA_API_KEY: UA-132673441-1
             CLOUDINARY_PRESET: wyifndmn
+            MIX_PANEL_TOKEN: 1c593bee1118657e7b0ad44c61996399
           command: |
             sudo apt-get install python-dev python-pip
             sudo pip install awscli

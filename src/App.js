@@ -14,7 +14,7 @@ import { DrawerProvider } from './contexts/DrawerContext';
 import theme from './themes';
 import GlobalStyle from './GlobalStyle';
 
-if (process.env.APP_ENV !== 'development') {
+if (process.env.NODE_ENV !== 'development') {
   ReactGA.initialize(process.env.GA_API_KEY);
 }
 

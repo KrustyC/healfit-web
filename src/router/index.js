@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Switch, Redirect, Route, Router } from 'react-router-dom';
-import ReactGA from 'react-ga';
+import { Mixpanel } from 'app/services/Mixpanel';
 import { DrawerContext } from 'app/contexts/DrawerContext';
 
 import * as Routes from './routes';
@@ -14,9 +14,7 @@ const CustomRouter = () => {
   useEffect(() => {
     history.listen(location => {
       onCloseMenu();
-      if (process.env.APP_ENV !== 'development') {
-        ReactGA.pageview(location.pathname);
-      }
+      Mixpanel.track(location.pathname);
     });
   }, []);
 

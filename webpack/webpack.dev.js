@@ -34,7 +34,7 @@ const devConfig = {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        APP_ENV: JSON.stringify('development'),
+        NODE_ENV: JSON.stringify('development'),
         APP_URL: JSON.stringify(process.env.APP_URL),
         BASE_URL: JSON.stringify('/'),
         BUGSNAG_API_KEY: JSON.stringify(process.env.BUGSNAG_API_KEY),

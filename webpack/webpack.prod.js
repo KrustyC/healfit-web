@@ -24,13 +24,13 @@ const plugins = [
   }),
   new webpack.DefinePlugin({
     'process.env': {
-      APP_ENV: JSON.stringify('production'),
       NODE_ENV: JSON.stringify('production'),
       APP_URL: JSON.stringify(process.env.APP_URL),
       BUGSNAG_API_KEY: JSON.stringify(process.env.BUGSNAG_API_KEY),
       API_URL: JSON.stringify(process.env.API_URL),
       GA_API_KEY: JSON.stringify(process.env.GA_API_KEY),
       CLOUDINARY_PRESET: JSON.stringify(process.env.CLOUDINARY_PRESET),
+      MIX_PANEL_TOKEN: JSON.stringify(process.env.MIX_PANEL_TOKEN),
     },
   }),
   new TerserPlugin({

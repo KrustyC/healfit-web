@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-restricted-globals */
-const DEBUG = process.env.APP_ENV === 'development';
+const DEBUG = process.env.NODE_ENV === 'development';
 
 // When the user navigates to your site,
 // the browser tries to redownload the script file that defined the service
