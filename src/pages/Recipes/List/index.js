@@ -3,6 +3,9 @@ import styled, { css } from 'styled-components';
 import { Helmet } from 'react-helmet';
 import gql from 'graphql-tag';
 import { compose, graphql, Query } from 'react-apollo';
+import { Link } from 'react-router-dom';
+import Button from 'uikit/blocks/Button';
+
 import Item from './Item';
 
 const Layout = styled.div`
@@ -20,6 +23,10 @@ const Layout = styled.div`
       padding: 0 ${theme.padding.sm};
     }
   `}
+`;
+
+const Top = styled.div`
+  width: 100%;
 `;
 
 const Grid = styled.div`
@@ -67,11 +74,18 @@ const Recipes = () => (
           if (error) return `Error! ${error.message}`;
 
           return (
-            <Grid>
-              {data.recipes.map(recipe => (
-                <Item key={recipe.slug} recipe={recipe} />
-              ))}
-            </Grid>
+            <>
+              <Top>
+                <Button as={Link} to="/recipes/create">
+                  New Recipe
+                </Button>
+              </Top>
+              <Grid>
+                {data.recipes.map(recipe => (
+                  <Item key={recipe.slug} recipe={recipe} />
+                ))}
+              </Grid>
+            </>
           );
         }}
       </Query>

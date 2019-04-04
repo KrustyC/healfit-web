@@ -11,9 +11,13 @@ const Input = styled.input`
     align-items: flex-start;
     border: 2px solid ${theme.colors.border};
     border-radius: 2px;
-    color: ${theme.colors.font};
+    color: ${theme.colors.font} !important;
     background: ${theme.colors.white};
     padding: 0px ${theme.padding.sm};
+
+    &::placeholder {
+      color: #979797 !important;
+    }
 
     ${switchProp(prop('size', 'regular'), {
       small: css`

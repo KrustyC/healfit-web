@@ -99,6 +99,7 @@ self.addEventListener('fetch', event => {
   }
 
   const resource = global.caches.match(request).then(response => {
+    console.log(response);
     if (response) {
       if (DEBUG) {
         console.log(`[SW] fetch URL ${requestUrl.href} from cache`);

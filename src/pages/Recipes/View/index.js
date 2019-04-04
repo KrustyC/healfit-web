@@ -55,7 +55,7 @@ const ViewRecipe = ({
         return (
           <>
             <Helmet>
-              <title>{data.recipe.name} | Healfit</title>
+              <title>{data.recipe.title} | Healfit</title>
               <meta name="description" content="View recipe" />
             </Helmet>
             <Recipe recipe={data.recipe} />

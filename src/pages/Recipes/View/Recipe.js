@@ -37,7 +37,7 @@ const RatContainer = styled.div`
 
 const Recipe = ({ recipe, rateRecipe, toastManager }) => {
   const [wantToRate, setWantToRate] = useState(false);
-  const [rating, setRating] = useState(recipe.rating);
+  const [rating, setRating] = useState(0);
 
   const onShowModal = () => setWantToRate(true);
   const onCloseModal = () => setWantToRate(false);
@@ -76,7 +76,7 @@ const Recipe = ({ recipe, rateRecipe, toastManager }) => {
         <Modal.Body>
           How much did you like this recipe on a scale from 1 to 5?
           <RatContainer>
-            <StarRating onRate={onSelectRate} />
+            <StarRating rating={rating} onRate={onSelectRate} />
           </RatContainer>
         </Modal.Body>
         <Modal.Footer>

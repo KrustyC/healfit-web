@@ -14,7 +14,10 @@ const rates = [1, 2, 3, 4, 5];
 
 const UikStarRating = ({ rating = 0, size, onRate }) => {
   const [colouredUntil, setColouredUntil] = useState(rating);
-  const handleClick = r => () => onRate(r);
+  const handleClick = r => () => {
+    setColouredUntil(r);
+    onRate(r);
+  };
 
   const onEnter = r => () => {
     if (onRate !== null) {
