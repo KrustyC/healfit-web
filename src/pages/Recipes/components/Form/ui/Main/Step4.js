@@ -8,6 +8,7 @@ import { getImageURL } from 'app/helpers/images';
 import Wizard from 'components/Wizard';
 import Heading from 'uikit/elements/Heading';
 import FileUpload from 'uikit/organisms/FileUpload';
+import CameraSvg from 'assets/icons/photo-camera.svg';
 
 const Info = styled.div`
   ${({ theme }) => css`
@@ -29,9 +30,9 @@ const Info = styled.div`
   `}
 `;
 
-const Image = styled.img`
+const Picture = styled.div`
   ${({ theme }) => css`
-    border: 1px solid ${theme.colors.border};
+    position: relative;
     height: 500px;
     width: 700px;
 
@@ -42,22 +43,56 @@ const Image = styled.img`
   `}
 `;
 
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.2;
+  transition: 0.5s ease;
+  background-color: #fcf8f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  :hover {
+    opacity: 1;
+  }
+
+  svg {
+    width: 50px;
+    height: 50px;
+  }
+`;
+
 const Step4 = ({ values, setFieldValue, setFieldTouched }) => (
   <Wizard.Page>
     <Heading level="h1" noPadding>
       More Info
     </Heading>
     <Form.FormGroup>
-      <Image
-        src={getImageURL(values.picture, 'w_700,h_600,g_face,c_thumb')}
-        alt="recipe image"
-      />
-      <br />
-      <FileUpload
-        height="300px"
-        onLoad={publicId => setFieldValue('picture', publicId)}
-        style={{ marginTop: '2rem' }}
-      />
+      <Picture>
+        <Image
+          src={getImageURL(values.picture, 'w_700,h_600,g_face,c_thumb')}
+          alt="recipe image"
+        />
+        <FileUpload onLoad={publicId => setFieldValue('picture', publicId)}>
+          {({ onShowUploadWidget }) => (
+            <Overlay>
+              <CameraSvg onClick={onShowUploadWidget} />
+            </Overlay>
+          )}
+        </FileUpload>
+      </Picture>
     </Form.FormGroup>
     <Form.FormGroup>
       <Form.Label>

@@ -1,31 +1,25 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Button from 'uikit/blocks/Button';
 
-export default class FileUploader extends Component {
-  static propTypes = {
-    onLoad: PropTypes.func.isRequired,
-  };
-
-  onShowUploadWidget = () => {
+const FileUploader = ({ children, onLoad }) => {
+  const onShowUploadWidget = () => {
     const options = {
       upload_preset: process.env.CLOUDINARY_PRESET,
-      cropping: true,
     };
 
     window.cloudinary.openUploadWidget(options, (error, res) => {
       if (error) {
         return null;
       }
-      return this.props.onLoad(res[0].public_id);
+      return onLoad(res[0].public_id);
     });
   };
 
-  render() {
-    return (
-      <Button onClick={this.onShowUploadWidget} type="button">
-        Choose Image
-      </Button>
-    );
-  }
-}
+  return children({ onShowUploadWidget });
+};
+
+FileUploader.propTypes = {
+  children: PropTypes.func.isRequired,
+  onLoad: PropTypes.func.isRequired,
+};
+
+export default FileUploader;
