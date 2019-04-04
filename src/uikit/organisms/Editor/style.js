@@ -4,7 +4,6 @@ export const Container = styled.div`
   width: 100%;
   div:last-child {
     width: 100%;
-    min-height: 50vh;
   }
 `;
 
