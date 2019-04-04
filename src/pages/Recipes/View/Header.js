@@ -48,22 +48,21 @@ const PictureContainer = styled.div`
     justify-content: center;
     flex: 1;
     position: relative;
+    max-width: 500px;
+    min-width: 500px;
     height: 400px;
-    /* width: 500px; */
 
     @media (max-width: ${theme.sizes.md}) {
       width: 100vw;
       height: 55vh;
-      img {
-        width: 100vw;
-        height: 55vh;
-      }
     }
   `}
 `;
 
 const Image = styled.img`
   ${({ theme }) => css`
+    width: 100%;
+    height: 100%;
     border: 1px solid ${theme.colors.border};
     border-radius: 5px;
 
@@ -164,7 +163,7 @@ const Header = ({ recipe, likeOrDislikeRecipe }) => {
       <Top>
         <PictureContainer>
           <Image
-            src={getImageURL(recipe.picture, 'w_700,h_600,g_face,c_thumb')}
+            src={getImageURL(recipe.picture, 'w_500,h_400,g_face,c_thumb')}
             alt="recipe image"
           />
           <Like>
