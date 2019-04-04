@@ -54,7 +54,7 @@ const EditRecipeWrapper = ({
       return (
         <>
           <Helmet>
-            <title>Edit {data.recipe.name} | Healfit</title>
+            <title>Edit {data.recipe.title} | Healfit</title>
             <meta name="description" content="Edit your recipe" />
           </Helmet>
           <EditForm recipe={data.recipe} />

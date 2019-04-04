@@ -40,6 +40,12 @@ const Actions = styled.div`
         margin-bottom: ${theme.margin.sm};
       }
     }
+
+    @media (min-width: ${theme.sizes.md}) {
+      ${Button}:first-of-type {
+        margin-right: ${theme.margin.sm};
+      }
+    }
   `}
 `;
 
@@ -54,7 +60,7 @@ const Data = styled.div`
     @media (min-width: ${theme.sizes.md}) {
       ${Form.FormGroup} {
         :first-of-type {
-          margin-right: 2rem;
+          margin-right: ${theme.margin.sm};
         }
       }
     }

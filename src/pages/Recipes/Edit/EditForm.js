@@ -25,7 +25,7 @@ const getInitiallValuesFromRecipe = recipe => ({
     label: recipe.category.name,
     value: recipe.category.id,
   },
-  level: recipe.category.id,
+  level: recipe.level.id,
   ingredients: recipe.ingredients,
   method: html.deserialize(recipe.method),
   picture: recipe.picture,
