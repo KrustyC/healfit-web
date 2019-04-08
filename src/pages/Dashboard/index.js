@@ -5,8 +5,8 @@ import { RootContext } from 'app/contexts/RootContext';
 import { Helmet } from 'react-helmet';
 import { UikButton } from '@duik';
 import { withToastManager } from 'uikit/blocks/Toast';
-import Navbar from 'components/navbars/LoggedNavbar';
-import Drawer from 'components/drawers/LoggedDrawer';
+import Navbar from 'uikit/organisms/navbars/LoggedNavbar';
+import Drawer from 'uikit/organisms/drawers/LoggedDrawer';
 
 const Dashboard = ({ toastManager }) => {
   const rootContext = useContext(RootContext);

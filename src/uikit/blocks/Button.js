@@ -204,8 +204,10 @@ const Button = styled.button`
           :hover,
           :focus {
             color: ${theme.colors.white};
-            background-color: ${theme.colors.primary};
-            border-color: ${theme.colors.primary};
+            background-color: background-color: ${theme.util.darkenOnHover(
+              theme.colors.white
+            )};
+            border-color: ${theme.util.darkenOnHover(theme.colors.white)};
           }
         `} :active {
         color: ${theme.colors.primary};

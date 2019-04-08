@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Form from 'uikit/blocks/Form';
 import { Field } from 'formik';
 
-import Wizard from 'components/Wizard';
+import Wizard from 'uikit/organisms/Wizard';
 import Heading from 'uikit/elements/Heading';
 
 const Step1 = ({

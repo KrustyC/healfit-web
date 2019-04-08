@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from 'components/navbars/LoggedNavbar';
+import Navbar from 'uikit/organisms/navbars/LoggedNavbar';
 
 const MealPlanner = () => (
   <>

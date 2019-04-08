@@ -1,24 +1,34 @@
 import React from 'react';
+import styled, { css } from 'styled-components';
+import history from 'app/router/history';
 
-import Navbar from 'uikit/blocks/Navbar';
-import Logo from 'assets/icons/logo.svg';
+import { UikTopBar, UikTopBarSection, UikTopBarTitle } from '@duik';
 
-export default () => (
-  <Navbar>
-    <Navbar.Header>
-      <Navbar.Brand to="/dashboard">
-        <Logo />
-      </Navbar.Brand>
-    </Navbar.Header>
-    <Navbar.Collapse>
-      <Navbar.Menu hideSmall>
-        <Navbar.Link type="index" to="/dashboard">
-          Dashboard
-        </Navbar.Link>
-        <Navbar.Link type="index" to="/recipes">
-          Recipes
-        </Navbar.Link>
-      </Navbar.Menu>
-    </Navbar.Collapse>
-  </Navbar>
+import Button from 'uikit/blocks/Button';
+
+const Section = styled(UikTopBarSection)`
+  ${({ theme }) => css`
+    padding: 0 ${theme.padding.sm};
+  `}
+`;
+
+const Navbar = () => (
+  <UikTopBar>
+    <UikTopBarSection>
+      <UikTopBarTitle>Healfit</UikTopBarTitle>
+    </UikTopBarSection>
+
+    <Section>
+      <Button
+        size="small"
+        color="primary"
+        style={{ marginRight: '10px' }}
+        onClick={() => history.push('/auth/signin')}
+      >
+        Login
+      </Button>
+    </Section>
+  </UikTopBar>
 );
+
+export default Navbar;

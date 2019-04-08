@@ -24,7 +24,6 @@ module.exports = {
     modules: [src, 'node_modules'],
     alias: {
       app: src,
-      components: path.join(src, 'components'),
       helpers: path.join(src, 'helpers'),
       hoc: path.join(src, 'hoc'),
       assets: path.join(src, 'assets'),

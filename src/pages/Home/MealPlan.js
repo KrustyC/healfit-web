@@ -36,7 +36,7 @@ const Right = styled.div`
   }
 `;
 
-const MoreFeatures = () => (
+const MealPlan = () => (
   <Container>
     <Left>
       <Heading level="h1">
@@ -54,4 +54,4 @@ const MoreFeatures = () => (
   </Container>
 );
 
-export default MoreFeatures;
+export default MealPlan;

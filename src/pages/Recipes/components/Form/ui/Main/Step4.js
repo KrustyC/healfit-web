@@ -5,7 +5,7 @@ import Form from 'uikit/blocks/Form';
 import { Field } from 'formik';
 
 import { getImageURL } from 'app/helpers/images';
-import Wizard from 'components/Wizard';
+import Wizard from 'uikit/organisms/Wizard';
 import Heading from 'uikit/elements/Heading';
 import FileUpload from 'uikit/organisms/FileUpload';
 import CameraSvg from 'assets/icons/photo-camera.svg';

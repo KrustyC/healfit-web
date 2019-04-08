@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Wizard from 'components/Wizard';
+import Wizard from 'uikit/organisms/Wizard';
 import Editor from 'uikit/organisms/Editor';
 import Heading from 'uikit/elements/Heading';
 

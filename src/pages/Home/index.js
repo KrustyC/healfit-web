@@ -6,8 +6,7 @@ import { RootContext } from 'app/contexts/RootContext';
 import Footer from 'uikit/organisms//footers/HomeFooter';
 import Hero from './Hero';
 import Features from './Features';
-import MoreFeatures from './MoreFeatures';
-import Image from './Image';
+import MealPlan from './MealPlan';
 import Cta from './Cta';
 
 const Layout = styled.div`
@@ -26,9 +25,8 @@ const Home = () => {
     <Layout>
       <Hero />
       <Features />
-      <Image />
-      <MoreFeatures />
       <Cta />
+      <MealPlan />
       <Footer />
     </Layout>
   );

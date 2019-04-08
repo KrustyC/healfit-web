@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { getImageURL } from 'app/helpers/images';
 
-import Wizard from 'components/Wizard';
+import Wizard from 'uikit/organisms/Wizard';
 import Editor from 'uikit/organisms/Editor';
 import Heading from 'uikit/elements/Heading';
 import List from 'uikit/elements/List';

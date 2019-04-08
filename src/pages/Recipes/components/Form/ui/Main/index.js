@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import Wizard from 'components/Wizard';
+import Wizard from 'uikit/organisms/Wizard';
 
 import Step1 from './Step1';
 import Step2 from './Step2';

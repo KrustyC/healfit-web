@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { Form, Formik } from 'formik';
 import html from 'uikit/organisms/Editor/htmlSerializer';
 
-import Wizard from 'components/Wizard';
+import Wizard from 'uikit/organisms/Wizard';
 import Bottom from './ui/Bottom';
 import Main from './ui/Main';
 import Sidebar from './ui/Sidebar';

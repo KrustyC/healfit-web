@@ -5,7 +5,7 @@ import withApolloClient from 'hoc/withApolloClient';
 import Heading from 'uikit/elements/Heading';
 
 import Form from 'uikit/blocks/Form';
-import Wizard from 'components/Wizard';
+import Wizard from 'uikit/organisms/Wizard';
 import AddIngredient from './AddIngredient';
 import Ingredients from './Ingredients';
 
