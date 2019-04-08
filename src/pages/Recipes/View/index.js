@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import Footer from 'uikit/organisms/Footer';
+import Footer from 'uikit/organisms/footers/DefaultFooter';
 import Recipe from './Recipe';
 
 const GET_RECIPE = gql`

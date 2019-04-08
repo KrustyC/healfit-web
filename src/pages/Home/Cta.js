@@ -14,13 +14,7 @@ const Container = styled.div`
   background: #fff;
   padding: ${({ theme: { padding } }) => padding.md};
   min-height: 60vh;
-  background: linear-gradient(
-    to right,
-    #1e5799 0%,
-    #2989d8 0%,
-    #42e595 0%,
-    #3bb2b8 100%
-  );
+  background: ${({ theme: { colors } }) => colors.primary};
 `;
 
 const Cta = () => (

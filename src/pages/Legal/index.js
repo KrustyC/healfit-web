@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { Switch, Redirect, Route } from 'react-router-dom';
 
 import DefaultNavbar from 'uikit/organisms/navbars/DefaultNavbar';
-import Footer from 'uikit/organisms/Footer';
+import Footer from 'uikit/organisms/footers/DefaultFooter';
 import Container from 'uikit/blocks/Container';
 import PrivacyPolicy from './PrivacyPolicy';
 import TermsAndCondition from './TermsAndConditions';

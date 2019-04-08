@@ -12,19 +12,19 @@ const features = [
   {
     title: 'Create your recipes',
     content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies sodales sodales. Aenean ut ante tempus, feugiat risus et, hendrerit leo. Pellentesque imperdiet ipsum id urna rhoncus elementum sit amet quis nulla.',
+      'Healfit databse contains hundreds of recipes, but if you find any missing one, you ar every welcome to add it yourself. it only takes a few minutes! ',
     icon: Clipboard,
   },
   {
     title: 'Create your meal plan',
     content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies sodales sodales. Aenean ut ante tempus, feugiat risus et, hendrerit leo. Pellentesque imperdiet ipsum id urna rhoncus elementum sit amet quis nulla.',
+      'Create a weekly meal plan so that you will always know what to eat and when! It will help you following an healthy eating scheme.',
     icon: Calendar,
   },
   {
     title: 'Track your progress',
     content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ultricies sodales sodales. Aenean ut ante tempus, feugiat risus et, hendrerit leo. Pellentesque imperdiet ipsum id urna rhoncus elementum sit amet quis nulla.',
+      'Track your results and compare them to what you have eaten, so that you can easily find out which recipes work best for you!',
     icon: Tablet,
   },
 ];
@@ -37,7 +37,8 @@ const Container = styled.div`
     justify-content: center;
     width: ${theme.dimensions.containerWidth.large};
     margin: 0 auto;
-    padding: ${theme.padding.md} ${theme.padding.xs};
+    padding: ${theme.padding.lg} ${theme.padding.xs};
+    min-height: 70vh;
     @media (max-width: ${theme.sizes.md}) {
       width: ${theme.dimensions.containerWidth.fullscreen};
     }
@@ -49,6 +50,8 @@ const Features = () => (
     <Heading level="h1" align="center">
       Tracking your progress has never been easier
     </Heading>
+    <br />
+    <br />
     <FeaturesGrid features={features} />
   </Container>
 );

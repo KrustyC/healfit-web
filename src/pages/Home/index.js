@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { Redirect } from 'react-router-dom';
 import { RootContext } from 'app/contexts/RootContext';
 
-import Navbar from 'components/navbars/DefaultNavbar';
-import Footer from 'uikit/organisms/Footer';
+import Footer from 'uikit/organisms//footers/HomeFooter';
 import Hero from './Hero';
 import Features from './Features';
 import MoreFeatures from './MoreFeatures';
@@ -25,7 +24,6 @@ const Home = () => {
 
   return (
     <Layout>
-      <Navbar />
       <Hero />
       <Features />
       <Image />

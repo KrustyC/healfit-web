@@ -20,19 +20,17 @@ const Grid = styled.div`
 const Box = styled.div`
   ${({ theme }) => css`
     padding: ${theme.padding.md} ${theme.padding.xs};
-  `}
-`;
-
-const ImgContainer = styled.div`
-  ${({ theme }) => css`
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    margin-bottom: ${theme.margin.sm};
+    flex-direction: column;
+
+    h3 {
+      margin-bottom: 0;
+    }
 
     svg {
-      width: 70px;
-      border: 3px solid ${theme.colors.border};
+      width: 55px;
       border-radius: 50%;
     }
   `}
@@ -42,13 +40,9 @@ const FeaturesGrid = ({ features }) => (
   <Grid>
     {features.map(({ title, content, icon: Icon }) => (
       <Box key={title}>
-        <ImgContainer>
-          <Icon />
-        </ImgContainer>
-        <Heading level="h3" align="center">
-          {title}
-        </Heading>
-        <P align="center">{content}</P>
+        <Icon />
+        <Heading level="h3">{title}</Heading>
+        <P>{content}</P>
       </Box>
     ))}
   </Grid>
