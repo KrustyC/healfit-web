@@ -27,7 +27,7 @@ jobs:
 
   deploy-job:
     docker:
-      - image: circleci/node:9.10.0-browsers
+      - image: circleci/node:8.10.0-browsers
     steps:
       - checkout
       - run:
