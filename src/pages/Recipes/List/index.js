@@ -14,7 +14,6 @@ const Layout = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-
     width: ${theme.dimensions.containerWidth.default};
     margin: ${theme.margin.lg} auto;
 
@@ -26,7 +25,10 @@ const Layout = styled.div`
 `;
 
 const Top = styled.div`
-  width: 100%;
+  ${({ theme }) => css`
+    width: 100%;
+    margin-bottom: ${theme.margin.md};
+  `}
 `;
 
 const Grid = styled.div`
