@@ -31,7 +31,6 @@ module.exports = {
       uikit: path.join(src, 'uikit'),
     },
   },
-
   module: {
     rules: [
       {
