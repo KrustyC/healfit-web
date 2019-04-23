@@ -23,33 +23,33 @@ const Provider = ({ client, children, login, setGlobalData }) => {
     setUser(account);
   };
 
-  useEffect(
-    () => {
-      window.cloudinary.setCloudName('healfituk');
+  useEffect(() => {
+    window.cloudinary.setCloudName('healfituk');
 
-      const performInitialFetch = async () => {
-        const {
-          data: { globalData },
-        } = await client.query({
-          query: FETCH_INITIAL_DATA,
-        });
+    const performInitialFetch = async () => {
+      const res = await client.query({ query: FETCH_INITIAL_DATA });
+      console.log(res);
+      const {
+        data: { globalData },
+      } = await client.query({
+        query: FETCH_INITIAL_DATA,
+      });
 
-        await setGlobalData({ variables: { globalData } });
+      console.log('GLOBAL', globalData);
+      await setGlobalData({ variables: { globalData } });
 
-        const currentAccount = await client.query({
-          query: FETCH_CURRENT_ACCOUNT_QUERY,
-        });
+      const currentAccount = await client.query({
+        query: FETCH_CURRENT_ACCOUNT_QUERY,
+      });
 
-        const { currentAccountInfo: account } = currentAccount.data;
-        setUser(account);
-      };
+      const { currentAccountInfo: account } = currentAccount.data;
+      setUser(account);
+    };
 
-      performInitialFetch()
-        .then(() => setMounted(true))
-        .catch(() => setMounted(true));
-    },
-    [isMounted]
-  );
+    performInitialFetch()
+      .then(() => setMounted(true))
+      .catch(() => setMounted(true));
+  }, []);
 
   const onLogin = async ({ email, password }) => {
     const result = await login({ variables: { email, password } });

@@ -12,6 +12,14 @@ const GET_GLOBAL_DATA = gql`
         id
         name
       }
+      recipeCategories {
+        id
+        name
+      }
+      recipeLevels {
+        id
+        name
+      }
     }
   }
 `;

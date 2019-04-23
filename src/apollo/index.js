@@ -31,6 +31,8 @@ const typeDefs = `
   type GlobalData {
     ingredientsCategories: ValueObject
     measurements: ValueObject
+    recipeCategories: ValueObject
+    recipeLevels: ValueObject
   }
 
   type Mutation {

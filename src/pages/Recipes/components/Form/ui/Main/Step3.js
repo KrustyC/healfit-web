@@ -1,47 +1,43 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Wizard from 'uikit/organisms/Wizard';
 import Editor from 'uikit/organisms/Editor';
 import Heading from 'uikit/elements/Heading';
 
-export default class Step3 extends Component {
-  static propTypes = {
-    values: PropTypes.shape({
-      method: PropTypes.object.isRequired,
-    }).isRequired,
-    setFieldValue: PropTypes.func.isRequired,
-    setFieldTouched: PropTypes.func.isRequired,
-  };
+const Step3 = ({ values, setFieldValue, setFieldTouched }) => {
+  const [touched, setIsTouched] = useState(false);
 
-  state = {
-    touched: false,
-  };
-
-  onChange = ({ value }) => {
-    const { touched } = this.state;
-
+  const onChange = ({ value }) => {
     if (!touched) {
-      this.setState({ touched: true });
-      this.props.setFieldTouched('method');
+      setIsTouched(true);
+      setFieldTouched('method');
     }
 
-    this.props.setFieldValue('method', value);
+    setFieldValue('method', value);
   };
 
-  render() {
-    const { method: value } = this.props.values;
-    return (
-      <Wizard.Page>
-        <Heading level="h1" noPadding>
-          Ingredients
-        </Heading>
-        <Editor
-          placeholder="Write your recipe method..."
-          value={value}
-          onChange={this.onChange}
-        />
-      </Wizard.Page>
-    );
-  }
-}
+  const { method: value } = values;
+  return (
+    <Wizard.Page>
+      <Heading level="h1" noPadding>
+        Ingredients
+      </Heading>
+      <Editor
+        placeholder="Write your recipe method..."
+        value={value}
+        onChange={onChange}
+      />
+    </Wizard.Page>
+  );
+};
+
+Step3.propTypes = {
+  values: PropTypes.shape({
+    method: PropTypes.object.isRequired,
+  }).isRequired,
+  setFieldValue: PropTypes.func.isRequired,
+  setFieldTouched: PropTypes.func.isRequired,
+};
+
+export default Step3;

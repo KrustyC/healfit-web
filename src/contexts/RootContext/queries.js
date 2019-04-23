@@ -15,6 +15,12 @@ export const FETCH_INITIAL_DATA = gql`
       measurements {
         ...ValueObjectData
       }
+      recipeCategories {
+        ...ValueObjectData
+      }
+      recipeLevels {
+        ...ValueObjectData
+      }
     }
   }
 `;

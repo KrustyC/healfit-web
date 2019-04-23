@@ -48,13 +48,16 @@ const PictureContainer = styled.div`
     justify-content: center;
     flex: 1;
     position: relative;
-    max-width: 500px;
-    min-width: 500px;
-    height: 400px;
 
     @media (max-width: ${theme.sizes.md}) {
       width: 100vw;
       height: 55vh;
+    }
+
+    @media (min-width: ${theme.sizes.md}) {
+      =max-width: 500px;
+      min-width: 500px;
+      height: 400px;
     }
   `}
 `;

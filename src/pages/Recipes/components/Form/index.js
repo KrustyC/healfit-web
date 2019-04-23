@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { Form, Formik } from 'formik';
 import html from 'uikit/organisms/Editor/htmlSerializer';
+import withGlobalData from 'hoc/withGlobalData';
 
 import Wizard from 'uikit/organisms/Wizard';
 import Bottom from './ui/Bottom';
@@ -32,34 +33,7 @@ const Layout = styled(Form)`
   `}
 `;
 
-const recipeCategories = [
-  { id: 1, name: 'Breakfast' },
-  { id: 2, name: 'Lunch' },
-  { id: 3, name: 'Appetizers' },
-  { id: 4, name: 'Soups' },
-  { id: 5, name: 'Shake' },
-  { id: 6, name: 'Fish' },
-  { id: 7, name: 'Vegetarian' },
-  { id: 8, name: 'Beef' },
-  { id: 9, name: 'Poultry' },
-  { id: 10, name: 'Pork' },
-  { id: 11, name: 'Vegetables' },
-  { id: 12, name: 'Salads' },
-  { id: 13, name: 'Vegan' },
-];
-
-const recipeLevels = [
-  { id: 1, name: 'Beginner' },
-  { id: 2, name: 'Intermidiate' },
-  { id: 3, name: 'Chef' },
-];
-
-const globalData = {
-  recipeLevels,
-  recipeCategories,
-};
-
-const EditOrCreateForm = ({ edit, initialValues, onComplete }) => {
+const EditOrCreateForm = ({ globalData, edit, initialValues, onComplete }) => {
   const onSubmit = values => {
     const preparedData = {
       ...values,
@@ -121,10 +95,11 @@ EditOrCreateForm.propTypes = {
   edit: PropTypes.bool,
   onComplete: PropTypes.func.isRequired,
   initialValues: PropTypes.object.isRequired,
+  globalData: PropTypes.object.isRequired,
 };
 
 EditOrCreateForm.defaultProps = {
   edit: false,
 };
 
-export default EditOrCreateForm;
+export default withGlobalData(EditOrCreateForm);
