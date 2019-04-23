@@ -26,7 +26,9 @@ const InnerContainer = styled.div`
     @media (max-width: ${theme.sizes.md}) {
       width: 80vw;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(5, 1fr);
+      grid-column-gap: ${theme.margin.md};
+      overflow: scroll;
     }
   `}
 `;

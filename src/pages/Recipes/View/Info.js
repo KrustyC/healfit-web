@@ -31,9 +31,13 @@ const InnerContainer = styled.div`
     @media (max-width: ${theme.sizes.md}) {
       width: 80vw;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-row-gap: ${theme.margin.sm};
-      padding: 0;
+      grid-template-columns: repeat(4, auto);
+      grid-column-gap: ${theme.margin.md};
+      overflow-y: scroll;
+
+      * {
+        white-space: nowrap;
+      }
     }
   `}
 `;
