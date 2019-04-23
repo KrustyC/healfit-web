@@ -41,6 +41,7 @@ jobs:
             sudo apt-get install python-dev python-pip
             sudo pip install awscli
             yarn install
+            yarn global add webpack-cli
             yarn build
             aws s3 sync ~/project/dist s3://healfit.co.uk --delete
             aws cloudfront create-invalidation --distribution-id E2H4X46OP5N91X --paths /*
