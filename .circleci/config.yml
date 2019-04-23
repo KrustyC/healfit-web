@@ -7,9 +7,6 @@ jobs:
 
     steps:
       - checkout
-
-      - run: yarn install
-
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -23,7 +20,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run build
-      - run: yarn build
+      - run: yarn install && yarn build
 
   deploy-job:
     docker:
@@ -43,8 +40,7 @@ jobs:
           command: |
             sudo apt-get install python-dev python-pip
             sudo pip install awscli
-            yarn install
-            yarn build
+            yarn install && yarn build
             aws s3 sync ~/project/dist s3://healfit.co.uk --delete
             aws cloudfront create-invalidation --distribution-id E2H4X46OP5N91X --paths /*
             aws cloudfront create-invalidation --distribution-id EEW1QT8BI9JTU --paths /*
