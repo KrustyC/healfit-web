@@ -27,7 +27,7 @@ const initialValues = {
   level: 0,
   ingredients: [],
   method: html.deserialize(''),
-  picture: '',
+  picture: '/production/placeholder',
   calories: 0,
   carbohydrates: 0,
   fiber: 0,

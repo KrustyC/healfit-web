@@ -44,8 +44,11 @@ const Picture = styled.div`
 `;
 
 const Image = styled.img`
-  width: 100%;
-  height: 100%;
+  ${({ theme }) => css`
+    width: 100%;
+    height: 100%;
+    border: 1px solid ${theme.colors.border};
+  `}
 `;
 
 const Overlay = styled.div`
@@ -56,7 +59,7 @@ const Overlay = styled.div`
   right: 0;
   height: 100%;
   width: 100%;
-  opacity: 0.2;
+  opacity: 0.1;
   transition: 0.5s ease;
   background-color: #fcf8f8;
   display: flex;
@@ -65,7 +68,7 @@ const Overlay = styled.div`
   cursor: pointer;
 
   :hover {
-    opacity: 1;
+    opacity: 0.8;
   }
 
   svg {
