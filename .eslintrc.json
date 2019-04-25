@@ -8,6 +8,8 @@
   "rules": {
     "prettier/prettier": ["error"],
     "react/destructuring-assignment": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "react/jsx-filename-extension": [
       1,
       {
