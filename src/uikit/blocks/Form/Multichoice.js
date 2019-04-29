@@ -28,6 +28,7 @@ const Multichoice = styled.div`
       height: 45px;
       flex: 1;
       position: relative;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;

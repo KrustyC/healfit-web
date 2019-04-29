@@ -27,15 +27,12 @@ const Provider = ({ client, children, login, setGlobalData }) => {
     window.cloudinary.setCloudName('healfituk');
 
     const performInitialFetch = async () => {
-      const res = await client.query({ query: FETCH_INITIAL_DATA });
-      console.log(res);
       const {
         data: { globalData },
       } = await client.query({
         query: FETCH_INITIAL_DATA,
       });
 
-      console.log('GLOBAL', globalData);
       await setGlobalData({ variables: { globalData } });
 
       const currentAccount = await client.query({
@@ -49,7 +46,7 @@ const Provider = ({ client, children, login, setGlobalData }) => {
     performInitialFetch()
       .then(() => setMounted(true))
       .catch(() => setMounted(true));
-  }, []);
+  }, [client, setGlobalData]);
 
   const onLogin = async ({ email, password }) => {
     const result = await login({ variables: { email, password } });

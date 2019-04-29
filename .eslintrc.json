@@ -3,7 +3,7 @@
   "env": {
     "browser": true
   },
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "react-hooks"],
   "parser": "babel-eslint",
   "rules": {
     "prettier/prettier": ["error"],

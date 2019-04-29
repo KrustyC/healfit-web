@@ -37,9 +37,7 @@ const EditOrCreateForm = ({ globalData, edit, initialValues, onComplete }) => {
   const onSubmit = values => {
     const preparedData = {
       ...values,
-      level: globalData.recipeLevels.find(
-        ({ id }) => parseInt(values.level, 10) === parseInt(id, 10)
-      ),
+      level: globalData.recipeLevels.find(({ id }) => values.level === id),
       category: {
         id: values.category.value,
         name: values.category.label,

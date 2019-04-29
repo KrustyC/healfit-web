@@ -8,10 +8,9 @@ const validateInfo = {
   totalTime: Yup.string().required(
     'Please tell us how much is needed for the recipe to be prepared'
   ),
-  level: Yup.number()
-    .required()
-    .min(1)
-    .max(3),
+  level: Yup.string().required(
+    'Please select a difficulty level for this recipe'
+  ),
 };
 
 const validateIngredients = {
@@ -22,7 +21,7 @@ const validateIngredients = {
         quantity: Yup.number().required(),
         measurement: Yup.object()
           .shape({
-            id: Yup.number().required(),
+            id: Yup.string().required(),
             name: Yup.string().required(),
           })
           .required(),

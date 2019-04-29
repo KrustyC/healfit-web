@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const appRoot = path.dirname(__dirname);
-console.log(process.env.APP_URL);
+
 const devConfig = {
   mode: 'development',
   devtool: 'inline-source-map',
