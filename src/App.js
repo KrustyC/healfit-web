@@ -2,7 +2,6 @@ import React, { Fragment, Suspense, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { hot } from 'react-hot-loader';
 import { ApolloProvider } from 'react-apollo';
-import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 import ReactGA from 'react-ga';
 
 import { ToastProvider } from 'uikit/blocks/Toast';
@@ -19,12 +18,17 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 const registerServiceWorker = () => {
-  if (
-    'serviceWorker' in navigator &&
-    (window.location.protocol === 'https:' ||
-      window.location.hostname === 'localhost')
-  ) {
-    runtime.register();
+  if ('serviceWorker' in navigator && process.env.NODE_ENV !== 'development') {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then(registration => {
+          console.log('SW registered: ', registration);
+        })
+        .catch(registrationError => {
+          console.log('SW registration failed: ', registrationError);
+        });
+    });
   }
 };
 

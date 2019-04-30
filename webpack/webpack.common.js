@@ -4,7 +4,6 @@ const path = require('path');
 const webpack = require('webpack');
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const appRoot = path.dirname(__dirname);
 const src = path.join(appRoot, 'src');
 
@@ -44,10 +43,6 @@ module.exports = {
         use: ['babel-loader'],
       },
       {
-        test: /\.(scss|css)$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
-      },
-      {
         test: /\.(png|j|jpeg|jpg|gif)$/,
         use: {
           loader: 'url-loader',
@@ -84,9 +79,6 @@ module.exports = {
   plugins: [
     new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new ServiceWorkerWebpackPlugin({
-      entry: path.join(__dirname, '../src/service-worker.js'),
-    }),
     new CopyWebpackPlugin([
       { from: path.join(__dirname, '../src/assets'), to: 'assets' },
     ]),
