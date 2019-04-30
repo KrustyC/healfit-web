@@ -22,10 +22,12 @@ const devConfig = {
     hotOnly: true,
   },
   module: {
-    rules: {
-      test: /\.(scss|css)$/,
-      use: ['style-loader', 'css-loader', 'sass-loader'],
-    },
+    rules: [
+      {
+        test: /\.(scss|css)$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+    ],
   },
   output: {
     path: path.resolve(appRoot, 'dist'),

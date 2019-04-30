@@ -30,8 +30,12 @@ const Box = styled.div`
     }
 
     svg {
-      width: 55px;
+      width: 83px;
       border-radius: 50%;
+    }
+
+    @media (max-width: ${theme.sizes.md}) {
+      align-items: center;
     }
   `}
 `;

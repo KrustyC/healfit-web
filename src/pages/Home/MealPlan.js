@@ -16,24 +16,38 @@ const Container = styled.div`
     padding: ${theme.padding.lg};
     @media (max-width: ${theme.sizes.md}) {
       width: ${theme.dimensions.containerWidth.fullscreen};
+      flex-direction: column;
     }
   `}
 `;
 
 const Left = styled.div`
-  max-width: 25%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  ${({ theme }) => css`
+    max-width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    @media (max-width: ${theme.sizes.md}) {
+      width: 100%;
+      max-width: 100%;
+    }
+  `}
 `;
 
 const Right = styled.div`
-  display: flex;
-  flex-direction: column;
-  svg {
-    height: 500px;
-  }
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    svg {
+      height: 500px;
+    }
+
+    @media (max-width: ${theme.sizes.md}) {
+      width: 90%;
+      height: auto;
+    }
+  `}
 `;
 
 const MealPlan = () => (
