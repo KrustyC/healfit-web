@@ -73,7 +73,7 @@ const GloablStyle = createGlobalStyle`
     body,
     html,
     * {
-      font-family: '${theme.fonts.default}', sans-serif;
+      font-family: '${theme.fonts.default}', Helvetica, sans-serif;
     }
 
     a {
