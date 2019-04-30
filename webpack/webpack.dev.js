@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const sharedConfig = require('./webpack.common.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const appRoot = path.dirname(__dirname);
 
@@ -21,11 +21,18 @@ const devConfig = {
     host: process.env.HOST,
     hotOnly: true,
   },
+  module: {
+    rules: {
+      test: /\.(scss|css)$/,
+      use: ['style-loader', 'css-loader', 'sass-loader'],
+    },
+  },
   output: {
     path: path.resolve(appRoot, 'dist'),
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new CopyWebpackPlugin(['src/sw.js']),
     new HtmlWebpackPlugin({
       hash: true,
       title: '[DEV] Healfit',

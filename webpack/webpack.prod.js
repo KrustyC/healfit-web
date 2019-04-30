@@ -4,6 +4,8 @@ const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const workboxPlugin = require('workbox-webpack-plugin');
 const sharedConfig = require('./webpack.common.js');
 
 const appRoot = path.dirname(__dirname);
@@ -13,6 +15,7 @@ const buildPath = path.resolve(appRoot, 'dist');
 
 const plugins = [
   new CleanWebpackPlugin(buildPath, { root: appRoot }),
+  new webpack.ProgressPlugin(),
   new webpack.LoaderOptionsPlugin({
     minimize: true,
     debug: false,
@@ -40,6 +43,12 @@ const plugins = [
     },
   }),
   new Visualizer({ filename: './statistics.html' }),
+  new MiniCssExtractPlugin(),
+  new workboxPlugin.GenerateSW({
+    swDest: 'sw.js',
+    clientsClaim: true,
+    skipWaiting: true,
+  }),
 ];
 
 module.exports = merge(sharedConfig, {
@@ -47,6 +56,14 @@ module.exports = merge(sharedConfig, {
   devtool: 'source-map',
   output: {
     path: buildPath,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(scss|css)$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
+    ],
   },
   plugins,
 });
