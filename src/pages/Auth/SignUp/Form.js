@@ -20,9 +20,9 @@ const validationSchema = Yup.object().shape({
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/,
       'Password must contain at least one upppercase character, one lowercase character, one special character and one number'
     )
-    .required('Please provide your password!'),
+    .required('Please provide your password'),
   acceptTermAndCondition: Yup.boolean()
-    .oneOf([true], 'Please accept out T&Cs!')
+    .oneOf([true], 'Please accept out T&Cs')
     .required('Please accept out T&Cs!'),
 });
 
