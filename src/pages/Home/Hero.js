@@ -15,8 +15,8 @@ import Heading from 'uikit/elements/Heading';
 import Button from 'uikit/blocks/Button';
 
 const Container = styled.div`
-  position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   width: 100vw;
@@ -24,10 +24,8 @@ const Container = styled.div`
 `;
 
 const Navbar = styled(UikTopBar)`
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
+  max-width: 100%;
   min-height: 60px;
   background: transparent !important;
   border: none;
@@ -39,6 +37,16 @@ const Brand = styled(UikTopBarSection)`
       height: 50px;
       width: 50px;
       margin-right: ${theme.margin.sm};
+    }
+  `}
+`;
+
+const Main = styled.div`
+  display: flex;
+  max-width: 100vw;
+  ${({ theme }) => css`
+    @media (max-width: ${theme.sizes.md}) {
+      flex-direction: column-reverse;
     }
   `}
 `;
@@ -66,6 +74,11 @@ const Right = styled.div`
     height: 100%;
     width: 100%;
   }
+  ${({ theme }) => css`
+    @media (max-width: ${theme.sizes.md}) {
+      display: none;
+    }
+  `}
 `;
 
 const Title = styled.span`
@@ -87,6 +100,14 @@ const Divider = styled(UikTopBarMenuDivider)`
   `}
 `;
 
+const LinkSection = styled(UikTopBarSection)`
+  ${({ theme }) => css`
+    @media (max-width: ${theme.sizes.sm}) {
+      display: none;
+    }
+  `}
+`;
+
 const Header = () => (
   <Container>
     <Navbar>
@@ -95,7 +116,7 @@ const Header = () => (
         <Heading>Healfit</Heading>
       </Brand>
 
-      <UikTopBarSection>
+      <LinkSection>
         <UikTopBarLink Component={NavLink} to="/recipes">
           Recipes
         </UikTopBarLink>
@@ -106,21 +127,23 @@ const Header = () => (
         <UikTopBarLink Component={NavLink} to="/auth/signup">
           Sign Up
         </UikTopBarLink>
-      </UikTopBarSection>
+      </LinkSection>
     </Navbar>
-    <Left>
-      <Title>Eat, healfitly.</Title>
-      <Descritpion>
-        Use our recipes, or share your own. Create your meal plan and track your
-        progress. All for free, in one place.
-      </Descritpion>
-      <Button to="/auth/signin" size="large" color="primary">
-        Get Started
-      </Button>
-    </Left>
-    <Right>
-      <MainImage />
-    </Right>
+    <Main>
+      <Left>
+        <Title>Eat, healfitly.</Title>
+        <Descritpion>
+          Use our recipes, or share your own. Create your meal plan and track
+          your progress. All for free, in one place.
+        </Descritpion>
+        <Button to="/auth/signin" size="large" color="primary">
+          Get Started
+        </Button>
+      </Left>
+      <Right>
+        <MainImage />
+      </Right>
+    </Main>
   </Container>
 );
 

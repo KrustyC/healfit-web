@@ -44,8 +44,10 @@ const Right = styled.div`
     }
 
     @media (max-width: ${theme.sizes.md}) {
-      width: 90%;
       height: auto;
+      svg {
+        max-width: 100%;
+      }
     }
   `}
 `;

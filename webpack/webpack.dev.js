@@ -34,7 +34,7 @@ const devConfig = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new CopyWebpackPlugin(['src/sw.js']),
+    // new CopyWebpackPlugin(['sw.js']),
     new HtmlWebpackPlugin({
       hash: true,
       title: '[DEV] Healfit',
