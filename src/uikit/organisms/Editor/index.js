@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Editor as SlateEditor } from 'slate-react';
 import { Value } from 'slate';
+import Lists from '@convertkit/slate-lists';
 
 import BoldSvg from 'assets/icons/bold-text.svg';
 import ItalicSvg from 'assets/icons/italic-text.svg';
@@ -14,6 +15,7 @@ const plugins = [
   MarkHotkey({ key: 'b', type: 'bold' }),
   MarkHotkey({ key: 'i', type: 'italic' }),
   MarkHotkey({ key: 'u', type: 'underline' }),
+  Lists(),
 ];
 
 export default class Editor extends Component {
@@ -33,6 +35,11 @@ export default class Editor extends Component {
 
   ref = editor => {
     this.editor = editor;
+  };
+
+  toggleOrderedList = event => {
+    event.preventDefault();
+    this.editor.toggleList({ type: 'ordered-list' });
   };
 
   onClickMark = (event, type) => {
@@ -82,6 +89,9 @@ export default class Editor extends Component {
             {this.renderMarkButton('bold', BoldSvg)}
             {this.renderMarkButton('italic', ItalicSvg)}
             {this.renderMarkButton('underline', UnderlineSvg)}
+            <ToolbarButton onMouseDown={this.toggleOrderedList}>
+              <BoldSvg />
+            </ToolbarButton>
           </Toolbar>
         )}
         <SlateEditor

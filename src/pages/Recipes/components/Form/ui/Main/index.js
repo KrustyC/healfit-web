@@ -80,13 +80,13 @@ Main.propTypes = {
   globalData: PropTypes.shape({
     recipeLevels: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
       })
     ).isRequired,
     recipeCategories: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
       })
     ).isRequired,

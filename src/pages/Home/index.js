@@ -17,6 +17,7 @@ const Layout = styled.div`
 
 const Home = () => {
   const { amILoggedIn } = useContext(RootContext);
+
   if (amILoggedIn) {
     return <Redirect to="/dashboard" />;
   }
