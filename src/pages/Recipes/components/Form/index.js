@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { Form, Formik } from 'formik';
-import html from 'uikit/organisms/Editor/htmlSerializer';
+import { convertToHTML } from 'uikit/organisms/Editor/utils';
 import withGlobalData from 'hoc/withGlobalData';
 
 import Wizard from 'uikit/organisms/Wizard';
@@ -42,7 +42,7 @@ const EditOrCreateForm = ({ globalData, edit, initialValues, onComplete }) => {
         id: values.category.value,
         name: values.category.label,
       },
-      method: html.serialize(values.method),
+      method: convertToHTML(values.method),
     };
     onComplete(preparedData);
   };

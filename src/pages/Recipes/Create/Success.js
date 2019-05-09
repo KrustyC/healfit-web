@@ -39,7 +39,7 @@ const Success = ({ recipe: { title, slug } }) => (
 Success.propTypes = {
   recipe: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
   }).isRequired,
 };
 

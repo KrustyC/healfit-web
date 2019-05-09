@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import Plain from 'slate-plain-serializer';
+import { convertToPlain } from 'uikit/organisms/Editor/utils';
 
 const validateInfo = {
   title: Yup.string().required('Please add a title to your recipe'),
@@ -34,8 +34,10 @@ const validateIngredients = {
 const validateMethod = {
   method: Yup.mixed()
     .required('Please add your recipe method')
-    .test('is-empty', 'Please add at least 50 charachters', value =>
-      Promise.resolve(Plain.serialize(value).trim().length > 50)
+    .test(
+      'is-empty',
+      'Please add at least 50 charachters',
+      value => convertToPlain(value).trim().length > 50
     ),
 };
 

@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import styled, { css } from 'styled-components';
-import html from 'uikit/organisms/Editor/htmlSerializer';
+import { convertFromHTML } from 'uikit/organisms/Editor/utils';
 import Form from '../components/Form';
 import Success from './Success';
 
@@ -26,7 +26,7 @@ const initialValues = {
   category: '',
   level: '',
   ingredients: [],
-  method: html.deserialize(''),
+  method: convertFromHTML(),
   picture: '/production/placeholder',
   calories: 0,
   carbohydrates: 0,

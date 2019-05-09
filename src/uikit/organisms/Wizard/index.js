@@ -19,10 +19,9 @@ export default class Wizard extends Component {
     pages: null,
   };
 
-  next = values =>
+  next = () =>
     this.setState(({ page, pages }) => ({
       page: Math.min(page + 1, pages - 1),
-      values,
     }));
 
   previous = () =>

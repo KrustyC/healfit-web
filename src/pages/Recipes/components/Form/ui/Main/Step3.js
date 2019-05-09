@@ -8,7 +8,7 @@ import Heading from 'uikit/elements/Heading';
 const Step3 = ({ values, setFieldValue, setFieldTouched }) => {
   const [touched, setIsTouched] = useState(false);
 
-  const onChange = ({ value }) => {
+  const onChange = value => {
     if (!touched) {
       setIsTouched(true);
       setFieldTouched('method');
@@ -17,15 +17,14 @@ const Step3 = ({ values, setFieldValue, setFieldTouched }) => {
     setFieldValue('method', value);
   };
 
-  const { method: value } = values;
   return (
     <Wizard.Page>
       <Heading level="h1" noPadding>
-        Ingredients
+        Method
       </Heading>
       <Editor
         placeholder="Write your recipe method..."
-        value={value}
+        value={values.method}
         onChange={onChange}
       />
     </Wizard.Page>

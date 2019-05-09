@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import styled, { css } from 'styled-components';
-import html from 'uikit/organisms/Editor/htmlSerializer';
+import { convertFromHTML } from 'uikit/organisms/Editor/utils';
 import Form from '../components/Form';
 import Success from './Success';
 
@@ -27,7 +27,7 @@ const getInitiallValuesFromRecipe = recipe => ({
   },
   level: recipe.level.id,
   ingredients: recipe.ingredients,
-  method: html.deserialize(recipe.method),
+  method: convertFromHTML(recipe.method),
   picture: recipe.picture,
   description: recipe.description,
   calories: recipe.calories,
