@@ -92,6 +92,9 @@ Recipe.propTypes = {
   recipe: PropTypes.shape({
     title: PropTypes.string.isRequired,
   }).isRequired,
+  toastManager: PropTypes.shape({
+    add: PropTypes.func.isRequired,
+  }).isRequired,
   rateRecipe: PropTypes.func.isRequired,
 };
 

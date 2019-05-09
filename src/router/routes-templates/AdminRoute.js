@@ -3,12 +3,7 @@ import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import { RootContext } from 'app/contexts/RootContext';
 
-const AdminRoute = ({
-  isAuthenticated,
-  account,
-  component: Component,
-  ...rest
-}) => {
+const AdminRoute = ({ component: Component, ...rest }) => {
   const { amILoggedIn, authUser } = useContext(RootContext);
   return (
     <Route
@@ -18,6 +13,7 @@ const AdminRoute = ({
           <Component {...props} />
         ) : (
           <Redirect
+            // eslint-disable-next-line react/prop-types
             to={{ pathname: '/dashboard', state: { from: props.location } }}
           />
         )

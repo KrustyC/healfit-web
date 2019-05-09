@@ -6,7 +6,7 @@ const Logout = () => {
 
   useEffect(() => {
     rootContext.onLogout();
-  }, []);
+  }, [rootContext]);
 
   return null;
 };

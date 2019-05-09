@@ -16,7 +16,7 @@ const CustomRouter = () => {
       onCloseMenu();
       Mixpanel.track(location.pathname);
     });
-  }, []);
+  }, [onCloseMenu]);
 
   return (
     <Router history={history}>

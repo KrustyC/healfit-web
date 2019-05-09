@@ -14,6 +14,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
           <Component {...props} />
         ) : (
           <Redirect
+            // eslint-disable-next-line react/prop-types
             to={{ pathname: '/auth/login', state: { from: props.location } }}
           />
         )

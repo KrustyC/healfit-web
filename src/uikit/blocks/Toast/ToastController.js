@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 export default class ToastController extends Component {
   static propTypes = {
+    Toast: PropTypes.any.isRequired,
+    onDismiss: PropTypes.func.isRequired,
     autoDismiss: PropTypes.bool,
     autoDismissTimeout: PropTypes.number,
   };

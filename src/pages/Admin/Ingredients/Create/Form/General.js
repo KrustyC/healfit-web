@@ -70,6 +70,9 @@ General.propTypes = {
       })
     ).isRequired,
   }).isRequired,
+  setFieldTouched: PropTypes.func.isRequired,
+  setFieldValue: PropTypes.func.isRequired,
+  values: PropTypes.object.isRequired,
 };
 
 export default withGlobalData(General);

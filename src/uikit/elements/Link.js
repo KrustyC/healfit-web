@@ -75,6 +75,7 @@ const LinkElement = props => {
 };
 
 LinkElement.propTypes = {
+  to: PropTypes.string.isRequired,
   children: PropTypes.any.isRequired,
   component: PropTypes.oneOf(['button', 'index']),
   font: PropTypes.oneOf(['default', 'serif']),
@@ -82,6 +83,7 @@ LinkElement.propTypes = {
 
 LinkElement.defaultProps = {
   component: null,
+  font: 'default',
 };
 
 export default LinkElement;
