@@ -6,6 +6,7 @@ import { compose, graphql } from 'react-apollo';
 import withApolloClient from 'hoc/withApolloClient';
 import { withToastManager } from 'uikit/blocks/Toast';
 import Link from 'uikit/elements/Link';
+import Form from 'uikit/blocks/Form';
 
 import {
   Table,
@@ -29,6 +30,31 @@ const Div = styled.div`
 const GET_INGRIDIENTS = gql`
   query GetIngredients {
     ingredients {
+      id
+      name
+      calories
+      nutrients {
+        cholesterol
+        fat {
+          monounsaturated
+          saturated
+          polyunsaturated
+        }
+        carbohydrate {
+          fiber
+          sugar
+        }
+        potassium
+        protein
+        sodium
+      }
+    }
+  }
+`;
+
+const SEARCH_INGRIDIENTS = gql`
+  query ingredients($name: String) {
+    ingredientsByName(name: $name) {
       id
       name
       calories
@@ -135,6 +161,21 @@ class Ingredients extends Component {
     );
   };
 
+  onSearchIngredient = async value => {
+    try {
+      const result = await this.props.client.query({
+        query: SEARCH_INGRIDIENTS,
+        variables: { name: value },
+      });
+
+      return this.setState({
+        ingredients: result.data.ingredientsByName,
+      });
+    } catch (error) {
+      return error;
+    }
+  };
+
   render() {
     const { loading, error } = this.state;
 
@@ -152,6 +193,14 @@ class Ingredients extends Component {
           <Heading level="h2">Ingredients</Heading>
           <Link to="/admin/ingredients/create">Add Ingredient</Link>
         </Row>
+        <Form.RemoteFilter
+          placeholder="Search for ingredients..."
+          list={[]}
+          labelField="name"
+          emptyMessage="No Ingredients Avaialable"
+          query={this.onSearchIngredient}
+          onSelect={() => null}
+        />
         <Table>
           <Header sticky>
             <Th flex="2">Name</Th>
