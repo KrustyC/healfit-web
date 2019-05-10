@@ -14,6 +14,9 @@ const GET_RECIPE = gql`
       description
       servings
       totalTime
+      createdBy {
+        _id
+      }
       category {
         name
       }

@@ -147,6 +147,8 @@ const Rating = styled.div`
 const Header = ({ recipe, likeOrDislikeRecipe }) => {
   const { amILoggedIn, authUser } = useContext(RootContext);
   const [amILiking, setLike] = useState(recipe.likedBy.includes(authUser._id));
+  console.log(authUser);
+  const amIAuthor = authUser && authUser._id === recipe.createdBy._id;
 
   const onLike = () => {
     if (!amILoggedIn) {
@@ -172,11 +174,13 @@ const Header = ({ recipe, likeOrDislikeRecipe }) => {
           <Like>
             <Icon onClick={onLike}>{amILiking ? 'love-fill' : 'love'}</Icon>
           </Like>
-          <Edit>
-            <Link to={`/recipes/edit/${recipe.slug}`}>
-              <Icon>edit</Icon>
-            </Link>
-          </Edit>
+          {amIAuthor && (
+            <Edit>
+              <Link to={`/recipes/edit/${recipe.slug}`}>
+                <Icon>edit</Icon>
+              </Link>
+            </Edit>
+          )}
           <Rating>
             <StarRating rating={recipe.rating} size="large" />
           </Rating>
@@ -206,6 +210,9 @@ Header.propTypes = {
     carbohydrates: PropTypes.number.isRequired,
     likedBy: PropTypes.array.isRequired,
     rating: PropTypes.number.isRequired,
+    createdBy: PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
   likeOrDislikeRecipe: PropTypes.func.isRequired,
 };
