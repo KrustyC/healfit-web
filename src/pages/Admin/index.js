@@ -12,7 +12,7 @@ const IngredientIndex = ({ match: { path } }) => (
     <Container size="fullscreen">
       <Switch>
         <Route path={`${path}/ingredients`} component={Ingredients} />
-        <Redirect to={`${path}/signin`} />
+        <Redirect to={`${path}/ingredients`} />
       </Switch>
     </Container>
   </>

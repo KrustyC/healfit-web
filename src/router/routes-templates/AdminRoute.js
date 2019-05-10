@@ -5,6 +5,7 @@ import { RootContext } from 'app/contexts/RootContext';
 
 const AdminRoute = ({ component: Component, ...rest }) => {
   const { amILoggedIn, authUser } = useContext(RootContext);
+
   return (
     <Route
       {...rest}
