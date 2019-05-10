@@ -75,7 +75,7 @@ Ingredients.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      quantity: PropTypes.number.isRequired,
+      quantity: PropTypes.string.isRequired,
       measurement: PropTypes.shape({
         name: PropTypes.string.isRequired,
       }).isRequired,

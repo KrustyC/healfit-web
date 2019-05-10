@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import posed from 'react-pose';
@@ -67,34 +67,25 @@ const Data = styled.div`
   `}
 `;
 
-class AddIngredient extends Component {
-  static propTypes = {
-    ingredient: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    globalData: PropTypes.shape({ measurements: PropTypes.array.isRequired })
-      .isRequired,
-    onConfirm: PropTypes.func.isRequired,
-    onCancel: PropTypes.func.isRequired,
+const AddIngredient = ({
+  ingredient,
+  globalData: { measurements },
+  onConfirm,
+  onCancel,
+}) => {
+  const [quantity, setQuantity] = useState('');
+  const [isQuantityError, setIsQuantityError] = useState(false);
+  const [measurement, setMeasurement] = useState(null);
+
+  const onChangeQuantity = ({ target: { value } }) => {
+    const trimmed = value.trim();
+    setQuantity(value);
+    setIsQuantityError(
+      trimmed.length === 0 || !trimmed.match(/^\d*((\/\d){1})?$/)
+    );
   };
 
-  state = {
-    quantity: 0,
-    measurement: null,
-  };
-
-  onChangeQuantity = e =>
-    this.setState({ quantity: parseInt(e.target.value, 10) });
-
-  onSelectMeasurement = measurement => this.setState({ measurement });
-
-  onCancelIngredient = () => this.props.onCancel();
-
-  onAddIngredient = () => {
-    const { ingredient } = this.props;
-    const { quantity, measurement } = this.state;
-
+  const onAddIngredient = () => {
     const newIngredient = {
       ...ingredient,
       quantity,
@@ -104,62 +95,72 @@ class AddIngredient extends Component {
       },
     };
 
-    this.props.onConfirm(newIngredient);
+    onConfirm(newIngredient);
   };
 
-  render() {
-    const { quantity, measurement } = this.state;
-    const {
-      ingredient,
-      globalData: { measurements },
-    } = this.props;
+  return (
+    <>
+      <AddIngredientRow initialPose="closed" pose="open">
+        <P>
+          <b>Ingredient:</b> {ingredient.name}
+        </P>
+        <Data>
+          <Form.FormGroup>
+            <Form.Label>
+              Quantity
+              <Form.Input
+                type="text"
+                placeholder="1, 1/2, 1/4, ..."
+                value={quantity}
+                onChange={onChangeQuantity}
+              />
+            </Form.Label>
+            {isQuantityError && (
+              <Form.Feedback>
+                This value has to be an integer or fractal number (i.e. 2, 1/4,
+                ...)
+              </Form.Feedback>
+            )}
+          </Form.FormGroup>
+          <Form.FormGroup>
+            <Form.Label>
+              Measurement
+              <Form.Select
+                placeholder="Select measurements..."
+                value={measurement || {}}
+                onChange={setMeasurement}
+              >
+                {measurements.map(({ id, name }) => (
+                  <Form.Select.Option key={id} label={name} value={id} />
+                ))}
+              </Form.Select>
+            </Form.Label>
+          </Form.FormGroup>
+        </Data>
+        <Actions>
+          <Button
+            color="primary"
+            onClick={onAddIngredient}
+            disabled={isQuantityError || !measurement}
+          >
+            Add Ingredient
+          </Button>
+          <Button onClick={onCancel}>Cancel</Button>
+        </Actions>
+      </AddIngredientRow>
+    </>
+  );
+};
 
-    return (
-      <>
-        <AddIngredientRow initialPose="closed" pose="open">
-          <P>
-            <b>Ingredient:</b> {ingredient.name}
-          </P>
-          <Data>
-            <Form.FormGroup>
-              <Form.Label>
-                Quantity
-                <Form.Input
-                  type="number"
-                  value={quantity}
-                  onChange={this.onChangeQuantity}
-                />
-              </Form.Label>
-            </Form.FormGroup>
-            <Form.FormGroup>
-              <Form.Label>
-                Measurement
-                <Form.Select
-                  placeholder="Select measurements..."
-                  value={measurement || {}}
-                  onChange={this.onSelectMeasurement}
-                >
-                  {measurements.map(({ id, name }) => (
-                    <Form.Select.Option key={id} label={name} value={id} />
-                  ))}
-                </Form.Select>
-              </Form.Label>
-            </Form.FormGroup>
-          </Data>
-          <Actions>
-            <Button
-              color="primary"
-              onClick={this.onAddIngredient}
-              disabled={!quantity || !measurement}
-            >
-              Add Ingredient
-            </Button>
-            <Button onClick={this.onCancelIngredient}>Cancel</Button>
-          </Actions>
-        </AddIngredientRow>
-      </>
-    );
-  }
-}
+AddIngredient.propTypes = {
+  ingredient: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  globalData: PropTypes.shape({ measurements: PropTypes.array.isRequired })
+    .isRequired,
+  onConfirm: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+};
 
 export default withGlobalData(AddIngredient);

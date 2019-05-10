@@ -15,7 +15,7 @@ export default class Wizard extends Component {
   };
 
   state = {
-    page: 0,
+    page: 1,
     pages: null,
   };
 
