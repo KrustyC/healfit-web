@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import htmlParser from 'helpers/htmlParser';
+import Interweave from 'interweave';
 
 const Container = styled.div`
   ${({ theme }) => css`
@@ -23,6 +23,7 @@ const Container = styled.div`
 
 const Text = styled.div`
   overflow: hidden;
+  word-wrap: break-word;
   * {
     font-size: 18px;
     font-family: 'PT Serif', serif !important;
@@ -33,7 +34,9 @@ const Text = styled.div`
 
 const Method = ({ method }) => (
   <Container>
-    <Text>{htmlParser(method)}</Text>
+    <Text>
+      <Interweave content={method} />
+    </Text>
   </Container>
 );
 

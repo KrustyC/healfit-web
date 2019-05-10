@@ -75,6 +75,7 @@ const EditOrCreateForm = ({ globalData, edit, initialValues, onComplete }) => {
                 globalData={globalData}
               />
               <Bottom
+                edit={edit}
                 onPrevious={onPrevious}
                 isSubmitting={isSubmitting}
                 isFirstPage={isFirstPage}

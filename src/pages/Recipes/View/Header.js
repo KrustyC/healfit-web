@@ -147,7 +147,7 @@ const Rating = styled.div`
 const Header = ({ recipe, likeOrDislikeRecipe }) => {
   const { amILoggedIn, authUser } = useContext(RootContext);
   const [amILiking, setLike] = useState(recipe.likedBy.includes(authUser._id));
-  console.log(authUser);
+
   const amIAuthor = authUser && authUser._id === recipe.createdBy._id;
 
   const onLike = () => {

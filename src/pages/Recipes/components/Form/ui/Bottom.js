@@ -17,6 +17,7 @@ const BottomContainer = styled.div`
 `;
 
 const Bottom = ({
+  edit,
   onPrevious,
   isSubmitting,
   isFirstPage,
@@ -33,12 +34,13 @@ const Bottom = ({
       disabled={(isSubmitting, !isValid)}
       type="submit"
     >
-      {isLastPage ? 'Create Recipe' : 'Next'}
+      {isLastPage ? `${edit ? 'Edit' : 'Create'} Recipe` : 'Next'}
     </Button>
   </BottomContainer>
 );
 
 Bottom.propTypes = {
+  edit: PropTypes.bool.isRequired,
   isSubmitting: PropTypes.bool.isRequired,
   isFirstPage: PropTypes.bool.isRequired,
   isLastPage: PropTypes.bool.isRequired,
