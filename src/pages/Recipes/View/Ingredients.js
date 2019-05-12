@@ -30,7 +30,7 @@ const InnerContainer = styled.div`
 `;
 
 const Grid = styled.div`
-  ${({ theme }) => css`
+  ${({ theme, children }) => css`
     margin-top: ${theme.margin.sm};
     display: grid;
     /* @TODO Here I should calculate based on number of items */
@@ -42,6 +42,7 @@ const Grid = styled.div`
 
     @media (max-width: ${theme.sizes.md}) {
       grid-template-columns: 1fr;
+      grid-template-rows: repeat(${children.length}, 1fr);
     }
   `}
 `;

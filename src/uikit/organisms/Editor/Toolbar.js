@@ -6,6 +6,7 @@ import { RichUtils } from 'draft-js';
 import BoldSvg from 'assets/icons/bold-text.svg';
 import ItalicSvg from 'assets/icons/italic-text.svg';
 import UnderlineSvg from 'assets/icons/underline-text.svg';
+import ListSvg from 'assets/icons/list.svg';
 
 const Row = styled.div`
   ${({ theme }) => css`
@@ -82,7 +83,7 @@ const Toolbar = ({ editorState, onChange }) => {
         active={blockType === 'ordered-list-item'}
         onClick={() => onToggleBlockType('ordered-list-item')}
       >
-        <UnderlineSvg />
+        <ListSvg />
       </Button>
     </Row>
   );

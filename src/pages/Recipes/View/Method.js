@@ -12,6 +12,12 @@ const Container = styled.div`
     align-items: center;
     flex-direction: column;
     padding-top: ${theme.padding.lg};
+    ol {
+      padding-left: 1.8rem;
+      li {
+        margin: 10px 0;
+      }
+    }
 
     @media (max-width: ${theme.sizes.md}) {
       width: ${theme.dimensions.containerWidth.fullscreen};
