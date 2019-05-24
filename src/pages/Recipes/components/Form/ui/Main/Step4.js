@@ -105,7 +105,8 @@ const Step4 = ({ values, setFieldValue, setFieldTouched }) => (
           name="calories"
           type="number"
           min="0"
-          max="500"
+          max="5000"
+          step="0.1"
           placeholder="Insert calories"
         />
       </Form.Label>
@@ -133,7 +134,8 @@ const Step4 = ({ values, setFieldValue, setFieldTouched }) => (
             name="carbohydrates"
             type="number"
             min="0"
-            max="500"
+            max="5000"
+            step="0.1"
             placeholder="Insert carbohydrates"
           />
         </Form.Label>
@@ -147,7 +149,8 @@ const Step4 = ({ values, setFieldValue, setFieldTouched }) => (
             name="protein"
             type="number"
             min="0"
-            max="500"
+            max="5000"
+            step="0.1"
             placeholder="Insert protein"
           />
         </Form.Label>
@@ -161,7 +164,8 @@ const Step4 = ({ values, setFieldValue, setFieldTouched }) => (
             name="fiber"
             type="number"
             min="0"
-            max="500"
+            max="5000"
+            step="0.1"
             placeholder="Insert fiber"
           />
         </Form.Label>
@@ -175,7 +179,8 @@ const Step4 = ({ values, setFieldValue, setFieldTouched }) => (
             name="fat"
             type="number"
             min="0"
-            max="500"
+            max="5000"
+            step="0.1"
             placeholder="Insert fat"
           />
         </Form.Label>
