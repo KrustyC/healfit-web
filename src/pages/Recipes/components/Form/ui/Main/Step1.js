@@ -37,7 +37,7 @@ const Step1 = ({
           name="servings"
           type="number"
           min="1"
-          max="10"
+          max="100"
           placeholder="Insert number of servings"
         />
       </Form.Label>
@@ -51,7 +51,7 @@ const Step1 = ({
           name="totalTime"
           type="number"
           min="0"
-          max="500"
+          max="1000"
           placeholder="Insert time in minutes"
         />
       </Form.Label>
