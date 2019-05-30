@@ -11,11 +11,21 @@ const moment = extendMoment(Moment);
 const Container = styled.div`
   ${({ theme }) => css`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
-    width: ${theme.dimensions.containerWidth.large};
+    width: ${theme.dimensions.containerWidth.fullscreen};
     margin: 0 auto;
   `}
+`;
+
+const Side = styled.div`
+  display: flex;
+  flex: 2;
+`;
+
+const Main = styled.div`
+  display: flex;
+  flex: 8;
 `;
 
 const Headings = styled.th`
@@ -249,53 +259,57 @@ const MealPlanner = () => {
       <div>Meal Planner</div>
 
       <Container>
-        <DayRangePicker
-          startDate={startDate}
-          endDate={endDate}
-          onDatesChange={onDatesChange}
-        />
-        <table>
-          <thead>
-            <th />
-            {days.map(day => (
-              <th>{day.format('D/M dddd')}</th>
-            ))}
-          </thead>
-          <tbody>
-            {positions.map(position => (
-              <Position>
-                <PositionHeader scope="row">{position.name}</PositionHeader>
-                {days.map(date => {
-                  const dailyMeals = meals.find(
-                    mealDay => mealDay.date === date.format('DD/MM/YYYY')
-                  );
+        <Side>
+          <DayRangePicker
+            startDate={startDate}
+            endDate={endDate}
+            onDatesChange={onDatesChange}
+          />
+        </Side>
+        <Main>
+          <table>
+            <thead>
+              <th />
+              {days.map(day => (
+                <th>{day.format('D/M dddd')}</th>
+              ))}
+            </thead>
+            <tbody>
+              {positions.map(position => (
+                <Position>
+                  <PositionHeader scope="row">{position.name}</PositionHeader>
+                  {days.map(date => {
+                    const dailyMeals = meals.find(
+                      mealDay => mealDay.date === date.format('DD/MM/YYYY')
+                    );
 
-                  if (!dailyMeals) {
-                    return <Cell />;
-                  }
+                    if (!dailyMeals) {
+                      return <Cell />;
+                    }
 
-                  const currentMeal = dailyMeals.meals.find(
-                    meal => meal.name === position.name
-                  );
+                    const currentMeal = dailyMeals.meals.find(
+                      meal => meal.name === position.name
+                    );
 
-                  if (!currentMeal) {
-                    return <Cell />;
-                  }
+                    if (!currentMeal) {
+                      return <Cell />;
+                    }
 
-                  return (
-                    <Cell>
-                      <CellContent>
-                        {currentMeal.recipes.map(recipe => (
-                          <Meal>{recipe.name}</Meal>
-                        ))}
-                      </CellContent>
-                    </Cell>
-                  );
-                })}
-              </Position>
-            ))}
-          </tbody>
-        </table>
+                    return (
+                      <Cell>
+                        <CellContent>
+                          {currentMeal.recipes.map(recipe => (
+                            <Meal>{recipe.name}</Meal>
+                          ))}
+                        </CellContent>
+                      </Cell>
+                    );
+                  })}
+                </Position>
+              ))}
+            </tbody>
+          </table>
+        </Main>
       </Container>
     </>
   );
