@@ -6,6 +6,7 @@ import BigCalendar from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import Navbar from 'uikit/organisms/navbars/LoggedNavbar';
+import AddMealOrTrainingModal from './AddMealOrTrainingModal';
 
 const localizer = BigCalendar.momentLocalizer(moment); // or globalizeLocalizer
 
@@ -48,10 +49,24 @@ const meals = [
 
 const MealPlanner = () => {
   // Here use effect , context and stuff to fetch all data
+  const [wantToAddMeal, setWantToAddMeal] = useState(false);
+  const [currentStartEnd, setCurrentStartEnd] = useState({
+    start: null,
+    end: null,
+  });
+
+  const onCloseMealModal = () => {
+    setCurrentStartEnd({ start: null, end: null });
+    setWantToAddMeal(false);
+  };
 
   const onSelectSlot = ({ start, end }) => {
-    console.log(start, end);
-    // @TODO Here add modal to let user selct type, recipe(s) and shit
+    setCurrentStartEnd({ start: moment(start), end: moment(end) });
+    setWantToAddMeal(true);
+  };
+
+  const onAddMeal = meal => {
+    console.log('add meal', meal);
   };
 
   const onSelectEvent = (x, y, z) => console.log(x, y, z);
@@ -80,6 +95,11 @@ const MealPlanner = () => {
           timeslots={12}
         />
       </Container>
+      <AddMealOrTrainingModal
+        show={wantToAddMeal}
+        onConfirm={onAddMeal}
+        onClose={onCloseMealModal}
+      />
     </>
   );
 };
