@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import * as Yup from 'yup';
 import gql from 'graphql-tag';
 import { Formik } from 'formik';
@@ -8,6 +9,7 @@ import withApolloClient from 'hoc/withApolloClient';
 import Modal from 'uikit/blocks/Modal';
 import Form from 'uikit/blocks/Form';
 
+// @TODO Visualise the correct date but let the user change the time
 // @TODO Add a "Can't find the recipe you are looking for? Add it to the system!"
 
 const SEARCH_RECIPES = gql`
@@ -39,8 +41,18 @@ const validationSchema = Yup.object().shape({
   recipes: Yup.string().required('Please add at least one recipe'),
 });
 
-const AddMealOrTrainingModal = ({ client, show, onConfirm, onClose }) => {
+const AddMealOrTrainingModal = ({
+  client,
+  startEnd,
+  show,
+  onConfirm,
+  onClose,
+}) => {
   const [lookupRecipes, setLookupRecipes] = useState([]);
+  const day =
+    startEnd.start !== null
+      ? moment(startEnd.start).format('Do [of] MMMM')
+      : null;
 
   const onSelectRecipe = (values, setFieldValue) => recipe => {
     setFieldValue('recipes', [...values.recipes, recipe]);
@@ -79,6 +91,7 @@ const AddMealOrTrainingModal = ({ client, show, onConfirm, onClose }) => {
           <>
             <Modal.Header>Add Meal or Training </Modal.Header>
             <Modal.Body>
+              {day}
               <Form.FormGroup>
                 <Form.Label>Please select a type</Form.Label>
                 <Form.Multichoice>
@@ -123,6 +136,10 @@ const AddMealOrTrainingModal = ({ client, show, onConfirm, onClose }) => {
 
 AddMealOrTrainingModal.propTypes = {
   show: PropTypes.bool.isRequired,
+  startEnd: PropTypes.shape({
+    start: PropTypes.object,
+    end: PropTypes.object,
+  }).isRequired,
   onConfirm: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   client: PropTypes.shape({

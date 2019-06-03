@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Helmet } from 'react-helmet';
 import moment from 'moment';
@@ -96,6 +96,7 @@ const MealPlanner = () => {
         />
       </Container>
       <AddMealOrTrainingModal
+        startEnd={currentStartEnd}
         show={wantToAddMeal}
         onConfirm={onAddMeal}
         onClose={onCloseMealModal}
