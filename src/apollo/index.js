@@ -30,6 +30,7 @@ const typeDefs = `
 
   type GlobalData {
     ingredientsCategories: ValueObject
+    mealTypes: ValueObject
     measurements: ValueObject
     recipeCategories: ValueObject
     recipeLevels: ValueObject

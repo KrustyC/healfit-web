@@ -12,6 +12,9 @@ export const FETCH_INITIAL_DATA = gql`
       ingredientsCategories {
         ...ValueObjectData
       }
+      mealTypes {
+        ...ValueObjectData
+      }
       measurements {
         ...ValueObjectData
       }
