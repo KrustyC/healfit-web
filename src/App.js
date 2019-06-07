@@ -18,7 +18,7 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 const registerServiceWorker = () => {
-  if ('serviceWorker' in navigator && process.env.NODE_ENV !== 'development') {
+  if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker
         .register('/sw.js')

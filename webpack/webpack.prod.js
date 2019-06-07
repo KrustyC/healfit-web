@@ -6,7 +6,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const BrotliGzipPlugin = require('brotli-gzip-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const workboxPlugin = require('workbox-webpack-plugin');
 const sharedConfig = require('./webpack.common.js');
 
 const appRoot = path.dirname(__dirname);
@@ -57,11 +56,6 @@ const plugins = [
   new webpack.IgnorePlugin({
     resourceRegExp: /^\.\/locale$/,
     contextRegExp: /moment$/,
-  }),
-  new workboxPlugin.GenerateSW({
-    swDest: 'sw.js',
-    clientsClaim: true,
-    skipWaiting: true,
   }),
 ];
 
