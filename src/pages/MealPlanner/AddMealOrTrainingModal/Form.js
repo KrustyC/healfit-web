@@ -63,7 +63,7 @@ const MealFormBody = ({
     </Form.FormGroup>
     <Times>
       <TimeContainer>
-        <b>Start</b>
+        <span>Start</span>
         <TimePicker
           theme="classic"
           time={values.start}
@@ -74,7 +74,7 @@ const MealFormBody = ({
         />
       </TimeContainer>
       <TimeContainer>
-        <b>End</b>
+        <span>End</span>
         <TimePicker
           theme="classic"
           time={values.end}
