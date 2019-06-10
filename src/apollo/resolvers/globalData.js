@@ -1,6 +1,7 @@
 const defaults = {
   globalData: {
     ingredientCategories: [],
+    mealTypes: [],
     measurements: [],
     recipeCategories: [],
     recipeLevels: [],

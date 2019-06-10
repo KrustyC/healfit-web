@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { compose } from 'react-apollo';
 import * as Yup from 'yup';
 import gql from 'graphql-tag';
 import { Formik } from 'formik';
-import TimePicker from 'react-times';
 import 'react-times/css/classic/default.css';
 
-import withGlobalData from 'hoc/withGlobalData';
 import withApolloClient from 'hoc/withApolloClient';
 
-import Heading from 'uikit/elements/Heading';
 import Modal from 'uikit/blocks/Modal';
-import Form from 'uikit/blocks/Form';
+import Form from './Form';
 
 // @TODO Visualise the correct date but let the user change the time
 // @TODO Add a "Can't find the recipe you are looking for? Add it to the system!"
@@ -44,7 +40,6 @@ const AddMealOrTrainingModal = ({
   show,
   onConfirm,
   onClose,
-  globalData: { mealTypes },
 }) => {
   const [lookupRecipes, setLookupRecipes] = useState([]);
   const day =
@@ -86,86 +81,25 @@ const AddMealOrTrainingModal = ({
         validationSchema={validationSchema}
       >
         {({ values, isValid, handleSubmit, setFieldValue }) => (
-          console.log(values),
-          (
-            <>
-              <Modal.Header>Add Meal or Training </Modal.Header>
-              <Modal.Body>
-                {day}
-                <Form.FormGroup>
-                  <Form.Label>Please select a type</Form.Label>
-                  <Form.Multichoice>
-                    {mealTypes.map(({ id, name }) => (
-                      <Form.Multichoice.Choice
-                        key={id}
-                        id={id}
-                        name="level"
-                        checked={values.level === id}
-                        onChange={e => setFieldValue('level', e.target.value)}
-                        label={name}
-                        value={id}
-                      />
-                    ))}
-                  </Form.Multichoice>
-                </Form.FormGroup>
-                <div style={{ display: 'flex' }}>
-                  <div style={{ flex: 1 }}>
-                    Start
-                    <br />
-                    <TimePicker
-                      onTimeChange={({ hour, minute }) =>
-                        setFieldValue('start', `${hour}:${minute}`)
-                      }
-                      time={values.start}
-                      theme="classic"
-                      timeConfig={{
-                        step: 15,
-                        unit: 'minute',
-                      }}
-                    />
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    End
-                    <br />
-                    <TimePicker
-                      onTimeChange={({ hour, minute }) =>
-                        setFieldValue('end', `${hour}:${minute}`)
-                      }
-                      time={values.end}
-                      timeConfig={{
-                        step: 15,
-                        unit: 'minute',
-                      }}
-                    />
-                  </div>
-                </div>
-                <Form.FormGroup>
-                  <Form.Label>Add one or more recipes to your meal</Form.Label>
-                  <Form.RemoteFilter
-                    placeholder="Search for recipes..."
-                    list={lookupRecipes}
-                    labelField="title"
-                    emptyMessage="No Recipes Avaialable"
-                    query={onSearchRecipe}
-                    onSelect={onSelectRecipe(values, setFieldValue)}
-                  />
-                  <Form.Feedback name="ingredients" />
-                </Form.FormGroup>
-                <Heading level="h4">Selected Recipes</Heading>
-                <ul>
-                  {values.recipes.map(({ id, slug, picture, title }) => (
-                    <li key={id}>{title}</li>
-                  ))}
-                </ul>
-              </Modal.Body>
-              <Modal.Footer>
-                <Modal.Cancel />
-                <Modal.Confirm disabled={!isValid} onClick={handleSubmit}>
-                  Create
-                </Modal.Confirm>
-              </Modal.Footer>
-            </>
-          )
+          <>
+            <Modal.Header>Add Meal or Training </Modal.Header>
+            <Modal.Body>
+              <Form
+                day={day}
+                values={values}
+                lookupRecipes={lookupRecipes}
+                setFieldValue={setFieldValue}
+                onSelectRecipe={onSelectRecipe}
+                onSearchRecipe={onSearchRecipe}
+              />
+            </Modal.Body>
+            <Modal.Footer>
+              <Modal.Cancel />
+              <Modal.Confirm disabled={!isValid} onClick={handleSubmit}>
+                Create
+              </Modal.Confirm>
+            </Modal.Footer>
+          </>
         )}
       </Formik>
     </Modal>
@@ -173,14 +107,6 @@ const AddMealOrTrainingModal = ({
 };
 
 AddMealOrTrainingModal.propTypes = {
-  globalData: PropTypes.shape({
-    mealTypes: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-  }).isRequired,
   show: PropTypes.bool.isRequired,
   startEnd: PropTypes.shape({
     start: PropTypes.object,
@@ -193,7 +119,4 @@ AddMealOrTrainingModal.propTypes = {
   }).isRequired,
 };
 
-export default compose(
-  withGlobalData,
-  withApolloClient
-)(AddMealOrTrainingModal);
+export default withApolloClient(AddMealOrTrainingModal);
