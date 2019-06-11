@@ -6,6 +6,7 @@ import BigCalendar from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import Navbar from 'uikit/organisms/navbars/LoggedNavbar';
+import MealPlannerStore from './Store';
 import AddMealOrTrainingModal from './AddMealOrTrainingModal';
 
 const localizer = BigCalendar.momentLocalizer(moment); // or globalizeLocalizer
@@ -79,29 +80,31 @@ const MealPlanner = () => {
         <meta name="description" content="Meal Planner" />
       </Helmet>
       <Navbar />
-      <div>Meal Planner</div>
+      <MealPlannerStore>
+        <div>Meal Planner</div>
 
-      <Container>
-        <BigCalendar
-          selectable
-          localizer={localizer}
-          events={meals}
-          startAccessor="start"
-          endAccessor="end"
-          defaultView="week"
-          onSelectSlot={onSelectSlot}
-          onSelectEvent={onSelectEvent}
-          onView={onView}
-          views={['week', 'day']}
-          timeslots={12}
+        <Container>
+          <BigCalendar
+            selectable
+            localizer={localizer}
+            events={meals}
+            startAccessor="start"
+            endAccessor="end"
+            defaultView="week"
+            onSelectSlot={onSelectSlot}
+            onSelectEvent={onSelectEvent}
+            onView={onView}
+            views={['week', 'day']}
+            timeslots={12}
+          />
+        </Container>
+        <AddMealOrTrainingModal
+          startEnd={currentStartEnd}
+          show={wantToAddMeal}
+          onConfirm={onAddMeal}
+          onClose={onCloseMealModal}
         />
-      </Container>
-      <AddMealOrTrainingModal
-        startEnd={currentStartEnd}
-        show={wantToAddMeal}
-        onConfirm={onAddMeal}
-        onClose={onCloseMealModal}
-      />
+      </MealPlannerStore>
     </>
   );
 };

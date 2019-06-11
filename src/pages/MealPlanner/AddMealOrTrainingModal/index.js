@@ -71,8 +71,6 @@ const AddMealOrTrainingModal = ({
     }
   };
 
-  const onAddToMealPlean = (values, { resetForm }) => {};
-
   return (
     <Modal large show={show} onCancel={onClose}>
       <Formik
