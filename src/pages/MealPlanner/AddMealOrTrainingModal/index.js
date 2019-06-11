@@ -21,17 +21,20 @@ const SEARCH_RECIPES = gql`
       title
       slug
       picture
+      calories
     }
   }
 `;
 
 const validationSchema = Yup.object().shape({
-  type: Yup.string()
-    .min(2, 'Add at least two letters')
-    .required('Please add a name'),
-  start: Yup.object().required('Please add a start time'),
-  end: Yup.object().required('Please add a end time'),
-  recipes: Yup.string().required('Please add at least one recipe'),
+  type: Yup.string().required('Please select a type'),
+  start: Yup.string().required('Please add a start time'),
+  end: Yup.string().required('Please add a end time'), // @TODO Validate end time is after start time
+  recipes: Yup.array().when('type', {
+    is: 'mt-1',
+    then: Yup.array().min(1, 'Please add at least one recipe'),
+    otherwise: Yup.array().min(0),
+  }),
 });
 
 const AddMealOrTrainingModal = ({
@@ -44,7 +47,7 @@ const AddMealOrTrainingModal = ({
   const [lookupRecipes, setLookupRecipes] = useState([]);
   const day =
     startEnd.start !== null
-      ? moment(startEnd.start).format('Do [of] MMMM')
+      ? moment(startEnd.start).format('dddd[,] Do MMMM YYYY')
       : null;
 
   const onSelectRecipe = (values, setFieldValue) => recipe => {
@@ -68,13 +71,15 @@ const AddMealOrTrainingModal = ({
     }
   };
 
+  const onAddToMealPlean = (values, { resetForm }) => {};
+
   return (
     <Modal large show={show} onCancel={onClose}>
       <Formik
         initialValues={{
           type: '',
-          start: '', // @TODO Get the time from the user selection
-          end: '', // @TODO Get the time from the user selection
+          start: startEnd.start ? startEnd.start.format('HH:mm') : '',
+          end: startEnd.end ? startEnd.end.format('HH:mm') : '',
           recipes: [],
         }}
         onSubmit={onConfirm}

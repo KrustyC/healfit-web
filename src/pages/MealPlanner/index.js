@@ -88,10 +88,11 @@ const MealPlanner = () => {
           events={meals}
           startAccessor="start"
           endAccessor="end"
+          defaultView="week"
           onSelectSlot={onSelectSlot}
           onSelectEvent={onSelectEvent}
           onView={onView}
-          views={['month', 'week', 'day']}
+          views={['week', 'day']}
           timeslots={12}
         />
       </Container>
