@@ -7,6 +7,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import Navbar from 'uikit/organisms/navbars/LoggedNavbar';
 import MealPlannerStore from './Store';
+import MealPlanner from './MealPlanner';
 import AddMealOrTrainingModal from './AddMealOrTrainingModal';
 
 const localizer = BigCalendar.momentLocalizer(moment); // or globalizeLocalizer
@@ -48,7 +49,7 @@ const meals = [
   },
 ];
 
-const MealPlanner = () => {
+const MealPlannerIndex = () => {
   // Here use effect , context and stuff to fetch all data
   const [wantToAddMeal, setWantToAddMeal] = useState(false);
   const [currentStartEnd, setCurrentStartEnd] = useState({
@@ -81,31 +82,9 @@ const MealPlanner = () => {
       </Helmet>
       <Navbar />
       <MealPlannerStore>
-        <div>Meal Planner</div>
-
-        <Container>
-          <BigCalendar
-            selectable
-            localizer={localizer}
-            events={meals}
-            startAccessor="start"
-            endAccessor="end"
-            defaultView="week"
-            onSelectSlot={onSelectSlot}
-            onSelectEvent={onSelectEvent}
-            onView={onView}
-            views={['week', 'day']}
-            timeslots={12}
-          />
-        </Container>
-        <AddMealOrTrainingModal
-          startEnd={currentStartEnd}
-          show={wantToAddMeal}
-          onConfirm={onAddMeal}
-          onClose={onCloseMealModal}
-        />
+        <MealPlanner />
       </MealPlannerStore>
     </>
   );
 };
-export default MealPlanner;
+export default MealPlannerIndex;
