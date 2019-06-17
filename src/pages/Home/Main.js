@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import MainImage from 'assets/images/undrawn/chef.svg';
-import Button from 'uikit/blocks/Button';
+import Link from 'uikit/elements/Link';
 import Heading from 'uikit/elements/Heading';
 import P from 'uikit/elements/P';
 
@@ -73,7 +73,7 @@ const Actions = styled.div`
   ${({ theme }) => css`
     padding-top: ${theme.padding.lg};
 
-    button:first-of-type {
+    a:first-of-type {
       margin-right: ${theme.margin.md};
     }
 
@@ -115,10 +115,17 @@ export default () => (
           </P>
         </IntroText>
         <Actions>
-          <Button size="large">Sign In</Button>
-          <Button color="primary" size="large">
+          <Link to="/auth/signin" size="large" component="button">
+            Sign In
+          </Link>
+          <Link
+            to="/auth/signup"
+            color="primary"
+            size="large"
+            component="button"
+          >
             Register
-          </Button>
+          </Link>
         </Actions>
       </Introduction>
       <Cover>

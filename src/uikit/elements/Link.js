@@ -9,30 +9,35 @@ import {
 import Button from 'uikit/blocks/Button';
 
 const Link = styled(ReactRouterLink)`
-  color: ${({ theme }) => theme.colors.accent};
   text-decoration: none;
-  cursor: pointer;
+  line-height: 100%;
+  ${({ type }) =>
+    type !== 'button' &&
+    css`
+      color: ${({ theme }) => theme.colors.accent};
+      cursor: pointer;
 
-  ${({ font }) =>
-    font === 'default' &&
-    css`
-      font-family: ${({ theme }) => theme.fonts.default};
-    `} ${({ font }) =>
-    font === 'serif' &&
-    css`
-      font-family: ${({ theme }) => theme.fonts.serif};
-    `}
+      ${({ font }) =>
+        font === 'default' &&
+        css`
+          font-family: ${({ theme }) => theme.fonts.default};
+        `} ${({ font }) =>
+        font === 'serif' &&
+        css`
+          font-family: ${({ theme }) => theme.fonts.serif};
+        `}
 
   &:hover, &:focus {
-    color: ${({ theme }) => theme.util.darkenOnHover(theme.colors.accent)};
-    text-decoration: underline;
-  }
+        color: ${({ theme }) => theme.util.darkenOnHover(theme.colors.accent)};
+        text-decoration: underline;
+      }
 
-  &:hover,
-  &:focus {
-    color: ${({ theme }) => theme.util.darkenOnActive(theme.colors.accent)};
-    text-decoration: underline;
-  }
+      &:hover,
+      &:focus {
+        color: ${({ theme }) => theme.util.darkenOnActive(theme.colors.accent)};
+        text-decoration: underline;
+      }
+    `}
 `;
 
 const NavLink = Link.withComponent(ReactRouterNavLink);
@@ -49,9 +54,9 @@ const LinkElement = props => {
   switch (component) {
     case 'button':
       return (
-        <Link to={to} as={Button} {...rest}>
+        <Button to={to} as={Link} {...rest} type="button">
           {children}
-        </Link>
+        </Button>
       );
     case 'nav':
       return (

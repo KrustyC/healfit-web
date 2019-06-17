@@ -32,7 +32,7 @@ const Button = styled.button`
   font-weight: bold;
   box-shadow: ${({ theme }) => theme.shadows.default};
   font-size: ${({ theme }) => theme.fontSize.regular};
-  height: 40px;
+  padding: 0.8rem 1.2rem;
 
   ${({ squircled }) =>
     squircled &&
@@ -63,14 +63,13 @@ const Button = styled.button`
     size === 'small' &&
     css`
       font-size: 12px;
-      height: 30px;
-      padding: 0 0.7rem;
+      padding: 0.6rem 1rem;
     `}
 
   ${({ size }) =>
     size === 'large' &&
     css`
-      height: 50px;
+      padding: 1rem 1.5rem;
     `}
 
   ${({ size }) =>
