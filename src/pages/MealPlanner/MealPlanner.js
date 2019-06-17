@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import styled, { css } from 'styled-components';
-import moment from 'moment';
+
 import BigCalendar from 'react-big-calendar';
+import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import FullCalendar from '@fullcalendar/react';
@@ -12,10 +13,7 @@ import '@fullcalendar/daygrid/main.css';
 import '@fullcalendar/timegrid/main.css';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
-import { useMealPlannerStore } from './Store';
 import AddMealOrTrainingModal from './AddMealOrTrainingModal';
-
-const localizer = BigCalendar.momentLocalizer(moment); // or globalizeLocalizer
 
 const Container = styled.div`
   ${({ theme }) => css`
@@ -32,43 +30,92 @@ const Container = styled.div`
   `}
 `;
 
+const localizer = BigCalendar.momentLocalizer(moment); // or globalizeLocalizer
+
 const MealPlanner = () => {
   // Here use effect , context and stuff to fetch all data
   const calendarComponentRef = useRef();
   const [wantToAddMeal, setWantToAddMeal] = useState(false);
-  const [currentStartEnd, setCurrentStartEnd] = useState({
-    start: null,
-    end: null,
-  });
-  const today = new Date();
-  const [{ mealPlan }, { loadMealPlan }] = useMealPlannerStore();
+  const [selectedStartTime, setSelectedStartTime] = useState();
 
   const onCloseMealModal = () => {
-    setCurrentStartEnd({ start: null, end: null });
+    setSelectedStartTime(null);
     setWantToAddMeal(false);
   };
 
-  const onSelectSlot = ({ start, end }) => {
-    setCurrentStartEnd({ start: moment(start), end: moment(end) });
+  const onSelectSlot = ({ start }) => {
+    setSelectedStartTime(moment(start));
     setWantToAddMeal(true);
   };
 
-  const onView = () => console.log('view');
-
-  const onRangeChange = whatever => console.log('range', whatever);
-  const onNavigate = whatever => console.log('navigate', whatever);
-
   const onAddMeal = values => {
     console.log(values);
+
+    const start = values.day;
+
+    const mewal = {
+      title: 'Workout',
+      start: '2019-06-19T12:30',
+      end: '2019-06-19T13:30',
+    };
+    calendarComponentRef.current.calendar.addEvent(mewal);
+    onCloseMealModal();
+  };
+
+  const onPrev = () => {
+    calendarComponentRef.current.calendar.prev();
+  };
+
+  const fetchEvents = ({ start, end }, callback) => {
+    console.log(new Date(start));
+    return callback([
+      {
+        title: 'event 1',
+        start: '2019-06-18T12:30',
+        end: '2019-06-18T13:30',
+      },
+    ]);
   };
 
   return (
     <>
       <Container>
         {/* <BigCalendar
+          events={[
+            {
+              title: 'My event',
+              allDay: false,
+              start: new Date(2018, 0, 1, 10, 0), // 10.00 AM
+              end: new Date(2018, 0, 1, 14, 0), // 2.00 PM
+            },
+          ]}
+          onNavigate={(params, par) => console.log('navigate', params, par)}
+          // step={60}
+          // // view="week"
+          // // views={['week']}
+          // min={new Date(2008, 0, 1, 8, 0)} // 8.00 AM
+          // max={new Date(2008, 0, 1, 17, 0)} // Max will be 6.00 PM!
+          // date={new Date(2018, 0, 1)}
+        /> */}
+        <BigCalendar
           selectable
-          events={mealPlan}
-          date={today}
+          events={[
+            {
+              title: 'My event',
+              allDay: false,
+              start: new Date(2019, 5, 18),
+              end: new Date(2019, 5, 18),
+              resourceId: 'breakfast',
+            },
+            {
+              title: 'My event',
+              allDay: false,
+              start: new Date(2019, 5, 19),
+              end: new Date(2019, 5, 19),
+              resourceId: 'lunch',
+            },
+          ]}
+          // date={today}
           localizer={localizer}
           startAccessor="start"
           endAccessor="end"
@@ -76,38 +123,44 @@ const MealPlanner = () => {
           views={['week', 'day']}
           timeslots={12}
           onSelectSlot={onSelectSlot}
-          onView={onView}
-          onRangeChange={onRangeChange}
-          onNavigate={onNavigate}
-        /> */}
-        <FullCalendar
+          resources={[
+            {
+              id: 'breakfast',
+              title: 'Breakfast',
+            },
+            {
+              id: 'snack',
+              title: 'Snack',
+            },
+            {
+              id: 'lunch',
+              title: 'Lunch',
+            },
+          ]}
+          // onView={onView}
+          // onRangeChange={onRangeChange}
+          // onNavigate={onNavigate}
+          onNavigate={(params, par) => console.log('navigate', params, par)}
+        />
+        {/* <FullCalendar
           selectable
+          events={fetchEvents}
+          minTime="05:00:00"
+          mixTime="22:00:00"
           ref={calendarComponentRef}
+          defaultView="timeGridWeek"
           allDaySlot={false}
           slotEventOverlap={false}
-          loading
-          events={[
-            {
-              title: 'event 1',
-              start: '2019-06-12T12:30',
-              end: '2019-06-12T13:30',
-            },
-            // { title: 'event 2', date: '2019-06-12T13:30' },
-          ]}
-          defaultView="timeGridDay"
           header={{
-            left: 'prev,next today',
-            center: 'title',
-            right: 'timeGridWeek,timeGridDay',
+            left: 'title',
+            right: 'prev,next',
           }}
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           select={onSelectSlot}
-          refetch={() => console.log('should refetch')}
-          // select={(start, end) => console.log('select', start, end)}
-        />
+        /> */}
       </Container>
       <AddMealOrTrainingModal
-        startEnd={currentStartEnd}
+        startTime={selectedStartTime}
         show={wantToAddMeal}
         onConfirm={onAddMeal}
         onClose={onCloseMealModal}

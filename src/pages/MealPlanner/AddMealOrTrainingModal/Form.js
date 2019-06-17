@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import moment from 'moment';
 import TimePicker from 'react-times';
 import 'react-times/css/classic/default.css';
 import { getImageURL } from 'app/helpers/images';
@@ -96,7 +97,6 @@ const timeConfig = {
 
 const MealFormBody = ({
   values,
-  day,
   setFieldValue,
   lookupRecipes,
   onSelectRecipe,
@@ -105,7 +105,7 @@ const MealFormBody = ({
 }) => (
   <>
     <Day>
-      <span>Date:</span> {day}
+      <span>Date:</span> {moment(values.day).format('dddd[,] Do MMMM YYYY')}
     </Day>
 
     <Times>
@@ -132,9 +132,9 @@ const MealFormBody = ({
         />
       </TimeContainer>
     </Times>
-    <Form.FormGroup>
+    <Form.FormGroup css="width: 100%;">
       <Form.Label>Please select a type</Form.Label>
-      <Form.Multichoice>
+      <Form.Multichoice css="width: 100%;">
         {mealTypes.map(({ id, name }) => (
           <Form.Multichoice.Choice
             key={id}
@@ -149,6 +149,7 @@ const MealFormBody = ({
       </Form.Multichoice>
     </Form.FormGroup>
 
+    {/* If you selected meal type then you'll have to add recipes to it */}
     {values.type === 'mt-1' && (
       <>
         <Form.FormGroup>
@@ -193,9 +194,9 @@ const MealFormBody = ({
 );
 
 MealFormBody.propTypes = {
-  day: PropTypes.string.isRequired,
   values: PropTypes.shape({
-    type: PropTypes.oneOf(['mt-1', 'mt-2']).isRequired,
+    day: PropTypes.object.isRequired,
+    type: PropTypes.oneOf(['mt-1', 'mt-2', '']).isRequired,
     start: PropTypes.string.isRequired,
     end: PropTypes.string.isRequired,
     recipes: PropTypes.array.isRequired,

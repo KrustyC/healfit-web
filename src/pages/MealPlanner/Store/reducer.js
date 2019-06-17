@@ -13,7 +13,7 @@ const parentReducer = (state, action) => {
     case `${MEAL_PLANNER}_FAILURE`:
       return Immutable.setIn(state, ['mealPlan', 'error'], action.payload.data);
     case `${MEAL_PLANNER}_SUCCESS`:
-      return Immutable.setIn(state, ['mealPlan', 'data'], action.payload.data);
+      return Immutable.setIn(state, ['mealPlan', 'data'], action.payload);
     default:
       return state;
   }

@@ -39,15 +39,15 @@ const validationSchema = Yup.object().shape({
 
 const AddMealOrTrainingModal = ({
   client,
-  startEnd,
+  startTime,
   show,
   onConfirm,
   onClose,
 }) => {
   const [lookupRecipes, setLookupRecipes] = useState([]);
   const day =
-    startEnd.start !== null
-      ? moment(startEnd.start).format('dddd[,] Do MMMM YYYY')
+    startTime !== null
+      ? moment(startTime).format('dddd[,] Do MMMM YYYY')
       : null;
 
   const onSelectRecipe = (values, setFieldValue) => recipe => {
@@ -75,9 +75,10 @@ const AddMealOrTrainingModal = ({
     <Modal large show={show} onCancel={onClose}>
       <Formik
         initialValues={{
+          day: startTime,
           type: '',
-          start: startEnd.start ? startEnd.start.format('HH:mm') : '',
-          end: startEnd.end ? startEnd.end.format('HH:mm') : '',
+          start: startTime ? startTime.format('HH:mm') : '',
+          end: startTime ? startTime.add(60, 'm').format('HH:mm') : '',
           recipes: [],
         }}
         onSubmit={onConfirm}
@@ -88,7 +89,6 @@ const AddMealOrTrainingModal = ({
             <Modal.Header>Add Meal or Training </Modal.Header>
             <Modal.Body>
               <Form
-                day={day}
                 values={values}
                 lookupRecipes={lookupRecipes}
                 setFieldValue={setFieldValue}
@@ -111,15 +111,16 @@ const AddMealOrTrainingModal = ({
 
 AddMealOrTrainingModal.propTypes = {
   show: PropTypes.bool.isRequired,
-  startEnd: PropTypes.shape({
-    start: PropTypes.object,
-    end: PropTypes.object,
-  }).isRequired,
+  startTime: PropTypes.object,
   onConfirm: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   client: PropTypes.shape({
     query: PropTypes.func.isRequired,
   }).isRequired,
+};
+
+AddMealOrTrainingModal.defaultProps = {
+  startTime: null,
 };
 
 export default withApolloClient(AddMealOrTrainingModal);
