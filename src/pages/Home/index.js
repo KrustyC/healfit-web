@@ -20,8 +20,8 @@ const Home = () => {
     <>
       <Header />
       <Main />
-      <Cta />
       <Features />
+      <Cta />
       <MealPlan />
       <Footer />
     </>

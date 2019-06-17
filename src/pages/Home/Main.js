@@ -1,7 +1,9 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
-import Button from 'uikit/blocks/Button';
 import MainImage from 'assets/images/undrawn/chef.svg';
+import Button from 'uikit/blocks/Button';
+import Heading from 'uikit/elements/Heading';
+import P from 'uikit/elements/P';
 
 const drop = keyframes`
   0% { 
@@ -55,7 +57,7 @@ const IntroText = styled.div`
       }
     }
 
-    p {
+    ${P} {
       margin-top: 5px;
       font-size: 22px;
       color: #585772;
@@ -80,6 +82,7 @@ const Actions = styled.div`
     }
   `}
 `;
+
 const Cover = styled.div`
   ${({ theme }) => css`
     flex: 1;
@@ -103,15 +106,19 @@ export default () => (
     <Presentation>
       <Introduction>
         <IntroText>
-          <h1>Meal Plan of the future</h1>
-          <p>
+          <Heading level="h1" align="left" color="white">
+            Meal Plan of the future
+          </Heading>
+          <P>
             Struggugling to keep up with your diet plan? Need a meal planner? We
             got you sorted
-          </p>
+          </P>
         </IntroText>
         <Actions>
-          <Button>Sign In</Button>
-          <Button color="primary">Register</Button>
+          <Button size="large">Sign In</Button>
+          <Button color="primary" size="large">
+            Register
+          </Button>
         </Actions>
       </Introduction>
       <Cover>

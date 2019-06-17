@@ -6,6 +6,7 @@ const H1 = styled.h1`
   ${({ theme, align, color, noPadding }) => css`
     text-align: ${align};
     color: ${theme.colors[color]};
+    margin: ${theme.margin.sm} 0 !important;
     ${noPadding &&
       css`
         padding: 0 !important;

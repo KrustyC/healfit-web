@@ -2,12 +2,11 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 import Heading from 'uikit/elements/Heading';
+import P from 'uikit/elements/P';
 import Clipboard from 'assets/icons/clipboard.svg';
 import Calendar from 'assets/icons/calendar.svg';
 import Tablet from 'assets/icons/tablet.svg';
-import FeaturesGrid from './components/FeaturesGrid';
 
-/* eslint-disable global-require */
 const features = [
   {
     title: 'Create your recipes',
@@ -45,17 +44,56 @@ const Container = styled.div`
   `}
 `;
 
+const Grid = styled.div`
+  ${({ theme }) => css`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: ${theme.margin.md};
+
+    @media (max-width: ${theme.sizes.md}) {
+      grid-template-columns: 1fr;
+    }
+  `}
+`;
+
+const Box = styled.div`
+  ${({ theme }) => css`
+    padding: ${theme.padding.md} ${theme.padding.xs};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    h3 {
+      margin-bottom: 0;
+    }
+
+    svg {
+      width: 83px;
+      border-radius: 50%;
+    }
+
+    @media (max-width: ${theme.sizes.md}) {
+      align-items: center;
+    }
+  `}
+`;
+
 const Features = () => (
   <Container>
     <Heading level="h1" align="center">
       Tracking your progress has never been easier
     </Heading>
-    <br />
-    <br />
-    <FeaturesGrid features={features} />
+    <Grid>
+      {features.map(({ title, content, icon: Icon }) => (
+        <Box key={title}>
+          <Icon />
+          <Heading level="h3">{title}</Heading>
+          <P align="center">{content}</P>
+        </Box>
+      ))}
+    </Grid>
   </Container>
 );
-
-/* eslint-enable global-require */
 
 export default Features;
