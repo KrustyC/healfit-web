@@ -83,7 +83,7 @@ const MealPlanner = () => {
 
     const start = values.day;
 
-    const mewal = {
+    const meal = {
       title: 'Workout',
       start: '2019-06-19T12:30',
       end: '2019-06-19T13:30',
@@ -92,13 +92,25 @@ const MealPlanner = () => {
     onCloseMealModal();
   };
 
+  const onNavigate = (date, period) => {
+    if (period === 'week') {
+      const fromDate = moment(date)
+        .subtract(2, 'day')
+        .format('DD-MM-YYYY');
+      const toDate = moment(date)
+        .add(4, 'day')
+        .format('DD-MM-YYYY');
+      actions.onFetchEvents(fromDate, toDate);
+    }
+  };
+
   return (
     <>
       <Container>
         <BigCalendar
           selectable
           events={events.data}
-          min={new Date(2016, 10, 0, 5, 0, 0)}
+          min={new Date(2016, 10, 0, 5, 0, 0)} // This set the min time to 05:00
           max={new Date(2016, 10, 0, 22, 0, 0)}
           localizer={localizer}
           components={{ event: Event }}
@@ -106,7 +118,7 @@ const MealPlanner = () => {
           defaultView="week"
           views={['week', 'day']}
           onSelectSlot={onSelectSlot}
-          onNavigate={(params, par) => console.log('navigate', params, par)}
+          onNavigate={onNavigate}
         />
       </Container>
       <AddMealOrTrainingModal
