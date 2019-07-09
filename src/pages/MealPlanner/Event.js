@@ -20,14 +20,18 @@ const Recipe = styled.div`
   text-overflow: ellipsis;
 `;
 
-const BREAKFAST = 'mc-1';
-const SNACK = 'mc-2';
-const LUNCH = 'mc-3';
-const DINNER = 'mc-4';
-const WORKOUT = 'mc-5';
+const BREAKFAST = 'mt-1';
+const SNACK = 'mt-2';
+const LUNCH = 'mt-3';
+const DINNER = 'mt-4';
+const WORKOUT = 'mt-5';
 
-const getColor = category => {
-  switch (category) {
+const getColor = event => {
+  if (event.__typename === 'WorkoutEvent') {
+    return '#E9F028';
+  }
+
+  switch (event.mealType) {
     case BREAKFAST:
       return '#F08484';
     case SNACK:
@@ -41,8 +45,12 @@ const getColor = category => {
   }
 };
 
-const getName = category => {
-  switch (category) {
+const getName = event => {
+  if (event.__typename === 'WorkoutEvent') {
+    return 'Workout';
+  }
+
+  switch (event.mealType) {
     case BREAKFAST:
       return 'Breakfast';
     case SNACK:
@@ -56,13 +64,15 @@ const getName = category => {
   }
 };
 
-const Event = ({ event: { title, category, recipes } }) => {
-  console.log(title);
-  return (
-    <EventContainer color={getColor(category)}>
-      {recipes && recipes.map(recipe => <Recipe>{recipe.title}</Recipe>)}
-    </EventContainer>
-  );
-};
+const Event = ({ event }) => (
+  <EventContainer color={getColor(event)}>
+    <b>{getName(event)}</b>
+
+    <small>
+      {event.__typename === 'MealEvent' &&
+        event.recipes.map(recipe => <Recipe>{recipe.title}</Recipe>)}
+    </small>
+  </EventContainer>
+);
 
 export default Event;

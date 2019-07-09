@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import * as Yup from 'yup';
 import gql from 'graphql-tag';
 import { Formik } from 'formik';
@@ -11,7 +10,6 @@ import withApolloClient from 'hoc/withApolloClient';
 import Modal from 'uikit/blocks/Modal';
 import Form from './Form';
 
-// @TODO Visualise the correct date but let the user change the time
 // @TODO Add a "Can't find the recipe you are looking for? Add it to the system!"
 
 const SEARCH_RECIPES = gql`
@@ -30,8 +28,13 @@ const validationSchema = Yup.object().shape({
   type: Yup.string().required('Please select a type'),
   start: Yup.string().required('Please add a start time'),
   end: Yup.string().required('Please add a end time'), // @TODO Validate end time is after start time
+  mealType: Yup.string().when('type', {
+    is: 'meal',
+    then: Yup.string().min(1, 'Please select a meal category'),
+    otherwise: Yup.string().min(0),
+  }),
   recipes: Yup.array().when('type', {
-    is: 'mt-1',
+    is: 'meal',
     then: Yup.array().min(1, 'Please add at least one recipe'),
     otherwise: Yup.array().min(0),
   }),
@@ -45,11 +48,6 @@ const AddMealOrTrainingModal = ({
   onClose,
 }) => {
   const [lookupRecipes, setLookupRecipes] = useState([]);
-  const day =
-    startTime !== null
-      ? moment(startTime).format('dddd[,] Do MMMM YYYY')
-      : null;
-
   const onSelectRecipe = (values, setFieldValue) => recipe => {
     setFieldValue('recipes', [...values.recipes, recipe]);
   };
@@ -60,12 +58,12 @@ const AddMealOrTrainingModal = ({
     }
 
     try {
-      const result = await client.query({
+      const { data } = await client.query({
         query: SEARCH_RECIPES,
         variables: { title: value },
       });
 
-      return setLookupRecipes(result.data.recipesByTitle);
+      return setLookupRecipes(data.recipesByTitle);
     } catch (error) {
       return error;
     }
@@ -79,6 +77,7 @@ const AddMealOrTrainingModal = ({
           type: '',
           start: startTime ? startTime.format('HH:mm') : '',
           end: startTime ? startTime.add(60, 'm').format('HH:mm') : '',
+          mealType: '',
           recipes: [],
         }}
         onSubmit={onConfirm}

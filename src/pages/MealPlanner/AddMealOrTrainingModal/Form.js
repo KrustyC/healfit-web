@@ -135,23 +135,46 @@ const MealFormBody = ({
     <Form.FormGroup css="width: 100%;">
       <Form.Label>Please select a type</Form.Label>
       <Form.Multichoice css="width: 100%;">
-        {mealTypes.map(({ id, name }) => (
-          <Form.Multichoice.Choice
-            key={id}
-            id={id}
-            name="type"
-            checked={values.type === id}
-            onChange={e => setFieldValue('type', e.target.value)}
-            label={name}
-            value={id}
-          />
-        ))}
+        <Form.Multichoice.Choice
+          key="meal"
+          id="meal"
+          name="type"
+          checked={values.type === 'meal'}
+          onChange={() => setFieldValue('type', 'meal')}
+          label="Meal"
+          value="meal"
+        />
+        <Form.Multichoice.Choice
+          key="workout"
+          id="workout"
+          name="type"
+          checked={values.type === 'workout'}
+          onChange={() => setFieldValue('type', 'workout')}
+          label="Workout"
+          value="workout"
+        />
       </Form.Multichoice>
     </Form.FormGroup>
 
     {/* If you selected meal type then you'll have to add recipes to it */}
-    {values.type === 'mt-1' && (
+    {values.type === 'meal' && (
       <>
+        <Form.FormGroup css="width: 100%;">
+          <Form.Label>Please select a type</Form.Label>
+          <Form.Multichoice css="width: 100%;">
+            {mealTypes.map(({ id, name }) => (
+              <Form.Multichoice.Choice
+                key={id}
+                id={id}
+                name="mealType"
+                checked={values.mealType === id}
+                onChange={e => setFieldValue('mealType', e.target.value)}
+                label={name}
+                value={id}
+              />
+            ))}
+          </Form.Multichoice>
+        </Form.FormGroup>
         <Form.FormGroup>
           <Form.Label>Add one or more recipes to your meal</Form.Label>
           <Form.RemoteFilter
@@ -196,7 +219,7 @@ const MealFormBody = ({
 MealFormBody.propTypes = {
   values: PropTypes.shape({
     day: PropTypes.object.isRequired,
-    type: PropTypes.oneOf(['mt-1', 'mt-2', '']).isRequired,
+    type: PropTypes.oneOf(['meal', 'workout', '']).isRequired,
     start: PropTypes.string.isRequired,
     end: PropTypes.string.isRequired,
     recipes: PropTypes.array.isRequired,

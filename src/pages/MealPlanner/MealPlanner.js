@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import moment from 'moment';
 import BigCalendar from 'react-big-calendar';
@@ -60,48 +60,42 @@ const localizer = BigCalendar.momentLocalizer(moment); // or globalizeLocalizer
 const MealPlanner = () => {
   // Here use effect , context and stuff to fetch all data
   const [{ events }, actions] = useMealPlannerStore();
-  const [wantToAddMeal, setWantToAddMeal] = useState(false);
+  const [wantToAddEvent, setWantToAddEvent] = useState(false);
   const [selectedStartTime, setSelectedStartTime] = useState();
-  console.log('re render');
+
+  const onNavigate = useCallback((date, period) => {
+    if (period === 'week') {
+      const startDate = moment(date).subtract(2, 'day');
+      const endDate = moment(date).add(4, 'day');
+
+      actions.onFetchEvents(startDate.toDate(), endDate.toDate());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
-    actions.onFetchEvents();
+    onNavigate(new Date(), 'week');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onCloseMealModal = () => {
     setSelectedStartTime(null);
-    setWantToAddMeal(false);
+    setWantToAddEvent(false);
   };
 
   const onSelectSlot = ({ start }) => {
     setSelectedStartTime(moment(start));
-    setWantToAddMeal(true);
+    setWantToAddEvent(true);
   };
 
-  const onAddMeal = values => {
-    console.log(values);
-
-    const start = values.day;
-
-    const meal = {
-      title: 'Workout',
-      start: '2019-06-19T12:30',
-      end: '2019-06-19T13:30',
-    };
+  const onAddEvent = values => {
+    if (values.type === 'meal') {
+      actions.onAddMealEvent(values);
+    } else {
+      actions.onAddWorkoutEvent(values);
+    }
 
     onCloseMealModal();
-  };
-
-  const onNavigate = (date, period) => {
-    if (period === 'week') {
-      const fromDate = moment(date)
-        .subtract(2, 'day')
-        .format('DD-MM-YYYY');
-      const toDate = moment(date)
-        .add(4, 'day')
-        .format('DD-MM-YYYY');
-      actions.onFetchEvents(fromDate, toDate);
-    }
   };
 
   return (
@@ -110,6 +104,8 @@ const MealPlanner = () => {
         <BigCalendar
           selectable
           events={events.data}
+          startAccessor="startTime"
+          endAccessor="endTime"
           min={new Date(2016, 10, 0, 5, 0, 0)} // This set the min time to 05:00
           max={new Date(2016, 10, 0, 22, 0, 0)}
           localizer={localizer}
@@ -123,11 +119,12 @@ const MealPlanner = () => {
       </Container>
       <AddMealOrTrainingModal
         startTime={selectedStartTime}
-        show={wantToAddMeal}
-        onConfirm={onAddMeal}
+        show={wantToAddEvent}
+        onConfirm={onAddEvent}
         onClose={onCloseMealModal}
       />
     </>
   );
 };
+
 export default MealPlanner;
