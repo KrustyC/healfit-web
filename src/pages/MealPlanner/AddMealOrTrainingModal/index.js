@@ -76,7 +76,12 @@ const AddMealOrTrainingModal = ({
           day: startTime,
           type: '',
           start: startTime ? startTime.format('HH:mm') : '',
-          end: startTime ? startTime.add(60, 'm').format('HH:mm') : '',
+          end: startTime
+            ? startTime
+                .clone()
+                .add(60, 'm')
+                .format('HH:mm')
+            : '',
           mealType: '',
           recipes: [],
         }}
