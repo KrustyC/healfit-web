@@ -149,10 +149,25 @@ const MealPlannerStore = ({
     return null;
   };
 
+  const onEditMealEvent = (id, values) => {
+    console.log('Edit meal', id, values);
+  };
+
+  const onEditWorkoutEvent = (id, values) => {
+    console.log('Edit workout', id, values);
+  };
+
+  const onDeleteEvent = id => {
+    console.log('Delete Event', id);
+  };
+
   const actions = {
     onFetchEvents,
     onAddMealEvent,
     onAddWorkoutEvent,
+    onDeleteEvent,
+    onEditMealEvent,
+    onEditWorkoutEvent,
   };
 
   return (

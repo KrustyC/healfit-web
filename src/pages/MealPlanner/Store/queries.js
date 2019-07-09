@@ -9,8 +9,11 @@ export const GET_MEAL_PLANNER_EVENTS = gql`
       ... on MealEvent {
         mealType
         recipes {
+          _id
           title
           slug
+          picture
+          calories
         }
       }
       ... on WorkoutEvent {

@@ -5,8 +5,9 @@ import BigCalendar from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import { useMealPlannerStore } from './Store';
-import AddMealOrTrainingModal from './AddMealOrTrainingModal';
-import Event from './Event';
+import AddEventModal from './components/AddEventModal';
+import EditOrDeleteModal from './components/EditOrDeleteModal';
+import Event from './components/Event';
 
 const Container = styled.div`
   ${({ theme }) => css`
@@ -62,6 +63,7 @@ const MealPlanner = () => {
   const [{ events }, actions] = useMealPlannerStore();
   const [wantToAddEvent, setWantToAddEvent] = useState(false);
   const [selectedStartTime, setSelectedStartTime] = useState();
+  const [focusedEvent, setFocusedEvent] = useState(null);
 
   const onNavigate = useCallback((date, period) => {
     if (period === 'week') {
@@ -78,7 +80,7 @@ const MealPlanner = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onCloseMealModal = () => {
+  const onCloseAddModal = () => {
     setSelectedStartTime(null);
     setWantToAddEvent(false);
   };
@@ -88,6 +90,10 @@ const MealPlanner = () => {
     setWantToAddEvent(true);
   };
 
+  const onSelectEvent = event => setFocusedEvent(event);
+
+  const onCloseEditOrDeleteModal = () => setFocusedEvent(null);
+
   const onAddEvent = values => {
     if (values.type === 'meal') {
       actions.onAddMealEvent(values);
@@ -95,7 +101,22 @@ const MealPlanner = () => {
       actions.onAddWorkoutEvent(values);
     }
 
-    onCloseMealModal();
+    onCloseAddModal();
+  };
+
+  const onEditEvent = values => {
+    if (values.type === 'meal') {
+      actions.onEditMealEvent(focusedEvent._id, values);
+    } else {
+      actions.onEditWorkoutEvent(focusedEvent._id, values);
+    }
+
+    onCloseEditOrDeleteModal(null);
+  };
+
+  const onDeleteEvent = () => {
+    actions.onDeleteEvent(focusedEvent._id);
+    onCloseEditOrDeleteModal(null);
   };
 
   return (
@@ -114,14 +135,23 @@ const MealPlanner = () => {
           defaultView="week"
           views={['week', 'day']}
           onSelectSlot={onSelectSlot}
+          onSelectEvent={onSelectEvent}
           onNavigate={onNavigate}
         />
       </Container>
-      <AddMealOrTrainingModal
+      <AddEventModal
         startTime={selectedStartTime}
         show={wantToAddEvent}
         onConfirm={onAddEvent}
-        onClose={onCloseMealModal}
+        onClose={onCloseAddModal}
+      />
+      <EditOrDeleteModal
+        startTime={selectedStartTime}
+        event={focusedEvent}
+        show={focusedEvent !== null}
+        onDelete={onDeleteEvent}
+        onEdit={onEditEvent}
+        onClose={onCloseEditOrDeleteModal}
       />
     </>
   );
