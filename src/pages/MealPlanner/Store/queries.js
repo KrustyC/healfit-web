@@ -46,3 +46,13 @@ export const ADD_MEAL_EVENT = gql`
     }
   }
 `;
+
+export const ADD_WORKOUT_EVENT = gql`
+  mutation addWorkoutEvent($startTime: Date!, $endTime: Date!) {
+    addWorkoutEvent(input: { startTime: $startTime, endTime: $endTime }) {
+      _id
+      startTime
+      endTime
+    }
+  }
+`;

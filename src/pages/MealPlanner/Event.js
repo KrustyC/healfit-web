@@ -24,7 +24,6 @@ const BREAKFAST = 'mt-1';
 const SNACK = 'mt-2';
 const LUNCH = 'mt-3';
 const DINNER = 'mt-4';
-const WORKOUT = 'mt-5';
 
 const getColor = event => {
   if (event.__typename === 'WorkoutEvent') {
@@ -70,9 +69,20 @@ const Event = ({ event }) => (
 
     <small>
       {event.__typename === 'MealEvent' &&
-        event.recipes.map(recipe => <Recipe>{recipe.title}</Recipe>)}
+        event.recipes.map(recipe => (
+          <Recipe key={recipe.title}>{recipe.title}</Recipe>
+        ))}
     </small>
   </EventContainer>
 );
+
+Event.propTypes = {
+  event: PropTypes.shape({
+    __typename: PropTypes.oneOf(['MealEvent', 'WorkoutEvent']),
+    recipes: PropTypes.arrayOf(
+      PropTypes.shape({ title: PropTypes.string.isRequired })
+    ),
+  }).isRequired,
+};
 
 export default Event;

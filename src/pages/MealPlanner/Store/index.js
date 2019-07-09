@@ -11,8 +11,12 @@ import withApolloClient from 'hoc/withApolloClient';
 import { withToastManager } from 'uikit/blocks/Toast';
 
 import mealPlannerReducer from './reducer';
-import { MEAL_PLANNER } from './consts';
-import { GET_MEAL_PLANNER_EVENTS, ADD_MEAL_EVENT } from './queries';
+import { MEAL_PLANNER, MEAL_PLANNER_EVENT_ADDED } from './consts';
+import {
+  GET_MEAL_PLANNER_EVENTS,
+  ADD_MEAL_EVENT,
+  ADD_WORKOUT_EVENT,
+} from './queries';
 
 const MealPlannerContext = createContext();
 
@@ -39,7 +43,13 @@ const getStartAndEndTime = (day, start, end) => {
   };
 };
 
-const MealPlannerStore = ({ client, addMealEvent, children }) => {
+const MealPlannerStore = ({
+  client,
+  toastManager,
+  addMealEvent,
+  addWorkoutEvent,
+  children,
+}) => {
   const [state, dispatch] = useReducer(mealPlannerReducer, initialState);
 
   const onFetchEvents = useCallback(
@@ -61,9 +71,14 @@ const MealPlannerStore = ({ client, addMealEvent, children }) => {
             endTime: new Date(endTime),
           })
         );
-        console.log(payload);
+
         dispatch({ type: `${MEAL_PLANNER}_SUCCESS`, payload });
       } catch (error) {
+        dispatch({
+          type: `${MEAL_PLANNER}_FAILURE`,
+          payload:
+            'Ooops! Something unexpected happened while fetching your meal plan',
+        });
         return error;
       }
 
@@ -74,20 +89,61 @@ const MealPlannerStore = ({ client, addMealEvent, children }) => {
 
   const onAddMealEvent = async data => {
     const { day, start, end } = data;
-    const { startTime, endTime } = getStartAndEndTime(day, start, end);
 
     const variables = {
-      startTime,
-      endTime,
+      ...getStartAndEndTime(day, start, end),
       recipes: data.recipes.map(({ id }) => id),
       mealType: data.mealType,
     };
 
     try {
       const result = await addMealEvent({ variables });
-      console.log(result);
+      const { startTime, endTime, ...rest } = result.data.addMealEvent;
+
+      const payload = {
+        ...rest,
+        startTime: new Date(startTime),
+        endTime: new Date(startTime),
+      };
+
+      dispatch({ type: `${MEAL_PLANNER_EVENT_ADDED}_SUCCESS`, payload });
     } catch (error) {
-      // @TODO Here I need to set an error to show in the UI
+      toastManager.add(
+        "Ops! We haven't been able to add your meal, please try again later on!",
+        {
+          type: 'error',
+        }
+      );
+      return error;
+    }
+    return null;
+  };
+
+  const onAddWorkoutEvent = async data => {
+    const { day, start, end } = data;
+
+    const variables = {
+      ...getStartAndEndTime(day, start, end),
+    };
+
+    try {
+      const result = await addWorkoutEvent({ variables });
+      const { startTime, endTime, ...rest } = result.data.addWorkoutEvenst;
+
+      const payload = {
+        ...rest,
+        startTime: new Date(startTime),
+        endTime: new Date(startTime),
+      };
+
+      dispatch({ type: `${MEAL_PLANNER_EVENT_ADDED}_SUCCESS`, payload });
+    } catch (error) {
+      toastManager.add(
+        "Ops! We haven't been able to add your workout, please try again later on!",
+        {
+          type: 'error',
+        }
+      );
       return error;
     }
     return null;
@@ -96,6 +152,7 @@ const MealPlannerStore = ({ client, addMealEvent, children }) => {
   const actions = {
     onFetchEvents,
     onAddMealEvent,
+    onAddWorkoutEvent,
   };
 
   return (
@@ -109,7 +166,11 @@ MealPlannerStore.propTypes = {
   client: PropTypes.shape({
     query: PropTypes.func.isRequired,
   }).isRequired,
+  toastManager: PropTypes.shape({
+    add: PropTypes.func.isRequired,
+  }).isRequired,
   addMealEvent: PropTypes.func.isRequired,
+  addWorkoutEvent: PropTypes.func.isRequired,
   children: PropTypes.any.isRequired,
 };
 
@@ -117,6 +178,7 @@ export const useMealPlannerStore = () => useContext(MealPlannerContext);
 
 export default compose(
   graphql(ADD_MEAL_EVENT, { name: 'addMealEvent' }),
+  graphql(ADD_WORKOUT_EVENT, { name: 'addWorkoutEvent' }),
   withApolloClient,
   withToastManager
 )(MealPlannerStore);
