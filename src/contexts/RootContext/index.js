@@ -33,7 +33,6 @@ const Provider = ({ client, children, login, setGlobalData }) => {
         query: FETCH_INITIAL_DATA,
       });
 
-      console.log(globalData);
       await setGlobalData({ variables: { globalData } });
 
       const currentAccount = await client.query({
