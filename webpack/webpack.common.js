@@ -26,6 +26,7 @@ module.exports = {
       app: src,
       helpers: path.join(src, 'helpers'),
       hoc: path.join(src, 'hoc'),
+      hooks: path.join(src, 'hooks'),
       assets: path.join(src, 'assets'),
       '@duik': path.join(src, 'duik'),
       uikit: path.join(src, 'uikit'),

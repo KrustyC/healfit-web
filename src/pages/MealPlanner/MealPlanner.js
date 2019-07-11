@@ -6,7 +6,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 import { useMealPlannerStore } from './Store';
 import AddEventModal from './components/AddEventModal';
-import EditOrDeleteModal from './components/EditOrDeleteModal';
+import EditEventModal from './components/EditEventModal';
 import Event from './components/Event';
 
 const Container = styled.div`
@@ -59,7 +59,6 @@ const Container = styled.div`
 const localizer = BigCalendar.momentLocalizer(moment); // or globalizeLocalizer
 
 const MealPlanner = () => {
-  // Here use effect , context and stuff to fetch all data
   const [{ events }, actions] = useMealPlannerStore();
   const [wantToAddEvent, setWantToAddEvent] = useState(false);
   const [selectedStartTime, setSelectedStartTime] = useState();
@@ -67,8 +66,8 @@ const MealPlanner = () => {
 
   const onNavigate = useCallback((date, period) => {
     if (period === 'week') {
-      const startDate = moment(date).subtract(2, 'day');
-      const endDate = moment(date).add(4, 'day');
+      const startDate = moment(date).startOf('week');
+      const endDate = moment(date).endOf('week');
 
       actions.onFetchEvents(startDate.toDate(), endDate.toDate());
     }
@@ -80,19 +79,15 @@ const MealPlanner = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onCloseAddModal = () => {
-    setSelectedStartTime(null);
-    setWantToAddEvent(false);
-  };
-
   const onSelectSlot = ({ start }) => {
     setSelectedStartTime(moment(start));
     setWantToAddEvent(true);
   };
 
-  const onSelectEvent = event => setFocusedEvent(event);
-
-  const onCloseEditOrDeleteModal = () => setFocusedEvent(null);
+  const onCloseAddModal = () => {
+    setSelectedStartTime(null);
+    setWantToAddEvent(false);
+  };
 
   const onAddEvent = values => {
     if (values.type === 'meal') {
@@ -104,6 +99,9 @@ const MealPlanner = () => {
     onCloseAddModal();
   };
 
+  const onWantToEdit = event => setFocusedEvent(event);
+  const onCloseEditModal = () => setFocusedEvent(null);
+
   const onEditEvent = values => {
     if (values.type === 'meal') {
       actions.onEditMealEvent(focusedEvent._id, values);
@@ -111,13 +109,10 @@ const MealPlanner = () => {
       actions.onEditWorkoutEvent(focusedEvent._id, values);
     }
 
-    onCloseEditOrDeleteModal(null);
+    onCloseEditModal(null);
   };
 
-  const onDeleteEvent = () => {
-    actions.onDeleteEvent(focusedEvent._id);
-    onCloseEditOrDeleteModal(null);
-  };
+  const onDeleteEvent = () => actions.onDeleteEvent(focusedEvent._id);
 
   return (
     <>
@@ -130,29 +125,37 @@ const MealPlanner = () => {
           min={new Date(2016, 10, 0, 5, 0, 0)} // This set the min time to 05:00
           max={new Date(2016, 10, 0, 22, 0, 0)}
           localizer={localizer}
-          components={{ event: Event }}
+          components={{
+            event: props => (
+              <Event
+                {...props}
+                onWantToEdit={onWantToEdit}
+                onDeleteEvent={onDeleteEvent}
+              />
+            ),
+          }}
           step={60}
           defaultView="week"
           views={['week', 'day']}
           onSelectSlot={onSelectSlot}
-          onSelectEvent={onSelectEvent}
           onNavigate={onNavigate}
         />
       </Container>
+
       <AddEventModal
         startTime={selectedStartTime}
         show={wantToAddEvent}
         onConfirm={onAddEvent}
         onClose={onCloseAddModal}
       />
-      <EditOrDeleteModal
-        startTime={selectedStartTime}
-        event={focusedEvent}
-        show={focusedEvent !== null}
-        onDelete={onDeleteEvent}
-        onEdit={onEditEvent}
-        onClose={onCloseEditOrDeleteModal}
-      />
+
+      {focusedEvent && (
+        <EditEventModal
+          event={focusedEvent}
+          onConfirm={onEditEvent}
+          onClose={onCloseEditModal}
+        />
+      )}
     </>
   );
 };
