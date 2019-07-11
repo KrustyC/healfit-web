@@ -58,6 +58,8 @@ const Container = styled.div`
 
 const localizer = BigCalendar.momentLocalizer(moment); // or globalizeLocalizer
 
+// TODO maybe use a popover to insert/edit recipe as well?
+
 const MealPlanner = () => {
   const [{ events }, actions] = useMealPlannerStore();
   const [wantToAddEvent, setWantToAddEvent] = useState(false);
@@ -112,7 +114,7 @@ const MealPlanner = () => {
     onCloseEditModal(null);
   };
 
-  const onDeleteEvent = () => actions.onDeleteEvent(focusedEvent._id);
+  const onDeleteEvent = event => actions.onDeleteEvent(event._id);
 
   return (
     <>
