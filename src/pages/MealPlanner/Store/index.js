@@ -11,11 +11,16 @@ import withApolloClient from 'hoc/withApolloClient';
 import { withToastManager } from 'uikit/blocks/Toast';
 
 import mealPlannerReducer from './reducer';
-import { MEAL_PLANNER, MEAL_PLANNER_EVENT_ADDED } from './consts';
+import {
+  MEAL_PLANNER,
+  MEAL_PLANNER_EVENT_ADDED,
+  MEAL_PLANNER_EVENT_DELETE,
+} from './consts';
 import {
   GET_MEAL_PLANNER_EVENTS,
   ADD_MEAL_EVENT,
   ADD_WORKOUT_EVENT,
+  DELETE_EVENT,
 } from './queries';
 
 const MealPlannerContext = createContext();
@@ -48,6 +53,7 @@ const MealPlannerStore = ({
   toastManager,
   addMealEvent,
   addWorkoutEvent,
+  deleteEvent,
   children,
 }) => {
   const [state, dispatch] = useReducer(mealPlannerReducer, initialState);
@@ -157,8 +163,30 @@ const MealPlannerStore = ({
     console.log('Edit workout', id, values);
   };
 
-  const onDeleteEvent = id => {
-    console.log('Delete Event', id);
+  const onDeleteEvent = async id => {
+    const { data: events } = state.events;
+    const eventIndex = events.findIndex(event => event._id === id);
+
+    dispatch({
+      type: `${MEAL_PLANNER_EVENT_DELETE}_SUCCESS`,
+      payload: eventIndex,
+    });
+
+    try {
+      await deleteEvent({ variables: { id } });
+    } catch (error) {
+      dispatch({
+        type: `${MEAL_PLANNER_EVENT_ADDED}_SUCCESS`,
+        payload: events[eventIndex],
+      });
+
+      toastManager.add(
+        "Ops! We haven't been able to delete the requested item!",
+        {
+          type: 'error',
+        }
+      );
+    }
   };
 
   const actions = {
@@ -186,6 +214,7 @@ MealPlannerStore.propTypes = {
   }).isRequired,
   addMealEvent: PropTypes.func.isRequired,
   addWorkoutEvent: PropTypes.func.isRequired,
+  deleteEvent: PropTypes.func.isRequired,
   children: PropTypes.any.isRequired,
 };
 
@@ -194,6 +223,7 @@ export const useMealPlannerStore = () => useContext(MealPlannerContext);
 export default compose(
   graphql(ADD_MEAL_EVENT, { name: 'addMealEvent' }),
   graphql(ADD_WORKOUT_EVENT, { name: 'addWorkoutEvent' }),
+  graphql(DELETE_EVENT, { name: 'deleteEvent' }),
   withApolloClient,
   withToastManager
 )(MealPlannerStore);
