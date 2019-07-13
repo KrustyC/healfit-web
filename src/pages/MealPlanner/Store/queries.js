@@ -50,9 +50,50 @@ export const ADD_MEAL_EVENT = gql`
   }
 `;
 
+export const EDIT_MEAL_EVENT = gql`
+  mutation editMealEvent(
+    $id: ID!
+    $startTime: Date!
+    $endTime: Date!
+    $recipes: [ID]!
+    $mealType: String!
+  ) {
+    editMealEvent(
+      input: {
+        _id: $id
+        startTime: $startTime
+        endTime: $endTime
+        recipes: $recipes
+        mealType: $mealType
+      }
+    ) {
+      _id
+      startTime
+      endTime
+      mealType
+      recipes {
+        title
+        slug
+      }
+    }
+  }
+`;
+
 export const ADD_WORKOUT_EVENT = gql`
   mutation addWorkoutEvent($startTime: Date!, $endTime: Date!) {
     addWorkoutEvent(input: { startTime: $startTime, endTime: $endTime }) {
+      _id
+      startTime
+      endTime
+    }
+  }
+`;
+
+export const EDIT_WORKOUT_EVENT = gql`
+  mutation editWorkoutEvent($id: ID!, $startTime: Date!, $endTime: Date!) {
+    editWorkoutEvent(
+      input: { _id: $id, startTime: $startTime, endTime: $endTime }
+    ) {
       _id
       startTime
       endTime

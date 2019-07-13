@@ -85,7 +85,11 @@ const PopoverContent = ({ event, onWantToEdit, onDeleteEvent, onHide }) => (
       )}
     </small>
     <Bottom>
-      <XsButton size="small" color="primary" onClick={onWantToEdit}>
+      <XsButton
+        size="small"
+        color="primary"
+        onClick={() => onWantToEdit(event)}
+      >
         Edit
       </XsButton>
       <XsButton size="small" onClick={onDeleteEvent}>

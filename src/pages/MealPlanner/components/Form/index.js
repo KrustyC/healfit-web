@@ -51,6 +51,7 @@ const RubbishIcon = styled(RubbishBin)`
 `;
 
 const FormBody = ({
+  edit,
   values,
   client,
   setFieldValue,
@@ -119,29 +120,31 @@ const FormBody = ({
           />
         </TimeContainer>
       </Times>
-      <Form.FormGroup css="width: 100%;">
-        <Form.Label>Please select a type</Form.Label>
-        <Form.Multichoice css="width: 100%;">
-          <Form.Multichoice.Choice
-            key="meal"
-            id="meal"
-            name="type"
-            checked={values.type === 'meal'}
-            onChange={() => setFieldValue('type', 'meal')}
-            label="Meal"
-            value="meal"
-          />
-          <Form.Multichoice.Choice
-            key="workout"
-            id="workout"
-            name="type"
-            checked={values.type === 'workout'}
-            onChange={() => setFieldValue('type', 'workout')}
-            label="Workout"
-            value="workout"
-          />
-        </Form.Multichoice>
-      </Form.FormGroup>
+      {!edit && (
+        <Form.FormGroup css="width: 100%;">
+          <Form.Label>Please select a type</Form.Label>
+          <Form.Multichoice css="width: 100%;">
+            <Form.Multichoice.Choice
+              key="meal"
+              id="meal"
+              name="type"
+              checked={values.type === 'meal'}
+              onChange={() => setFieldValue('type', 'meal')}
+              label="Meal"
+              value="meal"
+            />
+            <Form.Multichoice.Choice
+              key="workout"
+              id="workout"
+              name="type"
+              checked={values.type === 'workout'}
+              onChange={() => setFieldValue('type', 'workout')}
+              label="Workout"
+              value="workout"
+            />
+          </Form.Multichoice>
+        </Form.FormGroup>
+      )}
 
       {/* If you selected meal type then you'll have to add recipes to it */}
       {values.type === 'meal' && (
@@ -213,6 +216,7 @@ const FormBody = ({
 };
 
 FormBody.propTypes = {
+  edit: PropTypes.bool,
   values: PropTypes.shape({
     day: PropTypes.object.isRequired,
     type: PropTypes.oneOf(['meal', 'workout', '']).isRequired,
@@ -232,6 +236,10 @@ FormBody.propTypes = {
       })
     ).isRequired,
   }).isRequired,
+};
+
+FormBody.defaultProps = {
+  edit: false,
 };
 
 export default compose(

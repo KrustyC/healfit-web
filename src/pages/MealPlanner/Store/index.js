@@ -14,12 +14,14 @@ import mealPlannerReducer from './reducer';
 import {
   MEAL_PLANNER,
   MEAL_PLANNER_EVENT_ADDED,
-  MEAL_PLANNER_EVENT_DELETE,
+  MEAL_PLANNER_EVENT_REMOVED,
 } from './consts';
 import {
   GET_MEAL_PLANNER_EVENTS,
   ADD_MEAL_EVENT,
   ADD_WORKOUT_EVENT,
+  EDIT_MEAL_EVENT,
+  EDIT_WORKOUT_EVENT,
   DELETE_EVENT,
 } from './queries';
 
@@ -53,6 +55,8 @@ const MealPlannerStore = ({
   toastManager,
   addMealEvent,
   addWorkoutEvent,
+  editMealEvent,
+  editWorkoutEvent,
   deleteEvent,
   children,
 }) => {
@@ -112,7 +116,7 @@ const MealPlannerStore = ({
         endTime: new Date(startTime),
       };
 
-      dispatch({ type: `${MEAL_PLANNER_EVENT_ADDED}_SUCCESS`, payload });
+      dispatch({ type: MEAL_PLANNER_EVENT_ADDED, payload });
     } catch (error) {
       toastManager.add(
         "Ops! We haven't been able to add your meal, please try again later on!",
@@ -120,9 +124,42 @@ const MealPlannerStore = ({
           type: 'error',
         }
       );
-      return error;
     }
-    return null;
+  };
+
+  const onEditMealEvent = async (id, values) => {
+    const { data: events } = state.events;
+    const eventIndex = events.findIndex(event => event._id === id);
+
+    dispatch({ type: MEAL_PLANNER_EVENT_REMOVED, payload: eventIndex });
+
+    const { day, start, end } = values;
+
+    const variables = {
+      id,
+      ...getStartAndEndTime(day, start, end),
+      recipes: values.recipes.map(({ _id }) => _id),
+      mealType: values.mealType,
+    };
+
+    try {
+      const result = await editMealEvent({ variables });
+      const { startTime, endTime, ...rest } = result.data.editMealEvent;
+
+      const payload = {
+        ...rest,
+        startTime: new Date(startTime),
+        endTime: new Date(startTime),
+      };
+
+      dispatch({ type: MEAL_PLANNER_EVENT_ADDED, payload });
+    } catch (error) {
+      dispatch({ type: MEAL_PLANNER_EVENT_ADDED, payload: events[eventIndex] });
+      toastManager.add(
+        "Ops! We haven't been able to add your workout, please try again later on!",
+        { type: 'error' }
+      );
+    }
   };
 
   const onAddWorkoutEvent = async data => {
@@ -134,7 +171,7 @@ const MealPlannerStore = ({
 
     try {
       const result = await addWorkoutEvent({ variables });
-      const { startTime, endTime, ...rest } = result.data.addWorkoutEvenst;
+      const { startTime, endTime, ...rest } = result.data.addWorkoutEvent;
 
       const payload = {
         ...rest,
@@ -142,7 +179,7 @@ const MealPlannerStore = ({
         endTime: new Date(startTime),
       };
 
-      dispatch({ type: `${MEAL_PLANNER_EVENT_ADDED}_SUCCESS`, payload });
+      dispatch({ type: MEAL_PLANNER_EVENT_ADDED, payload });
     } catch (error) {
       toastManager.add(
         "Ops! We haven't been able to add your workout, please try again later on!",
@@ -150,17 +187,35 @@ const MealPlannerStore = ({
           type: 'error',
         }
       );
-      return error;
     }
-    return null;
   };
 
-  const onEditMealEvent = (id, values) => {
-    console.log('Edit meal', id, values);
-  };
+  const onEditWorkoutEvent = async (id, values) => {
+    const { day, start, end } = values;
 
-  const onEditWorkoutEvent = (id, values) => {
-    console.log('Edit workout', id, values);
+    const variables = {
+      ...getStartAndEndTime(day, start, end),
+    };
+
+    try {
+      const result = await editWorkoutEvent({ variables });
+      const { startTime, endTime, ...rest } = result.data.addWorkoutEvent;
+
+      const payload = {
+        ...rest,
+        startTime: new Date(startTime),
+        endTime: new Date(startTime),
+      };
+
+      dispatch({ type: MEAL_PLANNER_EVENT_ADDED, payload });
+    } catch (error) {
+      toastManager.add(
+        "Ops! We haven't been able to edit your workout, please try again later on!",
+        {
+          type: 'error',
+        }
+      );
+    }
   };
 
   const onDeleteEvent = async id => {
@@ -168,7 +223,7 @@ const MealPlannerStore = ({
     const eventIndex = events.findIndex(event => event._id === id);
 
     dispatch({
-      type: `${MEAL_PLANNER_EVENT_DELETE}_SUCCESS`,
+      type: MEAL_PLANNER_EVENT_REMOVED,
       payload: eventIndex,
     });
 
@@ -176,7 +231,7 @@ const MealPlannerStore = ({
       await deleteEvent({ variables: { id } });
     } catch (error) {
       dispatch({
-        type: `${MEAL_PLANNER_EVENT_ADDED}_SUCCESS`,
+        type: MEAL_PLANNER_EVENT_ADDED,
         payload: events[eventIndex],
       });
 
@@ -214,6 +269,8 @@ MealPlannerStore.propTypes = {
   }).isRequired,
   addMealEvent: PropTypes.func.isRequired,
   addWorkoutEvent: PropTypes.func.isRequired,
+  editMealEvent: PropTypes.func.isRequired,
+  editWorkoutEvent: PropTypes.func.isRequired,
   deleteEvent: PropTypes.func.isRequired,
   children: PropTypes.any.isRequired,
 };
@@ -223,7 +280,10 @@ export const useMealPlannerStore = () => useContext(MealPlannerContext);
 export default compose(
   graphql(ADD_MEAL_EVENT, { name: 'addMealEvent' }),
   graphql(ADD_WORKOUT_EVENT, { name: 'addWorkoutEvent' }),
+  graphql(EDIT_MEAL_EVENT, { name: 'editMealEvent' }),
+  graphql(EDIT_WORKOUT_EVENT, { name: 'editWorkoutEvent' }),
   graphql(DELETE_EVENT, { name: 'deleteEvent' }),
+
   withApolloClient,
   withToastManager
 )(MealPlannerStore);

@@ -8,7 +8,7 @@ import P from 'uikit/elements/P';
 const drop = keyframes`
   0% { 
     opacity: 0;
-    transform: translateY(-80px);
+    transform: translateY(-20px);
   }
 
   100% { 
@@ -91,8 +91,7 @@ const Cover = styled.div`
     svg {
       height: 100%;
       max-width: 100%;
-      filter: drop-shadow(0px 1px 2px black);
-      animation: ${drop} 1.5s ease;
+      animation: ${drop} 0.75s ease;
 
       @media (max-width: ${theme.sizes.md}) {
         height: 70%;

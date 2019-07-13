@@ -9,7 +9,6 @@ import Form, { validationSchema } from './Form';
 const getInitialValues = event => {
   const eventStartTime = moment(event.startTime);
   const eventEndTime = moment(event.endTime);
-
   return {
     day: eventStartTime,
     type: event.__typename === 'MealEvent' ? 'meal' : 'workout',
@@ -31,7 +30,7 @@ const EditEventModal = ({ event, onConfirm, onClose }) => (
         <Modal.Body>
           <Modal.Header>Edit Event </Modal.Header>
           <Modal.Body>
-            <Form values={values} setFieldValue={setFieldValue} />
+            <Form edit values={values} setFieldValue={setFieldValue} />
           </Modal.Body>
           <Modal.Footer>
             <Modal.Cancel />

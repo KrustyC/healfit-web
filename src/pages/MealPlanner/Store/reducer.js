@@ -2,7 +2,7 @@ import Immutable from 'seamless-immutable';
 import {
   MEAL_PLANNER,
   MEAL_PLANNER_EVENT_ADDED,
-  MEAL_PLANNER_EVENT_DELETE,
+  MEAL_PLANNER_EVENT_REMOVED,
 } from './consts';
 
 const parentReducer = (state, action) => {
@@ -18,16 +18,16 @@ const parentReducer = (state, action) => {
       return Immutable.setIn(state, ['events', 'pending'], action.payload.data);
     case `${MEAL_PLANNER_EVENT_ADDED}_FAILURE`:
       return Immutable.setIn(state, ['events', 'error'], action.payload.data);
-    case `${MEAL_PLANNER_EVENT_ADDED}_SUCCESS`: {
+    case MEAL_PLANNER_EVENT_ADDED: {
       const newEvents = [...state.events.data, action.payload];
       return Immutable.setIn(state, ['events', 'data'], newEvents);
     }
 
-    case `${MEAL_PLANNER_EVENT_DELETE}_PENDING`:
+    case `${MEAL_PLANNER_EVENT_REMOVED}_PENDING`:
       return Immutable.setIn(state, ['events', 'pending'], action.payload.data);
-    case `${MEAL_PLANNER_EVENT_DELETE}_FAILURE`:
+    case `${MEAL_PLANNER_EVENT_REMOVED}_FAILURE`:
       return Immutable.setIn(state, ['events', 'error'], action.payload.data);
-    case `${MEAL_PLANNER_EVENT_DELETE}_SUCCESS`: {
+    case MEAL_PLANNER_EVENT_REMOVED: {
       const { data: events } = state.events;
       const index = action.payload;
 
