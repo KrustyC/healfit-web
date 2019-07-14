@@ -63,7 +63,7 @@ const Item = ({ recipe }) => (
       <Card.Description>{recipe.description}</Card.Description>
     </Card.Main>
     <Card.Footer bordered>
-      <UikStarRating rating={recipe.rating} />
+      <UikStarRating clickable={false} rating={recipe.rating} />
       <Button
         color="primary"
         css="margin-left: auto; display: flex; align-items: center"
