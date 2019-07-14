@@ -24,7 +24,9 @@ const Provider = ({ client, children, login, setGlobalData }) => {
   };
 
   useEffect(() => {
-    window.cloudinary.setCloudName('healfituk');
+    if (window.cloudinary) {
+      window.cloudinary.setCloudName('healfituk');
+    }
 
     const performInitialFetch = async () => {
       const {

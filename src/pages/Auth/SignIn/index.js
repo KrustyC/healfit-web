@@ -27,7 +27,7 @@ const SignIn = () => {
   const onHandleSubmit = async ({ email, password }, { setSubmitting }) => {
     try {
       await rootContext.onLogin({ email, password });
-      return history.push('/dashboard');
+      return history.push('/meal-plan');
     } catch (loginError) {
       const errors = loginError.graphQLErrors.map(x => x.message);
       setError(errors[0]);

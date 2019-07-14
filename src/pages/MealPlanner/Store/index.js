@@ -29,13 +29,13 @@ const MealPlannerContext = createContext();
 
 const initialState = Immutable({
   events: {
-    isLoading: false,
-    isError: false,
+    pending: false,
+    error: false,
     data: [],
   },
   update: {
-    isLoading: false,
-    isError: false,
+    pending: false,
+    error: false,
     success: false,
   },
 });

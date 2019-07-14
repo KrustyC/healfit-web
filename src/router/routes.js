@@ -8,8 +8,8 @@ export const Admin = lazy(() =>
   import(/* webpackChunkName: "admin" */ '../pages/Admin')
 );
 
-export const Dashboard = lazy(() =>
-  import(/* webpackChunkName: "dashboard" */ '../pages/Dashboard')
+export const MealPlan = lazy(() =>
+  import(/* webpackChunkName: "dashboard" */ '../pages/MealPlan')
 );
 
 export const Home = lazy(() =>

@@ -34,14 +34,14 @@ const CustomRouter = () => {
 
         <AdminRoute path="/admin" component={WaitingComponent(Routes.Admin)} />
 
-        <PrivateRoute
-          path="/dashboard"
-          component={WaitingComponent(Routes.Dashboard)}
-        />
         <Route path="/recipes" component={WaitingComponent(Routes.Recipes)} />
         <PrivateRoute
           path="/meal-planner"
           component={WaitingComponent(Routes.MealPlanner)}
+        />
+        <PrivateRoute
+          path="/meal-plan"
+          component={WaitingComponent(Routes.MealPlan)}
         />
 
         <Route path="/404" component={WaitingComponent(Routes.NotFound)} />

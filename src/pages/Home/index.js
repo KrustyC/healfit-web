@@ -13,7 +13,7 @@ const Home = () => {
   const { amILoggedIn } = useContext(RootContext);
 
   if (amILoggedIn) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/meal-plan" />;
   }
 
   return (

@@ -46,8 +46,7 @@ const Category = styled.div`
   `}
 `;
 
-// @TODO Need to add the like functionality
-const Item = ({ recipe }) => (
+const Recipe = ({ recipe }) => (
   <Card>
     <Card.Thumb>
       <PictureContainer>
@@ -55,12 +54,11 @@ const Item = ({ recipe }) => (
           src={getImageURL(recipe.picture, 'w_300,h_220,c_thumb')}
           alt="recipe image"
         />
-        <Category>{recipe.category.name}</Category>
       </PictureContainer>
     </Card.Thumb>
     <Card.Main>
       <Card.Title>{recipe.title}</Card.Title>
-      <Card.Description>{recipe.description}</Card.Description>
+      <Card.Description>{recipe.title}</Card.Description>
     </Card.Main>
     <Card.Footer bordered>
       <UikStarRating rating={recipe.rating} />
@@ -77,17 +75,14 @@ const Item = ({ recipe }) => (
   </Card>
 );
 
-Item.propTypes = {
+Recipe.propTypes = {
   recipe: PropTypes.shape({
-    slug: PropTypes.string.isRequired,
     picture: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
-    category: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-    }).isRequired,
+    slug: PropTypes.string.isRequired,
   }).isRequired,
 };
 
-export default Item;
+export default Recipe;
