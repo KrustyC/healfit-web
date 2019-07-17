@@ -28,24 +28,6 @@ const Image = styled.img`
   `}
 `;
 
-const Category = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: ${theme.padding.xs} ${theme.padding.sm};
-    background: ${theme.colors.primary};
-    color: ${theme.colors.white};
-    font-size: ${theme.fontSize.small};
-    border-radius: 4px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: ${theme.margin.sm};
-    z-index: 1000000;
-  `}
-`;
-
 const Recipe = ({ recipe }) => (
   <Card>
     <Card.Thumb>

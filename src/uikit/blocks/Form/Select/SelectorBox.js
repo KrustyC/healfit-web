@@ -51,9 +51,6 @@ const SelectorBox = React.forwardRef((props, textInputRef) => (
           </BoxMain>
         </Selector>
         <Actions>
-          {/* <Action onClick={onRemoveAll} hide={!showList} size={size}>
-            <Icon src={require('assets/icons/cancel-grey.svg')} />
-          </Action> */}
           <Action size={size}>
             {/* eslint-disable-next-line */}
             <Icon src={require('assets/icons/arrow-down-grey.svg')} />
