@@ -43,8 +43,11 @@ export const ADD_MEAL_EVENT = gql`
       endTime
       mealType
       recipes {
+        _id
         title
         slug
+        picture
+        calories
       }
     }
   }
@@ -72,8 +75,11 @@ export const EDIT_MEAL_EVENT = gql`
       endTime
       mealType
       recipes {
+        _id
         title
         slug
+        picture
+        calories
       }
     }
   }

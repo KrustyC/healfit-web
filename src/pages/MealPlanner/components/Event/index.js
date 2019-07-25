@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import Popover from 'uikit/blocks/Popover';
-import { getColor, getName } from './utils';
+import { getColor, getName } from 'helpers/events';
 import PopoverContent from './PopoverContent';
 
 const EventContainer = styled.div`

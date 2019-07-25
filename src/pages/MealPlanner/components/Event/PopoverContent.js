@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import Button from 'uikit/blocks/Button';
 import Heading from 'uikit/elements/Heading';
 import SvgCancel from 'assets/icons/cancel-grey.svg';
-import { getName } from './utils';
+import { getName } from 'helpers/events';
 
 const Container = styled.div`
   ${({ theme }) => css`

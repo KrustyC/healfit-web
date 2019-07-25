@@ -14,6 +14,7 @@ export const FETCH_MEAL_PLAN = gql`
           slug
           picture
           calories
+          description
         }
       }
       ... on WorkoutEvent {

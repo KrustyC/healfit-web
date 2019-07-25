@@ -274,7 +274,7 @@ Button.propTypes = {
   squircled: PropTypes.bool,
 
   size: PropTypes.oneOf(['small', 'large', 'block']),
-  color: PropTypes.oneOf(['primary', 'accent', 'link', 'white']),
+  color: PropTypes.oneOf(['', 'primary', 'accent', 'link', 'white']),
   rounded: PropTypes.bool,
   radius: PropTypes.string,
 

@@ -1,7 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
+import moment from 'moment';
 import Heading from 'uikit/elements/Heading';
+import { getName } from 'helpers/events';
 import Recipe from './Recipe';
+
+const getHour = timestamp =>
+  moment
+    .utc(timestamp)
+    .local()
+    .format('HH:mm');
 
 const Time = styled.span`
   ${({ theme }) => css`
@@ -10,24 +19,41 @@ const Time = styled.span`
   `}
 `;
 
+const Row = styled.div`
+  display: flex;
+
+  .recipe {
+    margin-right: ${({ theme }) => theme.margin.sm};
+    margin-right: 50px;
+  }
+`;
+
 const MealPlanView = ({ event }) => (
   <div>
     <Heading level="h3">
-      Breakfast <Time>(08:00 - 09:00)</Time>
+      {getName(event)}{' '}
+      <Time>
+        ({getHour(event.startTime)} - {getHour(event.endTime)})
+      </Time>
     </Heading>
     {event.__typename === 'MealEvent' ? (
-      <div>
-        {event.recipes.map(
-          recipe => (
-            console.log(recipe), <Recipe key={recipe._id} recipe={recipe} />
-          )
-        )}
-      </div>
+      <Row>
+        {event.recipes.map(recipe => (
+          <Recipe key={recipe._id} recipe={recipe} />
+        ))}
+      </Row>
     ) : (
-      <h1>This is a workout</h1>
+      <span>There are no information for this workout</span>
     )}
-    )
   </div>
 );
+
+MealPlanView.propTypes = {
+  event: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    startTime: PropTypes.object.isRequired,
+    endTime: PropTypes.object.isRequired,
+  }).isRequired,
+};
 
 export default MealPlanView;

@@ -18,7 +18,7 @@ const MealPlanContext = createContext();
 
 const initialState = Immutable({
   events: {
-    pending: false,
+    pending: true,
     error: false,
     data: [],
   },
@@ -47,8 +47,6 @@ const MealPlanStore = ({ client, children }) => {
           })
         );
 
-        console.log(mealPlanEvents);
-
         dispatch({ type: `${MEAL_PLAN_FETCH}_SUCCESS`, payload });
       } catch (error) {
         dispatch({
@@ -56,10 +54,9 @@ const MealPlanStore = ({ client, children }) => {
           payload:
             'Ooops! Something unexpected happened while fetching your meal plan',
         });
-        return error;
       }
 
-      return null;
+      dispatch({ type: `${MEAL_PLAN_FETCH}_PENDING`, payload: false });
     },
     [client]
   );

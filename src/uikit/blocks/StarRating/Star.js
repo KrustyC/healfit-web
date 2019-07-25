@@ -46,11 +46,15 @@ const Star = ({ size, clickable, isFilled, onEnter, onLeave, onSelect }) => (
 
 Star.propTypes = {
   size: PropTypes.oneOf(['small', 'regular', 'large']).isRequired,
-  clickable: PropTypes.bool.isRequired,
+  clickable: PropTypes.bool,
   isFilled: PropTypes.bool.isRequired,
   onSelect: PropTypes.func.isRequired,
   onEnter: PropTypes.func.isRequired,
   onLeave: PropTypes.func.isRequired,
+};
+
+Star.defaultProps = {
+  clickable: true,
 };
 
 export default Star;

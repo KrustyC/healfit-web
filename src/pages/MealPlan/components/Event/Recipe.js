@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { getImageURL } from 'helpers/images';
 
-import UikStarRating from 'uikit/blocks/StarRating';
 import Link from 'uikit/elements/Link';
 import Card from 'uikit/blocks/Card';
-import Button from 'uikit/blocks/Button';
 
 const PictureContainer = styled.div`
   position: relative;
@@ -18,7 +16,6 @@ const Image = styled.img`
   ${({ theme }) => css`
     border: 1px solid ${theme.colors.border};
     height: 190px;
-    /* width: 350px; */
     transform: scale(1);
     transition: 0.3s ease-in-out;
 
@@ -29,7 +26,11 @@ const Image = styled.img`
 `;
 
 const Recipe = ({ recipe }) => (
-  <Card>
+  <Card
+    as={Link}
+    to={`/recipes/${recipe.slug}`}
+    style={{ marginRight: '30px' }}
+  >
     <Card.Thumb>
       <PictureContainer>
         <Image
@@ -40,20 +41,10 @@ const Recipe = ({ recipe }) => (
     </Card.Thumb>
     <Card.Main>
       <Card.Title>{recipe.title}</Card.Title>
-      <Card.Description>{recipe.title}</Card.Description>
+      <Card.Description>
+        {recipe.calories} kcal | 10g Protein • 10g Fat • 10g Carbs
+      </Card.Description>
     </Card.Main>
-    <Card.Footer bordered>
-      <UikStarRating rating={recipe.rating} />
-      <Button
-        color="primary"
-        css="margin-left: auto; display: flex; align-items: center"
-        as={Link}
-        to={`/recipes/${recipe.slug}`}
-        size="small"
-      >
-        View
-      </Button>
-    </Card.Footer>
   </Card>
 );
 
@@ -62,7 +53,6 @@ Recipe.propTypes = {
     picture: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
     slug: PropTypes.string.isRequired,
   }).isRequired,
 };
