@@ -6,7 +6,6 @@ import { getImageURL } from 'helpers/images';
 import UikStarRating from 'uikit/blocks/StarRating';
 import Link from 'uikit/elements/Link';
 import Card from 'uikit/blocks/Card';
-import Button from 'uikit/blocks/Button';
 
 const PictureContainer = styled.div`
   position: relative;
@@ -46,9 +45,8 @@ const Category = styled.div`
   `}
 `;
 
-// @TODO Need to add the like functionality
 const Item = ({ recipe }) => (
-  <Card>
+  <Card as={Link} to={`/recipes/${recipe.slug}`}>
     <Card.Thumb>
       <PictureContainer>
         <Image
@@ -62,17 +60,13 @@ const Item = ({ recipe }) => (
       <Card.Title>{recipe.title}</Card.Title>
       <Card.Description>{recipe.description}</Card.Description>
     </Card.Main>
-    <Card.Footer bordered>
+    <Card.Footer
+      bordered
+      css={`
+        padding: ${({ theme }) => theme.padding.sm};
+      `}
+    >
       <UikStarRating clickable={false} rating={recipe.rating} />
-      <Button
-        color="primary"
-        css="margin-left: auto; display: flex; align-items: center"
-        as={Link}
-        to={`/recipes/${recipe.slug}`}
-        size="small"
-      >
-        View
-      </Button>
     </Card.Footer>
   </Card>
 );

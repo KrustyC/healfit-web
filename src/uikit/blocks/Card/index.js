@@ -12,13 +12,12 @@ const Card = styled.div`
     transition: all 0.1s ease-in;
     border-radius: 4px;
     width: ${width || 'auto'};
-    max-width: 350px;
   `}
 `;
 
 const Main = styled.div`
   ${({ theme }) => css`
-    padding: calc(${theme.padding.sm} * 1.5) ${theme.padding.md};
+    padding: ${theme.padding.sm};
   `}
 `;
 
@@ -28,7 +27,7 @@ const Thumb = styled.div`
   overflow: hidden;
 `;
 
-const Title = styled.h3`
+const Title = styled.h4`
   white-space: wrap;
   margin: 0;
 `;
@@ -50,8 +49,7 @@ const Description = styled.div`
 
 const Footer = styled.div`
   ${({ theme, bordered }) => css`
-    padding: ${theme.padding.sm} ${theme.padding.md};
-    font-weight: bold;
+    padding: ${theme.padding.xs} ${theme.padding.sm};
     display: flex;
     align-items: center;
     margin-top: auto;

@@ -9,6 +9,7 @@ import Card from 'uikit/blocks/Card';
 const PictureContainer = styled.div`
   position: relative;
   height: 190px;
+  width: 250px;
   max-width: 100%;
 `;
 
@@ -29,22 +30,25 @@ const Recipe = ({ recipe }) => (
   <Card
     as={Link}
     to={`/recipes/${recipe.slug}`}
-    style={{ marginRight: '30px' }}
+    css="width: 250px; margin-right: 30px;"
   >
     <Card.Thumb>
       <PictureContainer>
         <Image
-          src={getImageURL(recipe.picture, 'w_300,h_220,c_thumb')}
+          src={getImageURL(recipe.picture, 'w_400,h_300,c_thumb')}
           alt="recipe image"
         />
       </PictureContainer>
     </Card.Thumb>
     <Card.Main>
       <Card.Title>{recipe.title}</Card.Title>
-      <Card.Description>
-        {recipe.calories} kcal | 10g Protein • 10g Fat • 10g Carbs
-      </Card.Description>
     </Card.Main>
+    <Card.Footer css="font-size: 12px;">
+      Calories {recipe.calories}
+      <br />
+      Protein {recipe.protein} &#183; Carbs {recipe.carbohydrates} &#183; Fat{' '}
+      {recipe.fat}
+    </Card.Footer>
   </Card>
 );
 

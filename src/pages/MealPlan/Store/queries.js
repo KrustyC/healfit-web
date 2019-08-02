@@ -15,6 +15,16 @@ export const FETCH_MEAL_PLAN = gql`
           picture
           calories
           description
+          carbohydrates
+          fiber
+          protein
+          fat
+        }
+        macros {
+          carbs
+          protein
+          fat
+          calories
         }
       }
       ... on WorkoutEvent {
