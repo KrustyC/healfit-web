@@ -4,6 +4,7 @@
   "description": "keep yourself fit by tracking your progress!.",
   "start_url": "/",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#3BB2B8",
   "theme_color": "#3BB2B8",
   "prefer_related_applications": false,

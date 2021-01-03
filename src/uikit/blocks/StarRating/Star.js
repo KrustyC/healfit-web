@@ -32,13 +32,13 @@ const Icon = styled(Uikon)`
   `}
 `;
 
-const Star = ({ size, isClickable, isFilled, onEnter, onLeave, onSelect }) => (
+const Star = ({ size, clickable, isFilled, onEnter, onLeave, onSelect }) => (
   <Icon
     size={size}
-    clickable={isClickable ? 'yes' : 'no'}
+    clickable={clickable ? 'yes' : 'no'}
     onMouseEnter={onEnter}
     onMouseLeave={onLeave}
-    onClick={onSelect}
+    onClick={clickable ? onSelect : null}
   >
     {isFilled ? 'star_fill' : 'star'}
   </Icon>
@@ -46,11 +46,15 @@ const Star = ({ size, isClickable, isFilled, onEnter, onLeave, onSelect }) => (
 
 Star.propTypes = {
   size: PropTypes.oneOf(['small', 'regular', 'large']).isRequired,
-  isClickable: PropTypes.bool.isRequired,
+  clickable: PropTypes.bool,
   isFilled: PropTypes.bool.isRequired,
   onSelect: PropTypes.func.isRequired,
   onEnter: PropTypes.func.isRequired,
   onLeave: PropTypes.func.isRequired,
+};
+
+Star.defaultProps = {
+  clickable: true,
 };
 
 export default Star;

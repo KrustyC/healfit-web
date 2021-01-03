@@ -99,8 +99,8 @@ const Navbar = () => {
         <UikTopBarTitle>Healfit</UikTopBarTitle>
         <Divider />
         <Links>
-          <UikTopBarLink Component={NavLink} to="/dashboard">
-            Dashboard
+          <UikTopBarLink Component={NavLink} to="/meal-plan">
+            Meal Plan
           </UikTopBarLink>
           <UikTopBarLink Component={NavLink} to="/recipes">
             Recipes

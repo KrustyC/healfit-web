@@ -104,7 +104,7 @@ class ForgotPassword extends Component {
             <Heading level="title" align="center">
               Healfit
             </Heading>
-            <Heading level="h3" align="center">
+            <Heading level="h1" align="center">
               Reset Your Password
             </Heading>
             <P align="center">

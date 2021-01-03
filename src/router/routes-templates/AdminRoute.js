@@ -15,7 +15,7 @@ const AdminRoute = ({ component: Component, ...rest }) => {
         ) : (
           <Redirect
             // eslint-disable-next-line react/prop-types
-            to={{ pathname: '/dashboard', state: { from: props.location } }}
+            to={{ pathname: '/meal-plan', state: { from: props.location } }}
           />
         )
       }

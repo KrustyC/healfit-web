@@ -4,6 +4,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const workboxPlugin = require('workbox-webpack-plugin');
 const appRoot = path.dirname(__dirname);
 const src = path.join(appRoot, 'src');
 
@@ -25,6 +26,7 @@ module.exports = {
       app: src,
       helpers: path.join(src, 'helpers'),
       hoc: path.join(src, 'hoc'),
+      hooks: path.join(src, 'hooks'),
       assets: path.join(src, 'assets'),
       '@duik': path.join(src, 'duik'),
       uikit: path.join(src, 'uikit'),
@@ -82,6 +84,10 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: path.join(__dirname, '../src/assets'), to: 'assets' },
     ]),
+    new workboxPlugin.InjectManifest({
+      swSrc: path.join(__dirname, '../src/src-sw.js'),
+      swDest: 'sw.js',
+    }),
   ],
   optimization: {
     concatenateModules: true,

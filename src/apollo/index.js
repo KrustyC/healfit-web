@@ -8,13 +8,14 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import decode from 'jwt-decode';
 import history from 'app/router/history';
 
+import fragmentMatcher from './fragmentMatcher';
 import defaultsAndResolvers from './resolvers';
 
 const httpLink = createHttpLink({
   uri: `${process.env.API_URL}/graphql`,
 });
 
-const cache = new InMemoryCache();
+const cache = new InMemoryCache({ fragmentMatcher });
 
 const typeDefs = `
   type Account {
@@ -30,6 +31,7 @@ const typeDefs = `
 
   type GlobalData {
     ingredientsCategories: ValueObject
+    mealTypes: ValueObject
     measurements: ValueObject
     recipeCategories: ValueObject
     recipeLevels: ValueObject

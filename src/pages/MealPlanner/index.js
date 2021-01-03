@@ -1,11 +1,21 @@
 import React from 'react';
-import Navbar from 'uikit/organisms/navbars/LoggedNavbar';
+import { Helmet } from 'react-helmet';
 
-const MealPlanner = () => (
+import Navbar from 'uikit/organisms/navbars/LoggedNavbar';
+import MealPlannerStore from './Store';
+import MealPlanner from './MealPlanner';
+
+const MealPlannerIndex = () => (
   <>
+    <Helmet>
+      <title>Meal Planner | Healfit</title>
+      <meta name="description" content="Meal Planner" />
+    </Helmet>
     <Navbar />
-    <div>Meal Planner</div>
+    <MealPlannerStore>
+      <MealPlanner />
+    </MealPlannerStore>
   </>
 );
 
-export default MealPlanner;
+export default MealPlannerIndex;

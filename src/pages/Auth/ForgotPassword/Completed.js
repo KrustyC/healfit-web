@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import P from 'uikit/elements/P';
 import Button from 'uikit/blocks/Button';
 import history from 'app/router/history';
+import Svg from 'assets/icons/paper-plane.svg';
 
 const Box = styled(
   posed.div({
@@ -24,7 +25,7 @@ const Box = styled(
   align-items: center;
 `;
 
-const Image = styled.img`
+const Image = styled(Svg)`
   ${({ theme }) => css`
     height: 200px;
     width: 200px;
@@ -40,8 +41,7 @@ const Image = styled.img`
 
 export default () => (
   <Box initialPose="open" pose="closed">
-    {/* eslint-disable-next-line */}
-    <Image src={require('assets/icons/paper-plane.svg')} />
+    <Image />
     <P align="center">
       We{"'"}ve sent an email to the provided address. Click the link in the
       email to reset your password. If you don{"'"}t see the email, check other

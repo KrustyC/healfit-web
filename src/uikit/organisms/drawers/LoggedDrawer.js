@@ -25,14 +25,14 @@ const Drawer = () => {
         </Header>
         <UikNavSection>
           <UikNavSectionTitle>Navigate</UikNavSectionTitle>
-          <UikNavLink Component={NavLink} to="/dashboard">
-            Dashboard
+          <UikNavLink Component={NavLink} to="/meal-plan">
+            Meal Plan
           </UikNavLink>
           <UikNavLink Component={NavLink} to="/recipes">
             Recipes
           </UikNavLink>
           <UikNavLink Component={NavLink} to="/meal-plan">
-            Meal Plan
+            Meal Plannner
           </UikNavLink>
         </UikNavSection>
       </Panel>

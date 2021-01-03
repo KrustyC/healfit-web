@@ -42,14 +42,15 @@ const Cta = () => (
     <Skrew />
     <Div>
       <Heading level="h1" align="center" color="white">
-        Try Healfit, it{"'"}s easy!
+        Are you looking for new recipes?
       </Heading>
       <P align="center" color="white">
-        And it{"'"}s free as well, how can you not try it?
+        We have hundreds of healthy and tasty recipes! And if you like add your
+        own one, you can do that as well!
       </P>
 
-      <Button size="large" onClick={() => history.push('/auth/signup')}>
-        Join Now
+      <Button size="large" onClick={() => history.push('/recipes')}>
+        View Recipes
       </Button>
     </Div>
   </Container>

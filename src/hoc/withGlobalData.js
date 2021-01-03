@@ -8,6 +8,10 @@ const GET_GLOBAL_DATA = gql`
         id
         name
       }
+      mealTypes {
+        id
+        name
+      }
       measurements {
         id
         name

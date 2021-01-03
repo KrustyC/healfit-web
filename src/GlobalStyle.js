@@ -49,14 +49,18 @@ const GloablStyle = createGlobalStyle`
       font-style: italic;
     }
 
+
     *,
     ::after,
     ::before {
       box-sizing: inherit;
     }
 
-    html {
+    html, body {
       font-family: sans-serif;
+      box-sizing: border-box;
+      margin: 0px;
+      padding: 0px;
       box-sizing: border-box;
     }
 
