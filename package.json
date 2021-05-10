@@ -92,7 +92,7 @@
     "immutable": "^4.0.0-rc.12",
     "interweave": "^11.1.0",
     "jwt-decode": "^2.2.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "memoize-one": "^5.0.4",
     "mini-css-extract-plugin": "^0.6.0",
     "mixpanel-browser": "^2.27.1",
