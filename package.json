@@ -96,7 +96,7 @@
     "memoize-one": "^5.0.4",
     "mini-css-extract-plugin": "^0.6.0",
     "mixpanel-browser": "^2.27.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "node-sass": "^4.11.0",
     "pettier": "^1.1.0",
     "polished": "^2.3.0",
